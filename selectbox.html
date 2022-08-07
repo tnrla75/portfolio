@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		ul{
+			list-style-type: none;
+			padding-left: 0px;
+		}
+		.select{
+			display: inline-block;
+			width: 120px;
+			border: 1px solid #999;
+		}
+		.select .selected{
+			display: flex;
+			justify-content: space-between;
+			padding: 8px 5px;
+		}
+		.select .selected .arrow{
+			width: 24px;
+			background: white;
+			background-size: 50% 50%;
+		}
+		.select ul{
+			width: 120px;
+			border: 1px solid #999;
+			position: absolute;
+			background:#fff;
+			border-top: none;
+			margin: 1px 0 0 -1px;
+			cursor: pointer;
+		}
+		.select ul li{
+			padding: 8px 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="select">
+		<div class="selected">
+			<div class="selected-value">none</div>
+			<div class="arrow"></div>
+		</div>
+	</div>
+	<ul>
+		<li class="option">option1</li>
+		<li class="option">option2</li>
+		<li class="option">option3</li>
+		<li class="option">option4</li>
+	</ul>
+</body>
+</html>
