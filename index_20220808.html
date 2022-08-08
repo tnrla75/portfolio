@@ -36,8 +36,75 @@
 		#tab-1 {
 			padding-bottom: 40px;
 		}
+		#tab-1 input:first-of-type {
+			width: 1060px;
+			height: 50px;
+			border-style: solid;
+			border-color: #E7E7E7;
+			position: relative;
+			font-size: 10pt;
+			top: 10px;
+			left: 10px;
+		}
+		#tab-1 input:last-of-type {
+			width:80px;
+			height: 55px;
+			border-style: solid;
+			font-weight: bold;
+			background-color: #002266;
+			color: white;
+			position: relative;
+			font-size: 13pt;
+			top: 13px;
+			right: 10px;
+		}
 		#tab-3 {
 			padding-bottom: 40px;
+		}
+		#tab-3 div {
+			border-style: solid;
+			border-color: #E7E7E7;
+			height: 60px;
+			width: 1060px;
+			margin-left: 20px;
+		}
+		#tab-3 img {
+			position: relative;
+			right: 50px;
+		}
+		#tab-3 input:first-of-type {
+			height: 50px;
+			width: 450px;
+			font-size: 10pt;
+			padding-right: 30px;
+			border-style: solid;
+			border-width: 0;
+			background-color: white;
+		}
+		#datechoice3 {
+			height: 50px;
+			width: 180px;
+			font-size: 10pt;
+			padding-right: 30px;
+			border-style: none;
+			background-color: white;
+			position: relative;
+		}
+		#datechoice4 {
+			height: 50px;
+			width: 180px;
+			font-size: 10pt;
+			padding-right: 30px;
+			border-style: none;
+			background-color: white;
+			position: relative;
+		}
+		#tab-3 div select {
+			height: 56px;
+			width: 100px;
+			font-size: 10pt;
+			border-style: none;
+			position: relative;
 		}
 		#tab-1 h3 {
 			position: relative;
@@ -51,27 +118,8 @@
 			position: relative;
 			left: 20px;
 		}
-		#tab-3 .people {
-			background-image: url(image/people.png);
-		    background-position: 60px center;
-		    background-size: 20px;
-		    background-repeat: no-repeat;
-		    width: 100px;
-		    position: relative;
-		    left: 40px;
-		    text-align: left;
-		}
-		#tab-1 input {
-			position: relative;
-			left: 25px;
-			height: 25px;
-			border-radius: 30px;
-		}
-		#tab-1 img {
-			position: relative;
-			top: 10px;
-			left: 30px;
-		}
+	
+		
 		.searchTop {
 			position: relative;
 			left: 20px;
@@ -86,32 +134,56 @@
 			height: 20px;
 		}
 		.seatGrade {
-	   		width:180px;
+	   		width:150px;
 		    padding:5px;
 		    border-style: solid;
-		    border-top: 0px;
-		    border-left: 0px;
-		    border-right: 0px;
+		    border-width: 0;
 		    background:url(image/seat.png);
-		    background-position: 150px;
-		    background-size: 20px;
+		    background-position: 100px;
+		    background-size: 15px;
 		    background-repeat: no-repeat;
 		    border-color: black;
 		    -webkit-appearance: none;
 		    -moz-appearance: none;
 		    appearance : none;
 		    position: relative;
-		    left: 30px;
+		}
+		.seatGrade2 {
+	   		width:200px;
+		    padding:5px;
+		    border-style: solid;
+		    border-width: 0;
+		    background:url(image/seat.png);
+		    background-position: 150px;
+		    background-size: 15px;
+		    background-repeat: no-repeat;
+		    border-color: black;
+		    -webkit-appearance: none;
+		    -moz-appearance: none;
+		    appearance : none;
+		    position: relative;
 		}
 		.searchBot {
 			position: relative;
 			left: 20px;
 			padding-right: 50px;
 		}
+		.airplainchoice {
+			float: left;
+			margin-top: 10px;
+		}
+		.searchBot div{
+			width: 1080px;
+			height: 60px;
+			border-style: solid;
+			border-color: #E7E7E7;
+			position: relative;
+			padding-right: 50px;
+		}
 		.searchBot input {
 			height: 30px;
 			font-size: 13pt;
-			border-style: solid;
+			border-style: none;
 			background-color: white;
 			border-top: 0px;
 			border-left: 0px;
@@ -681,8 +753,9 @@
 		            <li style="background-color: rgba(212,157,2,.7);"><a href="#tab-3"><img src="image/hotel.png" class="image">호텔</a></li>
 		        </ul>
 		        <div id="tab-1">
-		            <h3 style="font-size: 17pt;">가고싶은 곳을 검색해보세요.</h3>
-		            <input type="text" name="search" size="120"><img src="image/search.png" width="30" height="30">
+		              <h3 style="font-size: 14pt;">가고싶은 여행지, 명소를 검색해보세요.</h3>
+		            <input type="text" placeholder="여행지를 검색해보세요" size="150">
+		            <input type="button" name="btn" value="검색">
 		        </div>
 		        <div id="tab-2">
 		        	<div class="tabset">
@@ -695,45 +768,100 @@
 					  	<div class="tab-panels">
 					    	<section id="marzen" class="tab-panel">
 					    		<div class="searchBot">
-					        		<input type="button" name="departure" class="departureBtn" value="서울(김포)"><img src="image/arrow.png" width="30" height="30" class="arrow">
-					        		<input type="button" name="arrival" class="arrivalBtn" value="도착지">
-					        		<input type="button" name="people" value="인원수" class="people">
-					        		<select class="seatGrade">
-										<option>좌석등급</option>
-										<option>이코노미 클래스</option>
-										<option>비지니스 클래스</option>
-										<option>퍼스트 클래스</option>
-									</select>
-					        		<input type="date" name="day" class="airplaneDate">
-					        		<input type="date" name="day" class="airplaneDate">
-					        		<img src="image/search.png" width="30" height="30" class="icon">
-					        	</div>
-					  		</section>
-						    <section id="rauchbier" class="tab-panel">
-						    	<div class="searchBot">
-							    	<<input type="button" name="departure" class="departureBtn" value="서울(김포)"><img src="image/arrow.png" width="30" height="30" class="arrow">
-					        		<input type="button" name="arrival" class="arrivalBtn" value="도착지">
-					        		<input type="button" name="people" value="인원수" class="people">
-					        		<select class="seatGrade">
-										<option>좌석등급</option>
-										<option>이코노미 클래스</option>
-										<option>비지니스 클래스</option>
-										<option>퍼스트 클래스</option>
-									</select>
-					        		<input type="date" name="day" class="airplaneDate">
-					        		<img src="image/search.png" width="30" height="30" class="icon">
-					        	</div>
-						    </section>
+					        		<div style=" float: left; width: 1080px; border: 1px solid #E7E7E7; ">
+										<section class="airplainchoice">
+											<i class="fa-solid fa-plane-departure"></i>
+											<input type="text" placeholder="출발지" size="20">
+										</section>
+										<section class="airplainchoice">
+											<i class="fa-solid fa-plane-arrival"></i>
+											<input type="text" placeholder="도착지" size="20">
+										<input type="button" name="people" value="인원수" class="people">
+						        		<select class="seatGrade">
+											<option>좌석등급</option>
+											<option>이코노미 클래스</option>
+											<option>비지니스 클래스</option>
+											<option>퍼스트 클래스</option>
+										</select>
+										</section>
+										<section class="airplainchoice">
+											<input type="date" placeholder="출발일" id="datechoice1">
+										</section>
+										<section class="airplainchoice">
+											<input type="date" placeholder="도착일" id="datechoice2" >
+										</section>
+										<section class="airplainchoice" >
+											<button class="searchicon"><i class="fa-solid fa-magnifying-glass" style="width: 30px; height: 30px;"></i></button>
+										</section>
+									</div>
+								</div>
+							</section>
+							<section id="rauchbier" class="tab-panel">
+								<div class="searchBot">
+									<div>
+										<section class="airplainchoice">
+											<i class="fa-solid fa-plane-departure"></i>
+											<input type="text" placeholder="출발지">
+										</section>
+										<section class="airplainchoice">
+											<i class="fa-solid fa-plane-arrival"></i>
+											<input type="text" placeholder="도착지">
+											<input type="button" name="people" value="인원수" class="people2">
+							        		<select class="seatGrade2">
+												<option>좌석등급</option>
+												<option>이코노미 클래스</option>
+												<option>비지니스 클래스</option>
+												<option>퍼스트 클래스</option>
+											</select>
+										</section>
+										<section class="airplainchoice">
+											<input type="date" placeholder="출발일" id="datechoice5">
+										</section>
+								
+										<section class="airplainchoice" >
+											<button class="searchicon"><i class="fa-solid fa-magnifying-glass" style="width: 30px; height: 30px;"></i></button>
+										</section>
+									
+									</div>	
+								</div>
+							</section>
 					  </div>
 					</div>
 		        </div>
 		        <div id="tab-3">
-		        	<h3 style="font-size: 17pt;">가고싶은 곳을 검색해보세요.</h3>
-		            <input type="button" name="areaName" class="areaName" value="지역명">
-		            <input type="button" name="people" value="인원수" class="people">
-		            <input type="date" name="checkin" class="check">
-		        	<input type="date" name="checkout" class="check">
-		            <img src="image/search.png" width="30" height="30">
+		        	<h3 style="font-size: 14pt;">머무르고 싶은 지역을 입력하세요.</h3>
+		        	<div>
+		        		<input type="text" placeholder="	여행지 또는 숙소 이름으로 검색" size="40">
+			            <select>
+							<option value="인원수">인원수</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+			            <input type="date" name="checkin" id="datechoice3">
+			        	<input type="date" name="checkout" id="datechoice4">
+			        	<img src="image/search.png" width="30" height="30">
+		        	</div>
+		        	
+					<script>
+						document.getElementById('datechoice1').valueAsDate=new Date();
+						document.getElementById('datechoice2').valueAsDate=new Date();
+						document.getElementById('datechoice3').valueAsDate=new Date();
+						document.getElementById('datechoice4').valueAsDate=new Date();
+						document.getElementById('datechoice5').valueAsDate=new Date();
+						$("#datechoice1").datepicker();
+						$("#datechoice2").datepicker();
+						$("#datechoice3").datepicker();
+						$("#datechoice4").datepicker();
+						$("#datechoice5").datepicker();
+					</script>
 		        </div>
 		    </div>
         </div>
