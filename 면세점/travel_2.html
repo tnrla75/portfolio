@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>3.명소</title>
+	<link rel="stylesheet" type="text/css" href="header_footer.css">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
+	<style>
+		#mainheader{width: 1200px; height: 150px;
+					margin: 0 auto;
+					}
+		#main1{width: 750px; height: 550px;
+					margin: 20px auto 10px auto;
+					}
+		#mainframe{width: 1200px; height: 1500px;
+					box-sizing: border-box;
+					margin: 0 auto;
+					}			
+		#subframe{width: 800px; height: 1450px;
+					border-style: solid;
+					box-sizing: border-box;
+					margin-left: 200px;
+					border-radius: 5px;
+					float: left;
+					}						
+		#mainsection{width: 450px; height: 500px;
+					margin: 0 0 10px 0;
+					box-sizing: border-box;
+					float: left;
+					}
+		#mainsection>header{width: 400px; height: 100px;
+							box-sizing: border-box;
+							text-align: left;
+							font-size: 35pt
+							}
+		.maintext{width: 400px; height: 400px;
+				box-sizing: border-box;
+				border-style: dotted;
+				}
+		.mainimage{width: 300px; height: 500px;
+					margin: 0 0 10px;
+					box-sizing: border-box;
+					float: right;
+					}
+		#sub{width: 750px; height: 300px;
+					margin: 0 auto;
+					border-style: solid;
+					border-width: 4px;
+					border-radius: 5px;					
+					}
+		#sub>header{width: 550px; height: 30px;
+					margin: 30px auto 50px auto;
+					font-size: 20px;
+					}										
+		#sub>article{width: 550px; height: 30px;
+					margin: 10px auto 10px auto;
+					font-size: 15px;
+					border-style: solid;
+					border-width: 3px;
+					border-radius: 5px;}
+		.people{width: 250px; height: 30px;
+				float: left;}
+		.money{width: 250px; height: 30px;
+				float: right;
+				text-align: right;}	
+		#final{width: 750px; height: 530px;
+				margin: 20px auto 0 auto;
+				
+				}
+		#final>header{margin: 20px 0 10px 0;}
+		.reviewmain{width: 750px; height: 400px;
+					box-sizing: border-box;
+				}
+		.review1{width: 355px; height: 195px;
+				box-sizing: border-box; 
+				float: left;
+				border-style: solid;
+				border-width: 3px;
+				border-radius: 5px;
+				}
+		.review1>div{width:100px; height: 190px;
+					box-sizing: border-box;
+					float: left;
+					border-style: dotted;}
+		.review1>section{width: 240px; height: 190px;
+						box-sizing: border-box;
+						float: right;
+						
+						}
+		.review1>section>header{width: 240px; height: 50px;
+								box-sizing: border-box;
+								float: right;
+								font-size: 20pt;
+								}
+		.review1>section>article{width: 240px; height: 140px;
+								box-sizing: border-box;
+								float: right;
+								font-size: 15pt;
+								}						
+		.review2{width: 355px; height: 195px;
+				box-sizing: border-box; 
+				float: right;
+				border-style: solid;
+				border-width: 3px;
+				border-radius: 5px;
+				}
+		.review2>div{width:100px; height: 190px;
+					box-sizing: border-box;
+					float: left;
+					border-style: dotted;}
+		.review2>section{width: 240px; height: 190px;
+						box-sizing: border-box;
+						float: right;
+						}
+		.review2>section>header{width: 240px; height: 50px;
+								box-sizing: border-box;
+								float: right;
+								font-size: 20pt;
+								}
+		.review3{width: 355px; height: 195px;
+				box-sizing: border-box; 
+				float: left;
+				border-style: solid;
+				border-width: 3px;
+				border-radius: 5px;
+				}
+		.review3>div{width:100px; height: 190px;
+					box-sizing: border-box;
+					float: left;
+					border-style: dotted;}
+		.review3>section{width: 240px; height: 190px;
+						box-sizing: border-box;
+						float: right;
+						}
+		.review3>section>header{width: 240px; height: 50px;
+								box-sizing: border-box;
+								float: right;
+								font-size: 20pt;
+								}		
+		.review4{width: 355px; height: 195px;
+				box-sizing: border-box; 
+				float: right;
+				border-style: solid;
+				border-width: 3px;
+				border-radius: 5px;
+				}
+		.review4>div{width:100px; height: 190px;
+					box-sizing: border-box;
+					float: left;
+					border-style: dotted;}
+		.review4>section{width: 240px; height: 190px;
+						box-sizing: border-box;
+						float: right;
+						}
+		.review4>section>header{width: 240px; height: 50px;
+								box-sizing: border-box;
+								float: right;
+								font-size: 20pt;
+								}																
+		.subreview{width: 750px; height: 195px; 
+					margin: 0 0 20px 0; 
+					box-sizing: border-box;
+					}
+		#leftquickmenu{width: 190px;height: 450px ;
+						border-style: solid;
+						border-width: 3px;
+						position: fixed;
+						margin-left: -5px;
+						border-radius: 5px;
+						}
+		#leftquickmenu>header{width: 80px;
+							margin: 20px 0 0 10px;
+							border-bottom-style: solid;
+							border-color: gray;
+							font-size: 20px}
+		#search{margin: 10px 0 10px 10px;
+				height: 20px;}
+		#leftquickmenu>ul>li{margin: 15px 0 0 0;
+							font-size: 18px;
+							}
+		#place{width: 190px; height: 780px;
+				border-radius: 5px;
+				box-sizing: border-box; 
+				float: right;
+				border-style: solid;}
+		#chooseplace{width: 150px; height: 20px;
+					margin: 10px auto 20px auto;}
+		#chooseplace>select{width: 150px; height: 20px;}
+		#place>section{width: 150px; height: 100px;
+						margin: 0 auto;
+						border-style: dotted;}
+		#place>article{width: 150px; height: 20px;
+						margin: 0 auto 5px auto;
+						}		
+				
+	</style>
+</head>
+<body>
+	<form>	
+		<header id="mainheader">
+			<div id="title">
+			<header>
+				<h1>Title</h1>
+			</header>
+		</div>
+		<div id="nav">
+			<nav>
+				<ul id="top">
+						<li class="commonnav">탑네비1</li>
+						<li class="commonnav">탑네비2</li>
+						<li class="commonnav">탑네비3</li>
+						<li class="commonnav">탑네비4</li>
+						<li class="commonnav">탑네비4</li>
+					</ul>
+					<ul id="main">
+						<li class="commonnav">
+							<a class="commonlink" href="travel_2.html">여행</a>
+						</li>
+						<li class="commonnav">
+							<a class="commonlink" href="flight_main.html">항공</a>
+						</li>
+						<li class="commonnav">
+							<a class="commonlink" href="hotel_main.html">호텔</a>
+						</li>
+						<li class="commonnav">
+							<a class="commonlink" href="dutyfree_main.html">면세점</a>
+						</li>
+					</ul>
+			</nav>
+		</div>
+	</div>
+		</header>
+	<div id="mainframe">	
+	<aside id="leftquickmenu">
+		<header>빠른검색</header>
+		<input type=“text” id="search" size=“9” maxlength=“9” value=search>
+		<ul>
+			<li>여행</li>
+			<li>지역</li>
+			<li>관광명소</li>
+			<li>맛집</li>
+			<li>여행루트</li>
+			<li>여행메이트</li>
+		</ul>
+	</aside>
+	<div id="subframe">
+		
+	<div id="main1">
+		<section id="mainsection">
+			<header>서울</header>
+			<article class="maintext">내용</article>
+		</section>
+		<article class="mainimage">
+			<img src="seoul_01.jpg">
+		</article>
+		<input style="float: right;" type="submit" value="마이루트로 저장">
+	</div>
+
+	<div id="sub">
+		<header>입장권 예약</header>
+		<article>
+			<div class="people">성인</div>
+			<div class="money">금액₩</div>
+		</article>
+		<article>
+			<div class="people">중•고등학생</div>
+			<div class="money">금액₩</div>
+		</article>
+		<article>
+			<div class="people">어린이</div>
+			<div class="money">금액₩</div>
+		</article>
+		<div style="width: 120px; height: 25px; margin: 0 auto;">
+			<input style="float: center; width: 120px; height: 25px;" type="submit" value="입장권 예약">
+		</div>
+	</div>
+
+	<div id="final">
+		<header> <리뷰 더보기 </header>
+		<section class="reviewmain">
+			<div  class="subreview">
+				<div class="review1">
+					<div>이미지</div>
+					<section>
+						<header>제목</header>
+						<article>내용</article>
+					</section>	
+				</div>
+				<div class="review2">
+					<div>이미지</div>
+					<section>
+						<header>제목</header>
+						<article>내용</article>
+					</section>	
+				</div>
+			</div>
+			<div  class="subreview">
+				<div class="review3">
+					<div>이미지</div>
+					<section>
+						<header>제목</header>
+						<article>내용</article>
+					</section>	
+					</div>
+					<div class="review4" >
+						<div>이미지</div>
+							<section>
+								<header>제목</header>
+								<article>내용</article>
+							</section>	
+						</div>
+					</div>
+				</section>
+					<div style="width: 120px; height: 25px; margin: 30px auto 0 auto;">
+					<input style="float: center; width: 120px; height: 25px;" type="submit" value="리뷰 작성">
+				</div>		
+			</div>
+		</div>
+		<nav id="place">
+			<div id="chooseplace">
+				<select size=“1”>
+					<option>주변 관광지</option>
+					<option>주변 음식점</option>
+					<option>주변 호텔</option>
+				</select>		
+			</div>
+			<section>관광지1이미지</section>
+			<article>관광지1</article>
+			<section>관광지2이미지</section>
+			<article>관광지2</article>
+			<section>관광지3이미지</section>
+			<article>관광지3</article>
+			<section>관광지4이미지</section>
+			<article>관광지4</article>
+			<section>관광지5이미지</section>
+			<article>관광지5</article>
+			<input style="float: right;  margin: 15px 5px 0 0; width: 80px; height: 25px;" type="submit" value="더 보러가기">
+		</nav>
+	</div>
+	<footer>
+		<div id="footer">
+			<p>footerNav</p>
+		</div>
+	</footer>
+</form>
+</body>
+</html>

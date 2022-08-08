@@ -1,0 +1,68 @@
+		
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		#header {
+			width: 1200px;
+			height: 150px;
+			margin: 0 auto;
+		}
+		#title {
+			float: left;
+			width: 300px;
+			height: 100px;
+		}
+		h1 {
+			font-family: 'Koulen', cursive;
+			font-size: 50pt;
+			font-variant-position: buttom;
+		}
+		#nav { 
+			float: right;
+			margin-right: 0;
+			width: 700px;
+			height: 100px;
+		}
+		#top {
+			text-align: right;
+			margin-top: 0;
+			font-size: 10pt;
+		}
+		#main {
+			text-align: right;
+			font-size: 15pt;
+			margin-bottom: 0;
+		}
+		.commonnav {
+			display: inline-block;
+			line-height: 45pt;
+			list-style: none;
+			padding-top: 0;
+			padding-left: 10pt;
+		}		
+		footer {
+			width: 100%;
+			height: 190px;
+			margin-top: 70px;
+			background-color: #EAEAEA;
+		}
+		#footer {
+			width: 1200px;
+			height: 150px;
+			margin: 0 auto;
+		}
+		.commonlink:link {
+			color: black;
+			text-decoration-line: none;
+		}
+		.commonlink:hover {
+			line-height: 0;
+		}
+		.commonlink:visited{
+			color: black;
+		}
+		.commonlink{
+			font-size: 20pt;
+		}
+		
