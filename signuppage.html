@@ -1,14 +1,29 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="header_footer.css">
+	<link type="text/css" rel="stylesheet" href="css/responsive-tabs.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
 	<style>
-		*{
+		header:not{
 			margin: 0;
 			padding: 0;
+		}
+		a {
+			text-decoration-line: none;
+			color: black;
+		}
+		a:hover {
+			color: black;
+		}
+		a:active {
+			color: black;
+		}
+		a:visited {
+			color: black;
 		}
 		div{
 			/*border: solid black 2px;
@@ -18,7 +33,7 @@
 			margin: 0 auto;
 			font-size: 20pt;
 			width: 600px;
-			height:	175px;
+			height:	190px;
 			border-bottom: solid;
 		}
 		#signupdiv1 section{
@@ -30,7 +45,9 @@
 		}
 		#signupdiv2 {
 			width: 600px;
+			height: 790px;
 			margin: 0 auto;
+			border-bottom: solid;
 		}
 		#signupdiv2 >div{
 			
@@ -43,29 +60,39 @@
 			margin: 5px;
 			font-size: 10pt;
 		}
-		.signupinput{
-			width: 330px;
+		.signupinputdiv{
+			width: 320px;
 			height: 50px;
 			float: left;
 			margin: 10px;
-
 		}
-		.signupinput > input{
-			width: 330px;
+		.signupinputdiv{
+			
+			height: 50px;
+			float: left;
+			margin: 10px;
+		}
+		.signupinput{
+			width: 320px;
 			height: 40px;
 			font-size: 14px;
 			padding-left: 10px;
+			border: #D5D5D5 1px solid;
+			border-radius: 5px;
 		}
 		.signupsidebtn{
-			width: 90px;
+			width: 100px;
 			height: 50px;
 			float: left;
 			margin: 5px;
 		}
 		.signupsidebtn > button{
-			width: 90px;
+			width: 100px;
 			height: 45px;
-			border-style: solid;
+			border: black 1px solid;
+			background: white;
+			color: black;
+			font-weight: bold;
 			border-radius: 5px;
 			margin: 5px 10px;
 			cursor: pointer;
@@ -73,9 +100,164 @@
 		#signupid{
 			float: left;
 		}
+		.signupinputbirth{
+			margin: 11px 5px 10px 5px;
+			border: none;
+			float: left;
+		}
+		#signupdiv3{
+			width: 600px;
+			height: 200px;
+			margin: 0 auto;
+		}
+		.signupbotdiv{
+			width: 450px;
+			height: 50px;
+			line-height: 60px;
+			float: left;
+		}
+		.signupradio{
+			margin: 15px;
+		}
+		.signindiv{
+			width: 600px;
+			height: 100px;
+			margin: 0 auto;
+		}
+		.signinbtn{
+			float: left;
+			width: 250px;
+			height: 50px;
+			margin: 0 20px;
+			text-align: center;
+			line-height: 50px;
+			border-radius: 5px;
+			cursor: pointer;
+			background-color: white;
+			font-size: 14pt;
+		}
+		#header{
+			box-shadow: 0px 1px grey;
+		}
+		.errortextdiv{
+			width: 450px;
+			height: 10px;
+			margin: 0 auto;
+			text-align: center;
+			font-size: 8pt;
+			float: left;
+		}
+		
+
 	</style>
 </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#main > li > ul').hide();
+		
+		$('.commonnav1').mouseenter(function(){
+ 			$('.commonnav1 > ul').slideDown(200);
+ 			$('.commonnav1 > p').css("border-bottom","solid 5px #CC3D3D");
+ 			$('.commonnav1 > ul').show();
+ 		});
+ 		$('.commonnav1').mouseleave(function(){
+ 			$('.commonnav1 > ul').slideUp(200);
+ 			$('.commonnav1 > p').css("border-bottom","solid 5px white");
+ 		});
+ 		$('.commonnav2').mouseenter(function(){
+ 			$('.commonnav2 > ul').slideDown(200);
+ 			$('.commonnav2 > p').css("border-bottom","solid 5px #CC3D3D");
+ 			$('.commonnav2 > ul').show();
+ 		});
+ 		$('.commonnav2').mouseleave(function(){
+ 			$('.commonnav2 > ul').slideUp(200);
+ 			$('.commonnav2 > p').css("border-bottom","solid 5px white");
+ 		});
+ 		$('.commonnav3').mouseenter(function(){
+ 			$('.commonnav3 > ul').slideDown(200);
+ 			$('.commonnav3 > p').css("border-bottom","solid 5px #CC3D3D");
+ 			$('.commonnav3 > ul').show();
+ 		});
+ 		$('.commonnav3').mouseleave(function(){
+ 			$('.commonnav3 > ul').slideUp(200);
+ 			$('.commonnav3 > p').css("border-bottom","solid 5px white");
+ 		});
+ 		$('.commonnav4').mouseenter(function(){
+ 			$('.commonnav4 > ul').slideDown(200);
+ 			$('.commonnav4 > p').css("border-bottom","solid 5px #CC3D3D");
+ 			$('.commonnav4 > ul').show();
+ 		});
+ 		$('.commonnav4').mouseleave(function(){
+ 			$('.commonnav4 > ul').slideUp(200);
+ 			$('.commonnav4 > p').css("border-bottom","solid 5px white");
+ 		});
+	});
+</script>
 <body>
+<form>
+	<div style="width:100%; height: 150px; box-shadow: 0px 3px 1px 1px grey; ">
+		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
+		<header>
+			<div id="header">
+			<div id="title">
+				<header>
+					<h1>Title</h1>
+				</header>
+			</div>
+			<div id="nav">
+				<nav>
+					<ul id="top">
+						<li class="commonnav"><a href="#">로그인</a></li>
+						<li class="commonnav"><a href="#">회원가입</a></li>
+						<li class="commonnav"><a href="#">마이페이지</a></li>
+						<li class="commonnav"><a href="#">즐겨찾기</a></li>
+						<li class="commonnav"><a href="#">고객센터</a></li>
+					</ul>
+					<ul id="main">
+						<li class="commonnav1">
+							<p><a class="commonlink" href="travel_2.html" id="main1">여행</a></p>
+							<ul class="list">
+								<li><a href="#">지역</a></li>
+								<li><a href="#">관광명소</a></li>
+								<li><a href="#">맛집</a></li>
+								<li><a href="#">여행루트</a></li>
+								<li><a href="#">여행메이트</a></li>
+							</ul>
+						</li>
+						<li class="commonnav2">
+							<p><a class="commonlink" href="flight_main.html">항공</a></p>
+							<ul class="list">
+								<li><a href="#">최저가 항공권</a></li>
+								<li><a href="#">부가 서비스 안내</a></li>
+								<li><a href="#">좌석 안내</a></li>
+							</ul>
+						</li>
+						<li class="commonnav3">
+							<p><a class="commonlink" href="hotel_main.html">호텔</a></p>
+							<ul class="list">
+								<li><a href="#">추천 호텔</a></li>
+								<li><a href="#">호텔 검색</a></li>
+								<li><a href="#">계절별 할인</a></li>
+							</ul>
+						</li>
+						<li class="commonnav4">
+							<p><a class="commonlink" href="dutyfree_main.html">면세점</a></p>
+							<ul class="list">
+								<li><a href="#">카테고리</a></li>
+								<li><a href="#">Best샵</a></li>
+								<li><a href="#">세일</a></li>
+								<li><a href="#">명품관</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		</header>
+	</div>
+</div>
 	<div id="signupdiv1">
 		<div>
 			<section>
@@ -89,67 +271,220 @@
 	<div id="signupdiv2">
 		<div id="signupid">
 			<div class="signuplabel">
-				아이디
+				아이디<span style="color: red;">*</span>
 			</div>
-			<div class="signupinput">
-				<input type="text" placeholder="아이디를 입력하세요.">
-			</div>
-			<div class="signupsidebtn">
-				<button>중복 확인</button>
-			</div>
-		</div>
-	</div>
-	<div id="signupdiv2">
-		<div id="signupid">
-			<div class="signuplabel">
-				비밀번호
-			</div>
-			<div class="signupinput">
-				<input type="text" placeholder="비밀번호를 입력하세요.">
-			</div>
-			<div class="signupsidebtn">
-				
-			</div>
-		</div>
-	</div>
-	<div id="signupdiv2">
-		<div id="signupid">
-			<div class="signuplabel">
-				비밀번호 확인
-			</div>
-			<div class="signupinput">
-				<input type="text" placeholder="비밀번호를 한번 더 입력하세요.">
-			</div>
-			<div class="signupsidebtn">
-				
-			</div>
-		</div>
-	</div>
-	<div id="signupdiv2">
-		<div id="signupid">
-			<div class="signuplabel">
-				이름
-			</div>
-			<div class="signupinput">
-				<input type="text" placeholder="이름을 입력해 주세요.">
-			</div>
-			<div class="signupsidebtn">
-				
-			</div>
-		</div>
-	</div>
-	<div id="signupdiv2">
-		<div id="signupid">
-			<div class="signuplabel">
-				이메일
-			</div>
-			<div class="signupinput">
-				<input type="text" placeholder="이름을 입력해 주세요.">
+			<div class="signupinputdiv">
+				<input type="text" placeholder="아이디를 입력하세요." class="signupinput" id="signupid">
 			</div>
 			<div class="signupsidebtn">
 				<button>중복 확인</button>
 			</div>
 		</div>
+		<div class="errortextdiv">
+			8자리 이상 입력해주세요.
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				비밀번호<span style="color: red;">*</span>
+			</div>
+			<div class="signupinputdiv">
+				<input type="text" placeholder="비밀번호를 입력하세요." class="signupinput" id="signuppwd"> 
+			</div>
+			<div class="signupsidebtn">
+				
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				비밀번호 확인<span style="color: red;">*</span>
+			</div>
+			<div class="signupinputdiv">
+				<input type="text" placeholder="비밀번호를 한번 더 입력하세요." class="signupinput" id="signuppwdchk">
+			</div>
+			<div class="signupsidebtn">
+				
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				이름<span style="color: red;">*</span>
+			</div>
+			<div class="signupinputdiv">
+				<input type="text" placeholder="이름을 입력해 주세요." class="signupinput" id="signupname">
+			</div>
+			<div class="signupsidebtn">
+				
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				이름(영문)
+			</div>
+			<div class="signupinputdiv">
+				<input type="text" placeholder="Hong" style="width: 130px; float: left; margin-right: 30px;" class="signupinput" id="signupelastname">
+				<input type="text" placeholder="Gildong" style="width: 130px; float: right;" class="signupinput" id="signupefirstname">
+			</div>
+			<div class="signupsidebtn">
+				
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				이메일<span style="color: red;">*</span>
+			</div>
+			<div class="signupinputdiv">
+				<input type="text" placeholder="이름을 입력해 주세요." class="signupinput" id="signupemail1" style="width: 154px;">
+				<span>@</span>
+				<select id="signupemail2" style="border: #D5D5D5 1px solid; height: 45px; border-radius: 5px; width: 125px;">
+					<option>선택</option>
+					<option>naver.com</option>
+					<option>daum.net</option>
+					<option>gmail.com</option>
+				</select>
+			</div>
+			<div class="signupsidebtn">
+				<button>중복 확인</button>
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				주소
+			</div>
+			<div class="signupinputdiv">
+				<input type="text" placeholder="주소 검색" class="signupinput" id="signupaddress"> 
+			</div>
+			<div class="signupsidebtn">
+				<button>주소 검색</button>
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				전화번호
+			</div>
+			<div class="signupinputdiv">
+				<input type="text" placeholder="숫자만 입력해주세요." class="signupinput" id="signupphonenumber">
+			</div>
+			<div class="signupsidebtn">
+				
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				성별
+			</div>
+			<div class="signupinputdiv">
+				<input type="radio" name="signupradio" class="signupradio">선택안함
+				<input type="radio" name="signupradio" class="signupradio">남
+				<input type="radio" name="signupradio" class="signupradio">여
+			</div>
+			<div class="signupsidebtn">
+				
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				닉네임
+			</div>
+			<div class="signupinputdiv">
+				<input type="text" placeholder="숫자만 입력해주세요." class="signupinput" id="signupnickname">
+			</div>
+			<div class="signupsidebtn">
+				
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+				생년월일
+			</div>
+			<div class="signupinputdiv" style="width: 320px;height: 40px;padding-left: 10px;border: #D5D5D5 1px solid;border-radius: 5px;">
+				 
+				<input type="text" placeholder="YYYY" class="signupinputbirth" style="width: 100px;" id="signupyear">
+				<input type="text" placeholder="MM" class="signupinputbirth" style="width: 60px;" id="signupmonth">
+				<input type="text" placeholder="DD" class="signupinputbirth" style="width: 60px;" id="signupday">
+				
+			</div>
+			<div class="signupsidebtn">
+				
+			</div>
+		</div>
 	</div>
+	<div id="signupdiv3">
+		<div id="signupid">
+			<div class="signuplabel">
+				이용약관동의<span style="color: red;">*</span>
+			</div>
+			<div class="signupbotdiv">
+				<input type="checkbox" name="">
+				전체 동의합니다.
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+			</div>
+			<div class="signupbotdiv">
+				<input type="checkbox" name="">
+				이용약관 동의 <span style="color:#C3C3C3;">(필수)</span>
+				<a href="">
+					<span style="float: right;"> 약관 보기<i class="fa-solid fa-angle-right" style="margin-left: 10px;"></i></span>
+				</a>
+			</div>
+		</div>
+		<div id="signupid">
+			<div class="signuplabel">
+			</div>
+			<div class="signupbotdiv">
+				<input type="checkbox" name="">
+				개인정보 수집 및 이용 동의 <span style="color:#C3C3C3;">(필수)</span>
+				<a href="">
+					<span style="float: right;"> 약관 보기<i class="fa-solid fa-angle-right" style="margin-left: 10px;"></i></span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="signindiv">
+		<button class="signinbtn" style="border: 2px solid red;">
+			가입하기
+		</button>
+		<button class="signinbtn" style="border: 2px solid grey;">
+			돌아가기
+		</button>
+	</div>
+		<div class="footBack"></div>
+	<footer>
+		<div id="footer">
+			<div class="footerIn">
+				<ul>
+					<li>회사소개</li>
+					<li>회사에 대하여</li>
+					<li>기업지배구조</li>
+					<li>채용정보</li>
+					<li>홍보채널</li>
+				</ul>
+				<ul>
+					<li>고객지원</li>
+					<li>공지사항</li>
+					<li>자주 묻는 질문</li>
+					<li>고객의 말씀</li>
+					<li>서비스 센터</li>
+				</ul>
+				<ul>
+					<li>약관 및 규정</li>
+					<li>개인정보 처리방침</li>
+					<li>이용약관</li>
+					<li>고객의 말씀</li>
+				</ul>
+				<ul>
+					<li>기타 서비스</li>
+					<li>IR</li>
+					<li>파트너제휴 플랫폼</li>
+					<li>호텔 등록</li>
+					<li>모든호텔</li>
+				</ul>
+
+			</div>
+		</div>
+	</footer>
+	</form>
+	<script src="https://kit.fontawesome.com/e008e677ae.js" crossorigin="anonymous"></script>
 </body>
 </html>
