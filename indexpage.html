@@ -3,10 +3,10 @@
 <head>
 	<title></title>
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="header_footer.css">
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/header_footer.css">
 	<link type="text/css" rel="stylesheet" href="css/responsive-tabs.css" />
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="css/style2.css" />
     <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
 	<style>
 		
@@ -133,7 +133,7 @@
 		}
 		#tab-3 input:last-of-type {
 			border-style: none;
-			background:url(image/loupe.png);
+			background:url(img/icon/loupe.png);
 			width: 35px;
 			height: 35px;
 		    background-size: 15px;
@@ -160,7 +160,7 @@
 		    padding:5px;
 		    border-style: solid;
 		    border-width: 0;
-		    background:url(image/seat.png);
+		    background:url(img/icon/seat.png);
 		    background-position: 100px;
 		    background-size: 15px;
 		    background-repeat: no-repeat;
@@ -176,7 +176,7 @@
 		    padding:5px;
 		    border-style: solid;
 		    border-width: 0;
-		    background:url(image/seat.png);
+		    background:url(img/icon/seat.png);
 		    background-position: 100px;
 		    background-size: 15px;
 		    background-repeat: no-repeat;
@@ -216,14 +216,14 @@
 		}
 		.departure {
 			width: 250px;
-			background:url(image/take-off.png);
+			background:url(img/icon/take-off.png);
 		    background-position: 5px;
 		    background-size: 30px;
 		    background-repeat: no-repeat;
 		}
 		.arrive {
 			width: 250px;
-			background:url(image/landing.png);
+			background:url(img/icon/landing.png);
 		    background-position: 5px;
 		    background-size: 20px;
 		    background-repeat: no-repeat;
@@ -250,7 +250,7 @@
 			position: relative;
 			text-align: left;
 			right: 10px;
-			background:url(image/pin.png);
+			background:url(img/icon/pin.png);
 		    background-position: 155px;
 		    background-size: 20px;
 		    background-repeat: no-repeat;
@@ -263,7 +263,7 @@
 			height: 40px;
 			border-style: none;
 			background-color: white;
-			background:url(image/loupe.png);
+			background:url(img/icon/loupe.png);
 		    background-position: center;
 		    background-size: 20px;
 		    background-repeat: no-repeat;
@@ -275,7 +275,7 @@
 			height: 40px;
 			border-style: none;
 			background-color: white;
-			background:url(image/loupe.png);
+			background:url(img/icon/loupe.png);
 		    background-position: center;
 		    background-size: 20px;
 		    background-repeat: no-repeat;
@@ -285,7 +285,7 @@
 			position: relative;
 			text-align: left;
 			right: 5px;
-			background:url(image/pin.png);
+			background:url(img/icon/pin.png);
 		    background-position: 155px;
 		    background-size: 20px;
 		    background-repeat: no-repeat;
@@ -298,7 +298,7 @@
 			filter: opacity(0.5) drop-shadow(0 0 0 white);
 		}
 		.people1 {
-			background-image: url(image/people.png);
+			background-image: url(img/icon/people.png);
 		    background-position: 1px center;
 		    background-size: 20px;
 		    background-repeat: no-repeat;
@@ -309,7 +309,7 @@
 		    /*filter: opacity(0.5) drop-shadow(0 0 0 white);*/
 		}
 		.people2 {
-			background-image: url(image/people.png);
+			background-image: url(img/icon/people.png);
 		    background-position: 1px center;
 		    background-size: 20px;
 		    background-repeat: no-repeat;
@@ -348,7 +348,7 @@
 			position: relative;
 			text-align: left;
 			left: 10px;
-			background:url(image/pin.png);
+			background:url(img/icon/pin.png);
 		    background-position: 200px;
 		    background-size: 20px;
 		    background-repeat: no-repeat;
@@ -769,21 +769,23 @@
 	});
 </script>
 <body>
-<form>
-	
-	<div style="width: 1200px; height: 150px; margin: 0 auto; ">
+<form name="myform">
+	<div style="width:100%; height: 150px; box-shadow: 0px 5px 1px 1px #030066; ">
+		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
 		<header>
 			<div id="header">
 			<div id="title">
-				<header>
-					<h1>Title</h1>
-				</header>
+				<a href="indexpage.html">
+					<header style="width: 250px;height: 250px; z-index: -2;position: relative;">
+						<img src="img/logo/logo1.png">
+					</header>
+				</a>
 			</div>
 			<div id="nav">
 				<nav>
 					<ul id="top">
 						<li class="commonnav"><a href="#">로그인</a></li>
-						<li class="commonnav"><a href="#">회원가입</a></li>
+						<li class="commonnav"><a href="signuppage.html">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
@@ -830,7 +832,6 @@
 		</div>
 		</header>
 	</div>
-	</div>
 	<section>
 		<div class="main_visual_wrap">
 			<div class="imageBox">
@@ -846,9 +847,9 @@
         <div class="search">
         	<div id="horizontalTab">
 		        <ul>
-		            <li style="background-color: rgba(211,10,20,.7);"><a href="#tab-1"><img src="image/passenger.png" class="image">여행</a></li>
-		            <li style="background-color: rgba(34,42,115,.7);"><a href="#tab-2"><img src="image/flying-airplane.png"  class="image">항공</a></li>
-		            <li style="background-color: rgba(212,157,2,.7);"><a href="#tab-3"><img src="image/hotel.png" class="image">호텔</a></li>
+		            <li style="background-color: rgba(211,10,20,.7);"><a href="#tab-1"><img src="img/icon/passenger.png" class="image">여행</a></li>
+		            <li style="background-color: rgba(34,42,115,.7);"><a href="#tab-2"><img src="img/icon/flying-airplane.png"  class="image">항공</a></li>
+		            <li style="background-color: rgba(212,157,2,.7);"><a href="#tab-3"><img src="img/icon/hotel.png" class="image">호텔</a></li>
 		        </ul>
 		        <div id="tab-1">
 		              <h3 style="font-size: 14pt;">가고싶은 여행지, 명소를 검색해보세요.</h3>
@@ -928,7 +929,7 @@
 		        	<h3 style="font-size: 14pt;">머무르고 싶은 지역을 입력하세요.</h3>
 
 		        	<div>
-		        		<img src="image/hotel.png" width="20" height="20" class="hotelIcon">
+		        		<img src="img/icon/hotel.png" width="20" height="20" class="hotelIcon">
 		        		<input type="text" placeholder="여행지 또는 숙소 이름으로 검색" size="40">
 			            <select>
 							<option value="인원수">인원수</option>
@@ -946,7 +947,6 @@
 			            <input type="date" name="checkin" id="datechoice3">
 			        	<input type="date" name="checkout" id="datechoice4">
 			        	<input type="button" name="hotelBtn" class="hotelBtn">
-			        	<!-- <img src="image/loupe.png" width="30" height="30"> -->
 		        	</div>
 		        	
 					<script>
@@ -968,12 +968,12 @@
     <section>
     	<div class="contents">
 			<div class="travel" >
-				<h5>인기 여행지</h5>
+				<h5 style="margin-left: -10px;">인기 여행지</h5>
 				<a href="">
 					<div  class="travellist1" id="travel1">
 						<div style="width: 280px; height: 230px; overflow: hidden;">
-							<img src="image/1.jpg" width="280px" height="230px">
-							<p class="insert1">자세히 보러가기<img src="image/next.png" width="25" height="25"></p>
+							<img src="img/travel/austria.jpg" width="280px" height="230px">
+							<p class="insert1">자세히 보러가기<img src="img/icon/next.png" width="25" height="25"></p>
 						</div>
 						<div style="width: 280px; height: 100px;">
 							<a style="margin-left: 20px;font-size: 13pt;font-weight: bold;" href="#">오스트리아</a>
@@ -996,8 +996,8 @@
 				<a href="">
 					<div class="travellist1" id="travel2">
 						<div style="width: 280px; height: 230px; overflow: hidden;">
-							<img src="image/travel02.jpg" width="280px" height="230px">
-							<p class="insert2">자세히 보러가기<img src="image/next.png" width="25" height="25"></p>
+							<img src="img/travel/bolivia.jpg" width="280px" height="230px">
+							<p class="insert2">자세히 보러가기<img src="img/icon/next.png" width="25" height="25"></p>
 						</div>
 						<div style="width: 280px; height: 100px;">	
 							<a style="margin-left: 20px;font-size: 13pt;font-weight: bold;" href="#">볼리비아</a>
@@ -1019,8 +1019,8 @@
 				<a href="">
 					<div class="travellist1" id="travel3">
 						<div style="width: 280px; height: 230px; overflow: hidden;">
-							<img src="image/travel03.jpg" width="280px" height="230px">
-							<p class="insert3">자세히 보러가기<img src="image/next.png" width="25" height="25"></p>
+							<img src="img/travel/laos.jpg" width="280px" height="230px">
+							<p class="insert3">자세히 보러가기<img src="img/icon/next.png" width="25" height="25"></p>
 						</div>	
 						<div style="width: 280px; height: 100px;">	
 							<a style="margin-left: 20px;font-size: 13pt;font-weight: bold;" href="#">라오스</a>
@@ -1042,8 +1042,8 @@
 				<a href="">
 					<div class="travellist1" id="travel4">
 						<div style="width: 280px; height: 230px; overflow: hidden;">
-							<img src="image/travel04.jpg" width="280px" height="230px">
-							<p class="insert4">자세히 보러가기<img src="image/next.png"width="17" height="17"></p>
+							<img src="img/travel/switzerland.jpg" width="280px" height="230px">
+							<p class="insert4">자세히 보러가기<img src="img/icon/next.png"width="17" height="17"></p>
 						</div>	
 						<div style="width: 280px; height: 100px;">
 							<a style="margin-left: 20px;font-size: 13pt;font-weight: bold;" href="#">스위스</a>
@@ -1068,10 +1068,10 @@
 			</div>
 			<div class="travel">
 				<div class="contents2">
-					<h5>추천 항공권</h5>
+					<h5 style="margin-left: -15px;">추천 항공권</h5>
 					<a href="">
 						<div class="travellist2">
-							<img src="image/landscape01.jpg" width="280px" height="350px">
+							<img src="img/travel/phuket.jpg" width="280px" height="350px">
 							<div class="detail">
 								<p>푸켓</p>
 								<p>일반석 왕복</p>
@@ -1081,7 +1081,7 @@
 					</a>
 					<a href="">
 						<div class="travellist2">
-							<img src="image/landscape06.jpg" width="280px" height="350px">
+							<img src="img/travel/guam.jpg" width="280px" height="350px">
 							<div class="detail">
 								<p>괌</p>
 								<p>일반석 왕복</p>
@@ -1091,9 +1091,9 @@
 					</a>
 					<a href="">
 						<div class="travellist2">
-							<img src="image/landscape07.jpg" width="280px" height="350px">
+							<img src="img/travel/berlin.jpg" width="280px" height="350px">
 							<div class="detail">
-								<p>독일</p>
+								<p>베를린</p>
 								<p>일반석 왕복</p>
 								<p>KRW 1,948,000~</p>
 							</div>
@@ -1101,7 +1101,7 @@
 					</a>
 					<a href="">
 						<div class="travellist2">
-							<img src="image/landscape05.jpg" width="280px" height="350px">
+							<img src="img/travel/cebu.jpg" width="280px" height="350px">
 							<div class="detail">
 								<p>세부</p>
 								<p>일반석 왕복</p>
@@ -1116,15 +1116,15 @@
 			</div>
 			<div class="travel">
 				<div class="contents3">
-					<h5>인기 호텔</h5>
+					<h5 style="margin-left: 65px;">인기 호텔</h5>
 					<a href="">
 						<div  class="travellist3">
-							<div><img src="image/hotel01.jpg" width="280px" height="230px"></div>
+							<div><img src="img/hotel/hotel01.jpg" width="280px" height="230px"></div>
 							<p>서울 신라호텔
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
 							</p>
 							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
 							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
@@ -1132,12 +1132,12 @@
 					</a>
 					<a href="">
 						<div  class="travellist3">
-							<div><img src="image/hotel02.jpg" width="280px" height="230px"></div>
+							<div><img src="img/hotel/hotel02.jpg" width="280px" height="230px"></div>
 							<p>시그니엘 부산
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
 							</p>
 							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
 							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
@@ -1145,12 +1145,12 @@
 					</a>
 					<a href="">
 						<div  class="travellist3">
-							<div><img src="image/hotel03.jpg" width="280px" height="230px"></div>
+							<div><img src="img/hotel/hotel03.jpg" width="280px" height="230px"></div>
 							<p>그랜드 하얏트 제주
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
 							</p>
 							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
 							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
@@ -1158,12 +1158,12 @@
 					</a>
 					<a href="">
 						<div  class="travellist3">
-							<div><img src="image/hotel04.jpg" width="280px" height="230px"></div>
+							<div><img src="img/hotel/hotel04.jpg" width="280px" height="230px"></div>
 							<p>파라다이스 시티 인천
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
-								<img src="image/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="img/icon/star.png" width="15px" height="15px">
 							</p>
 							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
 							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
@@ -1175,14 +1175,14 @@
 				</div>
 				<div class="contents4">
 					<div>
-						<img src="image/shop.jpg" width="580" height="400">
+						<img src="img/dutyfree/shop.jpg" width="580" height="400">
 					</div>
 					<div>
 						<p>24시간 언제 어디서든</p>
 						<p>출굴 3시간 전까지</p>
 						<p>인터넷으로 간편하게</p>
 						<p>온라인 면세점으로 쇼핑 시간을 절약하세요!</p>
-						<a href="#"><p>면세점 둘러보기<p><img src="image/right-arrow2.png" width="20" height="20"></a>
+						<a href="#"><p>면세점 둘러보기<p><img src="img/icon/right-arrow2.png" width="20" height="20"></a>
 					</div>
 					
 				</div>
@@ -1190,10 +1190,10 @@
 		</div>
 		<div class="back1"></div>
 		<div class="back2"></div>
+		
 	</section>	
-		<div class="footBack"></div>
-	<footer>
-		<div id="footer">
+	<footer style="top: 350px;">
+		<div id="footer" >
 			<div class="footerIn">
 				<ul>
 					<li>회사소개</li>
@@ -1229,8 +1229,8 @@
     
 
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-        <script src="assets/js/jquery.revolver.min.js"></script>
-        <script src="assets/js/prettify.js"></script>
+        <script src="js/jquery.revolver.min.js"></script>
+        <script src="js/prettify.js"></script>
         <script type="text/javascript">
             var $revolver = $('#revolver').revolver(),
                 revolver  = $revolver.data('revolver'),

@@ -1,101 +1,29 @@
-
-
-#horizontalTab li {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	width: 160px;
-	height: 50px;
-	text-align: center;
-	position: relative;
+#wrapper {
+    margin: 10px auto 0;
+    padding: 20px 30px;
+    text-align: left;
+    width: 720px;
+    height: 300px;
 }
 
-/* Tabs container */
-.r-tabs {
-	position: relative;
-	border-top: 0px;
-	border-width: 2px;
-	/*border-top: 1px solid #002266;
-	border-right: 1px solid #002266;
-	border-left: 1px solid #002266;
-	border-bottom: 1px solid #002266;*/
-
+.revolver.stack .slide {
+    left: 0;
+    position: absolute;
+    top: 0;
 }
 
-/* Tab element */
-.r-tabs .r-tabs-tab {
-	position: relative;
-	/*background-color: #002266;*/
+.revolver.inline .slide {
+    border-style: solid;
+    margin: 0;
+    padding: 0;
+    position: static;
 }
 
-/* Tab anchor */
-.r-tabs .r-tabs-nav .r-tabs-anchor {
-	display: inline-block;
-	padding: 12px 30px;
-	text-decoration: none;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
-	font-size: 14pt;
-	/*font-weight: bold;*/
-	color: #fff;
-}
-
-#tab-1 {
-	border-style: solid;
-	border-top: 0px;
-	border-left: 0px;
-	box-shadow: 5px 10px 10px #8C8C8C;
-	border-width: 2px;
-	border-color: #8C8C8C;
-	height: 160px;
-}
-#tab-2 {
-	border-style: solid;
-	border-top: 0px;
-	border-left: 0px;
-	box-shadow: 10px 10px 10px #8C8C8C;
-	border-width: 2px;
-	border-color: #8C8C8C;
-	height: 170px;
-}
-#tab-3 {
-	border-style: solid;
-	border-top: 0px;
-	border-left: 0px;
-	box-shadow: 10px 10px 10px #8C8C8C;
-	border-width: 2px;
-	border-color: #8C8C8C;
-	height: 160px;
-}
-/* Disabled tab */
-.r-tabs .r-tabs-nav .r-tabs-state-disabled {
-	opacity: 0.5;
-}
-
-/* Active state tab anchor */
-.r-tabs .r-tabs-nav .r-tabs-state-active .r-tabs-anchor {
-	color: #002266;
-	text-shadow: none;
-	background-color: white;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
-	width: 100px;
-	height: 50px;
-	background-color: white;
-
-}
-.r-tabs .r-tabs-nav .r-tabs-state-active .r-tabs-anchor img {
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
-	filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(267deg) brightness(109%) contrast(108%);
-	background-color: white;
-
-}
-
-
-/* Tab panel */
-.r-tabs .r-tabs-panel {
-	background-color: white;
-	border-bottom: 4px solid white;
-	border-bottom-right-radius: 4px;
-	border-bottom-left-radius: 4px;
-
+.revolver.reveal .slide {
+    height: 300px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 720px;
 }
