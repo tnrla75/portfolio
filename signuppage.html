@@ -618,7 +618,7 @@
 				
 			</div>
 			<div class="errortextdiv" >
-				<input type="text" value="" class="infomessage" id="pwd1m">
+				<span id="pwd1m" class="infomessage"></span>
 			</div>
 		</div>
 		<div id="signupid">
@@ -633,7 +633,7 @@
 			</div>
 		</div>
 		<div class="errortextdiv" >
-			<input type="text" value="" class="infomessage" id="pwd2m">
+			<span id="pwd2m" class="infomessage"></span>
 		</div>
 		<div id="signupid">
 			<div class="signuplabel">
@@ -647,7 +647,7 @@
 			</div>
 		</div>
 		<div class="errortextdiv" >
-			<input type="text" value="" class="infomessage" id="namem">
+			<span id="namem" class="infomessage"></span>
 		</div>
 		<div id="signupid">
 			<div class="signuplabel">
@@ -660,7 +660,7 @@
 			
 		</div>
 		<div class="errortextdiv" >
-			<input type="text" value="" class="infomessage" id="enamem">
+			<span id="enamem" class="infomessage"></span>
 		</div>
 		<div id="signupid">
 			<div class="signuplabel">
@@ -695,7 +695,7 @@
 				<span>&nbsp@</span>
 				<select id="email2">
 
-					<option>선택</option>
+					<option value="선택">선택</option>
 					<option>naver.com</option>
 					<option>daum.net</option>
 					<option>gmail.com</option>
@@ -706,7 +706,7 @@
 			</div>
 		</div>
 		<div class="errortextdiv" >
-			<input type="text" value="" class="infomessage">
+			<span id="emailm" class="infomessage"></span>
 		</div>
 		<div id="signupid">
 			<div class="signuplabel">
@@ -721,9 +721,7 @@
 			</div>
 		</div>
 
-		<div class="errortextdiv" >
-			<input type="text" value="" class="infomessage">
-		</div>
+		
 		<div id="signupid">
 			<div class="signuplabel">
 				상세주소
@@ -733,9 +731,6 @@
 			</div>
 			<div class="signupsidebtn">
 			</div>
-		</div>
-		<div class="errortextdiv" >
-			<input type="text" value="" class="infomessage" id="phonenum">
 		</div>
 		<div id="signupid">
 			<div class="signuplabel">
@@ -956,10 +951,10 @@
 		</div>
 
 	<div class="signindiv">
-		<button class="signinbtn" style="border: 2px solid grey;">
+		<button class="signinbtn" style="border: 2px solid grey;" id="signupbtn1">
 			돌아가기
 		</button>
-		<button class="signinbtn" style="background-color: #030066;color: white;">
+		<button class="signinbtn" style="background-color: #030066;color: white;" id="signupbtn2">
 			가입하기
 		</button>
 	</div>
@@ -1044,38 +1039,60 @@
 			}
 		}
 		pwd1.onblur = function (){
-			if(!reg1.test(id.value)){
-				idm.innerText="4자리 이상 12자리 이하로 작성해주세요.";
+			if(!reg1.test(pwd1.value)){
+				pwd1m.innerText="4자리 이상 12자리 이하로 작성해주세요.";
 			}
 			else{
-				idm.innerText="";
+				pwd1m.innerText="";
 			}
 		}
 		pwd2.onblur = function (){
 			if(pwd1.value != pwd2.value){
-				$('input[id=pwd2m]').attr('value',"위와 같은 비밀번호를 입력하세요.");
+				pwd2m.innerText="위와 같은 비밀번호를 입력하세요.";
+			}
+			else{
+				pwd2m.innerText="";
 			}
 		}
-		// name.onblur = function (){
-		// 	if(name.value.length <= 1){
-		// 		$('input[id=namem]').attr('value',"이름을 입력해주세요.");
-		// 	}
-		// }
+		name.onblur = function (){
+			if(name.value.length <= 1){
+				namem.innerText="이름을 입력하세요.";
+			}
+			else{
+				namem.innerText="";	
+			}
+		}
 		elastname.onblur = function (){
 			if(!reg2.test(elastname.value)){
-				$('input[id=enamem]').attr('value',"영어로만 입력하세요.");
+				enamem.innerText="영어를 입력하세요.";
+			}
+			else if(reg2.test(elastname.value) && reg2.test(efirstname.value)){
+				enamem.innerText="";
 			}
 		}
 		efirstname.onblur = function (){
-			if(!reg2.test(elastname.value)){
-				$('input[id=enamem]').attr('value',"영어로만 입력하세요.");
+			if(!reg2.test(efirstname.value)){
+				enamem.innerText="영어를 입력하세요.";
+			}
+			else if(reg2.test(elastname.value) && reg2.test(efirstname.value)){
+				enamem.innerText="";
 			}
 		}
 		// email1.onblur = function (){
-		// 	if(!(id.value.length > 8 && id.value.length < 16)){
-		// 		$('input[id=idm]').attr('value',"8자리 이상 16자리 이하로 작성해주세요.");
+		// 	if(email1.value.length >= 2 && !(email2.value ==="선택")){
+		// 		emailm.innerText="이메일을 입력하세요.";
+		// 	}
+		// 	else{
+		// 		emailm.innerText="";	
 		// 	}
 		// }
+		// document.getElementById('signupbtn2').onclick = function() {
+		// 	alert("aa");
+		// };
+		// document.getElementById('signupbtn1').onclick = function() {
+		// 	alert("bb");
+		// };
+
 		
 	</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
