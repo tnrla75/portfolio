@@ -120,6 +120,16 @@
 			margin: 5px 10px;
 			cursor: pointer;
 		}
+		#addressbtn{
+			width: 100px;
+			height: 45px;
+			background: #030066;
+			color: white;
+			font-weight: bold;
+			border-radius: 5px;
+			margin: 5px 10px;
+			cursor: pointer;
+		}
 		#signupid{
 			float: left;
 		}
@@ -163,10 +173,10 @@
 			box-shadow: 0px 1px grey;
 		}
 		.errortextdiv{
-			width: 650px;
+			width: 320px;
 			height: 0px;
 			margin: 0 auto;
-			text-align: center;
+			text-align: left;
 			font-size: 8pt;
 			float: left;
 		}
@@ -176,6 +186,7 @@
 			bottom: 13px;
 			font-size: 6pt;
 			width: 320px;
+			left: 160px;
 		}
 		#email2{
 			width: 125px; float: right;
@@ -594,7 +605,7 @@
 			</div>
 		</div>
 		<div class="errortextdiv" >
-			<input type="text" value="" class="infomessage" id="idm">
+			<span id="idm" class="infomessage"></span>
 		</div>
 		<div id="signupid">
 			<div class="signuplabel">
@@ -703,13 +714,13 @@
 			</div>
 			<div class="signupinputdiv">
 				<input type="text" placeholder="주소 검색" class="signupinput" 
-				id="sample6_address" value=""> 
+				id="sample6_address" > 
 			</div>
-		
 			<div class="signupsidebtn">
-				<button onclick="sample6_execDaumPostcode()">주소 검색</button>
+				<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기" id="addressbtn"><br>
 			</div>
 		</div>
+
 		<div class="errortextdiv" >
 			<input type="text" value="" class="infomessage">
 		</div>
@@ -718,7 +729,7 @@
 				상세주소
 			</div>
 			<div class="signupinputdiv">
-				<input type="text" placeholder="주소를 자세히 입력하세요." class="signupinput" id="sample6_detailAddress" value="">
+				<input type="text" placeholder="주소를 자세히 입력하세요." class="signupinput" id="sample6_detailAddress">
 			</div>
 			<div class="signupsidebtn">
 			</div>
@@ -1026,15 +1037,18 @@
 		
 		id.onblur = function (){
 			if(!reg1.test(id.value)){
-				$('input[id=idm]').attr('value',"4자리 이상 12자리 이하로 작성해주세요.");
+				idm.innerText="4자리 이상 12자리 이하로 작성해주세요.";
 			}
 			else{
-				$('input[id=idm]').attr('value',"4자리 이상 12자리 이하로 작성해주세요.");	
+				idm.innerText="";
 			}
 		}
 		pwd1.onblur = function (){
 			if(!reg1.test(id.value)){
-				$('input[id=pwd1m]').attr('value',"4자리 이상 12자리 이하로 작성해주세요.");
+				idm.innerText="4자리 이상 12자리 이하로 작성해주세요.";
+			}
+			else{
+				idm.innerText="";
 			}
 		}
 		pwd2.onblur = function (){
@@ -1065,6 +1079,8 @@
 		
 	</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -1082,19 +1098,18 @@
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
                     addr = data.jibunAddress;
                 }
+
                 // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                
+              
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-      
                 document.getElementById("sample6_address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("sample6_detailAddress").focus();
-                // $('input[id=idm]').attr('value',"4자리 이상 12자리 이하로 작성해주세요.");
-               
             }
         }).open();
     }
+
 </script>
 </body>
 </html>
