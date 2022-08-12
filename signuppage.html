@@ -13,19 +13,7 @@
 			margin: 0;
 			padding: 0;
 		}
-		a {
-			text-decoration-line: none;
-			color: black;
-		}
-		a:hover {
-			color: black;
-		}
-		a:active {
-			color: black;
-		}
-		a:visited {
-			color: black;
-		}
+		
 		div{
 			/*border: solid black 2px;
 			box-sizing: border-box;*/
@@ -654,8 +642,8 @@
 				이름(영문)
 			</div>
 			<div class="signupinputdiv" style="width:350px;">
-				<input type="text" placeholder="Hong" style="width: 137px; float: left; margin-right: 30px;" class="signupinput" id="elastname" >
-				<input type="text" placeholder="Gildong" style="width: 137px;" class="signupinput" id="efirstname" >
+				<input type="text" placeholder="HONG" style="width: 137px; float: left; margin-right: 30px;" class="signupinput" id="elastname" >
+				<input type="text" placeholder="GILDONG" style="width: 137px;" class="signupinput" id="efirstname" >
 			</div>
 			
 		</div>
@@ -694,11 +682,10 @@
 				<input type="text" placeholder="이메일을 입력하세요." class="signupinput"  style="width: 150px;" id="email1">
 				<span>&nbsp@</span>
 				<select id="email2">
-
-					<option value="선택">선택</option>
 					<option>naver.com</option>
 					<option>daum.net</option>
 					<option>gmail.com</option>
+					<option>직접 입력</option>
 				</select>
 			</div>
 			<div class="signupsidebtn" style="right: 10px; position: relative;">
@@ -958,7 +945,7 @@
 			가입하기
 		</button>
 	</div>
-		<div class="footBack"></div>
+
 	<footer>
 		<div id="footer">
 			<div class="footerIn">
@@ -1062,6 +1049,7 @@
 				namem.innerText="";	
 			}
 		}
+
 		elastname.onblur = function (){
 			if(!reg2.test(elastname.value)){
 				enamem.innerText="영어를 입력하세요.";
@@ -1069,6 +1057,7 @@
 			else if(reg2.test(elastname.value) && reg2.test(efirstname.value)){
 				enamem.innerText="";
 			}
+
 		}
 		efirstname.onblur = function (){
 			if(!reg2.test(efirstname.value)){
@@ -1078,20 +1067,21 @@
 				enamem.innerText="";
 			}
 		}
-		// email1.onblur = function (){
-		// 	if(email1.value.length >= 2 && !(email2.value ==="선택")){
-		// 		emailm.innerText="이메일을 입력하세요.";
-		// 	}
-		// 	else{
-		// 		emailm.innerText="";	
-		// 	}
-		// }
-		// document.getElementById('signupbtn2').onclick = function() {
-		// 	alert("aa");
-		// };
-		// document.getElementById('signupbtn1').onclick = function() {
-		// 	alert("bb");
-		// };
+		email1.onblur = function (){
+			if(!(email1.value.length >= 2)){
+				emailm.innerText="이메일을 입력하세요.";
+			}
+			else{
+				emailm.innerText="";	
+			}
+		}
+		// jsp 배우고 추가예정
+		document.getElementById('signupbtn2').onclick = function() {
+			alert("가입하기");
+		};
+		document.getElementById('signupbtn1').onclick = function() {
+			alert("돌아가기");
+		};
 
 		
 	</script>
