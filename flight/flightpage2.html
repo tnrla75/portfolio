@@ -8,6 +8,41 @@
 	<title></title>
 	<style>
 		
+		#flightdiv1{
+			width: 900px;
+			height: 1200px;
+			position: relative;
+			
+		}
+		#flightdiv2{
+			width: 300px;
+			height: fit-content;
+			position: fixed;
+			top: 160px;
+			margin-left: 900px;
+			background-color: #E7E7E7;
+			border-radius: 10px;
+		}
+		#flightdiv2_indiv1{
+			width: 270px;
+			margin: 0 10px;
+			border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+		}
+		#flightdiv2_indiv2{
+			width: 270px;
+			margin: 0 10px;
+			border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+		} 
+		#flightdiv2_indiv3{
+			width: 270px;
+			margin: 0 10px;
+			float: left;
+		}
+		#flightdiv2_indiv3 > span{
+			margin: 10px 0;
+			font-weight: bold;
+			font-size: 14pt;
+		}
 	</style>
 </head>
 <script>
@@ -59,7 +94,7 @@
 				<header>
 					<div id="header">
 						<div id="title">
-							<a href="indexpage.html">
+							<a href="../indexpage.html">
 								<header style="width: 250px;height: 150px; z-index: -2;position: relative;">
 									<img src="../img/logo/logo1.png">
 								</header>
@@ -115,6 +150,23 @@
 						</div>
 					</div>
 				</header>
+			</div>
+		</div>
+		<div style="width: 1200px; margin: 0 auto;">
+			<div id="flightdiv1">
+				asdf
+			</div>
+			<div id="flightdiv2">
+				<div id="flightdiv2_indiv1">
+					<h3>요금 상세 정보</h3>
+				</div>
+				<div id="flightdiv2_indiv2">
+					<h4>탑승객</h4>
+				</div>
+				<div id="flightdiv2_indiv3">
+					<span style="float: left;">총 금액</span>
+					<span style="float:right;">222,222원</span>
+				</div>
 			</div>
 		</div>
 
