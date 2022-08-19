@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -506,7 +507,7 @@
 
 </script>
 <body>
-<form name="myform">
+<form name="myform" action="signuppage_result.jsp">
 	<div style="width:100%; height: 150px; box-shadow: 0px 3px 1px 1px #030066; ">
 		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
 		<header>
@@ -586,7 +587,7 @@
 				아이디<span style="color: red;">*</span>
 			</div>
 			<div class="signupinputdiv">
-				<input type="text" placeholder="아이디를 입력하세요." class="signupinput" id="id">
+				<input type="text" placeholder="아이디를 입력하세요." class="signupinput" id="id" name="mb_id" maxlength="12" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
 			<div class="signupsidebtn">
 				<button>중복 확인</button>
@@ -600,7 +601,7 @@
 				비밀번호<span style="color: red;">*</span>
 			</div>
 			<div class="signupinputdiv">
-				<input type="text" placeholder="비밀번호를 입력하세요." class="signupinput" id="pwd1" > 
+				<input type="text" placeholder="비밀번호를 입력하세요." class="signupinput" id="pwd1" name="mb_pw" maxlength="12" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 
 			</div>
 			<div class="signupsidebtn">
 				
@@ -614,7 +615,7 @@
 				비밀번호 확인<span style="color: red;">*</span>
 			</div>
 			<div class="signupinputdiv">
-				<input type="text" placeholder="비밀번호를 한번 더 입력하세요." class="signupinput" id="pwd2">
+				<input type="text" placeholder="비밀번호를 한번 더 입력하세요." class="signupinput" id="pwd2" maxlength="12" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
 			<div class="signupsidebtn">
 				
@@ -628,7 +629,7 @@
 				이름<span style="color: red;">*</span>
 			</div>
 			<div class="signupinputdiv">
-				<input type="text" placeholder="이름을 입력해 주세요." class="signupinput" id="name" >
+				<input type="text" placeholder="이름을 입력해 주세요." class="signupinput" id="name" name="mb_name" >
 			</div>
 			<div class="signupsidebtn">
 				
@@ -642,8 +643,8 @@
 				이름(영문)
 			</div>
 			<div class="signupinputdiv" style="width:350px;">
-				<input type="text" placeholder="HONG" style="width: 137px; float: left; margin-right: 30px;" class="signupinput" id="elastname" >
-				<input type="text" placeholder="GILDONG" style="width: 137px;" class="signupinput" id="efirstname" >
+				<input type="text" placeholder="HONG" style="width: 137px; float: left; margin-right: 30px;" class="signupinput" id="elastname" name="mb_firstname">
+				<input type="text" placeholder="GILDONG" style="width: 137px;" class="signupinput" id="efirstname"  name="mb_lastname">
 			</div>
 			
 		</div>
@@ -655,7 +656,7 @@
 				여권 번호
 			</div>
 			<div class="signupinputdiv">
-				<input type="text" placeholder="여권 번호를 입력하세요." class="signupinput" id="phone">
+				<input type="text" placeholder="여권 번호를 입력하세요." class="signupinput" id="phone" name="mb_passnum" maxlength="20">
 			</div>
 			<div class="signupsidebtn">
 				
@@ -667,8 +668,8 @@
 			</div>
 			<div class="signupinputdiv" style="width: 320px;height: 40px;padding-left: 10px;border: #D5D5D5 1px solid;border-radius: 5px;">
 				 
-				<input type="text" placeholder="YYYY" class="signupinputbirth" style="width: 100px;" id="byear">
-				<input type="text" placeholder="MM" class="signupinputbirth" style="width: 60px;" id="bmonth">
+				<input type="text" placeholder="YYYY" class="signupinputbirth" style="width: 100px;" id="byear" name="mb_exdate1" maxlength="4">
+				<input type="text" placeholder="MM" class="signupinputbirth" style="width: 60px;" id="bmonth" name="mb_exdate2" maxlength="2">
 				
 				
 			</div>
@@ -679,9 +680,9 @@
 				이메일<span style="color: red;">*</span>
 			</div>
 			<div class="signupinputdiv" style="width:330px;">
-				<input type="text" placeholder="이메일을 입력하세요." class="signupinput"  style="width: 150px;" id="email1">
+				<input type="text" placeholder="이메일을 입력하세요." class="signupinput"  style="width: 150px;" id="email1" name="mb_email1">
 				<span>&nbsp@</span>
-				<select id="email2">
+				<select id="email2" name="mb_email2">
 					<option>naver.com</option>
 					<option>daum.net</option>
 					<option>gmail.com</option>
@@ -701,7 +702,7 @@
 			</div>
 			<div class="signupinputdiv">
 				<input type="text" placeholder="주소 검색" class="signupinput" 
-				id="sample6_address" > 
+				id="sample6_address" name="mb_address"> 
 			</div>
 			<div class="signupsidebtn">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기" id="addressbtn"><br>
@@ -714,21 +715,26 @@
 				상세주소
 			</div>
 			<div class="signupinputdiv">
-				<input type="text" placeholder="주소를 자세히 입력하세요." class="signupinput" id="sample6_detailAddress">
+				<input type="text" placeholder="주소를 자세히 입력하세요." class="signupinput" id="sample6_detailAddress" name="mb_detailaddress">
 			</div>
 			<div class="signupsidebtn">
 			</div>
 		</div>
 		<div id="signupid">
+
 			<div class="signuplabel">
 				전화번호
 			</div>
-			<div class="signupinputdiv">
-				<input type="text" placeholder="숫자만 입력해주세요." class="signupinput" id="phone">
+			<div class="signupinputdiv" style="width: 400px;">
+			<select id="" name="mb_phonenum1" style="width:100px;">
+				<option>선택</option>
+				<option></option>
+				<option>daum.net</option>
+				<option>gmail.com</option>
+			</select>
+				<input type="text" placeholder="숫자만 입력해주세요." class="signupinput" id="phone" name="phonenum2" style="width: 215px;">
 			</div>
-			<div class="signupsidebtn">
-				
-			</div>
+			
 		</div>
 		<div id="signupid">
 			<div class="signuplabel">
@@ -738,20 +744,16 @@
 				<div class="container">
 						<ul>
 							<li>
-								<input type="radio" id="f-option" name="selector">
+								<input type="radio" id="f-option" name="mb_gender">
 								<label for="f-option">남</label>
 								<div class="check"></div>
 							</li>
 							<li>
-								<input type="radio" id="s-option" name="selector">
+								<input type="radio" id="s-option" name="mb_gender">
 								<label for="s-option">여</label>
 								<div class="check"><div class="inside"></div></div>
 							</li>
-							<li>
-								<input type="radio" id="t-option" name="selector">
-								<label for="t-option">선택안함</label>
-								<div class="check"><div class="inside"></div></div>
-							 </li>
+							
 						</ul>
 				</div>
 			</div>
@@ -759,26 +761,16 @@
 				
 			</div>
 		</div>
-		<div id="signupid">
-			<div class="signuplabel">
-				닉네임
-			</div>
-			<div class="signupinputdiv">
-				<input type="text" placeholder="숫자만 입력해주세요." class="signupinput" id="nickname">
-			</div>
-			<div class="signupsidebtn">
-				
-			</div>
-		</div>
+		
 		<div id="signupid">
 			<div class="signuplabel">
 				생년월일
 			</div>
 			<div class="signupinputdiv" style="width: 320px;height: 40px;padding-left: 10px;border: #D5D5D5 1px solid;border-radius: 5px;">
 				 
-				<input type="text" placeholder="YYYY" class="signupinputbirth" style="width: 100px;" id="byear">
-				<input type="text" placeholder="MM" class="signupinputbirth" style="width: 60px;" id="bmonth">
-				<input type="text" placeholder="DD" class="signupinputbirth" style="width: 60px;" id="bday">
+				<input type="text" placeholder="YYYY" class="signupinputbirth" style="width: 100px;" id="byear" name="mb_birth1" maxlength="4">
+				<input type="text" placeholder="MM" class="signupinputbirth" style="width: 60px;" id="bmonth" name="mb_birth2" maxlength="2">
+				<input type="text" placeholder="DD" class="signupinputbirth" style="width: 60px;" id="bday" name="mb_birth3" maxlength="2">
 				
 			</div>
 		</div>
@@ -922,9 +914,9 @@
 			   </div>
 			</div><br />
 			<div class="checks etrans">
-			  <input type="checkbox" id="ex_chk4" name="check"> 
+			  <input type="checkbox" id="ex_chk4" name="check" name="mb_agree1">
 			  <label for="ex_chk4">[선택]SNS 수신 동의</label>
-			  <span><input type="checkbox" id="ex_chk5" name="check"> 
+			  <span><input type="checkbox" id="ex_chk5" name="check" name="mb_agree2">  
 			  <label for="ex_chk5">[선택]이메일 수신 동의</label></span>
 			  <button class="termsBtn3">약관보기</button>
 			  <div class="terms3">
@@ -1086,8 +1078,6 @@
 		
 	</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
