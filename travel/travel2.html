@@ -4,111 +4,12 @@
 	<title></title>
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href=".../css/style.css" />
-	<link rel="stylesheet" type="text/css" href=".../css/header_footer.css">
-	<link type="text/css" rel="stylesheet" href=".../css/responsive-tabs.css" />
-    <link type="text/css" rel="stylesheet" href=".../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
+	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <link type="text/css" rel="stylesheet" href="../css/travel02.css" />
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<style>
-	.mainsearch {
-			margin: 20px auto;
-			padding-bottom: 40px;
-			width: 1200px;
-			height: 140px;
-			border: 3px #002266 solid;
-			border-radius: 3px;
-		}
-		.mainsearch>h3{
-			margin-left: 10px;
-			font-size: 14pt;
-		}
-		.mainsearch input:first-of-type {
-			width: 1060px;
-			height: 50px;
-			border-style: solid;
-			border-color: #E7E7E7;
-			position: relative;
-			font-size: 10pt;
-			top: 10px;
-			left: 10px;
-		}
-		.mainsearch input:last-of-type {
-			width:80px;
-			height: 55px;
-			border-style: solid;
-			font-weight: bold;
-			background-color: #002266;
-			color: white;
-			position: relative;
-			font-size: 13pt;
-			top: 13px;
-			right: 10px;
-		}
-		.travel:last-of-type {
-			position: relative;
-			top: 50px;
-		}
-		.travel h5 {
-			font-size: 22pt;
-			text-align: center;
-			font-weight: bold;
-		}
-		.contents2 {
-			width: 1200px;
-			height: 450px;
-			margin:0 auto;
-			position: relative;
-			top: 10px;
-			border-style: solid;
-		}
-		.travellist2 {
-			float: left;
-			border-style: solid;
-			height: 350px;
-			box-shadow: 7px 7px 7px #BDBDBD;
-			border-width: 2px;
-			border-color: #BDBDBD;
-			margin-left: 10px;
-			position: relative;
-			bottom: 10px;
-			overflow: hidden;
-		}
-	.travellist2 p:first-of-type {
-			padding-top: 15px;
-			font-size: 15pt;
-			font-weight: bold;
-			margin-left: 10px;
-			line-height: 5pt;
-		}
-.travellist2 p:nth-of-type(2) {
-			font-size: 11pt;
-			margin-left: 10px;
-
-		}
-		.travellist2 p:last-of-type {
-			font-size: 13pt;
-			font-weight: bold;
-			color: red;
-			margin-left: 10px;
-			line-height: 2pt;
-		}
-		.travellist2>img{
-			transition: all 0.2s linear;
-		}
-		.travellist2>img:hover{
-			transform: scale(1.04);
-			overflow: hidden;
-		}
-		.detail {
-			position: relative;
-			height: 100px;
-			bottom: 123px;
-			border-style: 100px;
-			background-color:rgba(0,0,0,.6);
-			color: white;
-		}
-</style>
 <script>
 	$(document).ready(function() {
 		
@@ -151,6 +52,9 @@
  		});
 	});
 
+		
+
+
 </script>
 <body>
 	<form>	
@@ -161,7 +65,7 @@
 			<div id="title">
 				<a href="indexpage.html">
 					<header style="width: 250px;height: 150px; z-index: -2;position: relative;">
-						<img src="img/logo/logo1.png">
+						<img src="../img/logo/logo1.png">
 					</header>
 				</a>
 			</div>
@@ -217,54 +121,110 @@
 		</header>
 	</div>
 </div>
-<div class="mainsearch">
-	<h3>가고싶은 여행지, 명소를 검색해보세요.</h3>
-	<input type="text" placeholder="여행지를 검색해보세요" size="150">
-	<input type="button" name="btn" value="검색">
-</div>
-<div class="contents2">
-					<h5 >추천 항공권</h5>
-					<a href="">
-						<div class="travellist2">
-							<img src="img/travel/phuket.jpg" width="280px" height="350px">
-							<div class="detail">
-								<p>푸켓</p>
-								<p>일반석 왕복</p>
-								<p>KRW 1,564,200~</p>
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="img/travel/guam.jpg" width="280px" height="350px">
-							<div class="detail">
-								<p>괌</p>
-								<p>일반석 왕복</p>
-								<p>KRW 1,637,600~</p>
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="img/travel/berlin.jpg" width="280px" height="350px">
-							<div class="detail">
-								<p>베를린</p>
-								<p>일반석 왕복</p>
-								<p>KRW 1,948,000~</p>
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="img/travel/cebu.jpg" width="280px" height="350px">
-							<div class="detail">
-								<p>세부</p>
-								<p>일반석 왕복</p>
-								<p>KRW 1,878,200~</p>
-							</div>
-						</div>
-					</a>
+	<div id="mainframe">	
+	<div id="subframe">
+		
+	<div id="main1">
+		<section id="mainsection">
+			<header>서울타워</header>
+			<article class="maintext">
+				<div class="openinghours">
+					영업시간: <div>월요일-토요일 10:00~23:59</div>
 				</div>
+				<div class="touraddress"> 주소 : 서울특별시 용산구 용산 2가동 남산공원길 105</div>
+				<div class="subtext">국내외 연간 1200만명의 관광객들이 방문하는 서울 제1의 관광명소</div>
+			</article>
+		</section>
+		<article class="mainimage">
+			<img src="../img/travel/seoul/seoultower.jpg">
+		</article>
+		<input type="submit" value="마이루트로 저장">
+	</div>
+
+	<div id="sub">
+		<header>입장권 예약</header>
+
+		<article>
+			<div class="people">성인</div>
+			<div class="money">₩ 15,000</div>
+		</article>
+		<article>
+			<div class="people">중•고등학생</div>
+			<div class="money">₩ 10,000</div>
+		</article>
+		<article>
+			<div class="people">어린이</div>
+			<div class="money">₩ 7,000</div>
+		</article>
+		<div style="width: 120px; height: 40px; margin: 0 auto;">
+			<input type="submit" value="입장권 예약">
+		</div>
+	</div>
+
+	<div id="final">
+		
+		<section class="reviewmain">
+			<div>
+				<
+			</div>
+			<!-- <div  class="subreview">
+				<div class="review1">
+					<div>이미지</div>
+					<section>
+						<header>제목</header>
+						<article>내용</article>
+					</section>	
+				</div>
+				<div class="review2">
+					<div>이미지</div>
+					<section>
+						<header>제목</header>
+						<article>내용</article>
+					</section>	
+				</div>
+			</div>
+			<div  class="subreview">
+				<div class="review3">
+					<div>이미지</div>
+					<section>
+						<header>제목</header>
+						<article>내용</article>
+					</section>	
+					</div>
+					<div class="review4" >
+						<div>이미지</div>
+							<section>
+								<header>제목</header>
+								<article>내용</article>
+							</section>	
+						</div>
+					</div> -->
+				</section>
+					<div style="width: 250px; height: 40px; margin: 30px 0 0 0;float:right;">
+					<input type="submit" value="리뷰 작성">
+					<input type="submit" value="더 보기">
+				</div>		
+			</div>
+		</div>
+		<nav id="place">
+			<div id="chooseplace">
+				<select size="1">
+					<option>주변 관광지</option>
+					<option>주변 음식점</option>
+					<option>주변 호텔</option>
+				</select>		
+			</div>
+			<section><img src="../img/travel/seoul/Gyeongbokgung.jpg"></section>
+			<article>경복궁</article>
+			<section><img src="../img/travel/seoul/Gwanghwamun.jpg"></section>
+			<article>광화문</article>
+			<section><img src="../img/travel/seoul/Bukchon.jpg"></section>
+			<article>북촌 한옥마을</article>
+			<section><img src="../img/travel/seoul/Cheonggyecheon.jpg"></section>
+			<article>청계천</article>
+			<input type="submit" value="더 보러가기">
+		</nav>
+	</div>
 <footer>
 		<div id="footer">
 			<div class="footerIn">
