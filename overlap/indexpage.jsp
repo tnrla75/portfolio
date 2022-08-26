@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -786,17 +785,17 @@
 		<header>
 			<div id="header">
 			<div id="title">
-				<a href="indexpage.html">
+				<a href="indexpage.jsp">
 					<header style="width: 250px;height: 250px; z-index: -2;position: relative;">
-						<img src="img/logo/logo1.png">
+						<img src="../img/logo/logo1.png">
 					</header>
 				</a>
 			</div>
 			<div id="nav">
 				<nav>
 					<ul id="top">
-						<li class="commonnav"><a href="login.html">로그인</a></li>
-						<li class="commonnav"><a href="signuppage.html">회원가입</a></li>
+						<li class="commonnav"><a href="login.jsp">로그인</a></li>
+						<li class="commonnav"><a href="signuppage.jsp">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
@@ -829,7 +828,7 @@
 							</ul>
 						</li>
 						<li class="commonnav1">
-							<p><a class="commonlink" href="travel_2.html" id="main1">여행</a></p>
+							<p><a class="commonlink" href="../travel/travel_2.html" id="main1">여행</a></p>
 							<ul class="list">
 								<li><a href="#">지역</a></li>
 								<li><a href="#">관광명소</a></li>
@@ -848,20 +847,20 @@
 		<div class="main_visual_wrap">
 			<div class="imageBox">
 				<div id="revolver" class="revolver container stack">
-	                <img class="slide" src="assets/img/main01.jpg" width="1920px" height="500px"/>
-	                <img class="slide hidden" src="assets/img/main02.jpg" width="1920px" height="500px"/>
-	                <img class="slide hidden" src="assets/img/main03.jpg" width="1920px" height="500px"/>
-	                <img class="slide hidden" src="assets/img/main04.jpg" width="1920px" height="500px"/>
-	                <img class="slide hidden" src="assets/img/main05.jpg" width="1920px" height="500px"/>
+	                <img class="slide" src="../assets/img/main01.jpg" width="1920px" height="500px"/>
+	                <img class="slide hidden" src="../assets/img/main02.jpg" width="1920px" height="500px"/>
+	                <img class="slide hidden" src="../assets/img/main03.jpg" width="1920px" height="500px"/>
+	                <img class="slide hidden" src="../assets/img/main04.jpg" width="1920px" height="500px"/>
+	                <img class="slide hidden" src="../assets/img/main05.jpg" width="1920px" height="500px"/>
 	            </div>
 			</div>
 		</div>
         <div class="search">
         	<div id="horizontalTab">
 		        <ul>
-		            <li style="background-color: rgba(211,10,20,.7);"><a href="#tab-1"><img src="img/icon/passenger.png" class="image">여행</a></li>
-		            <li style="background-color: rgba(34,42,115,.7);"><a href="#tab-2"><img src="img/icon/flying-airplane.png"  class="image">항공</a></li>
-		            <li style="background-color: rgba(212,157,2,.7);"><a href="#tab-3"><img src="img/icon/hotel.png" class="image">호텔</a></li>
+		            <li style="background-color: rgba(211,10,20,.7);"><a href="#tab-1"><img src="../img/icon/passenger.png" class="image">여행</a></li>
+		            <li style="background-color: rgba(34,42,115,.7);"><a href="#tab-2"><img src="../img/icon/flying-airplane.png"  class="image">항공</a></li>
+		            <li style="background-color: rgba(212,157,2,.7);"><a href="#tab-3"><img src="../img/icon/hotel.png" class="image">호텔</a></li>
 		        </ul>
 		        <div id="tab-1">
 		              <h3 style="font-size: 14pt;">가고싶은 여행지, 명소를 검색해보세요.</h3>
@@ -941,7 +940,7 @@
 		        	<h3 style="font-size: 14pt;">머무르고 싶은 지역을 입력하세요.</h3>
 
 		        	<div>
-		        		<img src="img/icon/hotel.png" width="20" height="20" class="hotelIcon">
+		        		<img src="../img/icon/hotel.png" width="20" height="20" class="hotelIcon">
 		        		<input type="text" placeholder="여행지 또는 숙소 이름으로 검색" size="40">
 			            <select>
 							<option value="인원수">인원수</option>
@@ -984,8 +983,8 @@
 				<a href="">
 					<div  class="travellist1" id="travel1">
 						<div style="width: 280px; height: 230px; overflow: hidden;">
-							<img src="img/travel/austria.jpg" width="280px" height="230px">
-							<p class="insert1">자세히 보러가기<img src="img/icon/next.png" width="25" height="25"></p>
+							<img src="../img/travel/austria.jpg" width="280px" height="230px">
+							<p class="insert1">자세히 보러가기<img src="../img/icon/next.png" width="25" height="25"></p>
 						</div>
 						<div style="width: 280px; height: 100px;">
 							<a style="margin-left: 20px;font-size: 13pt;font-weight: bold;" href="#">오스트리아</a>
@@ -1008,8 +1007,8 @@
 				<a href="">
 					<div class="travellist1" id="travel2">
 						<div style="width: 280px; height: 230px; overflow: hidden;">
-							<img src="img/travel/bolivia.jpg" width="280px" height="230px">
-							<p class="insert2">자세히 보러가기<img src="img/icon/next.png" width="25" height="25"></p>
+							<img src="../img/travel/bolivia.jpg" width="280px" height="230px">
+							<p class="insert2">자세히 보러가기<img src="../img/icon/next.png" width="25" height="25"></p>
 						</div>
 						<div style="width: 280px; height: 100px;">	
 							<a style="margin-left: 20px;font-size: 13pt;font-weight: bold;" href="#">볼리비아</a>
@@ -1031,8 +1030,8 @@
 				<a href="">
 					<div class="travellist1" id="travel3">
 						<div style="width: 280px; height: 230px; overflow: hidden;">
-							<img src="img/travel/laos.jpg" width="280px" height="230px">
-							<p class="insert3">자세히 보러가기<img src="img/icon/next.png" width="25" height="25"></p>
+							<img src="../img/travel/laos.jpg" width="280px" height="230px">
+							<p class="insert3">자세히 보러가기<img src="../img/icon/next.png" width="25" height="25"></p>
 						</div>	
 						<div style="width: 280px; height: 100px;">	
 							<a style="margin-left: 20px;font-size: 13pt;font-weight: bold;" href="#">라오스</a>
@@ -1054,8 +1053,8 @@
 				<a href="">
 					<div class="travellist1" id="travel4">
 						<div style="width: 280px; height: 230px; overflow: hidden;">
-							<img src="img/travel/switzerland.jpg" width="280px" height="230px">
-							<p class="insert4">자세히 보러가기<img src="img/icon/next.png"width="17" height="17"></p>
+							<img src="../img/travel/switzerland.jpg" width="280px" height="230px">
+							<p class="insert4">자세히 보러가기<img src="../img/icon/next.png"width="25" height="25"></p>
 						</div>	
 						<div style="width: 280px; height: 100px;">
 							<a style="margin-left: 20px;font-size: 13pt;font-weight: bold;" href="#">스위스</a>
@@ -1083,7 +1082,7 @@
 					<h5 style="margin-left: -15px;">추천 항공권</h5>
 					<a href="">
 						<div class="travellist2">
-							<img src="img/travel/phuket.jpg" width="280px" height="350px">
+							<img src="../img/travel/phuket.jpg" width="280px" height="350px">
 							<div class="detail">
 								<p>푸켓</p>
 								<p>일반석 왕복</p>
@@ -1093,7 +1092,7 @@
 					</a>
 					<a href="">
 						<div class="travellist2">
-							<img src="img/travel/guam.jpg" width="280px" height="350px">
+							<img src="../img/travel/guam.jpg" width="280px" height="350px">
 							<div class="detail">
 								<p>괌</p>
 								<p>일반석 왕복</p>
@@ -1103,7 +1102,7 @@
 					</a>
 					<a href="">
 						<div class="travellist2">
-							<img src="img/travel/berlin.jpg" width="280px" height="350px">
+							<img src="../img/travel/berlin.jpg" width="280px" height="350px">
 							<div class="detail">
 								<p>베를린</p>
 								<p>일반석 왕복</p>
@@ -1113,7 +1112,7 @@
 					</a>
 					<a href="">
 						<div class="travellist2">
-							<img src="img/travel/cebu.jpg" width="280px" height="350px">
+							<img src="../img/travel/cebu.jpg" width="280px" height="350px">
 							<div class="detail">
 								<p>세부</p>
 								<p>일반석 왕복</p>
@@ -1131,12 +1130,12 @@
 					<h5 style="margin-left: 65px;">인기 호텔</h5>
 					<a href="">
 						<div  class="travellist3">
-							<div><img src="img/hotel/hotel01.jpg" width="280px" height="230px"></div>
+							<div><img src="../img/hotel/hotel01.jpg" width="280px" height="230px"></div>
 							<p>서울 신라호텔
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
 							</p>
 							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
 							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
@@ -1144,12 +1143,12 @@
 					</a>
 					<a href="">
 						<div  class="travellist3">
-							<div><img src="img/hotel/hotel02.jpg" width="280px" height="230px"></div>
+							<div><img src="../img/hotel/hotel02.jpg" width="280px" height="230px"></div>
 							<p>시그니엘 부산
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
 							</p>
 							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
 							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
@@ -1157,12 +1156,12 @@
 					</a>
 					<a href="">
 						<div  class="travellist3">
-							<div><img src="img/hotel/hotel03.jpg" width="280px" height="230px"></div>
+							<div><img src="../img/hotel/hotel03.jpg" width="280px" height="230px"></div>
 							<p>그랜드 하얏트 제주
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
 							</p>
 							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
 							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
@@ -1170,12 +1169,12 @@
 					</a>
 					<a href="">
 						<div  class="travellist3">
-							<div><img src="img/hotel/hotel04.jpg" width="280px" height="230px"></div>
+							<div><img src="../img/hotel/hotel04.jpg" width="280px" height="230px"></div>
 							<p>파라다이스 시티 인천
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
-								<img src="img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
 							</p>
 							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
 							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
@@ -1187,14 +1186,14 @@
 				</div>
 				<div class="contents4">
 					<div>
-						<img src="img/dutyfree/shop.jpg" width="580" height="400">
+						<img src="../img/dutyfree/shop.jpg" width="580" height="400">
 					</div>
 					<div>
 						<p>24시간 언제 어디서든</p>
 						<p>출굴 3시간 전까지</p>
 						<p>인터넷으로 간편하게</p>
 						<p>온라인 면세점으로 쇼핑 시간을 절약하세요!</p>
-						<a href="#"><p>면세점 둘러보기<p><img src="img/icon/right-arrow2.png" width="20" height="20"></a>
+						<a href="#"><p>면세점 둘러보기<p><img src="../img/icon/right-arrow2.png" width="20" height="20"></a>
 					</div>
 					
 				</div>
@@ -1241,8 +1240,8 @@
     
 
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-        <script src="js/jquery.revolver.min.js"></script>
-        <script src="js/prettify.js"></script>
+        <script src="../js/jquery.revolver.min.js"></script>
+        <script src="../js/prettify.js"></script>
         <script type="text/javascript">
             var $revolver = $('#revolver').revolver(),
                 revolver  = $revolver.data('revolver'),
@@ -1257,8 +1256,8 @@
                 revolver.goTo($(this).data('goto'));
             });
         </script>
-        <script src="js/jquery-2.1.0.min.js"></script>
-	    <script src="js/jquery.responsiveTabs.js" type="text/javascript"></script>
+        <script src="../js/jquery-2.1.0.min.js"></script>
+	    <script src="../js/jquery.responsiveTabs.js" type="text/javascript"></script>
 	    <script type="text/javascript">
 	        $(document).ready(function () {
 	            var $tabs = $('#horizontalTab');

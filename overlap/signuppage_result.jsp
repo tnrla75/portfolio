@@ -35,7 +35,7 @@
 		System.out.println("회원가입 결과창");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio?characterEncoding=utf8", "root", "1645");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio?characterEncoding=utf8", "root", "0000");
 			stmt = conn.createStatement();
 
 				String command = String.format("insert into member_info (mb_id, mb_pw, mb_name, mb_firstname, mb_lastname, mb_passnum, mb_exdate, mb_email, mb_address, mb_detailaddress, mb_phonenum, mb_gender, mb_birth, mb_agree1, mb_agree2) values('%s','%s','%s','%s','%s','%s','%s/%s','%s@%s','%s','%s','%s%s','%s','%s%s%s','%s','%s');",

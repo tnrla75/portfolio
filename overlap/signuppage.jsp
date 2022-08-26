@@ -551,7 +551,7 @@
 		<header>
 			<div id="header">
 			<div id="title">
-				<a href="indexpage.html">
+				<a href="indexpage.jsp">
 					<header style="width: 250px;height: 150px; z-index: -2;position: relative;">
 						<img src="../img/logo/logo1.png">
 					</header>
@@ -561,8 +561,8 @@
 				<div id="nav">
 				<nav>
 					<ul id="top">
-						<li class="commonnav"><a href="login.html">로그인</a></li>
-						<li class="commonnav"><a href="signuppage.html">회원가입</a></li>
+						<li class="commonnav"><a href="login.jsp">로그인</a></li>
+						<li class="commonnav"><a href="signuppage.jsp">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
@@ -975,7 +975,7 @@
 
 	<div class="signindiv">
 		
-		<input type="button" class="signinbtn" style="border: 2px solid grey;" id="signupbtn1" value="돌아가기" onClick="location.href='indexpage.html'">
+		<input type="button" class="signinbtn" style="border: 2px solid grey;" id="signupbtn1" value="돌아가기" onClick="location.href='indexpage.jsp'">
 		
 		<input type="submit" class="signinbtn" style="background-color: #030066;color: white;" id="signupbtn2" value="가입하기">
 	</div>

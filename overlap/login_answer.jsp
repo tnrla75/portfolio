@@ -15,7 +15,7 @@
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio","root","1645");  //DB
+			conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio","root","0000");  //DB
 			stmt=conn.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("select*from member_info;");
@@ -44,6 +44,5 @@
 			catch(Exception e){
 			}
 		}
-	System.out.println(data);
 	%>
 	<%=data %>
