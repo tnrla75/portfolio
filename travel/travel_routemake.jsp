@@ -5,12 +5,40 @@
 	<title></title>
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/header_footer.css">
-	<link rel="stylesheet" type="text/css" href="css/login.css">
-	<link type="text/css" rel="stylesheet" href="css/responsive-tabs.css" />
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<style>
+	.maindiv{
+		margin: 0 auto;
+		width: 1200px;
+		height: 1200px;
+	}
+	.writediv{
+		width: 1200px;
+		height : 30px;
+		background-color: grey;
+		border-radius: 10px;
+		text-align: center;
+		margin-top: 30px;
+	}
+	.contentdiv{
+		width: 1200px;
+		height : 30px;
+		
+	}
+	.textdiv{
+		float:left;
+	}
+	.inputdiv > input{
+		width: 500px;	
+	}
+	.routeContent{
+		height: 500px;
+	}
+	
+</style>
+
 <script>
 	$(document).ready(function() {
 		
@@ -53,21 +81,19 @@
  		});
  		
 	});
-
-		
-
+	
 
 </script>
 <body>
-	<form>	
+	<form action='travel_routemake_call.jsp'>	
 <div style="width:100%; height: 150px; box-shadow: 0px 5px 1px 1px #030066; ">
 		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
 		<header>
 			<div id="header">
 			<div id="title">
-				<a href="indexpage.html">
+				<a href="../overlap/indexpage.jsp">
 					<header style="width: 250px;height: 250px; z-index: -2;position: relative;">
-						<img src="img/logo/logo1.png">
+						<img src="../img/logo/logo1.png">
 					</header>
 				</a>
 			</div>
@@ -75,8 +101,8 @@
 				<div id="nav">
 				<nav>
 					<ul id="top">
-						<li class="commonnav"><a href="login.html">로그인</a></li>
-						<li class="commonnav"><a href="signuppage.html">회원가입</a></li>
+						<li class="commonnav"><a href="../overlap/login.jsp">로그인</a></li>
+						<li class="commonnav"><a href="../overlap/signuppage.jsp">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
@@ -124,9 +150,24 @@
 		</div>
 		</header>
 	</div>
-<div >
+<div class="maindiv">
+	<div class="writediv">
+		<span>글쓰기</span>
+	</div>
+	<div class="contentdiv">
+		<div class="textdiv">제목</div>
+		<div class="inputdiv"><input type="text" name="title"></div>
+	</div>
+	
+	<div class="routeContent">
+		<div class="textdiv">내용</div>
+		<div class="inputdiv"><input type="text" class="routeContent" name="content"></div>
+	</div>
+	<div class="contentdiv">
+		<input type="submit" value="등록" >
+		<input type="button" value="취소">
+	</div>
 </div>
-
 
 <footer style="bottom: -139px;">
 		<div id="footer">
