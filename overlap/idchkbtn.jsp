@@ -8,7 +8,7 @@
 	int data = -1;
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio","root","1645");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio","root","0000");
 		stmt = conn.createStatement();
 		String command = "select * from member_info where mb_id= '" + mb_id + "'";
 		ResultSet rs = stmt.executeQuery(command);
