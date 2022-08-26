@@ -1,13 +1,16 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" type="text/css" href="css/header_footer.css">
-	<link type="text/css" rel="stylesheet" href="css/responsive-tabs.css" />
-    <link type="text/css" rel="stylesheet" href="css/style2.css" />
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
+	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
+    <link type="text/css" rel="stylesheet" href="../css/style2.css" />
     <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<style>
@@ -792,7 +795,7 @@
 			<div id="nav">
 				<nav>
 					<ul id="top">
-						<li class="commonnav"><a href="#">로그인</a></li>
+						<li class="commonnav"><a href="login.html">로그인</a></li>
 						<li class="commonnav"><a href="signuppage.html">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
@@ -831,7 +834,7 @@
 								<li><a href="#">지역</a></li>
 								<li><a href="#">관광명소</a></li>
 								<li><a href="#">맛집</a></li>
-								<li><a href="#">여행루트</a></li>
+								<li><a href="travel_route.jsp">여행루트</a></li>
 								<li><a href="#">여행메이트</a></li>
 							</ul>
 						</li>

@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/e008e677ae.js" crossorigin="anonymous"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<link rel="stylesheet" href="assets/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="css/header_footer.css">
-	<link type="text/css" rel="stylesheet" href="css/responsive-tabs.css" />
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="../assets/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
+	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
 	<style>
 		header:not{
 			margin: 0;
@@ -429,7 +430,7 @@
 		$('#idchkbtn').click(function(){
 			
 			var mb_id =  $('#id').val();
-			
+
 			$.ajax({
 				url: "idchkbtn.jsp?mb_id="+mb_id,
 				dataType : "html",
@@ -552,20 +553,22 @@
 			<div id="title">
 				<a href="indexpage.html">
 					<header style="width: 250px;height: 150px; z-index: -2;position: relative;">
-						<img src="img/logo/logo1.png">
+						<img src="../img/logo/logo1.png">
 					</header>
 				</a>
 			</div>
 			<div id="nav">
+				<div id="nav">
 				<nav>
 					<ul id="top">
-						<li class="commonnav"><a href="#">로그인</a></li>
-						<li class="commonnav"><a href="#">회원가입</a></li>
+						<li class="commonnav"><a href="login.html">로그인</a></li>
+						<li class="commonnav"><a href="signuppage.html">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
 					</ul>
 					<ul id="main">
+						
 						<li class="commonnav2">
 							<p><a class="commonlink" href="flight_main.html">항공</a></p>
 							<ul class="list">
@@ -592,12 +595,12 @@
 							</ul>
 						</li>
 						<li class="commonnav1">
-							<p><a class="commonlink" href="travel_2.html" id="main1">여행</a></p>
+							<p><a class="commonlink" href="../travel/travel_2.html" id="main1">여행</a></p>
 							<ul class="list">
 								<li><a href="#">지역</a></li>
 								<li><a href="#">관광명소</a></li>
 								<li><a href="#">맛집</a></li>
-								<li><a href="#">여행루트</a></li>
+								<li><a href="travel_route.jsp">여행루트</a></li>
 								<li><a href="#">여행메이트</a></li>
 							</ul>
 						</li>
@@ -816,7 +819,6 @@
 				
 			</div>
 		</div>
-
 	</div>
 	<div class="terms">
 			<h3>약관동의</h3>
@@ -1139,6 +1141,7 @@
 			alert("개인 정보 수집 동의를 하세요.");
 			return false
 		} 
+		alert("회원가입 성공")
 		return true;
 	}
 

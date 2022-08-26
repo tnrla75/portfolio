@@ -1,114 +1,16 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <html>
 <head>
 	<title></title>
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../css/style.css" />
-	<link rel="stylesheet" type="text/css" href=".../css/header_footer.css">
-	<link type="text/css" rel="stylesheet" href=".../css/responsive-tabs.css" />
-    <link type="text/css" rel="stylesheet" href=".../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/header_footer.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link type="text/css" rel="stylesheet" href="css/responsive-tabs.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<style>
-	.mainsearch {
-			margin: 20px auto;
-			padding-bottom: 40px;
-			width: 1200px;
-			height: 140px;
-			border: 3px #002266 solid;
-			border-radius: 3px;
-		}
-		.mainsearch>h3{
-			margin-left: 10px;
-			font-size: 14pt;
-		}
-		.mainsearch input:first-of-type {
-			width: 1060px;
-			height: 50px;
-			border-style: solid;
-			border-color: #E7E7E7;
-			position: relative;
-			font-size: 10pt;
-			top: 10px;
-			left: 10px;
-		}
-		.mainsearch input:last-of-type {
-			width:80px;
-			height: 55px;
-			border-style: solid;
-			font-weight: bold;
-			background-color: #002266;
-			color: white;
-			position: relative;
-			font-size: 13pt;
-			top: 13px;
-			right: 10px;
-		}
-		.travel:last-of-type {
-			position: relative;
-			top: 50px;
-		}
-		.travel h5 {
-			font-size: 22pt;
-			text-align: center;
-			font-weight: bold;
-		}
-		.contents2 {
-			width: 1200px;
-			height: 450px;
-			margin:0 auto;
-			position: relative;
-			top: 10px;
-			border-style: solid;
-		}
-		.travellist2 {
-			float: left;
-			border-style: solid;
-			height: 350px;
-			box-shadow: 7px 7px 7px #BDBDBD;
-			border-width: 2px;
-			border-color: #BDBDBD;
-			margin-left: 10px;
-			position: relative;
-			bottom: 10px;
-			overflow: hidden;
-		}
-	.travellist2 p:first-of-type {
-			padding-top: 15px;
-			font-size: 15pt;
-			font-weight: bold;
-			margin-left: 10px;
-			line-height: 5pt;
-		}
-.travellist2 p:nth-of-type(2) {
-			font-size: 11pt;
-			margin-left: 10px;
-
-		}
-		.travellist2 p:last-of-type {
-			font-size: 13pt;
-			font-weight: bold;
-			color: red;
-			margin-left: 10px;
-			line-height: 2pt;
-		}
-		.travellist2>img{
-			transition: all 0.2s linear;
-		}
-		.travellist2>img:hover{
-			transform: scale(1.04);
-			overflow: hidden;
-		}
-		.detail {
-			position: relative;
-			height: 100px;
-			bottom: 123px;
-			border-style: 100px;
-			background-color:rgba(0,0,0,.6);
-			color: white;
-		}
-</style>
 <script>
 	$(document).ready(function() {
 		
@@ -149,32 +51,38 @@
  			$('.commonnav4 > ul').slideUp(200);
  			$('.commonnav4 > p').css("border-bottom","solid 5px white");
  		});
+ 		
 	});
+
+		
+
 
 </script>
 <body>
 	<form>	
-<div style="width:100%; height: 150px; box-shadow: 0px 3px 1px 1px #030066; ">
+<div style="width:100%; height: 150px; box-shadow: 0px 5px 1px 1px #030066; ">
 		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
 		<header>
 			<div id="header">
 			<div id="title">
 				<a href="indexpage.html">
-					<header style="width: 250px;height: 150px; z-index: -2;position: relative;">
+					<header style="width: 250px;height: 250px; z-index: -2;position: relative;">
 						<img src="img/logo/logo1.png">
 					</header>
 				</a>
 			</div>
 			<div id="nav">
+				<div id="nav">
 				<nav>
 					<ul id="top">
-						<li class="commonnav"><a href="#">로그인</a></li>
-						<li class="commonnav"><a href="#">회원가입</a></li>
+						<li class="commonnav"><a href="login.html">로그인</a></li>
+						<li class="commonnav"><a href="signuppage.html">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
 					</ul>
 					<ul id="main">
+						
 						<li class="commonnav2">
 							<p><a class="commonlink" href="flight_main.html">항공</a></p>
 							<ul class="list">
@@ -206,7 +114,7 @@
 								<li><a href="#">지역</a></li>
 								<li><a href="#">관광명소</a></li>
 								<li><a href="#">맛집</a></li>
-								<li><a href="#">여행루트</a></li>
+								<li><a href="travel_route.jsp">여행루트</a></li>
 								<li><a href="#">여행메이트</a></li>
 							</ul>
 						</li>
@@ -216,56 +124,11 @@
 		</div>
 		</header>
 	</div>
+<div >
 </div>
-<div class="mainsearch">
-	<h3>가고싶은 여행지, 명소를 검색해보세요.</h3>
-	<input type="text" placeholder="여행지를 검색해보세요" size="150">
-	<input type="button" name="btn" value="검색">
-</div>
-<div class="contents2">
-					<h5 >추천 항공권</h5>
-					<a href="">
-						<div class="travellist2">
-							<img src="img/travel/phuket.jpg" width="280px" height="350px">
-							<div class="detail">
-								<p>푸켓</p>
-								<p>일반석 왕복</p>
-								<p>KRW 1,564,200~</p>
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="img/travel/guam.jpg" width="280px" height="350px">
-							<div class="detail">
-								<p>괌</p>
-								<p>일반석 왕복</p>
-								<p>KRW 1,637,600~</p>
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="img/travel/berlin.jpg" width="280px" height="350px">
-							<div class="detail">
-								<p>베를린</p>
-								<p>일반석 왕복</p>
-								<p>KRW 1,948,000~</p>
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="img/travel/cebu.jpg" width="280px" height="350px">
-							<div class="detail">
-								<p>세부</p>
-								<p>일반석 왕복</p>
-								<p>KRW 1,878,200~</p>
-							</div>
-						</div>
-					</a>
-				</div>
-<footer>
+
+
+<footer style="bottom: -139px;">
 		<div id="footer">
 			<div class="footerIn">
 				<ul>
