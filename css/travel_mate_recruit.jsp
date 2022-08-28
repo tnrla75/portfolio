@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
     <link type="text/css" rel="stylesheet" href="../css/style.css" />
-    <link type="text/css" rel="stylesheet" href="../css/travel_mate.css" />
+    <link type="text/css" rel="stylesheet" href="../css/travel_mate_recruit.css" />
     
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -55,14 +55,7 @@
  			$('.commonnav4 > p').css("border-bottom","solid 5px white");
  		});
 	});
-	function logincheck(){
-		var id = '<%=(String)session.getAttribute("id")%>';
-		if(id == null){
-			alert("로그인 해주세요.");
-		}else{
-			location.replace("travel_mate_recruit.jsp");
-		}
-	}
+
 </script>
 <body>
 	<form>	
@@ -129,15 +122,39 @@
 		</header>
 	</div>
 </div>
+
 <section>
-	<div class="bigtitle"><h3>여행 메이트 모집</h3></div>
-	<article>
-		<div></div><!-- 내용 입력 -->
-	</article>
-	<div class="buttonbox">
-		<input type="button" class="writebutton" value="글쓰기" onclick="logincheck()">
+	<div class="top">
+		<div class="title">
+			<input type="text" placeholder="제목을 입력하세요." class="writetitle">
+		</div>
+		<div class="information">
+			<div>여행장소: <input type="text" placeholder="여행장소" class="travelplace"></div>
+			<div>여행메이트 모집인원: 
+				<select>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				</select>명
+			</div>
+		</div>
+	</div>
+	<div class="middle">
+		<input type="text" class="maincontents">
+		
+	</div>
+	<div class="last">
+		<input type="text" class="plusfile" placeholder="첨부파일" style="float:left;">
+		<input type="button" value="검색">
+	</div>
+	<div class="writebutton">
+		<input type="button" value="글 작성">
 	</div>
 </section>
+
 <footer>
 		<div id="footer">
 			<div class="footerIn">
