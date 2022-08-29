@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import= "java.util.ArrayList"%>    
+<%@ page import="mate_package.MateConnect" %>
+<%@ page import="mate_package.MateDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
     <link type="text/css" rel="stylesheet" href="../css/style.css" />
-    <link type="text/css" rel="stylesheet" href="../css/travel_mate_recruit.css" />
+    <link type="text/css" rel="stylesheet" href="../css/travel_mate.css" />
     
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -55,7 +58,14 @@
  			$('.commonnav4 > p').css("border-bottom","solid 5px white");
  		});
 	});
-
+	function logincheck(){
+		var id = '<%=(String)session.getAttribute("id")%>';
+		if(id == null){
+			alert("로그인 해주세요.");
+		}else{
+			location.replace("travel_mate_recruit.jsp");
+		}
+	}
 </script>
 <body>
 	<form>	
@@ -112,7 +122,7 @@
 								<li><a href="#">관광명소</a></li>
 								<li><a href="#">맛집</a></li>
 								<li><a href="../travel/travel_route.jsp">여행루트</a></li>
-								<li><a href="#">여행메이트</a></li>
+								<li><a href="../travel/travel_mate.jsp">여행메이트</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -122,39 +132,20 @@
 		</header>
 	</div>
 </div>
-
 <section>
-	<div class="top">
-		<div class="title">
-			<input type="text" placeholder="제목을 입력하세요." class="writetitle">
-		</div>
-		<div class="information">
-			<div>여행장소: <input type="text" placeholder="여행장소" class="travelplace"></div>
-			<div>여행메이트 모집인원: 
-				<select>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				</select>명
-			</div>
-		</div>
-	</div>
-	<div class="middle">
-		<input type="text" class="maincontents">
-		
-	</div>
-	<div class="last">
-		<input type="text" class="plusfile" placeholder="첨부파일" style="float:left;">
-		<input type="button" value="검색">
-	</div>
-	<div class="writebutton">
-		<input type="button" value="글 작성">
-	</div>
+	<div class="bigtitle"><h3>여행 메이트 모집</h3></div>
+	<article>
+		<%
+		MateConnect user = new MateConnect();
+		String travelmateNum= request.getParameter("num");
+		ArrayList<MateDTO> customer2= user.detail(travelmateNum);
+		out.println(customer2.get(0).getTravelmateTitle());
+		out.println(customer2.get(0).getId());
+		out.println(customer2.get(0).getTravelmateDate());
+		out.println(customer2.get(0).getTravelmateContent());
+		%>
+	</article>
 </section>
-
 <footer>
 		<div id="footer">
 			<div class="footerIn">

@@ -58,7 +58,7 @@
 
 </script>
 <body>
-	<form>	
+	<form action="travel_mate_recruit2.jsp">	
 <div style="width:100%; height: 150px; box-shadow: 0px 3px 1px 1px #030066; ">
 		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
 		<header>
@@ -126,12 +126,12 @@
 <section>
 	<div class="top">
 		<div class="title">
-			<input type="text" placeholder="제목을 입력하세요." class="writetitle">
+			<input type="text" placeholder="제목을 입력하세요." class="writetitle" name="travelmateTitle">
 		</div>
 		<div class="information">
-			<div>여행장소: <input type="text" placeholder="여행장소" class="travelplace"></div>
+			<div>여행장소: <input type="text" placeholder="여행장소" class="travelplace" name="destination"></div>
 			<div>여행메이트 모집인원: 
-				<select>
+				<select name="travelmateMember">
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -143,7 +143,7 @@
 		</div>
 	</div>
 	<div class="middle">
-		<input type="text" class="maincontents">
+		<input type="text" class="maincontents" name="travelmateContent">
 		
 	</div>
 	<div class="last">
@@ -151,7 +151,7 @@
 		<input type="button" value="검색">
 	</div>
 	<div class="writebutton">
-		<input type="button" value="글 작성">
+		<input type="submit" value="글 작성">
 	</div>
 </section>
 
