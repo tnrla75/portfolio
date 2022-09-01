@@ -1,3 +1,4 @@
+
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -19,12 +20,36 @@
 		height: 1200px;
 	}
 	.routeinputdiv{
-		margin: 20px;
-		width: 1200px;
+		margin: 35px;
+		width: 1100px;
 		height: 50px;
 	}
 	.routeinput{
-
+		border-radius: 3px;
+		height: 30px;
+	}
+	.routeinputdiv input:first-of-type {
+			width: 950px;
+			height: 50px;
+			border-style: solid;
+			border-color: #E7E7E7;
+			position: relative;
+			font-size: 10pt;
+			top: 10px;
+			left: 30px;
+	}
+	.routeinputdiv input:last-of-type {
+		width:80px;
+		height: 52px;
+		border-style: solid;
+		border-radius: 5px;
+		font-weight: bold;
+		background-color: #002266;
+		color: white;
+		position: relative;
+		font-size: 13pt;
+		top: 13px;
+		left: 30px;
 	}
 	.bestroutediv{
 		margin: 20px;
@@ -56,15 +81,15 @@
 	.routelistdiv{
 		border: solid 2px black;
 		box-sizing: border-box;
-		width: 1000px;
-		height: 650px;
+		width: 1200px;
+		height: 700px;
 	}
 	.routelistindiv{
-		border: solid 2px black;
+		border: solid 2px blue;
 		box-sizing: border-box;
-		width: 900px;
+		width: 1100px;
 		height: 180px;
-		margin: 20px;
+		margin: 20px 40px;
 		display: flex;
 	}
 	.routelistindiv .div1{
@@ -81,7 +106,7 @@
 		margin: 10px;
 	}
 	.div3{
-		width:700px;
+		width:900px;
 		height: 30px;
 	}
 	.div3 > .span1{
@@ -94,6 +119,22 @@
 		width:700px;
 		height: 100px;
 	}
+	.routelistdiv a:link{
+		text-decoration: none;
+	}
+	.routemakebtn{
+		text-align: center;
+	}
+	.routemakebtn > input{
+		border-style: none;
+		border-radius: 8px;
+		width:100px;
+		height: 50px;
+		font-size: 14pt;
+		color: white;
+		background-color: blue;
+	}
+	
 	
 </style>
 
@@ -222,11 +263,12 @@
 	</div>
 <div class="maindiv">
 	<div class="routeinputdiv">
-		<span>여행 루트</span><input type="text" class="routeinput">
+		<input type="text" class="routeinput" placeholder="원하는 루트를 검색하세요.">
+		<input type="button" value="검색">
 	</div>
 	<div class="bestroutediv">
 		<div class="bestroutediv1">
-			<h3>인기 리뷰</h3>
+			<h2>인기 루트</h2>
 		</div>
 		<div class="bestroutediv2">
 			<div class="listdiv">
@@ -266,24 +308,74 @@
 <jsp:useBean id="control" class="route_package.RouteController">
 </jsp:useBean>
 	<div class="routelistdiv">
-	<% 
-	ArrayList<RouteDTO> arr = control.routeselect();
-		for(int i=0; i<arr.size(); i++){
-			out.print("<div class='routelistindiv'><div class='div1'>	이미지 파일</div><div class='div2'><div class='div3'><span class='span1'>"+arr.get(i).getRouteTitle()+"</span><span class='span2'>"+arr.get(i).getId()+"</span></div><div class='div4'><span>"+arr.get(i).getRouteContent()+"</span></div></div></div>");
-		};
-		
-		
-			
-			
+		<% 
+		ArrayList<RouteDTO> arr = control.routeselect();
+			for(int i=0; i<arr.size(); i++){
+				out.print("<a href=travel_routedetail.jsp?routeNum='"+arr.get(i).getRouteNum()+"'><div class='routelistindiv'><div class='div1'>이미지 파일</div><div class='div2'><div class='div3'><span class='span1'>"+arr.get(i).getRouteTitle()+"</span><span class='span2'>"+arr.get(i).getId()+"</span></div><div class='div4'><span>"+arr.get(i).getRouteContent()+"</span></div></div></div></a>");
+			}; 
 				/* out.print(arr.get(i).getRouteTitle()+" "+arr.get(i).getId()+" "+"<a href=boardpage_call.jsp?z='"+arr.get(i).getRouteContent()+"'></a>"); */
-		
 		%>
 		
-		<div>
-			<input type="button" value="글쓰기" onclick="mypage_check()">
+		<div class="routemakebtn">
+			<input type="button" value="글쓰기" onclick="mypage_check()" >
 		</div>
 	</div>
 </div>
+<div class="travel">
+				<div class="contents3">
+					<h5 style="margin-left: 65px;">인기 호텔</h5>
+					<a href="">
+						<div  class="travellist3">
+							<div><img src="../img/hotel/hotel01.jpg" width="280px" height="230px"></div>
+							<p>서울 신라호텔
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+							</p>
+							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
+							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
+						</div>
+					</a>
+					<a href="">
+						<div  class="travellist3">
+							<div><img src="../img/hotel/hotel02.jpg" width="280px" height="230px"></div>
+							<p>시그니엘 부산
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+							</p>
+							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
+							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
+						</div>
+					</a>
+					<a href="">
+						<div  class="travellist3">
+							<div><img src="../img/hotel/hotel03.jpg" width="280px" height="230px"></div>
+							<p>그랜드 하얏트 제주
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+							</p>
+							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
+							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
+						</div>
+					</a>
+					<a href="">
+						<div  class="travellist3">
+							<div><img src="../img/hotel/hotel04.jpg" width="280px" height="230px"></div>
+							<p>파라다이스 시티 인천
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+								<img src="../img/icon/star.png" width="15px" height="15px">
+							</p>
+							<p><b style="padding: 5px; background-color: #002266; color: white;">4.5/5</b> 이용자 리뷰 795개</p>
+							<p><b style="color: black; font-size: 10pt;">최저가</b> 380,000원</p>
+						</div>
+					</a>
 <footer style="bottom: -139px;">
 		<div id="footer">
 			<div class="footerIn">
@@ -317,6 +409,7 @@
 
 			</div>
 		</div>
+		
 	</footer>
 	</form>
 </body>
