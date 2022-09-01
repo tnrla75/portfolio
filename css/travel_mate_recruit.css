@@ -1,0 +1,117 @@
+section{
+	width:1200px;
+	height: 850px;
+	margin: 30px auto;
+	border-style: solid;
+	font-size: 11pt;
+}
+.h2{
+	width:1100px;
+	margin: 0 auto;
+}
+.top{
+	width:1100px;
+	margin:0 auto;
+	box-sizing: border-box;
+}
+.title{
+	width: 1100px;
+	
+}
+.writetitle{
+	width: 1050px;
+	height: 40px;
+	margin: 5px auto;
+	border-style: none;
+	border: 2px #E7E7E7 solid;
+}
+.information{
+	width: 1100px;
+	height: 50px;
+	margin: 10px auto;
+}
+.place{
+	width: 200px;
+	height: 30px;
+	margin: 10px 0 0 0;
+}
+.place input{
+	height: 35px;
+	border-style: none;
+	border: 2px #E7E7E7 solid;
+	font-size: 12pt;
+}
+.people{
+	width: 155px;
+	height: 25px;
+	float: left;
+	margin: 10px 20px 0 0;
+	padding-top:5px;
+	border-right: 2px #E7E7E7 solid;
+	
+}
+.people select{
+	height:25px;
+	margin:0 5px;
+	border-style: none;
+}
+.date{
+	width: 280px;
+	height: 25px;
+	float: left;
+	margin: 10px 20px 0 0;
+	padding-top:5px;
+	border-right: 2px #E7E7E7 solid;
+}
+.date input{
+	height: 20px;
+	border-style: none;
+}
+.reservation{
+	padding-top:5px;
+	width: 215px;
+	height: 25px;
+	float:left;
+	margin: 10px 20px 0 0;
+	border-right: 2px #E7E7E7 solid;
+}
+.middle{
+	width: 1100px;
+	height: 500px;
+	margin: 5px auto;
+}
+.maincontents{
+	width: 1100px;
+	height: 500px;
+	margin-top: 10px;
+	resize: none;
+}
+.writebutton{
+	width: 250px;
+	height: 30px;
+	margin: 40px auto 10px auto;
+	box-sizing: border-box;
+}
+.backbutton{
+	width: 100px;
+	height: 35px;
+	background: #E7E7E7;
+	border: none;
+	font-weight: bold;
+	border-radius: 5px;
+	box-sizing: border-box;
+	float: left;
+	margin-right:5px;
+	cursor: pointer;
+}
+.button{
+	width: 100px;
+	height: 35px;
+	border: none;
+	background: #030066;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	box-sizing: border-box;
+	cursor: pointer;
+}

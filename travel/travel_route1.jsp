@@ -1,24 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>header_footer</title>
+	<title></title>
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
-    <link type="text/css" rel="stylesheet" href="../css/style2.css" />
-    <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <link type="text/css" rel="stylesheet" href="../css/travel_route.css" />
+    
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-		$('#main > li > ul').hide();
-		$('.insert').hide();
 		
+		$('#main > li > ul').hide();
 		$('.commonnav1').mouseenter(function(){
  			$('.commonnav1 > ul').slideDown(200);
  			$('.commonnav1 > p').css("border-bottom","solid 5px #CC3D3D");
@@ -55,16 +54,26 @@
  			$('.commonnav4 > ul').slideUp(200);
  			$('.commonnav4 > p').css("border-bottom","solid 5px white");
  		});
- 	});
+	
+	$('.writebutton').click(function(){
+		String id = (String)session.getAttribute("id");
+		if(id== null){
+			alert("로그인을 하세요!");
+		}else{
+			location.replace("route_write.jsp");
+		}
+	});
+	});
 </script>
 <body>
-	<div style="width:100%; height: 150px; box-shadow: 0px 5px 1px 1px #030066; ">
+	<form>	
+<div style="width:100%; height: 150px; box-shadow: 0px 3px 1px 1px #030066; ">
 		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
 		<header>
 			<div id="header">
 			<div id="title">
-				<a href="indexpage.jsp">
-					<header style="width: 250px;height: 250px; z-index: -2;position: relative;">
+				<a href="../overlap/indexpage.jsp">
+					<header style="width: 250px;height: 150px; z-index: -2;position: relative;">
 						<img src="../img/logo/logo1.png">
 					</header>
 				</a>
@@ -72,14 +81,13 @@
 			<div id="nav">
 				<nav>
 					<ul id="top">
-						<li class="commonnav"><a href="login.jsp">로그인</a></li>
-						<li class="commonnav"><a href="signuppage.jsp">회원가입</a></li>
+						<li class="commonnav"><a href="../overlap/login.jsp">로그인</a></li>
+						<li class="commonnav"><a href="../overlap/signuppage.jsp">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
 					</ul>
 					<ul id="main">
-						
 						<li class="commonnav2">
 							<p><a class="commonlink" href="flight_main.html">항공</a></p>
 							<ul class="list">
@@ -93,7 +101,6 @@
 							<ul class="list">
 								<li><a href="#">추천 호텔</a></li>
 								<li><a href="#">호텔 검색</a></li>
-								<li><a href="#">호텔 게시판</a></li>
 								<li><a href="#">계절별 할인</a></li>
 							</ul>
 						</li>
@@ -107,12 +114,12 @@
 							</ul>
 						</li>
 						<li class="commonnav1">
-							<p><a class="commonlink" href="../travel/travel_2.html" id="main1">여행</a></p>
+							<p><a class="commonlink" href="travel_2.html" id="main1">여행</a></p>
 							<ul class="list">
 								<li><a href="#">지역</a></li>
 								<li><a href="#">관광명소</a></li>
 								<li><a href="#">맛집</a></li>
-								<li><a href="travel_route.jsp">여행루트</a></li>
+								<li><a href="../travel/travel_route.jsp">여행루트</a></li>
 								<li><a href="#">여행메이트</a></li>
 							</ul>
 						</li>
@@ -122,9 +129,64 @@
 		</div>
 		</header>
 	</div>
-
-	<footer style="top: 350px;">
-		<div id="footer" >
+</div>
+<div class="mainsearch">
+	<h3>가고싶은 여행지, 명소를 검색해보세요.</h3>
+	<input type="text" placeholder="여행지를 검색해보세요" size="150">
+	<input type="button" name="btn" value="검색">
+</div>
+<div class="contents1">
+					<h4>추천 여행 경로</h4>
+					<a href="">
+						<div class="travellist2">
+							<img src="../img/travel/phuket.jpg" width="280px" height="350px">
+							<div class="detail">
+								<p>푸켓 4박5일 일정!</p>
+							</div>
+						</div>
+					</a>
+					<a href="">
+						<div class="travellist2">
+							<img src="../img/travel/guam.jpg" width="280px" height="350px">
+							<div class="detail">
+								<p>괌 5박6일 일정!</p>
+							</div>
+						</div>
+					</a>
+					<a href="">
+						<div class="travellist2">
+							<img src="../img/travel/berlin.jpg" width="280px" height="350px">
+							<div class="detail">
+								<p>베를린</p>
+							</div>
+						</div>
+					</a>
+					<a href="">
+						<div class="travellist2">
+							<img src="../img/travel/cebu.jpg" width="280px" height="350px">
+							<div class="detail">
+								<p>세부</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="contents2">
+					<div class="detailcontents">
+						<img src="">
+						<div></div>
+					</div>
+					<div class="detailcontents">
+						<img src="">
+						<div></div>
+					</div>
+					<div class="detailcontents">
+						<img src="">
+						<div></div>
+					</div>
+					<div class="writebutton"><input type="button" class="wrtiebutton" value="글쓰기"></div>
+				</div>
+<footer>
+		<div id="footer">
 			<div class="footerIn">
 				<ul>
 					<li>회사소개</li>
@@ -134,9 +196,9 @@
 					<li>홍보채널</li>
 				</ul>
 				<ul>
+					<li>자주 묻는 질문</li>
 					<li>고객지원</li>
 					<li>공지사항</li>
-					<li>자주 묻는 질문</li>
 					<li>고객의 말씀</li>
 					<li>서비스 센터</li>
 				</ul>
@@ -148,14 +210,15 @@
 				</ul>
 				<ul>
 					<li>기타 서비스</li>
-					<li>IR</li>
 					<li>파트너제휴 플랫폼</li>
 					<li>호텔 등록</li>
 					<li>모든호텔</li>
+					<li>IR</li>
 				</ul>
 
 			</div>
 		</div>
 	</footer>
+	</form>
 </body>
 </html>

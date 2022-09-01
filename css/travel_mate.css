@@ -1,0 +1,93 @@
+section{
+	border: 2px #000054 solid;
+	width: 1200px;
+	margin: 10px auto;
+	border-radius: 5px;
+}
+.bigtitle{
+	width: 1100px;
+	margin: 0 auto;
+}
+.search{
+	width: 1100px;
+	margin: 10px auto 70px auto;
+}
+.search input{
+	float: right;
+	margin-left: 10px;
+}
+.searchbutton{
+	width:50px;
+	height:35px;
+	text-align: center;
+	background: #030066;
+	color: white;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	
+}
+.searchtext{
+	width:200px;
+	height:30px;
+	border: 2px black solid;
+	border-radius: 5px;
+	
+}
+.samearticle{
+	width: 1100px;
+	height: 30px;
+	margin: 3px auto;
+	border: 2px black solid;
+}
+.matetitle{
+	width: 500px;
+	float:left;
+	margin: 5px 0 0 20px;
+	border-right: 2px solid black;
+	
+}
+.matenum{
+	width: 70px;
+	float:left;
+	margin: 5px 0 0 20px;
+	border-right: 2px solid black;
+}
+.matedate{
+	width: 100px;
+	float: right;
+	margin: 5px 20px 0 0;
+	border-right: 2px solid black;
+}
+.mateid{
+	width: 100px;
+	float: right;	
+	margin: 5px 20px 0 0;
+}
+.buttonbox{
+	width: 1100px;
+	margin: 0 auto;
+}
+.writebutton{
+		width: 100px;
+		height: 25px;
+		background: #030066;
+		color: white;
+		font-weight: bold;
+		border: none;
+		border-radius: 5px;
+		margin: 5px 0 10px 1000px;
+		cursor: pointer;
+}
+a:link{
+	color:black;
+	text-decoration: none;
+}
+a:visited{
+	color:black;
+	text-decoration: none;
+}
+a:active{
+	color:black;
+	text-decoration: none;
+}

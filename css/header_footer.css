@@ -39,7 +39,7 @@
          position: relative;
          left: 110px;
          z-index: 10;
-         top: 6px;
+         top: 10px;
       }
       #top .commonnav {
          float: left;
