@@ -21,6 +21,11 @@
 			<div id="nav">
 				<nav>
 					<ul id="top">
+					<% 
+						if(!((String)session.getAttribute("id")==null)){
+							%><li class='commonnav'><%=(String)session.getAttribute("id") %>님</li><% 
+						}
+					%>
 						<li class='commonnav'><a href='../overlap/logout.jsp' >로그아웃</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
