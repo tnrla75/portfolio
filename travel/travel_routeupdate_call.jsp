@@ -9,14 +9,14 @@
 </head>
 <body>
 	<%
-	String title = request.getParameter("title");
-	String content = request.getParameter("content");
-	String writer = (String) session.getAttribute("id");
+	
+	String routeNum = request.getParameter("routeNum");
 	
 	RouteController control = new RouteController();
-	control.routeinsert(title, content, writer);
+	System.out.println(routeNum);
+	control.routeNumselect(routeNum);
 	
-	response.sendRedirect("travel_route.jsp");
+	response.sendRedirect("travel_routemake.jsp?routeNum='"+routeNum);
 	%>
 </body>
 </html>

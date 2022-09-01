@@ -107,7 +107,47 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 </style>
 
 <script>
-	
+	$(document).ready(function() {
+
+		$('#main > li > ul').hide();
+		$('.commonnav1').mouseenter(function() {
+			$('.commonnav1 > ul').slideDown(200);
+			$('.commonnav1 > p').css("border-bottom", "solid 5px #CC3D3D");
+			$('.commonnav1 > ul').show();
+		});
+		$('.commonnav1').mouseleave(function() {
+			$('.commonnav1 > ul').slideUp(200);
+			$('.commonnav1 > p').css("border-bottom", "solid 5px white");
+		});
+		$('.commonnav2').mouseenter(function() {
+			$('.commonnav2 > ul').slideDown(200);
+			$('.commonnav2 > p').css("border-bottom", "solid 5px #CC3D3D");
+			$('.commonnav2 > ul').show();
+		});
+		$('.commonnav2').mouseleave(function() {
+			$('.commonnav2 > ul').slideUp(200);
+			$('.commonnav2 > p').css("border-bottom", "solid 5px white");
+		});
+		$('.commonnav3').mouseenter(function() {
+			$('.commonnav3 > ul').slideDown(200);
+			$('.commonnav3 > p').css("border-bottom", "solid 5px #CC3D3D");
+			$('.commonnav3 > ul').show();
+		});
+		$('.commonnav3').mouseleave(function() {
+			$('.commonnav3 > ul').slideUp(200);
+			$('.commonnav3 > p').css("border-bottom", "solid 5px white");
+		});
+		$('.commonnav4').mouseenter(function() {
+			$('.commonnav4 > ul').slideDown(200);
+			$('.commonnav4 > p').css("border-bottom", "solid 5px #CC3D3D");
+			$('.commonnav4 > ul').show();
+		});
+		$('.commonnav4').mouseleave(function() {
+			$('.commonnav4 > ul').slideUp(200);
+			$('.commonnav4 > p').css("border-bottom", "solid 5px white");
+		});
+
+	});
 </script>
 <jsp:useBean id="control" class="route_package.RouteController">
 </jsp:useBean>
@@ -125,6 +165,10 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 			<%
 		}
 	%>
+			<% 
+				String routeNum = request.getParameter("routeNum");
+				ArrayList<RouteDTO> arr = control.routeNumselect(routeNum);
+			%>
 			<div class="maindiv">
 				<div class="writediv">
 					<span>글쓰기</span>
@@ -134,14 +178,14 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 
 						<div class="inputdiv">
 							<input type="text" name="title" id="board_title"
-								placeholder="제목을 입력하세요.">
+								placeholder="제목을 입력하세요." value='<%= arr.get(0).getRouteTitle() %>'>
 						</div>
 					</div>
 
 					<div class="routeContent">
 						<div class="inputdiv">
 							<input type="text" class="routeContent" name="content"
-								id="board_content" placeholder="내용을 입력하세요.">
+								id="board_content" placeholder="내용을 입력하세요." value='<%= arr.get(0).getRouteContent() %>'>
 						</div>
 					</div>
 				</div>

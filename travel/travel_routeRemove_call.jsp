@@ -9,13 +9,11 @@
 </head>
 <body>
 	<%
-	String title = request.getParameter("title");
-	String content = request.getParameter("content");
-	String writer = (String) session.getAttribute("id");
+	
+	String remove_num = request.getParameter("remove_num");
 	
 	RouteController control = new RouteController();
-	control.routeinsert(title, content, writer);
-	
+	control.routeRemove(remove_num);
 	response.sendRedirect("travel_route.jsp");
 	%>
 </body>
