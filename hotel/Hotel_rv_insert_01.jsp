@@ -1,5 +1,8 @@
+<%@page import="portfolio_02.Hotel_review_DB"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.sql.*"%>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -13,6 +16,7 @@
     <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
+<% String mb_id=(String)session.getAttribute("mb_id"); // 로그인할때 저장된 값 %>
 <script>
 	$(document).ready(function() {
 		$('#main > li > ul').hide();
@@ -56,49 +60,27 @@
  		});
 	});
  	</script>
-<style>
-.main_bigbox{
-	width:1000px;
-	height:1200px;
-	border-style: solid;
-	margin: 0 auto;
-	text-align: center;
-}
-.main_medlebox{
-	width:900px;
-	height:300px;
-	border-style: solid;
-	margin: 15px auto;
-	float:left;
-	
-}
-.main_poto_box{
-	width:200px;
-	height:290px;
-	border-style: solid;
-	float:left;
-}
-.main_medle_rigth_up{
-	width:600px;
-	height:300px;
-	border-style: solid;
-}
-.main_medle_rigth_up_sub{
-	width:220px;
-	height:80px;
-	border-style: solid;
-}
-
-.down_box{
-	width:1000px;
-	height:80px;
-	border-style: solid;
-	margin: 15px auto;
-}
-
-</style>
+ 	<style>
+ 	body{
+ 		margin:0;
+ 		padding:0;
+ 	}
+ 	.section{
+ 		width:1000px;
+		height:1200px;
+		border-style: solid;
+		margin: 0 auto;
+		text-align: center;
+ 	}
+ 	
+ 	</style>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>리뷰 입력란</title>
+</head>
 <body>
-<!-- 	<div style="width:100%; height: 150px; box-shadow: 0px 5px 1px 1px #030066; ">
+<div style="width:100%; height: 150px; box-shadow: 0px 5px 1px 1px #030066; ">
 		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
 		<header>
 			<div id="header">
@@ -112,7 +94,18 @@
 			<div id="nav">
 				<nav>
 					<ul id="top">
-						<li class="commonnav"><a href="login.jsp">로그인</a></li>
+						
+						<li class="commonnav_login"><%
+							if(mb_id == null){
+								out.println("<li class='commonnav'><a href='login.jsp'>로그인</a></li>");
+								
+							}else{
+								out.println(mb_id+"님이 로그인 중...!!"); 
+								out.println("<li class='commonnav'><a href='indexpage.jsp'>로그아웃</a></li>");
+							}
+						
+						%></li>
+						
 						<li class="commonnav"><a href="signuppage.jsp">회원가입</a></li>
 						<li class="commonnav"><a href="#">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
@@ -132,7 +125,7 @@
 							<p><a class="commonlink" href="hotel_main.html">호텔</a></p>
 							<ul class="list">
 								<li><a href="#">추천 호텔</a></li>
-								<li><a href="#">호텔 검색</a></li>
+								<li><a href="../hotel/Review_01.jsp">호텔 검색</a></li>
 								<li><a href="#">호텔 게시판</a></li>
 								<li><a href="#">계절별 할인</a></li>
 							</ul>
@@ -161,46 +154,60 @@
 			</div>
 		</div>
 		</header>
-	 --></div>
+	</div>
+<jsp:useBean id="members" class="portfolio_02.Java_main"/>
+<%
+	request.setCharacterEncoding("UTF-8");
+
+	String hotel_review_num=request.getParameter("hotel_review_num");
+	String hotel_add=request.getParameter("hotel_add");
+	String hotel_name=request.getParameter("hotel_name");
+	String hotel_rv_title=request.getParameter("hotel_rv_title");
 	
-	<section>
+	ArrayList<Hotel_review_DB> arr=members.select_01();
 	
-		<div class="main_bigbox">
-			<head>
-				<h3>호텔 리뷰</h3>
-			</head>			
-			<div class="main_medlebox" >
-				<div class="main_poto_box">
-					<img src="../img/hotel/hotel01.jpg"   style="width:200px; height:290px;">
-				</div>
-				<div class="main_medle_rigth_up">
-					<div class="main_medle_rigth_up_sub">
-						<div>
-						</div>
-					</div>
-					<div>
-						<div>
-					</div>
-					</div>
-				</div>
-			</div>
-			<div class="main_medlebox" >
-				<div class="main_poto_box">
-					<img src="../img/hotel/hotel02.jpg"   style="width:200px; height:290px;">
-				</div>
-			</div>
-			<div class="main_medlebox" >
-				<div class="main_poto_box">
-					<img src="../img/hotel/hotel04.jpg"   style="width:200px; height:290px;">
-				</div>
-			</div>
-		</idv>
+%>
+	<form action="Hotel_rv_insert_02.jsp">
+	<h1>게시판</h1>
+	<table border="1">
+		<input type="hidden" name="hotel_rv_id" value="<%= mb_id %>"/>
+		<input type="hidden" name="hotel_rv_date" id="hotel_rv_date"  />
 		
-		<div class="down_box">
-			<input type="button" value="글쓰기" style="width:100px;	height:70px; background-Color:skyblue; border-radius:7px ; ">
-		</div>
-	</section>
-	
+		<tr>
+			<td>지역</td>
+			<td>
+				<input class="text" type="text" name="hotel_add" placeholder="title 입력">
+			</td>
+		</tr>
+		
+		<tr>
+			<td>호텔 이름</td>
+			<td>
+				<input class="text" type="text" name="hotel_name" placeholder="name 입력">
+			</td>
+		</tr>
+		
+		<tr>
+			<td>타이틀</td>
+			<td>
+				<input class="text" type="text" name="hotel_rv_title" placeholder="date 입력">
+			</td>
+		</tr>
+		<tr>
+			<td>상세 내용</td>
+			<td>
+				<input class="text" type="text" name="hotel_rv_content" placeholder="content 입력">
+			</td>
+		</tr>
+		<tr>
+			<td>=======</td>
+			
+			<td>
+				<input class="text" type="submit" id="hotel_rv_date" value="등록">
+			</td>
+		</tr>
+	</table>
+	</form>
 	<footer style="top: 350px;">
 		<div id="footer" >
 			<div class="footerIn">
@@ -235,5 +242,10 @@
 			</div>
 		</div>
 	</footer>
+	<script>
+	date =  new Date().toISOString().substring(0,10);
+	$("#hotel_rv_date").val(date);
+		
+</script>
 </body>
 </html>
