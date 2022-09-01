@@ -18,8 +18,9 @@
 		String arriveDate= request.getParameter("arrivedate");
 		String reservation= request.getParameter("reservation");
 		String travelmateDate= request.getParameter("writedate");
+		String travelmateNum= request.getParameter("travelmateNum");
 		MateConnect mc = new MateConnect();
-		mc.insert(id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate);
+		mc.update(id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate,travelmateNum);
 		response.sendRedirect("travel_mate.jsp");
 	%>
 </body>

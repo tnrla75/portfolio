@@ -3,21 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>update</title>
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
     <link type="text/css" rel="stylesheet" href="../css/style.css" />
-    <link type="text/css" rel="stylesheet" href="../css/travel_mate_recruit.css" />
+    <link type="text/css" rel="stylesheet" href="../css/travel_mate_update.css" />
     
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
 <body>
-	<form action="travel_mate_recruit2.jsp">	
-		<%
+	<form action="travel_mate_update2.jsp">	
+	<%
 			String id = (String)session.getAttribute("id"); 
 			if(id == null){
 				%>
@@ -30,7 +29,7 @@
 			}
 		%>
 <section>
-	<div class="h2"><h2>모집 글 작성</h2></div>
+	<div class="h2"><h2>글 수정</h2></div>
 	<div class="top">
 		<div class="title">
 			<input type="text" placeholder="제목을 입력하세요." class="writetitle" name="travelmateTitle">
@@ -64,13 +63,17 @@
 	</div>
 	<div class="writebutton">
 		<a href="travel_mate.jsp"><input type="button" value="취소" class="backbutton"></a>
-		<input type="submit" value="글 작성" class="button">
+		<input type="submit" value="글 수정" class="button">
 	</div>
 	<input type="hidden"id="writedate" name="writedate">
+	<input type="hidden"id="num" name="travelmateNum">
 </section>
 <script>
 	date =  new Date().toISOString().substring(0, 10);
 	$("#writedate").val(date);
+	
+	var a =<%=request.getParameter("num")%>
+	$("#num").val(a);
 </script>
 	<jsp:include page="../overlap/footer.jsp"/>
 	</form>
