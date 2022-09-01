@@ -51,10 +51,11 @@ public class MateConnect {
 		return dbal;                         
 		}
 	
-	public void insert(String id,String travelmateTitle,String destination,String travelmateMember,String travelmateContent){
+	public void insert(String id,String travelmateTitle,String destination,String travelmateMember,String travelmateContent,String departureDate,String arriveDate,String reservation,String travelmateDate){
 		try{
 			dbc();
-			String command = String.format("insert into travel_mate (id, travelmateTitle,destination,travelmateMember,travelmateContent) values ('%s','%s','%s','%s','%s')",id, travelmateTitle,destination,travelmateMember,travelmateContent);
+			String command = String.format("insert into travel_mate (id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservationstatus,travelmateDate) values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')"
+											,id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate);
 			int rowNum = stmt.executeUpdate(command);
 		}catch(Exception e){	
 		}
@@ -71,6 +72,29 @@ public class MateConnect {
 			}
 		}
 		}
+	
+	public void update(String id,String travelmateTitle,String destination,String travelmateMember,String travelmateContent,String departureDate,String arriveDate,String reservation,String travelmateDate,String travelmateNum){
+		try{
+			dbc();
+			String command = String.format("update travel_mate set id :='%s', travelmateTitle :='%s',destination :='%s',travelmateMember :='%s',travelmateContent :='%s',departureDate :='%s',arriveDate :='%s',reservationstatus :='%s',travelmateDate :='%s' where travelmateNum="+travelmateNum+";"
+											,id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate);
+			int rowNum = stmt.executeUpdate(command);
+		}catch(Exception e){	
+		}
+		finally{
+			try{
+				stmt.close();
+			}
+			catch(Exception e){	
+			}
+			try{
+				conn.close();
+			}
+			catch(Exception e){
+			}
+		}
+		}
+	
 	
 	public ArrayList<MateDTO> detail(String travelNum){
 		ArrayList<MateDTO> dbal = new ArrayList<MateDTO>();
@@ -109,6 +133,61 @@ public class MateConnect {
 			}
 		}
 		return dbal;                         
+		}
+	
+	public void delete(String travelmateNum){
+		try{
+			dbc();
+			String command = String.format("delete from travel_mate where travelmateNum='%s'",travelmateNum);
+			int rowNum = stmt.executeUpdate(command);
+		}catch(Exception e){	
+		}
+		finally{
+			try{
+				stmt.close();
+			}
+			catch(Exception e){	
+			}
+			try{
+				conn.close();
+			}
+			catch(Exception e){
+			}
+		}
+		}
+	
+	public String login(String login_id,String login_pw){
+			String data=null;
+		try {
+			dbc();
+			ResultSet rs = stmt.executeQuery("select*from member_info;");
+			
+			
+			while(rs.next()){
+				String id = rs.getString("mb_id");
+				String pw = rs.getString ("mb_pw");
+				if((id.equals(login_id))&&(pw.equals(login_pw))){
+					data="1";
+					break;
+				}else{
+					data=null;
+				}		
+			}	
+		}catch(Exception e){	
+		}
+		finally{
+			try{
+				stmt.close();
+			}
+			catch(Exception e){	
+			}
+			try{
+				conn.close();
+			}
+			catch(Exception e){
+			}
+		}
+		return data;                         
 		}
 	
 	public void dbc() {
