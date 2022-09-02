@@ -31,10 +31,10 @@
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
 					</ul>
-					<ul id="main">
+				<ul id="main">
 						
 						<li class="commonnav2">
-							<p>항공</p>
+							<p><a class="commonlink" href="../overlap/indexpage.jsp">항공</a></p>
 							<ul class="list">
 								<li><a href="../flight/">최저가 항공권</a></li>
 								<li><a href="../flight/">부가 서비스 안내</a></li>
@@ -47,11 +47,11 @@
 								<li><a href="../hotel/">추천 호텔</a></li>
 								<li><a href="../hotel/">호텔 검색</a></li>
 								<li><a href="../hotel/">계절별 할인</a></li>
-								<li><a href="../hotel/Hotel_review_01">호텔 Q&A 게시판</a></li>
+								<li><a href="../hotel/Hotel_review_01.jsp">호텔 Q&A 게시판</a></li>
 							</ul>
 						</li>
 						<li class="commonnav4">
-							<p><a class="commonlink" href="dutyfree_main.html">면세점</a></p>
+							<p><a class="commonlink" href="../shopping/Item.jsp">면세점</a></p>
 							<ul class="list">
 								<li><a href="../shoping/">카테고리</a></li>
 								<li><a href="../shoping/">Best샵</a></li>
@@ -60,11 +60,11 @@
 							</ul>
 						</li>
 						<li class="commonnav1">
-							<p><a class="commonlink" href="../travel/travel_2.html" id="main1">여행</a></p>
+							<p><a class="commonlink" href="../overlap/indexpage.jsp" id="main1">여행</a></p>
 							<ul class="list">
-								<li><a href="../travel/">지역</a></li>
-								<li><a href="../travel/">관광명소</a></li>
-								<li><a href="../travel/">맛집</a></li>
+								<li><a href="../travel/travel_area.jsp">지역</a></li>
+								<li><a href="../travel/travel_attractions.jsp">관광명소</a></li>
+								<li><a href="../travel/travel_restaurant.jsp">맛집</a></li>
 								<li><a href="../travel/travel_route.jsp">여행루트</a></li>
 								<li><a href="../travel/travel_mate.jsp">여행메이트</a></li>
 							</ul>

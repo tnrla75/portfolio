@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import= "java.util.ArrayList"%>    
-<%@ page import="mate_package.MateConnect" %>
-<%@ page import="mate_package.MateDTO" %>
+<%@ page import="travel_package.MateController" %>
+<%@ page import="travel_package.MateDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +19,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
 	function logincheck(){
-		var id = '<%=(String)session.getAttribute("id")%>';
-		if(id == "null"){
+		var mb_id = '<%=(String)session.getAttribute("mb_id")%>';
+		if(mb_id == "null"){
 			alert("로그인 해주세요.");
 			location.replace("../overlap/login.jsp");
 		}else{
@@ -31,8 +31,8 @@
 <body>
 	<form>	
 	<%
-		String id = (String)session.getAttribute("id"); 
-		if(id == null){
+		String mb_id = (String)session.getAttribute("mb_id"); 
+		if(mb_id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
 			<%
@@ -55,8 +55,8 @@
 		<div class="mateid">작성자</div>
 		<div class="matedate">날짜</div>
 	</div>
-		<% 
-			MateConnect mc = new MateConnect();
+		<%
+			MateController mc = new MateController();
 			ArrayList<MateDTO> customer = mc.select();
 			for(int i=0; i<customer.size(); i++){
 				int a= i+1;

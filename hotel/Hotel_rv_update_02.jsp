@@ -1,5 +1,5 @@
-<%@page import="portfolio_02.Java_main"%>
-<%@page import="portfolio_02.Hotel_review_DB"%>
+<%@page import="hotel_package.Java_main"%>
+<%@page import="hotel_package.Hotel_review_DB"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

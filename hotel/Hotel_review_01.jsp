@@ -1,4 +1,4 @@
-<%@page import="portfolio_02.Hotel_review_DB"%>
+<%@page import="hotel_package.Hotel_review_DB"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -18,63 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     
 </head>
-<% String mb_id=(String)session.getAttribute("mb_id"); // 로그인할때 저장된 값 %>
-<script>
-	$(document).ready(function() {
-		$('#main > li > ul').hide();
-		$('.insert').hide();
-		
-		$('.commonnav1').mouseenter(function(){
- 			$('.commonnav1 > ul').slideDown(200);
- 			$('.commonnav1 > p').css("border-bottom","solid 5px #CC3D3D");
- 			$('.commonnav1 > ul').show();
- 		});
- 		$('.commonnav1').mouseleave(function(){
- 			$('.commonnav1 > ul').slideUp(200);
- 			$('.commonnav1 > p').css("border-bottom","solid 5px white");
- 		});
- 		$('.commonnav2').mouseenter(function(){
- 			$('.commonnav2 > ul').slideDown(200);
- 			$('.commonnav2 > p').css("border-bottom","solid 5px #CC3D3D");
- 			$('.commonnav2 > ul').show();
- 		});
- 		$('.commonnav2').mouseleave(function(){
- 			$('.commonnav2 > ul').slideUp(200);
- 			$('.commonnav2 > p').css("border-bottom","solid 5px white");
- 		});
- 		$('.commonnav3').mouseenter(function(){
- 			$('.commonnav3 > ul').slideDown(200);
- 			$('.commonnav3 > p').css("border-bottom","solid 5px #CC3D3D");
- 			$('.commonnav3 > ul').show();
- 		});
- 		$('.commonnav3').mouseleave(function(){
- 			$('.commonnav3 > ul').slideUp(200);
- 			$('.commonnav3 > p').css("border-bottom","solid 5px white");
- 		});
- 		$('.commonnav4').mouseenter(function(){
- 			$('.commonnav4 > ul').slideDown(200);
- 			$('.commonnav4 > p').css("border-bottom","solid 5px #CC3D3D");
- 			$('.commonnav4 > ul').show();
- 		});
- 		$('.commonnav4').mouseleave(function(){
- 			$('.commonnav4 > ul').slideUp(200);
- 			$('.commonnav4 > p').css("border-bottom","solid 5px white");
- 		});
 
-		
-		$('.insert_go').click(function(){
-			
-			 if(<%= mb_id %>==null){
-				alert("로그인 하셈");
-				location.replace("../overlap/login.jsp");
-			}else{
-				location.replace("Hotel_rv_insert_01.jsp?hotel_rv_id='mb_id'");
-			}  
-			
-		});
-	});
-	
- 	</script>
 <style>
 .main_bigbox{
 	width:1000px;
@@ -162,11 +106,10 @@
 	margin-bottom: 0;
 	text-align: center;
 	float:left;
-}
-p{
 	font-size:40px;
 	margin:0 auto;
 }
+
 .p_sub{
 	width:200px;
 	height:100px;
@@ -179,7 +122,7 @@ p{
 </style>
 
 
-<jsp:useBean id="members" class="portfolio_02.Java_main"/>
+<jsp:useBean id="members" class="hotel_package.Java_main"/>
 
 <%
 	
@@ -189,15 +132,47 @@ p{
 	String hotel_name=request.getParameter("hotel_name");
 	String hotel_rv_title=request.getParameter("hotel_rv_title");	
 	String hotel_rv_content=request.getParameter("hotel_rv_content");   // insert_01에서 가져옴.
-	
-	
 	String hotel_rv_id=request.getParameter("hotel_rv_id");
 	
 	
 %>
 <body>
-							<input type="hidden" name="hotel_rv_content" value="<%= hotel_rv_content %>"/>
-							
+<%
+		String mb_id = (String)session.getAttribute("mb_id"); 
+		if(mb_id == null){
+			%>
+			<jsp:include page="../overlap/header_login.jsp"/>
+			<%
+		}else{
+			%>
+			<jsp:include page="../overlap/header_logout.jsp"/>
+			<%
+		}
+	%>
+	<input type="hidden" name="hotel_rv_content" value="<%= hotel_rv_content %>"/>
+		<script>
+		
+	<%-- 	function write() {
+			alert("a");
+			  if((<%= mb_id %>!="null")){
+				alert("aa");
+			}else {
+				alert("bb");
+			}   
+			
+		} --%>
+		
+		function logincheck(){
+			var mb_id = '<%=(String)session.getAttribute("mb_id")%>';
+			if(mb_id == "null"){
+				alert("로그인 해주세요.");
+				location.replace("../overlap/login.jsp");
+			}else{
+				location.replace("Hotel_rv_insert_01.jsp");
+			}
+		}
+	
+ 	</script>					
 	<div class="p_box">
 		<div class="p_sub">
 			&nbsp;
@@ -221,7 +196,7 @@ p{
 		</div>
 	</div>
 	
-	<form action='Hotel_rv_insert_01.jsp' >
+	<form>
 		<section class='main_bigbox'>
 		
 		
@@ -258,12 +233,12 @@ p{
 		</table>
 		
 		<div class='down_box'>
-		<input type='submit' value='글쓰기' class='insert_go'>
+		<input type='button' value='글쓰기' class='insert_go' onclick="logincheck()">
 		</div>
 		</section>
 		</form>
 		
-
+	<jsp:include page="../overlap/footer.jsp"/>
 
 </body>
 </html>

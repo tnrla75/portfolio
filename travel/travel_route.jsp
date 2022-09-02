@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="route_package.RouteDTO" %>
+    <%@ page import="travel_package.RouteDTO" %>
 <html>
 <head>
 	<title></title>
@@ -122,10 +122,10 @@
 	
 	
 	 function mypage_check(){ 
-	    var uid = '<%=(String)session.getAttribute("id")%>';
+	    var mb_id = '<%=(String)session.getAttribute("mb_id")%>';
 	    
 
-	     if(uid=="null"){ 
+	     if(mb_id=="null"){ 
 	        alert("로그인을 해주세요");
 	     }
 	     else{ 
@@ -142,8 +142,8 @@
 
 	<form>	
 <%
-		String id = (String)session.getAttribute("id"); 
-		if(id == null){
+		String mb_id = (String)session.getAttribute("mb_id"); 
+		if(mb_id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
 			<%
@@ -158,7 +158,7 @@
 		<input type="text" class="routeinput" placeholder="원하는 루트를 검색하세요.">
 		<input type="button" value="검색">
 	</div>
-<jsp:useBean id="control" class="route_package.RouteController">
+<jsp:useBean id="control" class="travel_package.RouteController">
 </jsp:useBean>
 	<div class="routelistdiv">
 		<% 

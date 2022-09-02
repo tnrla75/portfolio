@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import= "java.util.ArrayList"%>   
-<%@ page import="mate_package.MateConnect" %>    
-<%@ page import="mate_package.MateDTO" %>
+<%@ page import="travel_package.MateController" %>    
+<%@ page import="travel_package.MateDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +10,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% 
-	MateConnect user = new MateConnect();
-	String travelmateNum= request.getParameter("num");
-	user.delete(travelmateNum);
-	response.sendRedirect("travel_mate.jsp");
+	<%
+		MateController user = new MateController();
+		String travelmateNum= request.getParameter("num");
+		user.delete(travelmateNum);
+		response.sendRedirect("travel_mate.jsp");
 	%>
 </body>
 </html>

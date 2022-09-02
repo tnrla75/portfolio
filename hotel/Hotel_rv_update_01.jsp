@@ -1,5 +1,5 @@
-<%@page import="portfolio_02.Java_main"%>
-<%@page import="portfolio_02.Hotel_review_DB"%>
+<%@page import="hotel_package.Java_main"%>
+<%@page import="hotel_package.Hotel_review_DB"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -18,9 +18,20 @@
     <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
-<% String mb_id=(String)session.getAttribute("mb_id"); // 로그인할때 저장된 값 %>
 <body>
-<jsp:useBean id="members" class="portfolio_02.Java_main"/>
+<%
+		String mb_id = (String)session.getAttribute("mb_id"); 
+		if(mb_id == null){
+			%>
+			<jsp:include page="../overlap/header_login.jsp"/>
+			<%
+		}else{
+			%>
+			<jsp:include page="../overlap/header_logout.jsp"/>
+			<%
+		}
+	%>
+<jsp:useBean id="members" class="hotel_package.Java_main"/>
 <script>
 date =  new Date().toISOString().substring(0, 10);
 $("#hotel_rv_date").val(date);
@@ -77,7 +88,9 @@ alert(hotel_rv_date);
 			</td>
 		</tr>
 	</table>
+		<jsp:include page="../overlap/footer.jsp"/>
 	</form>
+	
 </body>
 <script>
 	date =  new Date().toISOString().substring(0,10);

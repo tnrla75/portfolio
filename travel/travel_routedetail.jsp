@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="route_package.RouteDTO"%>
+ <%@ page import="travel_package.RouteDTO" %>
 <html>
 <head>
 <title></title>
@@ -79,12 +79,12 @@
 	background-color: #e7e7e7;
 }
 </style>
-<jsp:useBean id="control" class="route_package.RouteController">
+<jsp:useBean id="control" class="travel_package.RouteController">
 </jsp:useBean>
 <%
 	String num = request.getParameter("routeNum");
 	ArrayList<RouteDTO> arr = control.routeNumselect(num);
-	String id = (String) session.getAttribute("id");
+	String mb_id = (String) session.getAttribute("mb_id");
 %>
 <script>
 function removebtn() {
@@ -114,7 +114,7 @@ function updatebtn() {
 	<form>
 		<%
 		
-		if(id == null){
+		if(mb_id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
 			<%
@@ -130,13 +130,9 @@ function updatebtn() {
 					<div class="titlediv">
 						<span>제목 : <%=arr.get(0).getRouteTitle()%></span>
 					</div>
-					<div class="btndiv">
-					
+					<div class="btndiv">		
 						<%
-							System.out.println(id);
-							System.out.println(arr.get(0).getId());
-							System.out.println(arr.get(0).getRouteNum());
-							if (arr.get(0).getId().equals(id)) {
+							if (arr.get(0).getId().equals(mb_id)) {
 								out.print(
 									"<input type='button' value='수정' class='btn' name='update' onclick='updatebtn()'><input type='button' value='삭제' name='remove' class='btn' onclick='removebtn()' style='border-left: 1px solid rgba(0,0,0, 0.3);'>");
 							} else {

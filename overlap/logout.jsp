@@ -8,8 +8,8 @@
 </head>
 <body>
 	<%
-	String id = (String)session.getAttribute("id");
-	session.removeAttribute("id");
+	String mb_id = (String)session.getAttribute("mb_id");
+	session.removeAttribute("mb_id");
 	%>
 	<script>
 	location.href= document.referrer;

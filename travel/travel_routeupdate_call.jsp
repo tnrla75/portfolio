@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="route_package.RouteController" %>
+    <%@ page import="travel_package.RouteController" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +11,16 @@
 	<%
 	
 	String routeNum = request.getParameter("routeNum");
+	String content = request.getParameter("content");
+	String title = request.getParameter("title");
+	
+	System.out.println(routeNum +" "+ content+ " "+ title);
 	
 	RouteController control = new RouteController();
-	System.out.println(routeNum);
-	control.routeNumselect(routeNum);
 	
-	response.sendRedirect("travel_routemake.jsp?routeNum='"+routeNum);
+	control.routeupdate(routeNum, content, title);
+	
+	response.sendRedirect("travel_route.jsp");
 	%>
 </body>
 </html>

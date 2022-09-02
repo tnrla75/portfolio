@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="route_package.RouteDTO" %>
+    <%@ page import="travel_package.RouteDTO" %>
 <html>
 <head>
 <title></title>
@@ -149,13 +149,13 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 
 	});
 </script>
-<jsp:useBean id="control" class="route_package.RouteController">
+<jsp:useBean id="control" class="travel_package.RouteController">
 </jsp:useBean>
 <body>
-	<form action='travel_routemake_call.jsp'>
+	<form action='travel_routeupdate_call.jsp'>
 		<%
-		String id = (String)session.getAttribute("id"); 
-		if(id == null){
+		String mb_id = (String)session.getAttribute("mb_id"); 
+		if(mb_id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
 			<%
@@ -177,6 +177,7 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 					<div class="contentdiv">
 
 						<div class="inputdiv">
+						<input type="hidden" name="routeNum" value='<%= arr.get(0).getRouteNum() %>'>
 							<input type="text" name="title" id="board_title"
 								placeholder="제목을 입력하세요." value='<%= arr.get(0).getRouteTitle() %>'>
 						</div>

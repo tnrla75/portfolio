@@ -509,8 +509,8 @@
 <form name="myform" action="signuppage_result.jsp" onsubmit="return signupchk()">
 <input type="hidden"  id="hiddenidchk" value="3">
 		<%
-		String id = (String)session.getAttribute("id"); 
-		if(id == null){
+		String mb_id = (String)session.getAttribute("mb_id"); 
+		if(mb_id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
 			<%

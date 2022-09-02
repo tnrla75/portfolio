@@ -1,11 +1,11 @@
-<%@page import="portfolio_02.Java_main"%>
-<%@page import="portfolio_02.Hotel_review_DB"%>
+<%@page import="hotel_package.Java_main"%>
+<%@page import="hotel_package.Hotel_review_DB"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="java.sql.*"%>
 
-<jsp:useBean id="members" class="portfolio_02.Java_main"/>
+<jsp:useBean id="members" class="hotel_package.Java_main"/>
 <%
 	request.setCharacterEncoding("UTF-8");
 	

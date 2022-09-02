@@ -740,8 +740,8 @@
 <body>
 <form name="myform">
 	<%
-		String id = (String)session.getAttribute("id"); 
-		if(id == null){
+		String mb_id = (String)session.getAttribute("mb_id"); 
+		if(mb_id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
 			<%
