@@ -1,0 +1,120 @@
+.mainsearch {
+			margin: 20px auto;
+			padding-bottom: 40px;
+			width: 1200px;
+			height: 80px;
+			border-radius: 3px;
+		}
+		.mainsearch>h3{
+			margin-left: 10px;
+			font-size: 14pt;
+		}
+		.mainsearch input:first-of-type {
+			width: 1060px;
+			height: 50px;
+			border-style: solid;
+			border-color: #E7E7E7;
+			position: relative;
+			font-size: 10pt;
+			top: 10px;
+			left: 10px;
+		}
+		.mainsearch input:last-of-type {
+			width:80px;
+			height: 55px;
+			border-style: solid;
+			font-weight: bold;
+			background-color: #002266;
+			color: white;
+			position: relative;
+			font-size: 13pt;
+			top: 13px;
+			right: 10px;
+		}
+		.travel:last-of-type {
+			position: relative;
+			top: 50px;
+		}
+		.travel h5 {
+			font-size: 22pt;
+			text-align: center;
+			font-weight: bold;
+		}
+		.contents1 {
+			width: 1200px;
+			height: 350px;
+			margin:0 auto;
+			position: relative;
+			top: 10px;
+	
+		}
+		.contents2{
+			width: 1200px;
+			height: 770px;
+			margin:0 auto 20px auto;
+			position: relative;
+			top: 5px;		
+		}
+		.detailcontents{
+			width: 1200px;
+			height: 200px;
+			margin: 15px auto 0 auto;
+			border-style: solid;
+		}
+		.detailcontents>img{
+			width: 200px;
+			height: 200px;
+			float: left;
+			border-style: solid;
+		}
+		.writebutton {
+			width: 1200px;
+			height: 50px;
+			margin: 10px auto 0 auto;
+		}
+		.writebutton>input{
+			float: right;
+			width: 200px;
+			height: 50px;
+			background: #030066;
+			color: white;
+			font-weight: bold;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.travellist2 {
+			float: left;
+			border-style: solid;
+			height: 250px;
+			box-shadow: 7px 7px 7px #BDBDBD;
+			border-width: 2px;
+			border-color: #BDBDBD;
+			margin-left: 10px;
+			position: relative;
+			bottom: 10px;
+			overflow: hidden;
+		}
+
+		.travellist2 p{
+		padding-top: 15px;
+			font-size: 13pt;
+			font-weight: bold;
+			color: white;
+			margin-left: 10px;
+			line-height: 2pt;
+		}
+		.travellist2>img{
+			transition: all 0.2s linear;
+		}
+		.travellist2>img:hover{
+			transform: scale(1.04);
+			overflow: hidden;
+		}
+		.detail {
+			position: relative;
+			height: 50px;
+			bottom: 170px;
+			border-style: 100px;
+			background-color:rgba(0,0,0,.6);
+			color: white;
+		}
