@@ -23,7 +23,7 @@ public class FlightListAction_go implements Action {
 		String arrivalday = request.getParameter("arrivalDay1");
 		String departureday = request.getParameter("departureDay1");
 		FlightListService FlightListService = new FlightListService();
-		System.out.println("==bb");
+		
 		String arr = request.getParameter("arr");
 		
 		int page1=1;
@@ -32,17 +32,9 @@ public class FlightListAction_go implements Action {
 		if(request.getParameter("page1")!=null){
 			page1 = Integer.parseInt(request.getParameter("page1"));
 		}
-		System.out.println("==cc");
-//		泥댄겕諛뺤뒪瑜� 泥댄겕�뻽�쓣 寃쎌슦
-		if(arr!=null) {
-			article1 = FlightListService.getArticle_fliter(departure, arrive, people, seat, departureday , page1, limit, arr);
-			listCount=FlightListService.getListCountFilter(departure, arrive, people, seat, departureday, arr);
-		}
-// 		泥댄겕諛뺤뒪瑜� 泥댄겕�븞�뻽�쓣 寃쎌슦
-		else {
-			article1 = FlightListService.getArticle_go(departure, arrive, people, seat, departureday , page1, limit);
-			listCount=FlightListService.getListCount(departure, arrive, people, seat, departureday);
-		}
+		article1 = FlightListService.getArticle_go(departure, arrive, people, seat, departureday , page1, limit);
+		listCount=FlightListService.getListCount(departure, arrive, people, seat, departureday);
+		
 
    		int maxPage=(int)((double)listCount/limit+0.95);
    		// 10 / 10+0.95  1蹂대떎 �빟媛꾪겮 
