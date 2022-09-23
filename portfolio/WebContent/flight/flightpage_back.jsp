@@ -11,8 +11,6 @@
 		String seat = request.getParameter("seatGrade1");
 		String totalprice= request.getParameter("totalprice");
 		
-		System.out.println(totalprice);
-		
 		PageInfo pageInfo2 = (PageInfo)request.getAttribute("pageInfo2");
 		int listCount2=pageInfo2.getListCount();
 		int nowPage2=pageInfo2.getPage();
@@ -285,9 +283,7 @@
 			height: 600px;
 			margin-right: 10px;
 			float: left;
-			overflow-y: scroll;
-			/* background-color: orange; */
-			
+			overflow-y: scroll;		
 		}
 		/* 스크롤바 설정*/
 		#flightdiv2::-webkit-scrollbar{
@@ -309,21 +305,28 @@
 			width: 265px;
 			margin: 5px;
 			border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+			
+
 		}
 		#flightdiv3{
 			width: 900px;
+			border-radius: 5px;
 			height: fit-content;
 			float: left;
 		}
 		#flightdivmain{
-			width: 1200px; height: 1300px; margin: 0 auto;
+			width: 1200px; height: 1500px; margin: 0 auto;
 			
 		}
 		.flightlistdiv{
-			border-bottom: solid 1px rgba(0,0,0,0.3);
+			border-bottom: solid 1px rgba(0,0,0,0.2); 
+			
+			background-color:white;
 			width: 880px;
-			height: 100px;
-			margin: 10px;
+			height: 120px;
+			
+		
+			margin:4px;
 		}
 		.td1{
 			height: 80px;
@@ -334,7 +337,7 @@
 		.listtable{
 			text-align:center;
 			width :850px;			
-			height: 100px;
+			height: 120px;
 			position:relative;
 		}
 		.td1{
@@ -358,13 +361,17 @@
 		}
 		.airport{
 			font-size: 10pt;
-			color: rgba(0, 0, 0, 0.3);
+			color: rgba(0, 0, 0, 0.6);
 		}
 		.choicebtn{
-			border-radius: 5px;
+			border-radius: 3px;
 			height: 30px;
 			width: 70px;
 			margin-left:20px;
+			border-style:none;
+			background-color: rgba(211, 10, 20, 0.9);
+			color: white;
+			font-weight:bold;
 		}
 		#footerprice {
         position: fixed;
@@ -422,6 +429,35 @@
         	border-style: none;
         	float:right;
         }
+        .pageinfo{
+        	float: left;
+        	background-color: white;
+        	width: 300px;
+        	height: 60px;
+        	line-height: 60px;
+        	
+        }
+        .pageinfo > button {
+        	border-style: none;
+        	background-color: white;
+        	margin: 5px;
+        	
+        }
+        .pageinfo > button:hover{
+        	outline: solid;
+        	
+        }
+        #pagelistdiv{
+        	margin:0 auto;
+        }
+        #pagelistdiv div{
+        	margin: 0 auto;
+        	width:fit-content;
+        }
+       
+	 	.flightlistdiv:hover {
+	 	background-color: rgba(242,242,242, 0.4);
+		}  
 	</style>
 </head>
 <script>	
@@ -518,7 +554,7 @@ function getPost(mode)
 		<input type="hidden" id="total" value='' name="total">
 			<span class="span1">예상 결제 금액</span>
 			<input type="button" class="footer_backchoice" value="오는 편 선택">
-			<span class="span3">원</span>
+			<span class="span3"></span>
 			<input class="span2" name="totalprice" value='<%= request.getParameter("totalprice") %>' readonly>
 			
 			
@@ -667,13 +703,15 @@ function getPost(mode)
 					
 				}
 				%>
+				<input type="hidden" value="<%= request.getParameter("ticketNum1") %>" name="ticketNum1">
+				<input type="hidden" value="<%= ticketBeanList2.get(i).getFlight_Ticket_Num() %>" name="ticketNum2">
 				<img src="../img/flight/<%= flightimg1 %>" class="flightimg"></td>
 				<td class="td1" style="text-align: left;"><%= ticketBeanList2.get(i).getFlight_name() %></td>
 				<td class="td1"><span class="time"><%= ticketBeanList2.get(i).getFlight_departureTime()%></span><br><span class="airport"><%= ticketBeanList2.get(i).getFlight_departure() %></span></td>
 				<td class="td1"><span class="airport"><%= ticketBeanList2.get(i).getEstimated_time() %></span><br><img src="aaa.jpg"></td>
 				<td class="td1"><span class="time"><%= ticketBeanList2.get(i).getFlight_arrivalTime() %></span><br><span class="airport"><%= ticketBeanList2.get(i).getFlight_arrival() %></span></td>
 
-				<td class="td1" rowspan="2"><fmt:formatNumber value="<%= ticketBeanList2.get(i).getFlight_Ticket_Price() %>" groupingUsed="true" /><input type="button" value="선택" class="choicebtn" ></td>
+				<td class="td1" rowspan="2"><fmt:formatNumber value="<%= ticketBeanList2.get(i).getFlight_Ticket_Price() %>" groupingUsed="true" />원<input type="button" value="선택" class="choicebtn" ></td>
 			</tr>
 			
 			
@@ -683,6 +721,7 @@ function getPost(mode)
 				</div>
 				
 				<%} %> 
+				<div id="pagelistdiv"><div>
 				<section id="pageList">
 		<%if(nowPage2<=1){ %>
 		[이전]&nbsp;
@@ -705,10 +744,10 @@ function getPost(mode)
 		<a href="flightTicketSearch_back.air?page2=<%=nowPage2+1 %>&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>">[다음]</a>
 		<%} %>
 	</section>
+	</div></div>
 			</div>
 			
 		</div>
-		<jsp:include page="../overlap/footer.jsp"/>
 	</form>
 </body>
 </html>

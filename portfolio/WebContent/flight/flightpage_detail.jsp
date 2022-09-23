@@ -17,9 +17,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-
 <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
+
+
 <title></title>
 <style>
 
@@ -36,8 +36,8 @@
 	position: fixed;
 	top: 160px;
 	margin-left: 900px;
-	background-color: rgba(231,231,231,0.4);
-	border-radius: 5px;
+	background-color: rgba(231,231,231,0.2);
+	border-radius: 10px;
 }
 
 #flightdiv2_indiv1 {
@@ -49,10 +49,11 @@
 #flightdiv2_indiv2 {
 	width: 270px;
 	border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+		margin: 10px;
 }
 #flightdiv2_indiv2 > div{
 	width:250px;
-	margin: 20px;
+	margin: 20px 10px;
 }
 #flightdiv2_indiv2 > div > span:nth-child(2n){
 	float: right;
@@ -91,18 +92,18 @@
 	margin-left: 30px;
 }
 
-.infodiv {
+.flightdiv1_indiv1 > .infodiv {
 	border-bottom: solid 1px rgba(0, 0, 0, 0.3);
-	width: 360px;
+	width: 340px;
 	float: left;
 	margin: 20px 30px;
 }
 
-.infoinput {
+.infodiv > .infoinput {
 	border-style: none;
 	line-height: 30px;
 	float:left;
-	width: 360px;
+	width: 340px;
 }
 #btndiv{
 	width: 850px;
@@ -247,7 +248,8 @@
 			position:relative;
 		}
 		.numbtn{
-			float:right;
+			left: 500px;
+			position:relative;
 			border-style:none;
 			background-color: white;
 			color:#3264FF;
@@ -330,9 +332,12 @@ function delbtn(e){
 		</div>
 	</div>
 </div>
+
 	
 	
 	<div class="maindiv">
+	
+	
 		<div>
 			<table class="listtable">
 				<tr class="tr1">
@@ -444,6 +449,7 @@ function delbtn(e){
 			</div>
 		</div>
 
+	
 
 <%-- 		<jsp:include page="../overlap/footer.jsp"/> --%>
 	</form>
