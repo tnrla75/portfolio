@@ -35,11 +35,11 @@ public class Hotel_room_DB {
 	private String hot_re_id;
 	
 	
-	private String hot_country;
-	private int hot_re_grade;
-	private String hot_re_title;
+	
+	private int hot_re_rate;
+	
 	private String hot_re_content;
-	private String hot_re_comments;
+	
 	private Date hot_re_date;
 	
 	
@@ -58,24 +58,12 @@ public class Hotel_room_DB {
 	}
 	
 	
-	public String getHot_country() {
-		return hot_country;
-	}
-	public void setHot_country(String hot_country) {
-		this.hot_country = hot_country;
-	}
 	
-	public int getHot_re_grade() {
-		return hot_re_grade;
+	public int getHot_re_rate() {
+		return hot_re_rate;
 	}
-	public void setHot_re_grade(int hot_re_grade) {
-		this.hot_re_grade = hot_re_grade;
-	}
-	public String getHot_re_title() {
-		return hot_re_title;
-	}
-	public void setHot_re_title(String hot_re_title) {
-		this.hot_re_title = hot_re_title;
+	public void setHot_re_rate(int hot_re_rate) {
+		this.hot_re_rate = hot_re_rate;
 	}
 	public String getHot_re_content() {
 		return hot_re_content;
@@ -83,12 +71,7 @@ public class Hotel_room_DB {
 	public void setHot_re_content(String hot_re_content) {
 		this.hot_re_content = hot_re_content;
 	}
-	public String getHot_re_comments() {
-		return hot_re_comments;
-	}
-	public void setHot_re_comments(String hot_re_comments) {
-		this.hot_re_comments = hot_re_comments;
-	}
+	
 	public Date getHot_re_date() {
 		return hot_re_date;
 	}

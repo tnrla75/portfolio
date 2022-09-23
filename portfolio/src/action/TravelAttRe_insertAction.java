@@ -19,7 +19,7 @@ public class TravelAttRe_insertAction<ActionForward> implements Action {
 		Travelattre travelattre=null;
 		travelattre = new Travelattre();
 		travelattre.setAtt_num(Integer.parseInt(request.getParameter("att_num")));
-		travelattre.setAtt_reRate(Integer.parseInt(request.getParameter("att_rate")));
+		travelattre.setAtt_reRate(Integer.parseInt(request.getParameter("rate")));
 		travelattre.setMb_id(request.getParameter("att_reid"));
 		travelattre.setAtt_reContent(request.getParameter("att_content"));
 		travelattre.setAtt_reDate(request.getParameter("writedate"));

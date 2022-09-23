@@ -25,8 +25,6 @@ public class MateController {
 				nmd.setTravelmateTitle(rs.getString("travelmateTitle"));
 				nmd.setTravelmateDate(rs.getString("travelmateDate"));
 				nmd.setTravelmateContent(rs.getString("travelmateContent"));
-				nmd.setTravelmateComents(rs.getString("travelmateComents"));
-				nmd.setTravelmatePhoto(rs.getString("travelmatePhoto"));
 				nmd.setDestination(rs.getString("destination"));
 				nmd.setTravelmateMember(rs.getString("travelmateMember"));
 				nmd.setDepartureDate(rs.getString("departureDate"));
@@ -48,6 +46,7 @@ public class MateController {
 			catch(Exception e){
 			}
 		}
+		System.out.println(dbal);
 		return dbal;                         
 		}
 	
@@ -56,6 +55,7 @@ public class MateController {
 			dbc();
 			String command = String.format("insert into travel_mate (id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservationstatus,travelmateDate) values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')"
 											,id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate);
+			System.out.println(command+"=df");
 			int rowNum = stmt.executeUpdate(command);
 		}catch(Exception e){	
 		}
@@ -147,8 +147,6 @@ public class MateController {
 				nmd2.setTravelmateTitle(rs.getString("travelmateTitle"));
 				nmd2.setTravelmateDate(rs.getString("travelmateDate"));
 				nmd2.setTravelmateContent(rs.getString("travelmateContent"));
-				nmd2.setTravelmateComents(rs.getString("travelmateComents"));
-				nmd2.setTravelmatePhoto(rs.getString("travelmatePhoto"));
 				nmd2.setDestination(rs.getString("destination"));
 				nmd2.setTravelmateMember(rs.getString("travelmateMember"));
 				nmd2.setDepartureDate(rs.getString("departureDate"));
@@ -176,6 +174,7 @@ public class MateController {
 	public void delete(String travelmateNum){
 		try{
 			dbc();
+			System.out.println("bb");
 			String command = String.format("delete from travel_mate where travelmateNum='%s'",travelmateNum);
 			int rowNum = stmt.executeUpdate(command);
 		}catch(Exception e){	

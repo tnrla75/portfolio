@@ -9,26 +9,34 @@
 <%@ page import="vo.ItemOption"%>
 <%@ page import="vo.PageInfo"%>
 <%@ page import="vo.Qna"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
 	Item article = (Item)request.getAttribute("article");
 	ItemOption opArticle = (ItemOption)request.getAttribute("opArticle");
 	ItemImg imgArticle = (ItemImg)request.getAttribute("imgArticle");
-	ArrayList<ItemReview> articleList=(ArrayList<ItemReview>)request.getAttribute("articleList");
+	ArrayList<ItemReview> reArticleList =(ArrayList<ItemReview>)request.getAttribute("reArticleList");
+	ArrayList<ItemReview> totalReArticleList = (ArrayList<ItemReview>)request.getAttribute("totalReArticleList");
 	ArrayList<Qna> qnaArticleList = (ArrayList<Qna>)request.getAttribute("qnaArticleList");
 	ArrayList<Qna> totalQnaArticleList = (ArrayList<Qna>)request.getAttribute("totalQnaArticleList");
 
 	String itemCode = article.getItemCode();
 	session.setAttribute("itemCode", itemCode);
 	
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	int listCount=pageInfo.getListCount();
-	int nowPage=pageInfo.getPage();
-	int maxPage=pageInfo.getMaxPage();
-	int startPage=pageInfo.getStartPage();
-	int endPage=pageInfo.getEndPage();
-
+	PageInfo qna_pageInfo = (PageInfo)request.getAttribute("qna_pageInfo");
+	int listCount=qna_pageInfo.getListCount();
+	int nowPage=qna_pageInfo.getPage();
+	int maxPage=qna_pageInfo.getMaxPage();
+	int startPage=qna_pageInfo.getStartPage();
+	int endPage=qna_pageInfo.getEndPage();
+	
+	PageInfo re_pageInfo = (PageInfo)request.getAttribute("re_pageInfo");
+	int re_listCount = re_pageInfo.getListCount();
+	int re_nowPage = re_pageInfo.getPage();
+	int re_maxPage = re_pageInfo.getMaxPage();
+	int re_startPage = re_pageInfo.getStartPage();
+	int re_endPage = re_pageInfo.getEndPage(); 
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -58,45 +66,57 @@
 	a:visited {
 		color: black;
 	}
+	
 	#search {
 		width: 1200px;
 		height: 20px;
 		text-align: center;
 		margin: 50px auto;
 	}
-	#search input {
+	#search input[type=text] {
+		float: left;
 		width: 800px;
-		height: 20px;
-		margin-bottom: 0;
-		border-radius: 10px 10px 10px 10px;
+		height: 50px;
+		margin-left: 200px;
+		margin-top: 20px;
+		border-width: 0 0 1px 0;
 	}
-	#index {
-		width: 1200px;
-		height: 20px;
-		margin: 0 auto;
-		padding-bottom: 10px;
-	}
-	#category {
-		margin-top: 0;
-		text-align: center;
-		padding-left: 10px;
-		font-family: 굵은안상수체;
-		font-size: 17pt;
-	}
-	#category li {
-		display: inline-block;
-		list-style: none;
+	.searchIcon {
+		float: left;
+		width: 40px;
+		height: 40px;
+		border-style: none;
+		background-color: white;
+		background-image: url(../img/icon/loupe.png);
+	    background-position: 1px center;
+	    background-size: 20px;
+	    background-repeat: no-repeat;
+	    margin-top: 20px;
+	    position: relative;
+	    right: 40px;
+	    top: 10px;
 	}
 	#sort {
+		clear: left;
 		width: 1200px;
-		height: 80px;
+		height: 50px;
 		font-size: 7pt;
-		margin: 0 auto;
+		margin: 50px auto;
+		position: relative;
+		top: 45px;
 	}
 	.sort1 {
 		float: left;
 		font-size: 10pt;
 		line-height: 5pt;
+	}
+	.sort1:first-of-type {
+		position: relative;
+		bottom: 10px;
+	}
+	.sort1:first-of-type img {
+		position: relative;
+		top: 5px;
 	}
 	#detail1 {
 		width: 1200px;
@@ -119,7 +139,7 @@
 		width: 590px;
 		height: 500px;
 		position: relative;
-		bottom: 100px;
+		bottom: 90px;
 		/* border-style: solid;
 		border-color: #EAEAEA; */
 	}
@@ -136,7 +156,7 @@
 		width: 150px;
 		height: 40px;
 		position: relative;
-		bottom: 70px;
+		bottom: 35px;
 	}
 	#optionSel input[type=button]:first-of-type {
 		width: 30px;
@@ -144,6 +164,7 @@
 		background-color: white;
 		border-style: none;
 	}
+	
 	#optionSel input[type=button]:last-of-type {
 		width: 30px;
 		height: 30px;
@@ -224,8 +245,25 @@
 		padding-top: 7px;
 		font-size: 25pt;
 		position: relative;
-		top: 14px;
+		top: 14px;		
+		overflow: hidden;
 	}
+	#like_off {
+		width: 65px;
+		height: 65px;
+		position: relative;
+		top: 5px;
+	}
+	#like_on {
+		width: 65px;
+		height: 65px;
+		position: relative;
+		bottom: 59px;
+	}
+	/* .like lmg:first-of-type {
+		color: black;
+	} */
+
 	.tableLine {
 		border-bottom: 1px solid #D5D5D5;
 		padding: 10px;
@@ -320,20 +358,39 @@
 		width: 1200px;
 		border-collapse: collapse;
 	}
+
+	#reviewTable .text {
+		border-style: 50px;
+		height: fit-content;
+	}
 	#reviewTable .tableLine div:first-of-type {
 		margin-top: 10px;
 	}
-	#empty {
+	#empty1 {
 		width: 1200px;
-		height: 500px;
-		border-style: solid;
+		height: 280px;
 		text-align: center;
 	}
-	#empty p:first-of-type {
-		padding-top: 90px;
+	#empty1 p:first-of-type {
+		padding-top: 70px;
 		color: #8C8C8C;
 	}
-	#empty p:last-of-type {
+	#empty1 p:last-of-type {
+		font-weight: bold;
+		color: #8C8C8C;
+	}
+	#empty2 {
+		width: 1200px;
+		height: 100px;
+		margin-top: 20px;
+		border-style: solid;
+		border-width: 1px 0 1px 0;
+		padding-top: 30px;
+		text-align: center;
+		position: relative;
+		right: 40px;
+	}
+	#empty1 p {
 		font-weight: bold;
 		color: #8C8C8C;
 	}
@@ -382,6 +439,7 @@
 		width: 1200px;
 		height: fit-content;
 		margin-top: 10px;
+		resize: none;
 	}
 	#photo {
 		margin-top: 20px;
@@ -416,14 +474,20 @@
 		border-color: #EAEAEA;
 		border-width: 1px;
 		height: 90px;
+		margin-top: 20px;
 		padding-left: 25px;
 		padding-top: 30px;
 		font-size: 14pt;
 	}
 	.option_wr1 div:first-of-type {
-		margin-top: 15px;
+		margin-top: 10px;
 	}
-	
+	.option_wr1 div:first-of-type img {
+		position: relative;
+		left: 450px;
+		bottom: 25px;
+	}
+
 	.option_wr1 div:nth-of-type(2) {
 		position: relative;
 		top: 10px;
@@ -571,7 +635,7 @@
 	}
 	.tableLine {
 		border-bottom: 1px solid #D5D5D5;
-		height: 70px;
+		height: 50px;
 	}
 	#qnaTable {
 		margin-top: 50px;
@@ -705,8 +769,16 @@
 			location.href="../overlap/login.jsp";
 		} else {
 			var popupX = Math.ceil(( window.screen.width - 600 )/2);
-			var popupY = Math.ceil(( window.screen.height - 750 )/2); 
-			window.open("write.jsp?itemCode="+<%= itemCode %>,"popup",'width=600, height=750, left= '+popupX+', top= '+popupY+"'"); 
+			var popupY = Math.ceil(( window.screen.height - 700 )/2); 
+			window.open("write.jsp?itemCode="+<%= itemCode %>,"popup",'width=600, height=700, left= '+popupX+', top= '+popupY+"'"); 
+		}
+	}
+	
+	function qna() {
+		var mb_id = '<%= (String)session.getAttribute("mb_id") %>';
+		if (mb_id == "null") {
+			alert("로그인이 필요합니다.");
+			location.href="../overlap/login.jsp";
 		}
 	}
 	
@@ -720,8 +792,8 @@
 
 	function del(num) {
 		var popupX = Math.ceil(( window.screen.width - 300 )/2);
-		var popupY = Math.ceil(( window.screen.height - 170 )/2); 
-		window.open("delete01.jsp?reviewNo="+num,"popup",'width=300, height=170, left= '+popupX+', top= '+popupY+"'");
+		var popupY = Math.ceil(( window.screen.height - 120 )/2); 
+		window.open("delete01.jsp?reviewNo="+num,"popup",'width=300, height=120, left= '+popupX+', top= '+popupY+"'");
 		
 	}
 	
@@ -754,23 +826,24 @@
         } */
     } 
 	
-	
+	//옵션 수량
 	function count(type)  {
-		  // 결과를 표시할 element
-		  const resultElement = document.getElementById('result');
+		//결과를 표시할 element
+		const resultElement = document.getElementById('result');
 		  
-		  // 현재 화면에 표시된 값
-		  let number = resultElement.innerText;
+		var number = resultElement.innerText;
 		  
-		  // 더하기/빼기
-		  if(type === 'plus') {
-		    number = parseInt(number) + 1;
-		  }else if(type === 'minus')  {
-		    number = parseInt(number) - 1;
-		  }
-		  // 결과 출력
-		  resultElement.innerText = number;
+		// 더하기/빼기
+		if(type === 'plus') {
+			number = parseInt(number) + 1;
+		} else if(type === 'minus' && number>0)  { 
+			number = parseInt(number) - 1;
 		}
+		resultElement.innerText = number;
+	}
+ 	
+	
+
 	
 </script>
 <script>
@@ -781,40 +854,19 @@
 		$('.qna_display1').hide();
 		$('.qna_display2').hide();
 		
- 		$('.insert1').hide();
-        $('#travel1').mouseover(function(){
-            $('.insert1').show();
-        });
-        $('#travel1').mouseout(function(){
-            $('.insert1').hide();
-        });
-        $('.insert2').hide();
-        $('#travel2').mouseover(function(){
-            $('.insert2').show();
-        });
-        $('#travel2').mouseout(function(){
-            $('.insert2').hide();
-        });
-        $('.insert3').hide();
-        $('#travel3').mouseover(function(){
-            $('.insert3').show();
-        });
-        $('#travel3').mouseout(function(){
-            $('.insert3').hide();
-        });
-        $('.insert4').hide();
-        $('#travel4').mouseover(function(){
-            $('.insert4').show();
-        });
-        $('#travel4').mouseout(function(){
-            $('.insert4').hide();
-        });
-        
         //옵션 선택
         $('.option_wr1').hide();
         $('.select').on('change',function() {
-        	document.getElementById('option').innerText = this.value;
-        	$('.option_wr1').show();
+      		
+	        document.getElementById('option').innerText = this.value;
+	        if (this.value == "선택해 주세요.") {
+	        	 $('.option_wr1').hide();
+
+	        } else {
+	        	 $('.option_wr1').show();
+	        }
+	       
+        	
         });
         
       	//옵션 선택
@@ -827,6 +879,12 @@
         	document.getElementById('total2').innerText = "$"+result.innerHTML*<%= article.getDiscountDollar() %>;
         });
        	
+      	//옵션 딛기
+        $('#option_close').on('click',function() {
+        	document.getElementById('option').innerText = this.value;
+        	$('.option_wr1').hide();
+        });
+        
         //이미지 클릭
         $('#img > img').on('click',function() {
         	var is = $(this).attr('src');
@@ -858,7 +916,14 @@
         	}
         });
         
-      
+        $('#like_on').hide();
+        $('#like_off').on('click', function() {
+        	$('#like_on').show();
+        });
+        $('#like_off').on('click', function() {
+        	$('#like_off').show();
+            
+        });
 	});
 </script>
 <body>
@@ -874,21 +939,15 @@
 			<%
 		}
 		%>
+		
 		<nav>
 			<div id="search">
-				<input type="text" name="search">
+				<input type="text" name="keyword">
+				<input type="submit" value="" onclick="javascript: form.action='search.shop';" class="searchIcon">
 			</div>
-			<div id="index">
-				<nav>
-					<ul id="category">
-						<li>카테고리1</li>
-						<li>카테고리2</li>
-						<li>카테고리3</li>
-						<li>카테고리4</li>
-					</ul>
-				</nav>
-			</div>
+			
 			<div id="sort">
+				<p class="sort1"><a href="itemMain.jsp"><img src="../img/dutyfree/home.png" width="20px" height="20px">	<</a></p>
 				<p class="sort1"><a href="itemList.shop?category=<%=article.getBigCategory()%>"><%=article.getBigCategory() %> <</a></p>
 				<p class="sort1"><a href="itemList.shop?category=<%=article.getMidCategory()%>"><%=article.getMidCategory() %> <</a></p>
 				<p class="sort1"><a href="itemList.shop?category=<%=article.getSmCategory()%>"><%=article.getSmCategory() %> </a></p>
@@ -904,16 +963,16 @@
 						<% } else if (imgArticle.getItemImg3() == null) { %>
 							<img src="<%=imgArticle.getItemImg1() %>" width="146px" height="150px">
 					    	<img src="<%=imgArticle.getItemImg2() %>" width="146px" height="150px">
-					    <% } else if (imgArticle.getItemImg4() == null) { %>
+					    <% } else if (imgArticle.getItemImg4() == null){ %>
 					    	<img src="<%=imgArticle.getItemImg1() %>" width="146px" height="150px">
 					    	<img src="<%=imgArticle.getItemImg2() %>" width="146px" height="150px">
 					    	<img src="<%=imgArticle.getItemImg3() %>" width="146px" height="150px">
 					    <% } else { %>
-						    <img src="<%=imgArticle.getItemImg1() %>" width="146px" height="150px">
-						    <img src="<%=imgArticle.getItemImg2() %>" width="146px" height="150px">
-							<img src="<%=imgArticle.getItemImg3() %>" width="146px" height="150px">
-							<img src="<%=imgArticle.getItemImg4() %>" width="146px" height="150px">
-						<% } %>
+					    	<img src="<%=imgArticle.getItemImg1() %>" width="146px" height="150px">
+					    	<img src="<%=imgArticle.getItemImg2() %>" width="146px" height="150px">
+					    	<img src="<%=imgArticle.getItemImg3() %>" width="146px" height="150px">
+					    	<img src="<%=imgArticle.getItemImg4() %>" width="146px" height="150px">
+					    <% } %>
 					</p>
 				</div>
 				<div id="select">
@@ -922,11 +981,11 @@
 					<table cellpadding="15" align="center">
 						<tr>
 							<td>정상가</td>
-							<td style="color: #8C8C8C; text-decoration: line-through;">$<%=article.getItemDollar() %>&nbsp(<%=article.getItemWon() %>원)</td>
+							<td style="color: #8C8C8C; text-decoration: line-through;">$<%=article.getItemDollar() %>&nbsp(<fmt:formatNumber value="<%= article.getItemWon() %>" groupingUsed="true" />원)</td>
 						</tr>
 						<tr class="tableLine">
 							<td>회원가</td>
-							<td><font>$<%=article.getDiscountDollar() %></font>&nbsp(<%=article.getDiscountWon() %>원)10%off</td>
+							<td><font>$<%=article.getDiscountDollar() %></font>&nbsp(<fmt:formatNumber value="<%= article.getDiscountWon() %>" groupingUsed="true" />원)</td>
 						</tr>
 						<tr class="tableLine">
 							<td>상품코드</td>
@@ -934,7 +993,7 @@
 						</tr>
 						<tr class="tableLine">
 							<td><%=opArticle.getOptionName() %></td>
-							<td><select class="select">
+							<td><select class="select" name="suntack" onchange="select(itemDetail.suntack)">
 									<option>선택해 주세요.</option>
 									<% if(opArticle.getOption2() == null) { %>
 										<option><%=opArticle.getOption1() %></option>
@@ -966,7 +1025,8 @@
 						</tr>
 					</table>
 					<div class="option_wr1">
-						<div><%=article.getItemName() %></div>
+						
+						<div><%=article.getItemName() %> <img src="../img/dutyfree/x_icon.png" width="20px" height="20px" id="option_close"></div>
 						<div id="option"></div>
 						<div id="optionSel">
 							<input type='button' onclick='count("minus")' value='-'/>
@@ -981,17 +1041,18 @@
 					<input type="button" value="SHOPPING BAG" class="cart">
 					<button id="present"><img src="../img/dutyfree/present.png" width="35px" height="35px"></button>
 					<div class="like">
-						♡
-						<!-- <p>like</p> -->
+						<div id="like_off" onclick="like_off()"><img src="../img/dutyfree/heart.png" width="30px" height="30px"></div>
+						<div id="like_on" onclick="like_on()"><img src="../img/dutyfree/heart1.png" width="30px" height="30px"></div>
 					</div> 
 				</div>
 			</div>
+			</section>
 			<div id="tab_wr">
 				<div class="tabs">
 				    <input id="all" type="radio" name="tab_item" checked>
 				    <label class="tab_item" for="all">상품설명</label>
 				    <input id="programming" type="radio" name="tab_item">
-				    <label class="tab_item" for="programming">상품평 <%= "("+articleList.size()+")" %></label>
+				    <label class="tab_item" for="programming">상품평 <%= "("+totalReArticleList.size()+")" %></label>
 				    <input id="design" type="radio" name="tab_item">
 				    <label class="tab_item" for="design">Q&A <%= "("+totalQnaArticleList.size()+")" %></label>
 				    
@@ -1016,21 +1077,23 @@
 									String star4 = "<img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'>";
 									String star5 = "<img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'>";
 									
-									for(int i = 0; i<articleList.size(); i++) {
-										sum += articleList.get(i).getReRate();
-										avg = sum/articleList.size();
+									for(int i = 0; i<reArticleList.size(); i++) {
+										sum += reArticleList.get(i).getReRate();
+										avg = (double)sum/(double)reArticleList.size(); 
+										/* avg = sum/reArticleList.size(); */
 									}
 								%>
-								<p><%= avg%>/5.0</p>
+								
+								<p><fmt:formatNumber value='<%= avg %>' pattern=".0" />/5.0</p>
 								<p>
 									<%
 										if (avg == 5.0) {
 											out.println(star5);	
-										} else if (avg == 4.0) {
+										} else if (avg < 5.0) {
 											out.println(star4);	
-										} else if (avg == 3.0) {
+										} else if (avg < 4.0) {
 											out.println(star3);
-										} else if (avg == 2.0) {
+										} else if (avg < 3.0) {
 											out.println(star2);
 										} else {
 											out.println(star1);
@@ -1051,59 +1114,114 @@
 							</div>
 						</div>
 						<div id="detailReview1">	
+
 							<table id="reviewTable">
+				        	<% if (reArticleList.size() == 0) { %>
+				        		<div id='empty1'><p>리뷰가 없습니다.</p><p>리뷰를 작성해보세요</p><input type='button' class='reviewBtn2' value='상품 리뷰 작성하기' onclick='review()'></div>
+				        	<% } %>
+				        	<% if  (reArticleList == null && listCount == 0) {%>
+				        	<% } else {
+								for(int i=0; i<reArticleList.size(); i++){	
+									String a;
+									String star;
+
+									if(reArticleList.get(i).getReRate() == 1){
+										star = star1;
+									} else if(reArticleList.get(i).getReRate() == 2){
+										star = star2;
+									} else if(reArticleList.get(i).getReRate() == 3){
+										star = star3;
+									} else if(reArticleList.get(i).getReRate() == 4){
+										star = star4;
+									}  else if(reArticleList.get(i).getReRate() == 5){
+										star = star5;
+									} else {
+										star = "";
+									}	
+									out.println("<tr class='tableLine' height='30'><td><div><b>"+reArticleList.get(i).getMb_id()+"</b>");	
+												
+									if (mb_id == null || !mb_id.equals(reArticleList.get(i).getMb_id())) {
+										
+									} else {
+										a = "<input type='button' value='삭제' class='update' onclick='del("+reArticleList.get(i).getReviewNo()+")'><input type='button' value='수정' class='update' onclick='update("+reArticleList.get(i).getReviewNo()+")'></div><div id='reviewRate'>";
+										out.println(a);
+									}
+									out.println("<p>"+star+"<b class='reDate'>"+reArticleList.get(i).getReDate()+"</b></p></div><div id='text'>"+reArticleList.get(i).getReText()+"</div>");
+									if (reArticleList.get(i).getRePhoto1()==null || reArticleList.get(i).getRePhoto2()==null || reArticleList.get(i).getRePhoto3()==null) {
+										out.println("<div class='recom'><b>이 리뷰가 도움이 돼요!</b><b><img src='../img/dutyfree/finger1.png' width='15px' height='15px'></b></div></td></tr>");	
+									} else {
+										out.println("<div id='photo'>"+reArticleList.get(i).getRePhoto1()+reArticleList.get(i).getRePhoto2()+reArticleList.get(i).getRePhoto3()+
+											"</div><div class='recom'><b>이 리뷰가 도움이 돼요!</b><b><img src='../img/dutyfree/finger1.png' width='15px' height='15px'></b></div></td></tr>");
+									}
+								} 
+								%> 
+							</table>
+							<section id="pageList">
+									<%if (re_nowPage<=1) { %>
+										<&nbsp;
+									<%}else{ %>
+									<a href="itemDetail.shop?page=<%=re_nowPage-1 %>&itemCode=<%=article.getItemCode()%>"> < </a>&nbsp;
+									<%} %>
+									
+									<%for (int b = re_startPage; b<=re_endPage; b++){
+										if (b==re_nowPage) {%>
+										<%=b %>
+										<%} else { %>
+										<a href="itemDetail.shop?page=<%=b %>&itemCode=<%=article.getItemCode()%>"><%=b %>
+										</a>&nbsp;
+										<% } %>
+									<%} %>
+									<%if (re_nowPage>=re_maxPage) { %>
+										>
+									<%} %>
+							</section>
+							<% } %>
+							
+
+							<%-- <table id="reviewTable" >
 								<%
 									String a;
 									String star;
-									for(int i = 0; i<articleList.size(); i++) {
-										if (articleList.size() == 0) {
-											out.println("<div id='empty'><p>리뷰가 없습니다.</p><p>리뷰를 작성해보세요</p><input type='button' class='reviewBtn2' value='상품 리뷰 작성하기' onclick='review()'></div>");
-										}	
-										 if(articleList.get(i).getReRate() == 1){
+				
+									for(int i = 0; i<reArticleList.size(); i++) {
+										 if(reArticleList.get(i).getReRate() == 1){
 											star = star1;
-										} else if(articleList.get(i).getReRate() == 2){
+										} else if(reArticleList.get(i).getReRate() == 2){
 											star = star2;
-										} else if(articleList.get(i).getReRate() == 3){
+										} else if(reArticleList.get(i).getReRate() == 3){
 											star = star3;
-										} else if(articleList.get(i).getReRate() == 4){
+										} else if(reArticleList.get(i).getReRate() == 4){
 											star = star4;
-										}  else if(articleList.get(i).getReRate() == 5){
+										}  else if(reArticleList.get(i).getReRate() == 5){
 											star = star5;
 										} else {
 											star = "";
 										}	
-										out.println("<tr class='tableLine'><td><div><b>"+articleList.get(i).getMb_id()+"</b>");	
+										out.println("<tr class='tableLine' height='= 80'><td><div><b>"+reArticleList.get(i).getMb_id()+"</b>");	
 												
-										if (mb_id.equals(articleList.get(i).getMb_id())) {
+										/* if (mb_id.equals(articleList.get(i).getMb_id())) {
 											a = "<input type='button' value='삭제' class='update' onclick='del("+articleList.get(i).getReviewNo()+")'><input type='button' value='수정' class='update' onclick='update("+articleList.get(i).getReviewNo()+")'></div><div id='reviewRate'>";
 											out.println(a);
-										}
-									out.println("<p>"+star+"<b class='reDate'>"+articleList.get(i).getReDate()+"</b></p></div><div id='text'>"+articleList.get(i).getReText()+"</div>");
-										if (articleList.get(i).getRePhoto1()==null || articleList.get(i).getRePhoto2()==null || articleList.get(i).getRePhoto3()==null) {
+										} */
+										out.println("<p>"+star+"<b class='reDate'>"+reArticleList.get(i).getReDate()+"</b></p></div><div id='text'>"+reArticleList.get(i).getReText()+"</div>");
+										if (reArticleList.get(i).getRePhoto1()==null || reArticleList.get(i).getRePhoto2()==null || reArticleList.get(i).getRePhoto3()==null) {
 											out.println("<div class='recom'><b>이 리뷰가 도움이 돼요!</b><b><img src='../img/dutyfree/finger1.png' width='15px' height='15px'></b></div></td></tr>");	
 										} else {
-											out.println("<div id='photo'>"+articleList.get(i).getRePhoto1()+articleList.get(i).getRePhoto2()+articleList.get(i).getRePhoto3()+
+											out.println("<div id='photo'>"+reArticleList.get(i).getRePhoto1()+reArticleList.get(i).getRePhoto2()+reArticleList.get(i).getRePhoto3()+
 												"</div><div class='recom'><b>이 리뷰가 도움이 돼요!</b><b><img src='../img/dutyfree/finger1.png' width='15px' height='15px'></b></div></td></tr>");
 										}
 									} 
-								%>
-							</table>
+								%> 
+							</table> --%>
 						</div> 
 						<div id="list">
-							<ul>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">></a></li>
-							</ul>
+							
 						</div>
 					</div>
 					
 					<!-- tab3 내용 -->
 					<div class="tab_content" id="design_content">
-						<div class='qnaWriteBtn'><a href="javascript:doDisplay1();" >상품문의</a></div>
+						<div class='qnaWriteBtn' onclick="qna()"><a href="javascript:doDisplay1();" >상품문의</a></div>
 					    <div id="terms1">
 				    		<table celpadding="10px">
 				    			<tr>
@@ -1121,8 +1239,13 @@
 							</div>
 				    	</div>
 				        <table id="qnaTable" cellpadding="10px">
-							<%
-							if(qnaArticleList != null && listCount > 0) {
+				        	<% if (qnaArticleList.size() == 0) { %>
+				        		<section><div id='empty2'><p>아직 등록된 Q&A가 없습니다.</p></div></section>
+				        	<% } %>
+				        	<% if  (qnaArticleList == null && listCount == 0) {%>
+				        		<section><div id='empty2'><p>아직 등록된 Q&A가 없습니다.</p></div></section>
+				        	<% } else {
+								/* if(qnaArticleList != null && listCount > 0) { */
 								for(int i=0; i<qnaArticleList.size(); i++){	
 							%>
 								<tr class="qnaTableLine">
@@ -1134,7 +1257,6 @@
 										<% } %>
 									</td>
 									<td width="400"><a href="javascript:qnaDisplay();" ><%= qnaArticleList.get(i).getQsubject() %></a></td>
-									<%-- <td width="400"><div onclick="qna()"><%= qnaArticleList.get(i).getQsubject() %></div></td> --%>
 									<td width="80" align="center" id="qna_id"><%= qnaArticleList.get(i).getMb_id() %></td>
 									<td width="80" align="center"><%= qnaArticleList.get(i).getQupdate() %></td>
 								</tr>
@@ -1155,35 +1277,31 @@
 								<% } %>
 						</table>
 						<section id="pageList">
-								<%if(nowPage<=1){ %>
-								<&nbsp;
+								<%if (nowPage<=1) { %>
+									<&nbsp;
 								<%}else{ %>
 								<a href="itemDetail.shop?page=<%=nowPage-1 %>&itemCode=<%=article.getItemCode()%>"> < </a>&nbsp;
 								<%} %>
-								<%for(int b = startPage; b<=endPage; b++){
-									if(b==nowPage){%>
+								
+								<%for (int b = startPage; b<=endPage; b++){
+									if (b==nowPage) {%>
 									<%=b %>
-									<%}else{ %>
+									<%} else { %>
 									<a href="itemDetail.shop?page=<%=b %>&itemCode=<%=article.getItemCode()%>"><%=b %>
 									</a>&nbsp;
-									<%} %>
+									<% } %>
 								<%} %>
-								<%if(nowPage>=maxPage){ %>
-								>
-								<%}else{ %>
-								<a href="itemDetail.shop?page=<%=nowPage+1%>&itemCode=<%=article.getItemCode()%>"> > </a>
+								<%if (nowPage>=maxPage) { %>
+									>
 								<%} %>
 						</section>
 						<%
-					    } else {
-						%> <section id="emptyArea">등록된 글이 없습니다.</section>
-						<% } %>
+					    } %>
 						</div>
 					</div>
 				</div>
-			</section>
-			<jsp:include page="../overlap/footer.jsp"/>
+		<jsp:include page="../overlap/footer.jsp"/>
 	</form>
-
+	
 </body>
 </html>

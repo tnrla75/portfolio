@@ -8,6 +8,7 @@
     <%@page import="java.sql.*"%>
     
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,20 +16,47 @@
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../css/style.css" />
+	<link type="text/css" rel="stylesheet" href="../css/style2.css" />
 	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
-	
+	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
     <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     
 </head>
 <style>
-
+	body{
+	
+	}
+	#up_rightbox input:first-of-type {
+		height: 40px;
+		width: 200px;
+		font-size: 10pt;
+		padding-left: 30px padding-right: 30px;
+		border-style: solid;
+		border-width: 0;
+		background-color: gray;
+		position: relative;
+		bottom: 5px;
+	}
+	
+	#up_rightbox input:last-of-type {
+		border-style: none;
+		background: url(../img/icon/loupe.png);
+		width: 35px;
+		height: 35px;
+		background-size: 20px;
+		background-repeat: no-repeat;
+		position: relative;
+		left: 40px;
+		top: 20px;
+	}
 	.section{
 		width: 1200px;
 		height: 1400px;
 		padding-bottom:20px;
 		margin: 40px auto;
-		border-style: solid;		
+		border-style: solid;
+		background-color: white;		
 	}
 	#head{	
 	width: 1200px;
@@ -40,7 +68,7 @@
 	}
 	#up_rightbox{
 		width: 800px;
-		height: 150px;
+		height: 130px;
 		margin: 0 auto;
 		border-radius: 7px;
 		border-style: solid;
@@ -67,27 +95,28 @@
 	
 	#centerbox{
 		width: 800px;	
-		height: 1300px;	
+		height: fit-content;
 		margin: 0 auto;
 		padding-bottom: 30px;		
 		text-align: center;
 		border-radius: 7px;
 		border-style: solid;
 		float:left;
+		
 	}
 	
 	.up_rightbox{
 		width: 800px;
-		height: 240px;
-		margin: 15px auto;
+		height: 200px;
+		margin: 10px auto;
 		text-align: center;
 		border-radius: 7px;
 		border-style: solid;
 		float:right;
 	}
 	.hot_centerimg{
-		width: 200px;
-		height: 240px;
+		width: 180px;
+		height: 200px;
 		margin: 0 auto;
 		border-radius: 7px;
 		text-align: center;
@@ -97,19 +126,19 @@
 	
 	.hot_centerbox{
 		width: 590px;
-		height: 240px;
-		margin: 0 auto;
-		
+		height: 200px;
+		margin: 0 auto;		
 		text-align: left;
+		
 		border-style: solid;
 		float:left;
 	}
 	.hot_centerbox_up{
 		width: 580px;
-		height: 80px;
+		height: 50px;
 		margin: 0 auto;		
 		text-align: left;
-		border-style: solid;
+		
 		padding-left:10px;
 		float:left;
 	}
@@ -117,16 +146,16 @@
 	
 	.hot_centerbox_up_left{
 		width: 460px;
-		height: 80px;
+		height: 50px;
 		margin: 0 auto;		
 		text-align: left;
-				
+		font-size:15px;		
 		float:left;
 	}
 	
 	.hot_centerbox_up_right{
 		width: 100px;
-		height: 80px;
+		height: 50px;
 		margin: 0 auto;		
 		text-align: right;
 				
@@ -134,17 +163,18 @@
 	}
 	.hot_centerbox_down{
 		width: 580px;
-		height: 120px;
-		margin: 5px auto;		
+		height: 100px;
+		margin: 15px auto;		
 		text-align: left;
-		border-style: solid;
+		background: linear-gradient(-90deg, #fff 0%, #fff 25%, #f5f7fa 100%);
+		
 		padding-left:10px;
 		float:left;
 	}
 	.hot_centerbox_down_left{
 		clear:left;
 		width: 410px;
-		height: 120px;
+		height: 100px;
 		margin: 0 auto;		
 		text-align: left;
 		
@@ -154,11 +184,15 @@
 	
 	.hot_centerbox_down_rigth{
 		width: 140px;
-		height: 120px;
+		height: 100px;
 		margin: 0 auto;		
 		text-align: right;
 				
 		float:left;
+	}
+	
+	.hotelBtn{
+	
 	}
 	
 </style>
@@ -170,6 +204,15 @@
 		}
 		myform.submit();
 	}
+
+	function getPost(mode)
+	{
+		var myform = document.myform;
+		if(mode == '05'){
+			myform.action = "../hotel/hotelMainForm.ho";
+		}
+		myform.submit();
+	};
 </script>
 <%
 	
@@ -208,50 +251,72 @@
 			<jsp:include page="../overlap/header_logout.jsp"/>
 			<%
 		}
+	
 	%>
 	
 	<section class="section">
 	<div id="head" style="font-size: 20pt;">검색 결과(지금은 로그인 아이디) : <%= mb_id %> </div>		
 		<div id="up_leftbox">
-				dsfasdf
+				<div>지도</div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 		</div>
 		<div id="centerbox">
 		 <div id="up_rightbox">
 		 		
 					<h3 style="font-size: 20pt;">머무르고 싶은 지역을 입력하세요.</h3>
-		        		<img src="../img/icon/hotel.png" width="20" height="20" class="hotelIcon">
-		        		<input type="text" placeholder="여행지 또는 숙소 이름으로 검색" size="40">
-			            <select>
-							<option value="인원수">인원수</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-			            <input type="date" name="checkin" id="datechoice3">
-			        	<input type="date" name="checkout" id="datechoice4">
-			        	<input type="submit" name="hotelBtn" class="hotelBtn" value="검색" onclick="getPost()"><hr>
+		        		<div>
+							<img src="../img/icon/hotel.png" width="20" height="20"	class="hotelIcon"> 
+							<input type="text" placeholder="여행지 또는 숙소 이름으로 검색" size="40"> 
+							<select height="30">
+								<option value="인원수">인원수</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select> 
+							<input type="date" name="checkin" id="datechoice3"> 
+							<input type="date" name="checkout" id="datechoice4"> 
+							<input type="button" name="hotelBtn" class="hotelBtn" onClick="getPost('05')">
+						</div><hr>
+						<script>
+							document.getElementById('datechoice1').valueAsDate=new Date();
+							document.getElementById('datechoice2').valueAsDate=new Date();
+							document.getElementById('datechoice3').valueAsDate=new Date();
+							document.getElementById('datechoice4').valueAsDate=new Date();
+							document.getElementById('datechoice5').valueAsDate=new Date();
+							$("#datechoice1").datepicker();
+							$("#datechoice2").datepicker();
+							$("#datechoice3").datepicker();
+							$("#datechoice4").datepicker();
+							$("#datechoice5").datepicker();
+						</script>
 		       
 		      </div>  	
 		     		<%	if(mainList != null && listCount > 0){	%>
 					<% for(int i=0;i<mainList.size();i++){ %> 
+					<a href='../hotel/hotelRoomForm.ho?hot_main_num=<%=mainList.get(i).getHot_main_num()%>'>
 			<div class="up_rightbox">
 					
 					<div class="hot_centerimg">
-						<img alt="경로 잘못입력됨." src="../img/hotel_main/<%=mainList.get(i).getHot_main_img()%>" style="width: 200px; height: 240px;">
+						<img alt="경로 잘못입력됨." src="../img/hotel_main/<%=mainList.get(i).getHot_main_img()%>" style="width: 180px; height: 200px;">						
 					</div>
+					
 					<div class="hot_centerbox">
 						<br>
 						<div class="hot_centerbox_up">
-							<div class="hot_centerbox_up_left"> 
-								<div class='centerbox' name='hot_main_num'><a href='../hotel/hotelRoomForm.ho?hot_main_num=<%=mainList.get(i).getHot_main_num()%>'><%=mainList.get(i).getHot_main_num() %></a></div><br>
-								<div>호텔 주소 : <%=mainList.get(i).getHot_nation()%> <br></div>
+							<div class="hot_centerbox_up_left"> 								
+								<div>호텔 이름 : <%=mainList.get(i).getHot_name()%> <br></div>
+								<div>호텔 지역 : <%=mainList.get(i).getHot_nation()%> <br></div>
 							</div>
 							<div class="hot_centerbox_up_right">
 									<div>리뷰좋다<br></div>
@@ -267,9 +332,10 @@
 									<div> 가격<br></div>
 									<div>오른쪽<br></div>
 							</div>
-		       		</div>
-		        </div>
-		     </div>	 	
+		       			</div>
+		        	</div>		       
+		     </div>	 
+		      </a>	
 		      <%} %>  
 		      <section id="pageList">
 			<%if(nowPage<=1){ %>

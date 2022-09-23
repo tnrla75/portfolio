@@ -75,7 +75,7 @@ public class TravelDAO {
 		ArrayList<Travelattandimg> travelimg = new ArrayList<Travelattandimg>();
 		
 		try{
-			String board_list_sql="select*from attraction a, att_img b where a.att_num=b.att_num and a.local_num=? order by rand() limit 4;";
+			String board_list_sql="select*from attraction a, att_img b where a.att_num=b.att_num and a.local_num=? order by rand() limit 7;";
 			Travelattandimg board = null;
 				pstmt = con.prepareStatement(board_list_sql);
 				pstmt.setInt(1, b);
@@ -286,6 +286,24 @@ public class TravelDAO {
 		return deleteCount;
 
 	}
+	public int updateArticle(Travelattre travelattre){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int a=0;
+		try{
+			String board_list_sql="update att_review set att_reContent= ?, att_reRate= ? where att_reNum=?";
+				pstmt = con.prepareStatement(board_list_sql);
+				pstmt.setString(1, travelattre.getAtt_reContent());
+				pstmt.setInt(2, travelattre.getAtt_reRate());
+				pstmt.setInt(3, travelattre.getAtt_reNum());
+				a= pstmt.executeUpdate();
+			}catch(Exception ex){
+				System.out.println(ex);
+			}finally{
+				close(pstmt);
+			}
+			return a;			
+	}
 	// 관광지 댓글페이지카운트  
 		public int selectListattCount() {
 
@@ -309,5 +327,34 @@ public class TravelDAO {
 
 			return listCount;
 
+		}
+		//트립가이드 select
+		public ArrayList<Travellocal> tripguide_select(){
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<Travellocal> travellocal = new ArrayList<Travellocal>();
+			
+			try{
+				String board_list_sql="select*from travel_local order by rand() limit 4";
+				Travellocal board = null;
+					pstmt = con.prepareStatement(board_list_sql);
+					rs = pstmt.executeQuery();
+					while(rs.next()){
+						board = new Travellocal();
+						board.setLocal_num(rs.getInt("local_num"));
+						board.setLocal_name(rs.getString("local_name"));
+						board.setLocal_img(rs.getString("local_img"));
+						board.setLocal_content(rs.getString("local_content"));
+						board.setLocal_nation(rs.getString("local_nation"));
+						travellocal.add(board);
+					}
+			
+				}catch(Exception ex){
+					System.out.println(ex);
+				}finally{
+					close(rs);
+					close(pstmt);
+				}
+				return travellocal;			
 		}
 }

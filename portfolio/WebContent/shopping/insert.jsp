@@ -31,7 +31,12 @@
 		
 		String mb_id = (String) session.getAttribute("mb_id");
 		String itemCode = (String)session.getAttribute("itemCode");
-		System.out.println("==zzz");
+		session.setAttribute("reRate", rate);
+		session.setAttribute("reText", reText);
+		session.setAttribute("rePhoto1", rePhoto1);
+		session.setAttribute("rePhoto2", rePhoto2);
+		session.setAttribute("rePhoto3", rePhoto3);
+		
 		int reRate = Integer.parseInt(rate);
 
 		DBconnect db = new DBconnect();

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.TravelAttRe_deleteAction;
 import action.TravelAttRe_insertAction;
+import action.TravelAttRe_updateAction;
+import action.Travel_tripguideAction;
 import action.TravelattAction;
 import action.TravellocalAction;
 import vo.ActionForward;
@@ -61,14 +63,34 @@ public class TravelController extends javax.servlet.http.HttpServlet {
 				e.printStackTrace();	
 			}
 		}else if(command.equals("/travel/Attraction_Review_delete.travel")){
-			System.out.println("a");
 			action  = new TravelAttRe_deleteAction();
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
 				e.printStackTrace();	
 			}
+		}else if(command.equals("/travel/Attraction_Review_updatepage.travel")){
+			forward=new ActionForward();
+			forward.setPath("../travel/travel_attraction_review_update.jsp");
+		}else if(command.equals("/travel/Attraction_review_update.travel")){
+			action  = new TravelAttRe_updateAction();
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();	
+			}
+		}else if(command.equals("/travel/TripGuide.travel")){
+			action  = new Travel_tripguideAction();
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();	
+			}
+		}else if(command.equals("/travel/tripguideselect.travel")){
+			forward=new ActionForward();
+			forward.setPath("../travel/travel_tripguide.jsp");
 		}
+
 		if(forward != null){
 			
 			if(forward.isRedirect()){

@@ -12,8 +12,19 @@ public class Hotel_main_DB {
 	private String hot_nation;
 	private String hot_name;
 	private String hot_address;
-	private String hot_checkin_date;
-	private String hot_checkout_date;
+	private int hot_star;
+	private String hot_wifi;
+	private String hot_meetRoom;
+	private String hot_smoking;
+	private String hot_Nosmoking;
+	private String hot_TV;
+	private String hot_restaurant;
+	private String hot_breakfast;
+	private String hot_lockerRoom;
+	private String hot_checkin_time;
+	private String hot_checkout_time;
+	
+	
 	
 	private int hot_latitude;
 	private int hot_longitude;
@@ -64,17 +75,75 @@ public class Hotel_main_DB {
 	public void setHot_address(String hot_address) {
 		this.hot_address = hot_address;
 	}
-	public String getHot_checkin_date() {
-		return hot_checkin_date;
+	
+	
+	
+	
+	public int getHot_star() {
+		return hot_star;
 	}
-	public void setHot_checkin_date(String hot_checkin_date) {
-		this.hot_checkin_date = hot_checkin_date;
+	public void setHot_star(int hot_star) {
+		this.hot_star = hot_star;
 	}
-	public String getHot_checkout_date() {
-		return hot_checkout_date;
+	public String getHot_wifi() {
+		return hot_wifi;
 	}
-	public void setHot_checkout_date(String hot_checkout_date) {
-		this.hot_checkout_date = hot_checkout_date;
+	public void setHot_wifi(String hot_wifi) {
+		this.hot_wifi = hot_wifi;
+	}
+	public String getHot_meetRoom() {
+		return hot_meetRoom;
+	}
+	public void setHot_meetRoom(String hot_meetRoom) {
+		this.hot_meetRoom = hot_meetRoom;
+	}
+	public String getHot_smoking() {
+		return hot_smoking;
+	}
+	public void setHot_smoking(String hot_smoking) {
+		this.hot_smoking = hot_smoking;
+	}
+	public String getHot_Nosmoking() {
+		return hot_Nosmoking;
+	}
+	public void setHot_Nosmoking(String hot_Nosmoking) {
+		this.hot_Nosmoking = hot_Nosmoking;
+	}
+	public String getHot_TV() {
+		return hot_TV;
+	}
+	public void setHot_TV(String hot_TV) {
+		this.hot_TV = hot_TV;
+	}
+	public String getHot_restaurant() {
+		return hot_restaurant;
+	}
+	public void setHot_restaurant(String hot_restaurant) {
+		this.hot_restaurant = hot_restaurant;
+	}
+	public String getHot_breakfast() {
+		return hot_breakfast;
+	}
+	public void setHot_breakfast(String hot_breakfast) {
+		this.hot_breakfast = hot_breakfast;
+	}
+	public String getHot_lockerRoom() {
+		return hot_lockerRoom;
+	}
+	public void setHot_lockerRoom(String hot_lockerRoom) {
+		this.hot_lockerRoom = hot_lockerRoom;
+	}
+	public String getHot_checkin_time() {
+		return hot_checkin_time;
+	}
+	public void setHot_checkin_time(String hot_checkin_time) {
+		this.hot_checkin_time = hot_checkin_time;
+	}
+	public String getHot_checkout_time() {
+		return hot_checkout_time;
+	}
+	public void setHot_checkout_time(String hot_checkout_time) {
+		this.hot_checkout_time = hot_checkout_time;
 	}
 	public int getHot_latitude() {
 		return hot_latitude;

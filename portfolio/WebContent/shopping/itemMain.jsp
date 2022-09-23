@@ -351,20 +351,22 @@
 	}
 	.opa {
 		background: rgba(0, 0, 0, 0.3);
+		margin-top: -300px;
 		width: 100%;
-		height: 100%;
+		height: 850px;
 	}
 	main .content {
 		width: 1000px;
-		position: absolute;
-		top: 35%;
-		left: 30%;
+		margin: 300px 0 100px 500px;
 		transform: translateX(-50%);
 		color: #fff;
 		text-align: left;
 		width: 600px;
 	}
 	.content h1 {
+		position: realtive;
+		top: 230px;
+		left: 100px;
 		font-family: 'Roboto', sans-serif;
 		font-size: 60px;
 		font-weight: 400;
@@ -373,6 +375,8 @@
 		color: #fff;
 	}
 	.content p {
+		margin-top: 300px;
+		margin-left: 105px;
 		font-size: 20px;
 		color: #fff;
 		font-weight: 100;
@@ -402,16 +406,16 @@
 		background: #fff;
 		width: 40px;
 	}
-	 section {
-		margin-top: 800px;
+	  section {
+		margin-top: 850px;
 		height: 400px;
-	}
-	#item_wr {
+	} 
+	 #item_wr {
 		border-style: solid;
 		width: 1200px;
 		height: 300px;
 		margin: 0 auto;
-	}
+	} 
 </style>
 </head>
 <% 
@@ -419,120 +423,117 @@
 	String reviewNo=request.getParameter("reviewNo");
 %>
 <script type="text/javascript">
-  //>>>>>>메인 슬라이드
+  	//>>>>>>메인 슬라이드
 	$(document).ready(function() {
-	  slide();
+		slide();
 	  
-	  $('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
+	 	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
 			$(this).toggleClass('open');
 		});
 	});
 	
 	function slide() {
-	  var wid = 0;
-	  var now_num = 0;
-	  var slide_length = 0;
-	  var auto = null;
-	  var $dotli = $('.dot>li');
-	  var $panel = $('.panel');
-	  var $panelLi = $panel.children('li');
+		 var wid = 0;
+		 var now_num = 0;
+		 var slide_length = 0;
+		 var auto = null;
+		 var $dotli = $('.dot>li');
+		 var $panel = $('.panel');
+		 var $panelLi = $panel.children('li');
 	
-	  // 변수 초기화
-	  function init() {
-	    wid = $('.slide').width();
-	    now_num = $('.dot>li.on').index();
-	    slide_length = $dotli.length;
-	  }
+		 // 변수 초기화
+		 function init() {
+		 	wid = $('.slide').width();
+		    now_num = $('.dot>li.on').index();
+		    slide_length = $dotli.length;
+		 }
 
-  // 이벤트 묶음
-  function slideEvent() {
+		 // 이벤트 묶음
+		 function slideEvent() {
+		
+		 	// 슬라이드 하단 dot버튼 클릭했을때
+		    $dotli.click(function() {
+		    	now_num = $(this).index();
+		    	slideMove();
+		    });
+		    // 오토플레이
+		    autoPlay();
+		    // 오토플레이 멈춤
+		    autoPlayStop();
+		    // 오토플레이 재시작
+		    autoPlayRestart();
+		    // 화면크기 재설정 되었을때
+		    resize();
+		  }
 
-    // 슬라이드 하단 dot버튼 클릭했을때
-    $dotli.click(function() {
-      now_num = $(this).index();
-      slideMove();
-    });
+		  // 자동실행 함수
+		  function autoPlay() {
+		  	auto = setInterval(function() {
+				nextChkPlay();
+		    }, 3000);
+		  }
 
-    // 오토플레이
-    autoPlay();
+		  // 자동실행 멈춤
+		  function autoPlayStop() {
+		  	$panelLi.mouseenter(function() {
+		    	clearInterval(auto);
+		    });
+		  }
+		  
+		  // 자동실행 멈췄다가 재실행
+		  function autoPlayRestart() {
+		  	$panelLi.mouseleave(function() {
+		    	auto = setInterval(function() {
+		        	nextChkPlay();
+		   		 }, 5000);
+		    });
+		  }
 
-    // 오토플레이 멈춤
-    autoPlayStop();
+		  // 이전 버튼 클릭시 조건 검사후 슬라이드 무브
+		  function prevChkPlay() {
+		  	if (now_num == 0) {
+		    	now_num = slide_length - 1;
+		    } else {
+		      	now_num--;
+		    }
+		    slideMove();
+		  }
 
-    // 오토플레이 재시작
-    autoPlayRestart();
+		  // 이후 버튼 클릭시 조건 검사후 슬라이드 무브
+		  function nextChkPlay() {
+		 	if (now_num == slide_length - 1) {
+		    	now_num = 0;
+		    } else {
+		    	now_num++;
+		    }
+		    slideMove();
+		  }
 
-    // 화면크기 재설정 되었을때
-    resize();
-  }
-
-  // 자동실행 함수
-  function autoPlay() {
-    auto = setInterval(function() {
-      nextChkPlay();
-    }, 3000);
-  }
-
-  // 자동실행 멈춤
-  function autoPlayStop() {
-    $panelLi.mouseenter(function() {
-      clearInterval(auto);
-    });
-  }
-  // 자동실행 멈췄다가 재실행
-  function autoPlayRestart() {
-    $panelLi.mouseleave(function() {
-      auto = setInterval(function() {
-        nextChkPlay();
-      }, 5000);
-    });
-  }
-
-  // 이전 버튼 클릭시 조건 검사후 슬라이드 무브
-  function prevChkPlay() {
-    if (now_num == 0) {
-      now_num = slide_length - 1;
-    } else {
-      now_num--;
-    }
-    slideMove();
-  }
-
-  // 이후 버튼 클릭시 조건 검사후 슬라이드 무브
-  function nextChkPlay() {
-    if (now_num == slide_length - 1) {
-      now_num = 0;
-    } else {
-      now_num++;
-    }
-    slideMove();
-  }
-
-  // 슬라이드 무브
-  function slideMove() {
-    $panel.stop().animate({
-      'margin-left': -wid * now_num
-    });
-    $dotli.removeClass('on');
-    $dotli.eq(now_num).addClass('on');
-  }
-
-  // 화면크기 조정시 화면 재설정
-  function resize() {
-    $(window).resize(function() {
-      init();
-      $panel.css({
-        'margin-left': -wid * now_num
-      });
-    });
-  }
-  init();
-  slideEvent();
-}
+		  // 슬라이드 무브
+		  function slideMove() {
+		  	$panel.stop().animate({
+		    	'margin-left': -wid * now_num
+		    });
+		    $dotli.removeClass('on');
+		    $dotli.eq(now_num).addClass('on');
+		  }
+		
+		  // 화면크기 조정시 화면 재설정
+		  function resize() {
+		 	$(window).resize(function() {
+		    	init();
+		      	$panel.css({
+		       	'margin-left': -wid * now_num
+		      	});
+		    });
+		  }
+		  init();
+		  slideEvent();
+	}
+	
 	function doDisplay1(){
         var con = document.getElementById("left_nav"); 	
         if(con.style.display=='none'){ 	
-
             con.style.display = 'block'; 	
         }else{ 		
             con.style.display = 'none'; 	
@@ -540,28 +541,26 @@
     } 
 </script>
 <script>
-$(function() {
-	$('#left_nav').hide();
-	  function slideMenu() {
-	    var activeState = $("#menu-container .menu-list").hasClass("active");
-	    $("#menu-container .menu-list").animate({left: activeState ? "0%" : "-100%"}, 300);
-	  }
-	  $("#menu-wrapper").click(function(event) {
-	    event.stopPropagation();
-	    $("#hamburger-menu").toggleClass("open");
-	    $("#menu-container .menu-list").toggleClass("active");
-	    slideMenu();
-
-	    $("body").toggleClass("overflow-hidden");
-	  });
-
-	  $(".menu-list").find(".accordion-toggle").click(function() {
-	    $(this).next().toggleClass("open").slideToggle("fast");
-	    $(this).toggleClass("active-tab").find(".menu-link").toggleClass("active");
-
-	    $(".menu-list .accordion-content").not($(this).next()).slideUp("fast").removeClass("open");
-	    $(".menu-list .accordion-toggle").not(jQuery(this)).removeClass("active-tab").find(".menu-link").removeClass("active");
-	  });
+	$(function() {
+		$('#left_nav').hide();
+		function slideMenu() {
+			var activeState = $("#menu-container .menu-list").hasClass("active");
+		    $("#menu-container .menu-list").animate({left: activeState ? "0%" : "-100%"}, 1000);
+		}
+		$("#menu-wrapper").click(function(event) {
+			event.stopPropagation();
+		    $("#hamburger-menu").toggleClass("open");
+		    $("#menu-container .menu-list").toggleClass("active");
+		    slideMenu();
+		    $("body").toggleClass("overflow-hidden");
+		});
+		$(".menu-list").find(".accordion-toggle").click(function() {
+		    $(this).next().toggleClass("open").slideToggle("slow");
+		    $(this).toggleClass("active-tab").find(".menu-link").toggleClass("active");
+	
+		    $(".menu-list .accordion-content").not($(this).next()).slideUp(1000).removeClass("open");
+		    $(".menu-list .accordion-toggle").not(jQuery(this)).removeClass("active-tab").find(".menu-link").removeClass("active");
+		});
 	}); // jQuery load
 </script>
 <body>
@@ -672,8 +671,8 @@ $(function() {
 			</div>
 	  	</main>
 	  	</div>
-	  	<div class='nav_btn'><a href="javascript:doDisplay1();" >
-			<img src="../img/dutyfree/menu.png" width="35px" height="35px;"></a>
+	  	<div class='nav_btn'>
+	  		<a href="javascript:doDisplay1();" ><img src="../img/dutyfree/menu.png" width="35px" height="35px;"></a>
 		</div>
 		<section>
 			<div id="item_wr">
@@ -682,7 +681,7 @@ $(function() {
 		</section>
 	  </form>
 	  
-	  	<jsp:include page="../overlap/footer.jsp" />
+	  	 <jsp:include page="../overlap/footer.jsp" /> 
 </body>
 </html>
 

@@ -948,9 +948,6 @@ function getPost(mode)
 								</section>
 							</div>
 						</div>
-						<!-- <h3 style="font-size: 14pt;">가고싶은 여행지, 명소를 검색해보세요.</h3>
-						<input type="text" placeholder="여행지를 검색해보세요" size="150"> <input
-							type="button" name="btn" value="검색" onClick="getPost('01')"> -->
 					</div>
 					<div id="tab-2">
 						<div class="tabset">

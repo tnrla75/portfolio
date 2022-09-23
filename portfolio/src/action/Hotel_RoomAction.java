@@ -52,7 +52,7 @@ public ActionForward execute(HttpServletRequest request,HttpServletResponse resp
 		}
 		
 		int listCount=hotel_RoomService.reviewListCount(hot_main_num);
-		reviewList=hotel_RoomService.reviewList(page,limit);
+		reviewList=hotel_RoomService.reviewList(hot_main_num,page,limit);
 		
    		int maxPage=(int)((double)listCount/limit+0.95); 
    		int startPage = (((int) ((double)page / limit + 0.9)) - 1) * limit + 1;  // 10媛좊뜲 �냼�닽�젏�씠 �솢 �뱾�뼱媛�吏� �씠�빐媛� �븞媛�..

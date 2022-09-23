@@ -58,6 +58,7 @@
 		<%
 			MateController mc = new MateController();
 			ArrayList<MateDTO> customer = mc.select();
+			System.out.println(customer.size());
 			for(int i=0; i<customer.size(); i++){
 				int a= i+1;
 				out.println("<div class='samearticle'><div class='matenum'>"+a+"</div><div class='matetitle'><a href='travel_mate_recruit_detail.jsp?num="+customer.get(i).getTravelmateNum()+"'>"+customer.get(i).getTravelmateTitle()+"</a></div><div class='mateid'>"+customer.get(i).getId()+"</div><div class='matedate'>"+customer.get(i).getTravelmateDate()+"</div></div>");

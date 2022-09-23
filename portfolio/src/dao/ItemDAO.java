@@ -36,7 +36,7 @@ public class ItemDAO {
 		this.con = con;
 	}
 	
-	//議고쉶�닔
+	//조회수
 	public int updateReadCount(String itemCode){
 
 		PreparedStatement pstmt = null;
@@ -53,18 +53,20 @@ public class ItemDAO {
 			return updateCount;
 		}
 	
-	//�빐�떦 �뜲�씠�꽣 select
+	//해당 데이터 select
 	public Item selectArticle(String itemCode){
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Item item = null;
+
 		try{
 			pstmt = con.prepareStatement(
 					"select * from item where itemCode = ?");
 			pstmt.setString(1, itemCode);
 			rs= pstmt.executeQuery();
-			//�빐�떦 寃뚯떆湲� �궡�슜
+
+			//해당 게시글 내용
 			if(rs.next()){
 				item = new Item();
 				item.setItemCode(rs.getString("itemCode"));
@@ -82,7 +84,7 @@ public class ItemDAO {
 				item.setCount(rs.getInt("count"));
 			}
 		}catch(Exception ex){
-			System.out.println("�떎�뙣");
+			System.out.println("실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -90,7 +92,7 @@ public class ItemDAO {
 		return item;
 	}
 	
-	//�빐�떦 �뜲�씠�꽣 option select
+	//해당 데이터 option select
 	public ItemOption optionSelectArticle(String itemCode){
 
 		PreparedStatement pstmt = null;
@@ -103,7 +105,7 @@ public class ItemDAO {
 			pstmt.setString(1, itemCode);
 			rs= pstmt.executeQuery();
 			
-			//�빐�떦 寃뚯떆湲� �궡�슜
+			//해당 게시글 내용
 			if(rs.next()){
 				itemOption = new ItemOption();
 				itemOption.setItemCode(rs.getString("itemCode"));
@@ -115,9 +117,9 @@ public class ItemDAO {
 				itemOption.setOption5(rs.getString("option5"));
 			}
 
-			System.out.println("option select �꽦怨�");
+			System.out.println("option select 성공");
 		}catch(Exception ex){
-			System.out.println("�떎�뙣");
+			System.out.println("실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -125,7 +127,7 @@ public class ItemDAO {
 		return itemOption;
 	}
 	
-	//�빐�떦 �뜲�씠�꽣 �씠誘몄� select
+	//해당 데이터 이미지 select
 	public ItemImg imgSelectArticle(String itemCode){
 
 		PreparedStatement pstmt = null;
@@ -138,7 +140,7 @@ public class ItemDAO {
 			pstmt.setString(1, itemCode);
 			rs= pstmt.executeQuery();
 			System.out.println(pstmt);
-			//�빐�떦 寃뚯떆湲� �궡�슜
+			//해당 게시글 내용
 			if(rs.next()){
 				itemImg = new ItemImg();
 				itemImg.setItemCode(rs.getString("itemCode"));
@@ -147,9 +149,9 @@ public class ItemDAO {
 				itemImg.setItemImg3(rs.getString("itemImg3"));
 				itemImg.setItemImg4(rs.getString("itemImg4"));
 			}
-			System.out.println("�씠誘몄� select �꽦怨�");
+			System.out.println("이미지 select 성공");
 		}catch(Exception ex){
-			System.out.println("�떎�뙣");
+			System.out.println("실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -157,22 +159,23 @@ public class ItemDAO {
 		return itemImg;
 	}
 	
-	//由щ럭 select
-	public ArrayList<ItemReview> reviewSelectArticleList(String itemCode){
+	//해당 아이템 리뷰 개수 
+	public ArrayList<ItemReview> totalReSelectArticleList(String itemCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql="select * from itemReview where itemCode = ?";	
+		
 		ArrayList<ItemReview> articleList = new ArrayList<ItemReview>();
 		ItemReview review = null;
-
+	
 		try{
-			pstmt = con.prepareStatement(
-					"select * from itemReview where itemCode = ?");
-			pstmt.setString(1, itemCode);
-			System.out.println(pstmt.toString()+"==22");
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,itemCode);
+			System.out.println(pstmt.toString());
+
 			rs = pstmt.executeQuery();
 
 			while(rs.next()){
-				System.out.println(pstmt.toString()+"==22");
 				review = new ItemReview();
 				review.setReviewNo(rs.getInt("reviewNo"));
 				review.setMb_id(rs.getString("mb_id"));
@@ -185,9 +188,71 @@ public class ItemDAO {
 				review.setReDate(rs.getDate("reDate"));
 				articleList.add(review);
 			}
-			System.out.println("由щ럭 select �꽦怨�");
+			System.out.println("qna select 성공");
+		}catch(Exception ex) {
+			System.out.println("qna select 실패");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return articleList;
+	}
+	
+	//해당 아이템 리뷰 개수
+	public int reSelectListCount(String itemCode) {
+		int listCount= 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			//데이터 개수 출력
+			pstmt=con.prepareStatement("select count(*) from itemReview where itemCode = ?");
+			pstmt.setString(1,itemCode);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()){
+				listCount=rs.getInt(1);
+			}
 		}catch(Exception ex){
-			System.out.println("由щ럭 select �떎�뙣");
+
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
+	//해당 아이템 리뷰 select
+	public ArrayList<ItemReview> reviewSelectArticleList(int page, int limit, String itemCode){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ItemReview> articleList = new ArrayList<ItemReview>();
+		ItemReview review = null;
+		int startrow=(page-1)*10;
+
+		try{
+			pstmt = con.prepareStatement(
+					"select * from itemReview where itemCode = ? limit ?,10");
+			pstmt.setString(1, itemCode);
+			pstmt.setInt(2,startrow);
+			System.out.println(pstmt.toString());
+			rs = pstmt.executeQuery();
+
+			while(rs.next()){
+				review = new ItemReview();
+				review.setReviewNo(rs.getInt("reviewNo"));
+				review.setMb_id(rs.getString("mb_id"));
+				review.setItemCode(rs.getString("itemCode"));
+				review.setReRate(rs.getInt("reRate"));
+				review.setReText(rs.getString("reText"));
+				review.setRePhoto1(rs.getString("rePhoto1"));
+				review.setRePhoto2(rs.getString("rePhoto2"));
+				review.setRePhoto2(rs.getString("rePhoto3"));
+				review.setReDate(rs.getDate("reDate"));
+				articleList.add(review);
+			}
+			System.out.println("리뷰 select 성공");
+		}catch(Exception ex){
+			System.out.println("리뷰 select 실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -195,7 +260,7 @@ public class ItemDAO {
 		return articleList;
 	}
 
-	//�궙�� 媛�寃⑹닚 �젙�젹
+	//낮은 가격순 정렬
 	public ArrayList<Item> lowSelectArticleList(int page,int limit, String category){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -230,9 +295,9 @@ public class ItemDAO {
 				item.setCount(rs.getInt("count"));
 				articleList.add(item);
 			}
-			System.out.println("a");
+			System.out.println("낮은 가격순 정렬 성공");
 		}catch(Exception ex){
-			System.out.println("�궙�� 媛�寃⑹닚 �젙�젹 �떎�뙣");
+			System.out.println("낮은 가격순 정렬 실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -240,7 +305,7 @@ public class ItemDAO {
 		return articleList;
 	}
 	
-	//�넂�� 媛�寃⑹닚 �젙�젹
+	//높은 가격순 정렬
 	public ArrayList<Item> highSelectArticleList(int page,int limit, String category){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -255,9 +320,9 @@ public class ItemDAO {
 			pstmt.setString(2,category);
 			pstmt.setString(3,category);
 			pstmt.setInt(4, startrow);
-			System.out.println(pstmt.toString()+"==22");
+			System.out.println(pstmt.toString());
 			rs = pstmt.executeQuery();
-			System.out.println(rs+"22~2222");
+			
 			while(rs.next()){
 				item = new Item();
 				item.setItemCode(rs.getString("itemCode"));
@@ -275,9 +340,9 @@ public class ItemDAO {
 				item.setCount(rs.getInt("count"));
 				articleList.add(item);
 			}
-			System.out.println("�넂�� 媛�寃⑹닚 �젙�젹 �꽦怨�");
+			System.out.println("높은 가격순 정렬 성공");
 		}catch(Exception ex){
-			System.out.println("�넂�� 媛�寃⑹닚 �젙�젹 �떎�뙣");
+			System.out.println("높은 가격순 정렬 실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -285,7 +350,7 @@ public class ItemDAO {
 		return articleList;
 	}
 	
-	//議고쉶�닔�닚 �젙�젹
+	//조회수순 정렬
 	public ArrayList<Item> countSelectArticleList(int page,int limit, String category){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -320,9 +385,9 @@ public class ItemDAO {
 				item.setCount(rs.getInt("count"));
 				articleList.add(item);
 			}
-			System.out.println("議고쉶�닔 �젙�젹 �꽦怨�");
+			System.out.println("조회수 정렬 성공");
 		}catch(Exception ex){
-			System.out.println("議고쉶�닔 �젙�젹  �떎�뙣");
+			System.out.println("조회수 정렬  실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -330,10 +395,11 @@ public class ItemDAO {
 		return articleList;
 	}
 	
-	//釉뚮옖�뱶 �삉�뒗 �긽�뭹 寃��깋
+	//브랜드 또는 상품 검색
 	public ArrayList<Item> searchSelectArticleList(String keyword){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		System.out.println(keyword);
 		String sql="select * from item where brandName like '%"+keyword+"%' or itemName like '%"+keyword+"%'";
 		ArrayList<Item> articleList = new ArrayList<Item>();
 		Item item = null;
@@ -362,9 +428,9 @@ public class ItemDAO {
 				item.setCount(rs.getInt("count"));
 				articleList.add(item);
 			}
-			System.out.println("寃��깋 �꽦怨�");
+			System.out.println("검색 성공");
 		}catch(Exception ex){
-			System.out.println("寃��깋 �떎�뙣");
+			System.out.println("검색 실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -372,14 +438,15 @@ public class ItemDAO {
 		return articleList;
 	}
 	
-	//臾몄쓽寃뚯떆�뙋 �뜲�씠�꽣 媛쒖닔
-	public int qnaSelectListCount() {
+	//문의게시판 데이터 개수
+	public int qnaSelectListCount(String itemCode) {
 		int listCount= 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try{
-			//�뜲�씠�꽣 媛쒖닔 異쒕젰
-			pstmt=con.prepareStatement("select count(*) from itemQna");
+			//데이터 개수 출력
+			pstmt=con.prepareStatement("select count(*) from itemQna where itemCode = ?");
+			pstmt.setString(1,itemCode);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()){
@@ -394,7 +461,7 @@ public class ItemDAO {
 		return listCount;
 	}
 	
-	//臾몄쓽寃뚯떆�뙋 select
+	//해당 아이템에 대한 문의게시판  글 개수
 	public ArrayList<Qna> totalQnaSelectArticleList(String itemCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -420,9 +487,9 @@ public class ItemDAO {
 				qna.setQanswer(rs.getString("qanswer"));
 				articleList.add(qna);
 			}
-			System.out.println("qna select �꽦怨�");
+			System.out.println("qna select 성공");
 		}catch(Exception ex) {
-			System.out.println("qna select �떎�뙣");
+			System.out.println("qna select 실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -430,12 +497,12 @@ public class ItemDAO {
 		return articleList;
 	}
 	
-	//臾몄쓽寃뚯떆�뙋 select
+	//문의게시판 select
 	public ArrayList<Qna> qnaSelectArticleList(int page,int limit, String itemCode) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from itemQna where itemCode = ? limit ?,10";
+		String sql="select * from itemQna where itemCode = ? order by qnaNo desc  limit ?,10";
 			
 		System.out.println(sql);
 		ArrayList<Qna> articleList = new ArrayList<Qna>();
@@ -460,9 +527,9 @@ public class ItemDAO {
 				qna.setQanswer(rs.getString("qanswer"));
 				articleList.add(qna);
 			}
-			System.out.println("qna select �꽦怨�");
+			System.out.println("qna select 성공");
 		}catch(Exception ex) {
-			System.out.println("qna select �떎�뙣");
+			System.out.println("qna select 실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -470,13 +537,13 @@ public class ItemDAO {
 		return articleList;
 	}
 	
-	//�뜲�씠�꽣 媛쒖닔
+	//데이터 개수
 	public int selectListCount(String category) {
 		int listCount= 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;	
 		try{
-			//�뜲�씠�꽣 媛쒖닔 異쒕젰
+			//데이터 개수 출력
 			pstmt=con.prepareStatement("select count(*) from item where bigCategory=? or midCategory=? or smCategory=?");
 			pstmt.setString(1,category);
 			pstmt.setString(2,category);
@@ -495,7 +562,7 @@ public class ItemDAO {
 		return listCount;
 	}
 	
-	//�쟾泥� select
+	//전체 select
 	public ArrayList<Item> selectArticleList(int page,int limit, String category) throws UnsupportedEncodingException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -519,9 +586,7 @@ public class ItemDAO {
 			rs = pstmt.executeQuery();
 
 			while(rs.next()){
-				System.out.println("aaa1");
 				item = new Item();
-				System.out.println("aaa2");
 				item.setItemCode(rs.getString("itemCode"));
 				item.setBigCategory(rs.getString("bigCategory"));
 				item.setMidCategory(rs.getString("midCategory"));
@@ -535,29 +600,28 @@ public class ItemDAO {
 				item.setDiscountWon(rs.getInt("discountWon"));
 				item.setDiscountDollar(rs.getInt("discountDollar"));
 				item.setCount(rs.getInt("count"));
-				System.out.println("aaa4");
 //				item.setReRate(rs.getInt("reRate"));
 				articleList.add(item);
 			}
-			System.out.println("�쟾泥� select �꽦怨�");
+			System.out.println("전체 select 성공");
 		}catch(Exception ex) {
 			System.out.println("select 실패");
 		}finally{
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(articleList.size()+"==22");
+		System.out.println(articleList.size());
 		return articleList;
 	}
 
 
-	//寃뚯떆湲� 踰덊샇 update 諛� �떟湲� insert
+	//게시글 번호 update 및 답글 insert
 //	public int insertReplyArticle(BoardBean article){
 //
 //		PreparedStatement pstmt = null;
 //		ResultSet rs = null;
 //		
-//		//寃뚯떆湲� 留덉�留� 踰덊샇
+//		//게시글 마지막 번호
 //		String board_max_sql="select max(board_num) from board";
 //		String sql="";
 //		int num=0;
@@ -573,7 +637,7 @@ public class ItemDAO {
 //			if(rs.next())num =rs.getInt(1)+1;
 //			else num=1;
 //			
-//			//�떟蹂� �옉�꽦�떆 湲�踰덊샇�뒗 寃뚯떆湲� 留덉�留� 踰덊샇+1
+//			//답변 작성시 글번호는 게시글 마지막 번호+1
 //			sql="update board set BOARD_RE_SEQ=BOARD_RE_SEQ+1 where BOARD_RE_REF=? ";
 //			sql+="and BOARD_RE_SEQ>?";
 //			pstmt = con.prepareStatement(sql);
@@ -581,7 +645,7 @@ public class ItemDAO {
 //			pstmt.setInt(2,re_seq);
 //			int updateCount=pstmt.executeUpdate();
 //
-//			//�떟湲� insert
+//			//답글 insert
 //			if(updateCount > 0){
 //				commit(con);
 //			}
@@ -597,7 +661,7 @@ public class ItemDAO {
 //			pstmt.setString(3, article.getBOARD_PASS());
 //			pstmt.setString(4, article.getBOARD_SUBJECT());
 //			pstmt.setString(5, article.getBOARD_CONTENT());
-//			pstmt.setString(6, ""); //占쏙옙占썲에占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싸듸옙占쏙옙占쏙옙 占쏙옙占쏙옙.
+//			pstmt.setString(6, ""); //���忡�� ������ ���ε����� ����.
 //			pstmt.setInt(7, re_ref);
 //			pstmt.setInt(8, re_lev);
 //			pstmt.setInt(9, re_seq);
@@ -611,16 +675,16 @@ public class ItemDAO {
 //		}
 //
 //		return insertCount;
-//
+
 //	}
 //
-//	//update臾�
+//	//update문
 //	public int updateArticle(BoardBean article){
 //
 //		int updateCount = 0;
 //		PreparedStatement pstmt = null;
 //		
-//		//�빐�떦 湲��쓽 �젣紐�, �궡�슜 update �떎�뻾
+//		//해당 글의 제목, 내용 update 실행
 //		String sql="update board set BOARD_SUBJECT=?,BOARD_CONTENT=? where BOARD_NUM=?";
 //
 //		try{
@@ -659,7 +723,7 @@ public class ItemDAO {
 //
 //	
 //	
-//	//濡쒓렇�씤
+//	//로그인
 //	public boolean login(String id, String pw) {
 //		PreparedStatement pstmt = null;
 //		ResultSet rs = null;
@@ -673,13 +737,13 @@ public class ItemDAO {
 //			rs=pstmt.executeQuery();
 //			rs.next();
 //			
-//			//�엯�젰諛쏆� id��  pw媛� �뀒�씠釉� �냽 �젙蹂댁� �씪移섑븯�뒗吏� �솗�씤
+//			//입력받은 id와  pw가 테이블 속 정보와 일치하는지 확인
 //			if(id.equals(rs.getString("id")) && pw.equals(rs.getString("pw"))){
 //				login = true;
-//				System.out.println("濡쒓렇�씤 �꽦怨�");
+//				System.out.println("로그인 성공");
 //			}
 //		}catch(SQLException ex){
-//			System.out.println("�떎�뙣");
+//			System.out.println("실패");
 //		}
 //		finally{
 //			close(pstmt);
@@ -687,7 +751,7 @@ public class ItemDAO {
 //		return login;
 //	}
 //
-//	//鍮꾨�踰덊샇 泥댄겕
+//	//비밀번호 체크
 //	public boolean isArticleBoardWriter(int board_num,String pass){
 //
 //		PreparedStatement pstmt = null;
@@ -701,7 +765,7 @@ public class ItemDAO {
 //			rs=pstmt.executeQuery();
 //			rs.next();
 //
-//			//�엯�젰諛쏆� pass媛� �빐�떦 寃뚯떆湲��쓽 board_pass�� 媛숈�吏� �솗�씤
+//			//입력받은 pass가 해당 게시글의 board_pass와 같은지 확인
 //			if(pass.equals(rs.getString("BOARD_PASS"))){
 //				isWriter = true;
 //			}

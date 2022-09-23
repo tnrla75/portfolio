@@ -65,7 +65,7 @@
 			alert('<%=customer2.get(0).getTravelmateNum()%>');
 		}else{
 			alert(<%=customer2.get(0).getTravelmateNum()%>);
-			location.href("travel_mate_delete.jsp?travelmateNum="+<%=customer2.get(0).getTravelmateNum()%>);
+			location.href="travel_mate_delete.jsp?travelmateNum="+<%=customer2.get(0).getTravelmateNum()%>;
 		
 		}
 	}

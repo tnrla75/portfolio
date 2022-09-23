@@ -30,7 +30,7 @@ public class Hotel_DAO {
 		ResultSet rs = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio?characterEncoding=utf8","root","1234"); 
+			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio?characterEncoding=utf8","root","0000"); 
 			stmt=conn.createStatement();
 			
 		}catch (Exception e) {
@@ -50,7 +50,7 @@ public class Hotel_DAO {
 	
 	
 	 
-//	 호텔 메인 페이지 select
+//	 �샇�뀛 硫붿씤 �럹�씠吏� select
 
 	public static ArrayList<Hotel_main_DB> selectArticleList(int page,int limit){
 		PreparedStatement pstmt = null;
@@ -80,8 +80,19 @@ public class Hotel_DAO {
 				board.setHot_name(rs.getString("hot_name"));
 				board.setHot_nation(rs.getString("hot_nation"));
 				board.setHot_address(rs.getString("hot_address"));
-				board.setHot_checkin_date(rs.getString("hot_checkin_date"));
-				board.setHot_checkout_date(rs.getString("hot_checkout_date"));
+				
+				board.setHot_star(rs.getInt("hot_star"));
+				board.setHot_wifi(rs.getString("hot_wifi"));
+				board.setHot_meetRoom(rs.getString("hot_meetRoom"));
+				board.setHot_smoking(rs.getString("hot_smoking"));
+				board.setHot_Nosmoking(rs.getString("hot_Nosmoking"));
+				board.setHot_TV(rs.getString("hot_TV"));
+				board.setHot_restaurant(rs.getString("hot_restaurant"));
+				board.setHot_breakfast(rs.getString("hot_breakfast"));
+				board.setHot_lockerRoom(rs.getString("hot_lockerRoom"));
+				
+				board.setHot_checkin_time(rs.getString("hot_checkin_time"));
+				board.setHot_checkout_time(rs.getString("hot_checkout_time"));
 				board.setHot_latitude(rs.getInt("hot_latitude"));
 				board.setHot_longitude(rs.getInt("hot_longitude"));
 			
@@ -127,8 +138,8 @@ public class Hotel_DAO {
 				board.setHot_name(rs.getString("hot_name"));
 				board.setHot_nation(rs.getString("hot_nation"));
 				board.setHot_address(rs.getString("hot_address"));
-				board.setHot_checkin_date(rs.getString("hot_checkin_date"));
-				board.setHot_checkout_date(rs.getString("hot_checkout_date"));
+				board.setHot_checkin_time(rs.getString("hot_checkin_time"));
+				board.setHot_checkout_time(rs.getString("hot_checkout_time"));
 				board.setHot_latitude(rs.getInt("hot_latitude"));
 				board.setHot_longitude(rs.getInt("hot_longitude"));
 			
@@ -222,14 +233,14 @@ public class Hotel_DAO {
 				
 				hotel_room_DB.setHot_room_num(rs.getInt("hot_re_num"));
 				hotel_room_DB.setHot_re_id(rs.getString("hot_re_id"));
-				hotel_room_DB.setHot_country(rs.getString("hot_country"));
-				hotel_room_DB.setHot_re_grade(rs.getInt("hot_re_grade"));
+				
+				hotel_room_DB.setHot_re_rate(rs.getInt("hot_re_rate"));
 			
-				hotel_room_DB.setHot_re_title(rs.getString("hot_re_title"));
+				
 				
 				hotel_room_DB.setHot_re_content(rs.getString("hot_re_content"));
 				
-				hotel_room_DB.setHot_re_comments(rs.getString("hot_re_comments"));
+			
 				
 				hotel_room_DB.setHot_re_date(rs.getDate("hot_re_date"));
 				
@@ -246,7 +257,7 @@ public class Hotel_DAO {
 	
 	public static Hotel_DAO getInstance(){
 		if(hotel_DAO == null){
-			hotel_DAO = new Hotel_DAO(); // 객체가 없으면 만들어라 (싱글던패턴?) 한번만들고 쭈욱 씀.
+			hotel_DAO = new Hotel_DAO(); // 媛앹껜媛� �뾾�쑝硫� 留뚮뱾�뼱�씪 (�떛湲��뜕�뙣�꽩?) �븳踰덈쭔�뱾怨� 彛덉슧 ��.
 		}
 		return hotel_DAO;
 	}
@@ -295,20 +306,30 @@ public class Hotel_DAO {
 				
 				Hotel_main_DB hotel_main_DB = new Hotel_main_DB();
 				
-				hotel_main_DB.setHot_main_num(rs.getInt("hot_main_num"));
+				hotel_main_DB.setHot_main_num(rs.getInt("hot_main_num"));	
 				
 				hotel_main_DB.setHot_main_img(rs.getString("hot_main_img"));
-				
-				hotel_main_DB.setHot_nation(rs.getString("hot_nation"));
-			
+				hotel_main_DB.setAtt_Num(rs.getInt("att_Num"));				
 				hotel_main_DB.setHot_name(rs.getString("hot_name"));
-				
+				hotel_main_DB.setHot_nation(rs.getString("hot_nation"));
 				hotel_main_DB.setHot_address(rs.getString("hot_address"));
 				
-				hotel_main_DB.setHot_checkin_date(rs.getString("hot_checkin_date"));
+				hotel_main_DB.setHot_star(rs.getInt("hot_star"));
+				hotel_main_DB.setHot_wifi(rs.getString("hot_wifi"));
+				hotel_main_DB.setHot_meetRoom(rs.getString("hot_meetRoom"));
+				hotel_main_DB.setHot_smoking(rs.getString("hot_smoking"));
+				hotel_main_DB.setHot_Nosmoking(rs.getString("hot_Nosmoking"));
+				hotel_main_DB.setHot_TV(rs.getString("hot_TV"));
+				hotel_main_DB.setHot_restaurant(rs.getString("hot_restaurant"));
+				hotel_main_DB.setHot_breakfast(rs.getString("hot_breakfast"));
+				hotel_main_DB.setHot_lockerRoom(rs.getString("hot_lockerRoom"));
 				
-				hotel_main_DB.setHot_checkout_date(rs.getString("hot_checkout_date"));				
+				hotel_main_DB.setHot_checkin_time(rs.getString("hot_checkin_time"));
+				hotel_main_DB.setHot_checkout_time(rs.getString("hot_checkout_time"));
+				hotel_main_DB.setHot_latitude(rs.getInt("hot_latitude"));
+				hotel_main_DB.setHot_longitude(rs.getInt("hot_longitude"));
 			
+				
 				members.add(hotel_main_DB);	
 
 			
@@ -328,7 +349,8 @@ public class Hotel_DAO {
 
 		try{
 			up();
-			pstmt=con.prepareStatement("select*from hot_review where hot_main_num=?;");
+			pstmt=con.prepareStatement("select count(*) from hot_review where hot_main_num=?;");
+			
 			pstmt.setInt(1, hot_main_num);
 			rs = pstmt.executeQuery();
 			System.out.println("main");
@@ -341,6 +363,7 @@ public class Hotel_DAO {
 		}finally{
 			down();
 		}
+		System.out.println(pstmt.toString());
 		System.out.println(listCount+" : DAO reviewCount");
 		return listCount;
 
@@ -369,7 +392,7 @@ public class Hotel_DAO {
 
 	}
 
-//		여기부터는 전에 써놨던 게시판
+//		�뿬湲곕��꽣�뒗 �쟾�뿉 �뜥�넧�뜕 寃뚯떆�뙋
 		
 public ArrayList<Hotel_review_DB> select_01(){
 		
@@ -390,16 +413,15 @@ public ArrayList<Hotel_review_DB> select_01(){
 					
 					student.setHot_main_num(rs.getInt("hot_main_num"));
 					student.setHot_re_id(rs.getString("hot_re_id"));
-					student.setHot_re_grade(rs.getInt("hot_re_grade"));
-					student.setHot_country(rs.getString("hot_country"));
-					student.setHot_re_title(rs.getString("hot_re_title"));
+					student.setHot_re_rate(rs.getInt("hot_re_rate"));
+					
 					student.setHot_re_content(rs.getString("hot_re_content"));
-					student.setHot_re_comments(rs.getString("hot_re_comments"));
+					
 					student.setHot_re_date(rs.getDate("hot_re_date"));
 					
 					members.add(student);					
 				}				
-				
+				System.out.println(pstmt.toString());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -429,11 +451,10 @@ public ArrayList<Hotel_review_DB> select_02(int hot_main_num){
 				
 				student.setHot_main_num(rs.getInt("hot_main_num"));
 				student.setHot_re_id(rs.getString("hot_re_id"));
-				student.setHot_re_grade(rs.getInt("hot_re_grade"));
-				student.setHot_country(rs.getString("hot_country"));
-				student.setHot_re_title(rs.getString("hot_re_title"));
+				student.setHot_re_rate(rs.getInt("hot_re_rate"));
+			
 				student.setHot_re_content(rs.getString("hot_re_content"));
-				student.setHot_re_comments(rs.getString("hot_re_comments"));
+			
 				student.setHot_re_date(rs.getDate("hot_re_date"));
 				
 				members.add(student);					
@@ -448,21 +469,23 @@ public ArrayList<Hotel_review_DB> select_02(int hot_main_num){
 		}
 		return members;
 }
-public static ArrayList<Hotel_review_DB> reviewList(int page,int limit){
+public static ArrayList<Hotel_review_DB> reviewList(int hot_main_num,int page,int limit){
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	String board_list_sql=("select * from hot_review order by hot_main_num desc limit ?,?");
+	String board_list_sql=("select * from hot_review where hot_main_num = ? order by hot_re_date desc, hot_main_num desc limit ?,5");
 	ArrayList<Hotel_review_DB> mainList = new ArrayList<Hotel_review_DB>();
 	
 	Hotel_review_DB board = null;
-	int startrow=(page-1)*limit;  
+	int startrow=(page-1)*5;  
 	
 	try{
 		up();
 		pstmt = con.prepareStatement(board_list_sql);
-		pstmt.setInt(1, startrow);
-		pstmt.setInt(2, limit);
+		pstmt.setInt(1, hot_main_num);
+		pstmt.setInt(2, startrow);
+		
+		
 		
 		rs = pstmt.executeQuery();		
 		
@@ -471,16 +494,16 @@ public static ArrayList<Hotel_review_DB> reviewList(int page,int limit){
 			board.setHot_re_num(rs.getInt("hot_re_num"));	
 			board.setHot_main_num(rs.getInt("hot_main_num"));
 			board.setHot_re_id(rs.getString("hot_re_id"));
-			board.setHot_re_grade(rs.getInt("hot_re_grade"));
-			board.setHot_country(rs.getString("hot_country"));
-			board.setHot_re_title(rs.getString("hot_re_title"));
+			board.setHot_re_rate(rs.getInt("hot_re_rate"));
 			board.setHot_re_content(rs.getString("hot_re_content"));
-			board.setHot_re_comments(rs.getString("hot_re_comments"));
+			
 			board.setHot_re_date(rs.getDate("hot_re_date"));
 		
 			mainList.add(board);
 		
 		}
+		
+		System.out.println(pstmt.toString());
 		
 	}catch(Exception ex){
 		
@@ -494,11 +517,11 @@ public static ArrayList<Hotel_review_DB> reviewList(int page,int limit){
 }	
 
 
-	public void insert_01(String hot_re_num,String hot_main_num,String mb_id,String hot_country,String hot_re_title,String hot_re_content,String hot_re_comments,String hot_re_date) {
+	public void insert_01(String hot_main_num,String hot_re_id,String hot_re_content,String hot_re_rate) {
 	try{
 		
 			up();
-			String command=String.format("insert into hot_review (hot_re_num,hot_main_num,hot_re_id,hot_country,hot_re_title,hot_re_content,hot_re_comments,hot_re_date) values (%s,%s,'%s','%s','%s','%s','%s','%s');",hot_re_num,hot_main_num,mb_id,hot_country,hot_re_title,hot_re_content,hot_re_comments,hot_re_date);
+			String command=String.format("insert into hot_review (hot_main_num,hot_re_id,hot_re_rate,hot_re_content,hot_re_date) values (%s,'%s',%s,'%s',now())",hot_main_num,hot_re_id,hot_re_rate,hot_re_content);
 			
 			int rowNum=stmt.executeUpdate(command);
 			
@@ -508,12 +531,11 @@ public static ArrayList<Hotel_review_DB> reviewList(int page,int limit){
 		}
 
 }
-	public void update_01(String hot_main_num,String hot_re_id,String hot_country,String hot_re_title,String hot_re_content,String hot_re_comments,String hot_re_date,String hot_re_num) {
+	public void update_01(String hot_re_num,String hot_main_num,String hot_re_id,String hot_re_content) {
 		try{
 			
-	
 				up();
-				String command=String.format("update hot_review set hot_main_num :=%s,hotel_name :='%s',hot_re_id :='%s',hot_country :='%s',hot_re_title :='%s',hot_re_content :='%s',hot_re_comments :='%s',hot_re_date :='%s' where hot_re_num = %s ",hot_main_num,hot_re_id,hot_country,hot_re_title,hot_re_content,hot_re_comments,hot_re_date,hot_re_num);
+				String command=String.format("update hot_review set hot_main_num :=%s,hot_re_id :='%s',hot_re_content :='%s' where hot_re_num = %s ",hot_main_num,hot_re_id,hot_re_content,hot_re_num);
 				
 								
 				int rowNum=stmt.executeUpdate(command);

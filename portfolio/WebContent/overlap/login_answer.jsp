@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<%	
+<% 	
 		String login_id = request.getParameter("login_id");
 		String login_pw = request.getParameter("login_pw");
 		Connect mc = new Connect();
@@ -20,15 +20,14 @@
 			session.setAttribute("mb_id", login_id);
 			response.sendRedirect("indexpage.jsp");
 		}else{
+			out.println("<script>");
+			out.println("alert('fail');");
+			out.println("history.back();");
+			out.println("</script>");
+			}
 			%>
-			<script>
-			alert("로그인실패!");
-			location.href("login.jsp");
-			</script>
-			<%
-			 
-		}
-	%>
+		
+	
 
 </body>
 </html>

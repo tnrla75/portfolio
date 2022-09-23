@@ -85,13 +85,13 @@ public class Hotel_RoomService {
 	}
 	
 	//	리뷰2
-	public ArrayList<Hotel_review_DB> reviewList(int page, int limit) throws Exception{
+	public ArrayList<Hotel_review_DB> reviewList(int hot_main_num,int page, int limit) throws Exception{
 		
 		ArrayList<Hotel_review_DB> reviewList = null;
 		Connection con = getConnection();
 		Hotel_DAO hotel_DAO = Hotel_DAO.getInstance();		
 		hotel_DAO.setConnection(con);		
-		reviewList = Hotel_DAO.reviewList(page,limit);	
+		reviewList = Hotel_DAO.reviewList(hot_main_num,page,limit);	
 		
 		System.out.println(reviewList+" : reviewList서비스 리뷰2");
 		

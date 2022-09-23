@@ -12,7 +12,7 @@
 		<header>
 			<div id="header">
 			<div id="title">
-				<a href="../overlap/indexpage.jsp">
+				<a href="../overlap/indexpage.jsp" style="width: 300px;height: 200px;">
 					<header style="width: 250px;height: 250px; z-index: -2;position: relative;">
 						<img src="../img/logo/logo1.png">
 					</header>
@@ -46,25 +46,21 @@
 							<ul class="list">
 								<li><a href="../hotel/">추천 호텔</a></li>
 								<li><a href="../hotel/">호텔 검색</a></li>
-								<li><a href="../hotel/">계절별 할인</a></li>
 								<li><a href="../hotel/Hotel_review_01.jsp">호텔 Q&A 게시판</a></li>
 							</ul>
 						</li>
 						<li class="commonnav4">
 							<p><a class="commonlink" href="../shopping/itemMain.jsp">면세점</a></p>
 							<ul class="list">
-								<li><a href="../shoping/">카테고리</a></li>
 								<li><a href="../shoping/">Best샵</a></li>
 								<li><a href="../shoping/">세일</a></li>
 								<li><a href="../shoping/">명품관</a></li>
 							</ul>
 						</li>
 						<li class="commonnav1">
-							<p><a class="commonlink" href="../overlap/indexpage.jsp" id="main1">여행</a></p>
+							<p><a class="commonlink" href="../travel/TripGuide.travel" id="main1">여행</a></p>
 							<ul class="list">
-								<li><a href="../travel/travel_area.jsp">지역</a></li>
-								<li><a href="../travel/travel_attractions.jsp">관광명소</a></li>
-								<li><a href="../travel/travel_restaurant.jsp">맛집</a></li>
+								<li><a href="../travel/TripGuide.travel">트립 가이드</a></li>
 								<li><a href="../travel/travel_route.jsp">여행루트</a></li>
 								<li><a href="../travel/travel_mate.jsp">여행메이트</a></li>
 							</ul>

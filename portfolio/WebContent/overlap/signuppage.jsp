@@ -428,20 +428,19 @@
 	var hiddenidchk = document.getElementById("hiddenidchk");
 	$(document).ready(function() {
 		$('#idchkbtn').click(function(){
-			var idchk = $('#hiddenidchk').val();
-			var mb_id =  $('#id').val();
 			
+			var mb_id =  $('#id').val();
+
 			$.ajax({
-				url: "idchkbtn.jsp?mb_id="+mb_id ,
+				url: "idchkbtn.jsp?mb_id="+mb_id,
 				dataType : "html",
 				success:function(data){
-					alert("성공 : " +data);
-					alert(" :"+ idchk);
-					if(data == 0){
+				
+					if(data== 0){
 						$("#idm").html('중복된 아이디입니다.');
 						$("#hiddenidchk").val('0');
 					}
-					else if(data == 1){
+					else{
 						$("#idm").html('사용가능한 아이디입니다.');
 						$("#hiddenidchk").val('1');
 					}
@@ -451,9 +450,7 @@
 				}
 			});
 		});
-		$("#id").on("change keyup paste", function(){
-			$('#hiddenidchk').val('2');
-		});
+		
 		$(".all").click(function() {
 				if($(".all").is(":checked")) $("input[name=check]").prop("checked", true);
 				else $("input[name=check]").prop("checked", false);
@@ -510,7 +507,7 @@
 
 <body>
 <form name="myform" action="signuppage_result.jsp" onsubmit="return signupchk()">
-<input type="hidden"  id="hiddenidchk" value="2">
+<input type="hidden"  id="hiddenidchk" value="3">
 		<%
 		String mb_id = (String)session.getAttribute("mb_id"); 
 		if(mb_id == null){
@@ -912,7 +909,6 @@
 	var ex_chk3 = document.getElementById("ex_chk3");
 
 
-	
 	var idm = document.getElementById("idm");
 	var pwd1m = document.getElementById("pwd1m");
 	var pwd2m = document.getElementById("pwd2m");
@@ -1020,8 +1016,8 @@
 		if(ex_chk3.checked == false){
 			alert("개인 정보 수집 동의를 하세요.");
 			return false
-		}
-		alert("회원가입 성공");
+		} 
+		alert("회원가입 성공")
 		return true;
 	}
 

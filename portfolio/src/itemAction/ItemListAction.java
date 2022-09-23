@@ -27,7 +27,6 @@ public class ItemListAction implements Action {
 		
 		request.setCharacterEncoding("utf-8");
 		String category = request.getParameter("category");
-		System.out.println(category);
 		
 		//데이터 개수 확인
 		int listCount=itemListService.getListCount(category);

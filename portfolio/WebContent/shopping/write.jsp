@@ -12,33 +12,35 @@
 <meta charset="UTF-8">
 <title>리뷰 작성</title>
 <style type="text/css">
+	header img {
+		position: relative;
+		top: 40px;
+		left: 170px;
+	}
 	#review {
 		width: 500px;
 		margin: 0 auto;
 	}
-	#review div {
-		width: 500px;
-		
-	}
-	#review div:first-of-type {
-		height: 130px;
+	#top {
+		height: 100px;
+		margin-top: 40px;
 		margin-bottom: 20px;
 		border-style: solid;
 		border-width: 0 0 1px 0;
 	}
-	#review div:first-of-type h3 {
+	h3 {
 		text-align: center;
-	}
-
-	 #review div:nth-of-type(2) {
-		height: 20px;
-	}
-	#review div:nth-of-type(3) {
-		height: 210px;
+		position: relative;
+		margin-bottom: 40px;
+		right: 60px;
 	}
 	#text {
 		width: 500px;
 		height: 210px;
+		margin-top: 0px;
+	}
+	#photoSel {
+		margin-top: 10px;
 	}
 	#photo {
 		width: 500px;
@@ -46,11 +48,10 @@
 		border-style: dashed;
 		border-color: #D5D5D5; 
 		background-color: white;
-	}
-	img {
-		position: relative;
-		top: 40px;
-		left: 170px;
+		background: url(../img/dutyfree/camera.png);
+		background-size: 25px;
+		background-repeat: no-repeat;
+		background-position: 450px;
 	}
 	.btn:first-of-type {
 		width: 240px;
@@ -67,6 +68,8 @@
 		border-style: solid;
 		border-color: #003399;
 	}
+	
+	/* 파일첨부 */
 	.filebox .upload-name {
 	    display: inline-block;
 	    width: 350px;
@@ -74,7 +77,6 @@
 	    padding: 0 10px;
 	    vertical-align: middle;
 	    border: 1px solid #dddddd;
-	    
 	    color: #999999;
 	}
 	.filebox label {
@@ -98,14 +100,7 @@
 	    overflow: hidden;
 	    border: 0;
 	}
-	.starColor1 {
-		filter: invert(71%) sepia(95%) saturate(468%) hue-rotate(360deg) brightness(108%) contrast(104%);
-		Loss: 0.0. This is a perfect result.
-	}
-	.starColor2 {
-		filter: invert(84%) sepia(0%) saturate(1407%) hue-rotate(147deg) brightness(97%) contrast(76%);
-		Loss: 0.7. This is a perfect result.
-	}	
+
 	header {
 		float: left;
 		width: 250px; 
@@ -115,6 +110,50 @@
 		bottom: 60px;
 		right: 70px;
 	}
+	.fileBox {
+		margin-top: 10px;
+	}
+	#btn {
+		margin-top: 20px;
+	}
+	/* 평점 */
+	.rate {
+	    float: left;
+	    position: relative;
+		left: 40px;
+	    bottom: 20px;
+	}
+	.rate:not(:checked) > input {
+	    position:absolute;
+	    top:-9999px;
+	}
+	.rate:not(:checked) > label {
+	    float:right;
+	    width:1em;
+	    overflow:hidden;
+	    white-space:nowrap;
+	    cursor:pointer;
+	    font-size:30px;
+	    color:#ccc;
+	}
+	.rate:not(:checked) > label:before {
+	    content: '★ ';
+	}
+	.rate > input:checked ~ label {
+	    color: #FFE400;    
+	}
+	.rate:not(:checked) > label:hover,
+	.rate:not(:checked) > label:hover ~ label {
+	    color: #FFE400;  
+	}
+	.rate > input:checked + label:hover,
+	.rate > input:checked + label:hover ~ label,
+	.rate > input:checked ~ label:hover,
+	.rate > input:checked ~ label:hover ~ label,
+	.rate > label:hover ~ input:checked ~ label {
+	    color: #FFE400;
+	}
+	
 </style>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -130,49 +169,30 @@
 </script>
 <script>
 	$("#file").on('change',function(){
-		var fileName = $("#file").val();
+		var fileName = $("#file").innerText();
+		alert(fileName);
 		$(".upload-name").val(fileName);
 	});
 	
 	$(document).ready(function() {
 	  	$('#star1').click(function() {
-	  		$(this).addClass('starColor1');
-	  		$('#star2').addClass('starColor2');
-	  		$('#star3').addClass('starColor2');
-	  		$('#star4').addClass('starColor2');
-	  		$('#star5').addClass('starColor2');
+	  		$('input[name=reRate]').attr('value',"1");
 	 	});
 	  	
 	  	$('#star2').click(function() {
-	  		$(this).addClass('starColor1');
-	  		$('#star1').addClass('starColor1');
-	  		$('#star3').addClass('starColor2');
-	  		$('#star4').addClass('starColor2');
-	  		$('#star5').addClass('starColor2');
+	  		$('input[name=reRate]').attr('value',"2");
 	 	});
 	  	
 	  	$('#star3').click(function() {
-	  		$(this).addClass('starColor1');
-	  		$('#star1').addClass('starColor1');
-	  		$('#star2').addClass('starColor1');
-	  		$('#star4').addClass('starColor2');
-	  		$('#star5').addClass('starColor2');
+	  		$('input[name=reRate]').attr('value',"3");
 	 	});
 	  	
 	  	$('#star4').click(function() {
-	  		$(this).addClass('starColor1');
-	  		$('#star1').addClass('starColor1');
-	  		$('#star2').addClass('starColor1');
-	  		$('#star3').addClass('starColor1');
-	  		$('#star5').addClass('starColor2');
+	  		$('input[name=reRate]').attr('value',"4");
 	 	});
 	  	
 	  	$('#star5').click(function() {
-	  		$(this).addClass('starColor1');
-	  		$('#star1').addClass('starColor1');
-	  		$('#star2').addClass('starColor1');
-	  		$('#star3').addClass('starColor1');
-	  		$('#star5').addClass('starColor1');
+	  		$('input[name=reRate]').attr('value',"5");
 	 	});
 	  	
 	});
@@ -193,7 +213,7 @@
 			</div>
 		</div>
 		<div id="review"> 
-			<div>
+			<div id="top">
 				<h3>
 					<%
 						String mb_id = (String)session.getAttribute("mb_id");
@@ -201,12 +221,19 @@
 					%>
 					상품은 만족하셨나요?
 				</h3>
-					<img src="../img/dutyfree/star3.png" width="20px" height="20px" id="star1" class="starColor1">
-					<img src="../img/dutyfree/star3.png" width="20px" height="20px" id="star2" class="starColor1">
-					<img src="../img/dutyfree/star3.png" width="20px" height="20px" id="star3" class="starColor1">
-					<img src="../img/dutyfree/star3.png" width="20px" height="20px" id="star4" class="starColor1">
-					<img src="../img/dutyfree/star3.png" width="20px" height="20px" id="star5" class="starColor1">
-				<input type="text" name="reRate" placeholder="평점" id="reRate" onblur="num_ck()">
+				<div class="rate">
+				    <input type="radio" id="star5" name="rate" value="5" />
+				    <label for="star5" title="text">5 stars</label>
+				    <input type="radio" id="star4" name="rate" value="4" />
+				    <label for="star4" title="text">4 stars</label>
+				    <input type="radio" id="star3" name="rate" value="3" />
+				    <label for="star3" title="text">3 stars</label>
+				    <input type="radio" id="star2" name="rate" value="2" />
+				    <label for="star2" title="text">2 stars</label>
+				    <input type="radio" id="star1" name="rate" value="1" />
+				    <label for="star1" title="text">1 star</label>
+				</div>
+				<input type="hidden" name="reRate" value="" id="reRate" name="reRate" onblur="num_ck()">
 			</div>
 			<div>
 				<input type="hidden" name="itemCode" value="<%= itemCode%>"><br>
@@ -214,25 +241,25 @@
 			<div>
 				<textarea name="reText" placeholder="최소 10자 이상 입력해주세요." id="text"></textarea>
 			</div>
-			<div>
-				<img src='../img/dutyfree/camera.png' width='20px' height='20px'><input type="button" name="photo" value="사진 첨부하기" id="photo">
+			<div id="photoSel">
+				<input type="button" name="photo" value="사진 첨부하기" id="photo">
 			</div>
 			<div class="filebox">
-			    <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+			    <input class="upload-name" value="" placeholder="첨부파일">
 			    <label for="file">파일찾기</label> 
 			    <input type="file" id="file" name="file1"><br>
 			</div>
 			<div class="filebox">
-			    <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+			    <input class="upload-name" value="" placeholder="첨부파일">
 			    <label for="file">파일찾기</label> 
 			    <input type="file" id="file" name="file2"><br>
 			</div>
 			<div class="filebox">
-			    <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+			    <input class="upload-name" value="" placeholder="첨부파일">
 			    <label for="file">파일찾기</label> 
 			    <input type="file" id="file" name="file3"><br>
 			</div>
-			<div>
+			<div id="btn">
 				<input type="button" value="취소" class="btn" onclick="window.close()">
 				<input type="submit" value="등록" class="btn"​>
 			</div>

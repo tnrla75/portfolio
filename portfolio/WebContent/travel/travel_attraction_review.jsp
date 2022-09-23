@@ -15,7 +15,7 @@
 	section{
 		width: 1200px;
 		height: 700px;
-		margin: 30px auto;
+		margin: 30px auto 127px auto;
 		border-radius: 5px;
 		border:2px #030066 solid;
 	}
@@ -71,11 +71,47 @@
 		background: #030066; 
 		border: none;
 	}
+	.rate {
+		width: 300px;
+	    height: 46px;
+	    padding: 0 10px;
+	    margin: 20px 0 0 -100px;
+	}
+	.rate input{
+		float: left;
+	}
+	.rate:not(:checked) > input {
+	    position:absolute;
+	    top:-9999px;
+	}
+	.rate:not(:checked) > label {
+	    float:right;
+	    width:1em;
+	    overflow:hidden;
+	    white-space:nowrap;
+	    cursor:pointer;
+	    font-size:30px;
+	    color:#ccc;
+	}
+	.rate:not(:checked) > label:before {
+	    content: '★ ';
+	}
+	.rate > input:checked ~ label {
+	    color: #ffc700;    
+	}
+	.rate:not(:checked) > label:hover,
+	.rate:not(:checked) > label:hover ~ label {
+	    color: #ffc700;  
+	}
+	.rate > input:checked + label:hover,
+	.rate > input:checked + label:hover ~ label,
+	.rate > input:checked ~ label:hover,
+	.rate > input:checked ~ label:hover ~ label,
+	.rate > label:hover ~ input:checked ~ label {
+	    color: #ffc700;
+	}
 </style>
 <script>
-	function back(){
-		
-	}
 </script>
 
 <body>
@@ -101,7 +137,18 @@
 			<h3>평점을 남겨주세요.</h3>
 		</div>
 		<div>
-			<input type="text" placeholder="평점을 입력하세요." name="att_rate">
+			<div class="rate">
+			    <input type="radio" id="star5" name="rate" value="5" checked/>
+			    <label for="star5" title="text">5 stars</label>
+			    <input type="radio" id="star4" name="rate" value="4"/>
+			    <label for="star4" title="text">4 stars</label>
+			    <input type="radio" id="star3" name="rate" value="3" />
+			    <label for="star3" title="text">3 stars</label>
+			    <input type="radio" id="star2" name="rate" value="2" />
+			    <label for="star2" title="text">2 stars</label>
+			    <input type="radio" id="star1" name="rate" value="1" />
+			    <label for="star1" title="text">1 star</label>
+			  </div>
 		</div>
 		<div class="comment">
 			<h3>여행은 어떠셨나요?</h3>
@@ -116,7 +163,7 @@
 			<input type="hidden" value="<%=att%>" name="att_name">
 		</div>
 		<div class="buttonbox">
-			<input type="button" value="취소" id="backbutton" class="backbutton">
+			<a href="../travel/Attraction.travel?att=<%=att%>"><input type="button" value="취소" id="backbutton" class="backbutton"></a>
 			<input type="submit" value="글 작성" id="writebutton" class="writebutton">
 		</div>
 	</section>

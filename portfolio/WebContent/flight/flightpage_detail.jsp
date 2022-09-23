@@ -9,6 +9,9 @@
 		ArrayList<FlightTicketBean> articleList_back=(ArrayList<FlightTicketBean>)request.getAttribute("ticketBeanList_back");
 		String totalprice= request.getParameter("totalprice");
 		
+		System.out.println(articleList_go.get(0).getFlight_Ticket_Num());
+		System.out.println(articleList_back.get(0).getFlight_Ticket_Num());
+		
 	%>
 <!DOCTYPE html>
 <html>
@@ -338,7 +341,7 @@ function delbtn(e){
 	<div class="maindiv">
 	
 	
-		<div>
+		 <div>
 			<table class="listtable">
 				<tr class="tr1">
 					<td class="td1">
@@ -391,7 +394,7 @@ function delbtn(e){
 					<td class="td1"><span class="time"><%= articleList_back.get(0).getFlight_arrivalTime() %></span><br><span class="airport"><%= articleList_back.get(0).getFlight_arrival() %></span></td>			
 				</tr>
 			</table>
-		</div>
+		</div> 
 			<div id="flightdiv1">
 				<h2>탑승객</h2>
 				<div class="flightdiv1_indiv1">

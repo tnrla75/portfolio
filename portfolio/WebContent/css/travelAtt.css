@@ -8,19 +8,18 @@
 					box-sizing: border-box;
 					margin: 0 auto;
 					}			
-		#subframe{width: 960px; height: 1450px;
+		#subframe{width: 960px; height: fit-content;
 					box-sizing: border-box;
 					margin-top: 15px;
 					border-radius: 5px;
 					float: left;
-					border-style: solid;
 					}						
-		#mainsection{width: 450px; height: 500px;
+		#mainsection{width: 450px; height: 400px;
 					margin: 0 0 10px 0;
 					box-sizing: border-box;
 					float: left;
 					}
-		#mainsection>header{width: 400px;
+		#mainsection>header{width: 350px;
 							box-sizing: border-box;
 							text-align: left;
 							font-size: 30pt
