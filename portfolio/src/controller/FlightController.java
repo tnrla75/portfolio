@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.FlightDetailAction;
+import action.FlightFilterAction;
 import action.FlightListAction_back;
 import action.FlightListAction_go;
 import action.FlightListAction_oneway;
@@ -58,6 +59,14 @@ public class FlightController extends javax.servlet.http.HttpServlet
 			}
 		}else if(command.equals("/flight/flightDetail.air")){
 			action  = new FlightDetailAction();
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/flight/flightFilter.air")){
+			action  = new FlightFilterAction();
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
