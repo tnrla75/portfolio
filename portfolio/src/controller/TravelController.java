@@ -12,6 +12,9 @@ import action.Action;
 import action.TravelAttRe_deleteAction;
 import action.TravelAttRe_insertAction;
 import action.TravelAttRe_updateAction;
+import action.TravelMateAction;
+import action.TravelMate_applyAction;
+import action.TravelMate_searchAction;
 import action.Travel_tripguideAction;
 import action.TravelattAction;
 import action.TravellocalAction;
@@ -24,6 +27,7 @@ public class TravelController extends javax.servlet.http.HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String RequestURI=request.getRequestURI();
 		String contextPath=request.getContextPath();
 		String command=RequestURI.substring(contextPath.length());
@@ -89,8 +93,31 @@ public class TravelController extends javax.servlet.http.HttpServlet {
 		}else if(command.equals("/travel/tripguideselect.travel")){
 			forward=new ActionForward();
 			forward.setPath("../travel/travel_tripguide.jsp");
+		}else if(command.equals("/travel/reservationComplete.travel")){
+			forward=new ActionForward();
+			forward.setPath("../travel/travelAtt_reservationComplete.jsp");
+		}else if(command.equals("/travel/travel_mate.travel")){
+			action  = new TravelMateAction();
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();	
+			}
+		}else if(command.equals("/travel/travel_mate_search.travel")){
+			action  = new TravelMate_searchAction();
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();	
+			}
+		}else if(command.equals("/travel/travel_mate_apply.travel")){
+			action  = new TravelMate_applyAction();
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();	
+			}
 		}
-
 		if(forward != null){
 			
 			if(forward.isRedirect()){
@@ -101,8 +128,6 @@ public class TravelController extends javax.servlet.http.HttpServlet {
 				dispatcher.forward(request, response);
 			}	
 		}
-		
-		
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 

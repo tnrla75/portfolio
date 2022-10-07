@@ -23,7 +23,6 @@ public class FlightListAction_go implements Action {
 		String arrivalday = request.getParameter("arrivalDay1");
 		String departureday = request.getParameter("departureDay1");
 		FlightListService FlightListService = new FlightListService();
-		System.out.println("==bb");
 		String arr = request.getParameter("arr");
 		
 		int page1=1;
@@ -32,8 +31,7 @@ public class FlightListAction_go implements Action {
 		if(request.getParameter("page1")!=null){
 			page1 = Integer.parseInt(request.getParameter("page1"));
 		}
-		System.out.println("==cc");
-
+		
 		article1 = FlightListService.getArticle_go(departure, arrive, people, seat, departureday , page1, limit);
 		listCount=FlightListService.getListCount(departure, arrive, people, seat, departureday);
 

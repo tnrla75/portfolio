@@ -324,12 +324,40 @@ public class TravelDAO {
 				close(rs);
 				close(pstmt);
 			}
-
 			return listCount;
 
 		}
 		//트립가이드 select
 		public ArrayList<Travellocal> tripguide_select(){
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<Travellocal> travellocal = new ArrayList<Travellocal>();
+			
+			try{
+				String board_list_sql="select*from travel_local order by rand() limit 10";
+				Travellocal board = null;
+					pstmt = con.prepareStatement(board_list_sql);
+					rs = pstmt.executeQuery();
+					while(rs.next()){
+						board = new Travellocal();
+						board.setLocal_num(rs.getInt("local_num"));
+						board.setLocal_name(rs.getString("local_name"));
+						board.setLocal_img(rs.getString("local_img"));
+						board.setLocal_content(rs.getString("local_content"));
+						board.setLocal_nation(rs.getString("local_nation"));
+						travellocal.add(board);
+					}
+			
+				}catch(Exception ex){
+					System.out.println(ex);
+				}finally{
+					close(rs);
+					close(pstmt);
+				}
+				return travellocal;			
+		}
+		
+		public ArrayList<Travellocal> Index_travel_select(){
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			ArrayList<Travellocal> travellocal = new ArrayList<Travellocal>();

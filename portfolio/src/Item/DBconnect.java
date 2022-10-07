@@ -106,7 +106,7 @@ public class DBconnect {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio?characterEncoding=utf8","root","0000");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio?characterEncoding=utf8","root","1645");
 			stmt = conn.createStatement();
 		} catch (Exception e) {
 		}

@@ -1,22 +1,27 @@
 package travel_package;
 
+import static db.TravelDButil.close;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import travel_package.MateDTO;
+import vo.PageInfo;
 
 public class MateController {
 	Connection conn = null;
 	Statement stmt = null;
 	
-	public ArrayList<MateDTO> select(){
+	public ArrayList<MateDTO> select(int page, int limit){
 		ArrayList<MateDTO> dbal = new ArrayList<MateDTO>();
+		int startrow=(page-1)*10; 
 		try {
 			dbc();
-			ResultSet rs = stmt.executeQuery("select*from travel_mate;");    
+			ResultSet rs = stmt.executeQuery("select*from travel_mate order by travelmateDate desc limit "+startrow+",10;");    
 			while(rs.next()){
 				MateDTO nmd = new MateDTO();  
 				nmd.setTravelmateNum(rs.getString("travelmateNum"));
@@ -46,7 +51,46 @@ public class MateController {
 			catch(Exception e){
 			}
 		}
-		System.out.println(dbal);
+		return dbal;                         
+		}
+	
+	public ArrayList<MateDTO> searchselect(int page, int limit, String search){
+		ArrayList<MateDTO> dbal = new ArrayList<MateDTO>();
+		int startrow=(page-1)*10; 
+		try {
+			dbc();
+			String command="select*from travel_mate where destination='"+search+"' limit "+startrow+",10;";
+			ResultSet rs = stmt.executeQuery(command);
+			while(rs.next()){
+				MateDTO nmd = new MateDTO();  
+				nmd.setTravelmateNum(rs.getString("travelmateNum"));
+				nmd.setRouteNum(rs.getString("routeNum"));
+				nmd.setId(rs.getString("id"));
+				nmd.setTravelmateTitle(rs.getString("travelmateTitle"));
+				nmd.setTravelmateDate(rs.getString("travelmateDate"));
+				nmd.setTravelmateContent(rs.getString("travelmateContent"));
+				nmd.setDestination(rs.getString("destination"));
+				nmd.setTravelmateMember(rs.getString("travelmateMember"));
+				nmd.setDepartureDate(rs.getString("departureDate"));
+				nmd.setArriveDate(rs.getString("arriveDate"));
+				nmd.setReservationstatus(rs.getString("reservationstatus"));
+				dbal.add(nmd);
+			}
+		}catch(Exception e){	
+			System.out.println(e);
+		}
+		finally{
+			try{
+				stmt.close();
+			}
+			catch(Exception e){	
+			}
+			try{
+				conn.close();
+			}
+			catch(Exception e){
+			}
+		}
 		return dbal;                         
 		}
 	
@@ -55,7 +99,6 @@ public class MateController {
 			dbc();
 			String command = String.format("insert into travel_mate (id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservationstatus,travelmateDate) values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')"
 											,id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate);
-			System.out.println(command+"=df");
 			int rowNum = stmt.executeUpdate(command);
 		}catch(Exception e){	
 		}
@@ -76,7 +119,7 @@ public class MateController {
 	public void update(String id,String travelmateTitle,String destination,String travelmateMember,String travelmateContent,String departureDate,String arriveDate,String reservation,String travelmateDate,String travelmateNum){
 		try{
 			dbc();
-			String command = String.format("update travel_mate set id :='%s', travelmateTitle :='%s',destination :='%s',travelmateMember :='%s',travelmateContent :='%s',departureDate :='%s',arriveDate :='%s',reservationstatus :='%s',travelmateDate :='%s' where travelmateNum="+travelmateNum+";"
+			String command = String.format("update travel_mate set id :='%s', travelmateTitle :='%s',destination :='%s',travelmateMember :='%s',travelmateContent :='%s',departureDate :='%s',arriveDate :='%s',reservationstatus :='%s' where travelmateNum="+travelmateNum+";"
 											,id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate);
 			int rowNum = stmt.executeUpdate(command);
 		}catch(Exception e){	
@@ -85,12 +128,14 @@ public class MateController {
 			try{
 				stmt.close();
 			}
-			catch(Exception e){	
+			catch(Exception e){
+				System.out.println(e+"=1");
 			}
 			try{
 				conn.close();
 			}
 			catch(Exception e){
+				System.out.println(e+"=2");
 			}
 		}
 		}
@@ -134,6 +179,59 @@ public class MateController {
 		return dbal;                         
 		}
 	
+	public int selectListattCount() {
+		int listCount= 0;
+		try{
+			dbc();
+			ResultSet rs = stmt.executeQuery("select count(*) from travel_mate");    
+			if(rs.next()){
+				listCount=rs.getInt(1);
+			}
+		}catch(Exception ex){
+
+		}finally{
+			try{
+				stmt.close();
+			}
+			catch(Exception e){	
+			}
+			try{
+				conn.close();
+			}
+			catch(Exception e){
+			}
+		}
+		return listCount;
+
+	}
+	
+	public int selectsearchListattCount(String search) {
+		int listCount= 0;
+		try{
+			dbc();
+			ResultSet rs = stmt.executeQuery("select count(*) from travel_mate where destination="+search+";");    
+			if(rs.next()){
+				listCount=rs.getInt(1);
+			}
+		}catch(Exception ex){
+
+		}finally{
+			try{
+				stmt.close();
+			}
+			catch(Exception e){	
+			}
+			try{
+				conn.close();
+			}
+			catch(Exception e){
+			}
+		}
+		return listCount;
+
+	}
+	
+	
 	public ArrayList<MateDTO> detail(String travelNum){
 		ArrayList<MateDTO> dbal = new ArrayList<MateDTO>();
 		try {
@@ -174,7 +272,6 @@ public class MateController {
 	public void delete(String travelmateNum){
 		try{
 			dbc();
-			System.out.println("bb");
 			String command = String.format("delete from travel_mate where travelmateNum='%s'",travelmateNum);
 			int rowNum = stmt.executeUpdate(command);
 		}catch(Exception e){	
@@ -194,10 +291,11 @@ public class MateController {
 		}
 	
 	
+	
 	public void dbc() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio?characterEncoding=utf8","root","0000");
+			conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio?characterEncoding=utf8","root","1645");
 			stmt=conn.createStatement();
 		}catch(Exception e){
 		}

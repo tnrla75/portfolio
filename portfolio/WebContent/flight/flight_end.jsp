@@ -99,7 +99,7 @@
 <body>
 	<form>
 		<%
-		String id = (String)session.getAttribute("id"); 
+		String id = (String)session.getAttribute("mb_id"); 
 		if(id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>

@@ -5,12 +5,17 @@
 	<%@page import="vo.FlightTicketBean"%>
 	<%@page import="vo.PageInfo"%>
 	<%@ page import="java.text.SimpleDateFormat"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 	<%
 		ArrayList<FlightTicketBean> ticketBeanList1 = (ArrayList<FlightTicketBean>)request.getAttribute("ticketBeanList1"); 
+		request.setAttribute("ticketBeanList1", ticketBeanList1);
 		String people =request.getParameter("flight_people1");
 		String seat = request.getParameter("seatGrade1");
 		String arrivalday = request.getParameter("arrivalDay1");
+		
+		System.out.println(ticketBeanList1.size()); 
+		
 		
 		PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo1");
 		int listCount1=pageInfo1.getListCount();
@@ -18,7 +23,6 @@
 		int maxPage1=pageInfo1.getMaxPage();
 		int startPage1=pageInfo1.getStartPage();
 		int endPage1=pageInfo1.getEndPage();
-		
 	%>
 <!DOCTYPE html>
 <html>
@@ -278,14 +282,19 @@
 		}
 		#flightdiv1{
 			width: 1200px; margin: 20px auto; height: 150px;
-
+			background-color: white; 
+			border-radius: 10px;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+			position: relative;			   
+    		top: 10px;
 		}
 		#flightdiv2{
 			width: 290px;
 			height: 600px;
 			margin-right: 10px;
 			float: left;
-			overflow-y: scroll;		
+			overflow-y: scroll;	
+			background-color: white;
 		}
 		/* 스크롤바 설정*/
 		#flightdiv2::-webkit-scrollbar{
@@ -295,13 +304,13 @@
 		/* 스크롤바 막대 설정*/
 		#flightdiv2::-webkit-scrollbar-thumb{
 		    height: 17%;
-		    background-color: rgba(33,133,133,1);
+		    background-color: rgba(3,0,102,1);
 		    border-radius: 10px;  
 		}
 
 		/* 스크롤바 뒷 배경 설정*/
 		#flightdiv2::-webkit-scrollbar-track{
-		    background-color: rgba(33,133,133,0.33);
+		    background-color: rgba(0,51,155,0.33);
 		}
 		.flightdiv2_indiv{
 			width: 265px;
@@ -311,18 +320,22 @@
 
 		}
 		#flightdiv3{
+		
 			width: 900px;
 			border-radius: 5px;
 			height: fit-content;
 			float: left;
+			background-color:white;
+			border-radius: 10px;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 		}
 		#flightdivmain{
 			width: 1200px; height: 1500px; margin: 0 auto;
 			
 		}
 		.flightlistdiv{
-			border-bottom: solid 1px rgba(0,0,0,0.2); 
-			
+			border: solid 1px rgba(0,0,0,0.2);
+			border-radius:5px;
 			background-color:white;
 			width: 880px;
 			height: 120px;
@@ -347,11 +360,15 @@
 			margin: 0px;
 			padding: 0px;
 		}
-		.listtable  tr  td:nth-child(odd){
+		.listtable  tr  td:nth-child(1), .listtable  tr  td:nth-child(3){
 			width: 80px;
 		}
 		.listtable  tr  td:nth-child(even){
 			width: 200px;
+		}
+		.listtable  tr  td:nth-child(5){
+			width: 100px;
+			padding-right:50px;
 		}
 		.flightimg{
 			width: 50px;
@@ -364,6 +381,14 @@
 		.airport{
 			font-size: 10pt;
 			color: rgba(0, 0, 0, 0.6);
+		}
+		.airplanename{
+			font-size: 10pt;
+			color: rgba(0, 0, 0, 0.6);
+		}
+		.flightname{
+			font-weight: bold;
+			font-size: 14pt;
 		}
 		.choicebtn{
 			border-radius: 3px;
@@ -395,6 +420,10 @@
 			line-height: 60px;
 			font-size: 14pt;
 			font-weight: bold;
+			position: relative;
+			left: 200px;
+			padding-left: 150px;
+			
         }
         .footer_amount > .span2{
         	height: 60px;
@@ -430,27 +459,30 @@
         	background-color: #002266;
         	border-style: none;
         	float:right;
+        	cursor: pointer;
         }
         .pageinfo{
         	float: left;
         	background-color: white;
         	width: 300px;
         	height: 60px;
-        	line-height: 60px;
-        	
+        	line-height: 60px;        	
         }
         .pageinfo > button {
         	border-style: none;
         	background-color: white;
         	margin: 5px;
-        	
+        	font-size: 12pt;
         }
-        .pageinfo > button:hover{
-        	outline: solid;
-        	
+        
+        .pageinfo > button > img {
+        	width:25px;
+        	height:25px;
+        	position: relative;
+    		top: 6px;
         }
         #pagelistdiv{
-        	margin:0 auto;
+        	margin:10px auto;
         }
         #pagelistdiv div{
         	margin: 0 auto;
@@ -473,11 +505,11 @@
 			left:0;
 			top: 198px;
 			width:70%;
-			height:400px;
+			height:650px;
 		}
 		#modal1>#content1{
 			width:500px;
-			height:400px;
+			height:650px;
 			margin:100px auto;
 			padding:20px;
 			position: relative;
@@ -511,7 +543,7 @@
 			line-height: 50px;
 			position: relative;
 			left:-60px;
-			top:-33px;
+			top:-36px;
 		}
 		.modalul li:nth-child(1){
 			width: 540px;
@@ -534,32 +566,74 @@
 			outline: none;
 			border-bottom: solid rgba(211, 10, 20, 0.9) 2px;
 		}
+		#backdiv{
+			background-color: #f5f7fa;
+			position: relative;
+			top:-13px;
+		}
+		.flex{
+		  display:flex
+		}
+		/* 라디오버튼 */
+		.container {
+		  display: flex;
+		  position: relative;
+		  cursor: pointer;
+		  font-size: 22px;
+		  width:202px;
+		  height:120px;
+		  -webkit-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		  
+		}
 		
+		.container input {
+		  position: absolute;
+		  opacity: 0;
+		  cursor: pointer;
+		}
+		
+		.checkmark {
+		  display: flex;
+		  flex-direction: column;
+		  padding: 15px 25px;
+		  background: #fff;
+		  min-width: 150px;
+/* 		  transition: all 0.3s linear */
+		}
+		
+		.container:hover input ~ .checkmark {
+		  background-color: #f7f7f7;
+		}
+		.container input:checked ~ .checkmark {
+		  border: #002266 2px solid;
+		  -webkit-box-shadow: 0px 3px 6px 2px rgba(0,0,0,0.16);
+		  -moz-box-shadow: 0px 3px 6px 2px rgba(0,0,0,0.16);
+		  box-shadow: 0px 3px 6px 2px rgba(0,0,0,0.16);
+		  background-color: #002266;
+		  color:white;
+		  width: 202px;
+		}
 	</style>
 </head>
 <script>	
 $(document).ready(function() {
-	$('.choicebtn').on('click',function(){
+	
+	$("input:radio[name='choicebtn']").change(function(){
 		var checkBtn = $(this);
-		
-		var tr = checkBtn.parent().parent();
+		var tr = checkBtn.parent().parent().parent();
 		var td = tr.children();
 		
-		var flight1 = new Array();
-		alert(td.eq(1).text())
-		flight1.push(td.eq(1).text());
-		flight1.push(td.eq(2).text());
-		flight1.push(td.eq(3).text());
-		flight1.push(td.eq(4).text());
-		flight1.push(td.eq(5).text());
-		
-		
-		$('.span2').val(td.eq(5).text());
-		
+		$('#ticketNum1').val(td.eq(0).find("input[type='hidden']").val());
+		$('.span2').val(td.eq(5).find("h4").text()+"원");
+	});
+	$('.footer_backchoice').on('click',function(){
 		myform.action = "../flight/flightTicketSearch_back.air";
 		myform.submit();
 	});
-	
+	$("input:radio[name='choicebtn']").is(':checked')
 	
 	$('.flightdiv2_indiv > input').change(function(){
 		/* 체크를 했을시에 해당 체크된 부분을 넘김 */
@@ -571,25 +645,39 @@ $(document).ready(function() {
             if($("#asianaair").is(":checked")){
             	arr.push($("#asianaair").val());
             }
+            if($("#koreanair").is(":checked")){
+            	arr.push($("#koreanair").val());
+            }
             <%-- location.href="../flight/flightTicketSearch_go.air?arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>"; --%>
             
             $.ajax({
                 url : "../flight/flightFilter.air?arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
                 dataType : "html" ,
                 success:function(data){
-                    alert("성공인데 미구현");
-                    $('#flightdiv3').empty();
-                    alert(data);
+                	alert("제작중..");
+                    $('#flightdiv3').empty();  
                     $('#flightdiv3').append(data);
-                    alert("b");
                 }, 
                 error : function(){
                     alert("fail");
                 }
             }); 
 		}
+		else{
+			location.reload();
+		}
 	}); 
 });	
+
+	
+	
+	$(window).scroll(function() {
+	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	
+	    }
+	}); 
+
+
 	
 	<%-- <% if( people.equals("1")){ %>
 		$('#flight_people1').val('1').prop("selected",true);
@@ -634,11 +722,13 @@ function getPost(mode)
 	myform.submit();
 };
 
+
+
 </script>
 <body>
 	<form name="myform">
-		<%
-		String id = (String)session.getAttribute("id"); 
+	<%
+		String id = (String)session.getAttribute("mb_id"); 
 		if(id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
@@ -649,22 +739,22 @@ function getPost(mode)
 			<%
 		}
 	%>
-
 <div id="footerprice">
 	<div id="textdiv">
 		<div class="footer_amount">
 			<div class="pageinfo">
 				<button>
-					1 검색
+					<img src="../img/flight/one.png"> 검색
 				</button>
-				<button> 2 항공편 </button>
-				<button> 3 결제</button>
+				<button style="font-weight: bold; color: #2394BC; "> <img src="../img/flight/step2.png" style="border-bottom: 1px #2394BC solid; padding-bottom: 2px; top:8px;"> 항공편 </button>
+				<button> <img src="../img/flight/three.png"> 결제</button>
 			</div>
 			 <!-- 1 검색 / 2 항공편 / 3 결제  -->
-			<span class="span1">예상 결제 금액</span>
+			<span class="span1">예상 결제 금액 : </span>
 			<input type="button" class="footer_backchoice" value="가는 편 선택">
-			<span class="span3">원</span>
-			<input class="span2" name="totalprice" value='0' readonly>
+			<span class="span3"></span>
+			<input class="span2" name="totalprice" value='' readonly>
+			<input type="hidden" value="" name="ticketNum1" id="ticketNum1">
 		</div>
 		
 	</div>
@@ -673,7 +763,6 @@ function getPost(mode)
 
 <div id='modal1'>
 	<div id='content1'>
-		
 		<div>
 			<div class="modaltitle">
 				<ul class="modalul">
@@ -682,6 +771,25 @@ function getPost(mode)
 					<li>bbb</li>
 					<li>서울</li>
 					<li>제주도</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;한국</li>
+					<li>ICN 서울/인천</li>
+					<li>GMP 서울/김포</li>
+					<li>CJU 제주</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;중국</li>
+					<li>도쿄</li>
+					<li>오사카</li>
+					<li>교토</li>
+					<li>삿포로</li>
+					<li>나고야</li>
+					<li>오키나와</li>
 				</ul>
 			</div>
 			<div class="modaltitle">
@@ -697,17 +805,26 @@ function getPost(mode)
 			</div>
 			<div class="modaltitle">
 				<ul class="modalul">
-					<li>&nbsp;&nbsp;베트남</li>
+					<li>&nbsp;&nbsp;태국</li>
 					<li>호치민</li>
 					<li>호이안</li>
 					<li>다낭</li>
 					<li>하노이</li>
 				</ul>
 			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;기타 국가</li>
+					<li>싱가포르</li>
+					<li>홍콩</li>
+					
+				</ul>
+			</div>
+			
 		</div>
 	</div>
 </div>
-
+<div id="backdiv">
 		<div id="flightdiv1">
 			<div class="tabset">
 							<!-- Tab 1 -->
@@ -800,11 +917,12 @@ function getPost(mode)
 		<div id="flightdivmain">
 			<div id="flightdiv2">
 				<div class="flightdiv2_indiv">
-					<h4>항공사</h4>
-					
+					<h4>&nbsp;&nbsp;항공사</h4>
 						<input type="checkbox" name="jejuair" id="jejuair" value="제주"> 제주<br><br>
 						<input type="checkbox" name="asianaair" id="asianaair" value="아시아나"> 아시아나 <br><br>
-					
+						<input type="checkbox" name="koreanair" id="koreanair" value="대한"> 대한 <br><br>
+						<input type="checkbox" name="jejuair" id="jejuair" value="이스타">이스타항공<br><br>
+						<input type="checkbox" name="asianaair" id="asianaair" value="아시아나"> 진에어 <br><br>
 				</div>
 				<div class="flightdiv2_indiv">
 					<h4>가격</h4>
@@ -826,82 +944,89 @@ function getPost(mode)
 				</div>
 				<div class="flightdiv2_indiv">
 					<h4>총 소요시간</h4>
-					
+						
 						<input type="checkbox" name="">
 				</div>
 			</div>
 			<div id="flightdiv3">
 
-			 	<% for(int i = 0; i< ticketBeanList1.size(); i++){
-						/*if(ticketBeanList1.get(i).getFlight_arrivalTime() < ticketBeanList2.get(i).getFlight_departureTime()){
- 						if문을 넣어서  배열 1 도착시간 < 배열2 출발시간 일 경우에만 배열2를 쓴다*/
-				%> 
-				<div class="flightlistdiv">
-		<table class="listtable">
-			<tr class="tr1">
-				<td class="td1">
-				<% 
-				String flightimg1 = "";
-				if(ticketBeanList1.get(i).getFlight_name().equals("제주")){ 
-					flightimg1 = "jejuair.png";
-				}else if(ticketBeanList1.get(i).getFlight_name().equals("아시아나")){
-					flightimg1 = "asiana.png";
-				}else if(ticketBeanList1.get(i).getFlight_name().equals("")){
-					
-				}else if(ticketBeanList1.get(i).getFlight_name().equals("")){
-					
-				}
-				%>
-				<input type="hidden" value="<%= ticketBeanList1.get(i).getFlight_Ticket_Num() %>" name="ticketNum1">
-				
-				<img src="../img/flight/<%= flightimg1 %>" class="flightimg"></td>
-				<td class="td1" style="text-align: left;"><%= ticketBeanList1.get(i).getFlight_name() %></td>
-				<td class="td1"><span class="time"><%= ticketBeanList1.get(i).getFlight_departureTime()%></span><br><span class="airport"><%= ticketBeanList1.get(i).getFlight_departure() %></span></td>
-				<td class="td1"><span class="airport"><%= ticketBeanList1.get(i).getEstimated_time() %></span><br><img src="aaa.jpg"></td>
-				<td class="td1"><span class="time"><%= ticketBeanList1.get(i).getFlight_arrivalTime() %></span><br><span class="airport"><%= ticketBeanList1.get(i).getFlight_arrival() %></span></td>
-				<td class="td1" rowspan="2"><fmt:formatNumber value="<%= ticketBeanList1.get(i).getFlight_Ticket_Price() %>" groupingUsed="true" />원<input type="button" value="선택" class="choicebtn" ></td>
-				
-			</tr>
-		</table>
-					
+				<c:forEach  var="ticketBeanList1" items="${ticketBeanList1}">
+					<div class="flightlistdiv">
+					<table class="listtable" cellspacing="0">
+						<tr class="tr1">
+							<td class="td1">
+							<input type="hidden" value="${ticketBeanList1.flight_Ticket_Num}">
+							<c:if test="${ticketBeanList1.flight_name eq '제주'}" var="bool">
+								<img src="../img/flight/jejuair.png" class="flightimg">
+							</c:if>
+							<c:if test="${ticketBeanList1.flight_name eq '아시아나'}" var="bool">
+								<img src="../img/flight/asiana.png" class="flightimg">
+							</c:if>
+							<c:if test="${ticketBeanList1.flight_name eq '대한'}" var="bool">
+								<img src="../img/flight/koreanair.png" class="flightimg">
+							</c:if>
+							</td>
+							<td class="td1" style="text-align: left;"><span class="flightname">${ticketBeanList1.flight_name}</span><br><span class="airplanename">${ticketBeanList1.flight_airplaneName}</span></td>
+							<td class="td1"><span class="time">${ticketBeanList1.flight_departureTime}</span><br><span class="airport">${ticketBeanList1.flight_departure}</span></td>
+							<td class="td1"><span class="airport">${ticketBeanList1.estimated_time}</span><br><img src="aaa.jpg"></td>
+							<td class="td1"><span class="time">${ticketBeanList1.flight_arrivalTime}</span><br><span class="airport">${ticketBeanList1.flight_arrival}</span></td>
+							<td class="td1" rowspan="2" style="border-right: #E6E6E6 2px solid; border-left: #E6E6E6 2px solid;">
+							<label class="container">
+							  <input type="radio" class="choicebtn" name="choicebtn">
+							  <span class="checkmark">
+							    <h4><fmt:formatNumber value="${ticketBeanList1.flight_Ticket_Price}" groupingUsed="true"/></h4>
+							  </span>
+							</label>
+							</td>
+						</tr>
+					</table>
 				</div>
+				</c:forEach> 
 				
-				<%} %> 
-				<div id="pagelistdiv">
-				<div>
-				<section id="pageList">
-		<%if(nowPage1<=1){ %>
-		[이전]&nbsp;
-		<%}else{ %>
-		<a href="flightTicketSearch_go.air?page1=<%=nowPage1 -1 %>&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>">[이전]</a>&nbsp;
-		<%} %>
-
-		<%for(int a=startPage1;a<=endPage1;a++){
-				if(a==nowPage1){%>
-		[<%=a %>]
-		<%}else{ %>
-		<a href="flightTicketSearch_go.air?page1=<%=a %>&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>">[<%=a %>]
-		</a>&nbsp;
-		<%} %>
-		<%} %>
-
-		<%if(nowPage1>=maxPage1){ %>
-		[다음]
-		<%}else{ %>
-		<a href="flightTicketSearch_go.air?page1=<%=nowPage1 +1 %>&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>">[다음]</a>
-		<%} 
-			
-		%>
-	</section>
-	</div>
-	</div>
 			</div>
 			
 			
 		</div>
+</div>
 	</form>
 </body>
 <script>
+const count = 10 // 한 번 새로운 item들이 추가될 때 추가되는 item의 갯수
+let index = 0 // item의 index
+
+// 옵션 객체
+const options = {
+  // null을 설정하거나 무엇도 설정하지 않으면 브라우저 viewport가 기준이 된다.
+  root: null,
+  // 타겟 요소의 10%가 루트 요소와 겹치면 콜백을 실행한다.
+  threshold: 0.1
+}
+
+let observer = new IntersectionObserver(function(entries, observer) {
+  entries.forEach(entry => {
+    const list = document.querySelector('.list')
+    
+    // 타겟 요소와 루트 요소가 교차하면
+    if (entry.isIntersecting) {
+      for (let i = index; i < index + count; i++) {
+        // item을 count 숫자 만큼 생성하고 list에 추가해주기
+        let item = document.createElement('p')
+        
+        item.textContent = i
+        item.className += 'item'
+        list.appendChild(item)
+      }
+      
+      // index에 +count해서 갱신해주기
+      index += count
+    }
+  })
+} ,options)
+
+// list의 끝부분을 알려주는 p 타겟 요소를 관찰
+observer.observe(document.querySelector('.list-end'))
+
+
 // modal 창 1번 
 	var btnOpen1  = document.getElementById('btnOpen1');
 	var btnClose1 = document.getElementById('btnClose1');

@@ -391,61 +391,54 @@ $(function(){
 		%>
 		
 		<section>
-		<div class="carousel">
-  <div class="carousel__nav">
-   <span id="moveLeft" class="carousel__arrow">
-        <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
-    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
-</svg>
-    </span>
-    <span id="moveRight" class="carousel__arrow" >
-      <svg class="carousel__icon"  width="24" height="24" viewBox="0 0 24 24">
-  <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
-</svg>    
-    </span>
-  </div>
-  <div class="carousel-item carousel-item--1">
-    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(4).getTravel_img1() %>');"></div>
-    <div class="carousel-item__info">
-      <div class="carousel-item__container">
-      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
-      <h1 class="carousel-item__title"><%=travellocal.getLocal_name() %></h1>
-      <p class="carousel-item__description"><%=travellocal.getLocal_content() %></p>
-      <a href="#" class="carousel-item__btn"><%=travelatt.get(4).getAtt_name() %></a>
-        </div>
-    </div>
-  </div>
-  <div class="carousel-item carousel-item--2">
-    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(5).getTravel_img1() %>');"></div>
-    <div class="carousel-item__info">
-      <div class="carousel-item__container">
-      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
-      <h1 class="carousel-item__title"><%=travellocal.getLocal_name() %></h1>
-      <p class="carousel-item__description"><%=travellocal.getLocal_content() %></p>
-      <a href="#" class="carousel-item__btn"><%=travelatt.get(5).getAtt_name() %></a>
-        </div>
-    </div>
-  </div>
-    <div class="carousel-item carousel-item--3">
-    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(6).getTravel_img1() %>');"></div>
-    <div class="carousel-item__info">
-      <div class="carousel-item__container">
-      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
-      <h1 class="carousel-item__title"><%=travellocal.getLocal_name() %></h1>
-      <p class="carousel-item__description"><%=travellocal.getLocal_content() %></p>
-      <a href="#" class="carousel-item__btn"><%=travelatt.get(6).getAtt_name() %></a>
-        </div>
-    </div>
-  </div>
-
-</div>
-		 	<%-- <article>
-				<div class="contents1">
-					<p><%=travellocal.getLocal_name() %></p>
-					<div class="localmap"><img src="../img/travel<%=travellocal.getLocal_img()%>"></div>
-					<div class="localcontent"><%=travellocal.getLocal_content() %></div>
-				</div>
-			</article>  --%>
+				<div class="carousel">
+		  <div class="carousel__nav">
+		   <span id="moveLeft" class="carousel__arrow">
+		        <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
+		    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+		</svg>
+		    </span>
+		    <span id="moveRight" class="carousel__arrow" >
+		      <svg class="carousel__icon"  width="24" height="24" viewBox="0 0 24 24">
+		  <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+		</svg>    
+		    </span>
+		  </div>
+		  <div class="carousel-item carousel-item--1">
+		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(4).getTravel_img1() %>');"></div>
+		    <div class="carousel-item__info">
+		      <div class="carousel-item__container">
+		      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
+		      <h1 class="carousel-item__title"><%=travellocal.getLocal_name() %></h1>
+		      <p class="carousel-item__description"><%=travellocal.getLocal_content() %></p>
+		      <a href="../travel/Attraction.travel?att=<%=travelatt.get(4).getAtt_name() %>" class="carousel-item__btn"><%=travelatt.get(4).getAtt_name() %></a>
+		        </div>
+		    </div>
+		  </div>
+		  <div class="carousel-item carousel-item--2">
+		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(5).getTravel_img1() %>');"></div>
+		    <div class="carousel-item__info">
+		      <div class="carousel-item__container">
+		      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
+		      <h1 class="carousel-item__title"><%=travellocal.getLocal_name() %></h1>
+		      <p class="carousel-item__description"><%=travellocal.getLocal_content() %></p>
+		      <a href="../travel/Attraction.travel?att=<%=travelatt.get(5).getAtt_name() %>" class="carousel-item__btn"><%=travelatt.get(5).getAtt_name() %></a>
+		        </div>
+		    </div>
+		  </div>
+		    <div class="carousel-item carousel-item--3">
+		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(6).getTravel_img1() %>');"></div>
+		    <div class="carousel-item__info">
+		      <div class="carousel-item__container">
+		      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
+		      <h1 class="carousel-item__title"><%=travellocal.getLocal_name() %></h1>
+		      <p class="carousel-item__description"><%=travellocal.getLocal_content() %></p>
+		      <a href="../travel/Attraction.travel?att=<%=travelatt.get(6).getAtt_name() %>" class="carousel-item__btn"><%=travelatt.get(6).getAtt_name() %></a>
+		        </div>
+		    </div>
+		  </div>
+		
+		</div>
 			<div>
 				<div class="iconmenu">	
 					<div class="icon" style="float: left;">
@@ -505,43 +498,6 @@ $(function(){
 				</div>
 				<div class="contents2">
 				<h4> 주변 호텔</h4>
-					<a href="">
-						<div class="travellist2">
-							<img src="../img/travel/phuket.jpg">
-							<div class="detail">
-								<p>푸켓</p>
-								
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="../img/travel/guam.jpg">
-							<div class="detail">
-								<p>괌</p>
-								
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="../img/travel/berlin.jpg">
-							<div class="detail">
-								<p>베를린</p>
-							</div>
-						</div>
-					</a>
-					<a href="">
-						<div class="travellist2">
-							<img src="../img/travel/cebu.jpg">
-							<div class="detail">
-								<p>세부</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="contents2">
-				<h4> 주변 음식점</h4>
 					<a href="">
 						<div class="travellist2">
 							<img src="../img/travel/phuket.jpg">

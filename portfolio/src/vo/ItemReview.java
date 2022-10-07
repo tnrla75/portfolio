@@ -67,6 +67,4 @@ public class ItemReview {
 	public void setReDate(Date reDate) {
 		this.reDate = reDate;
 	}
-
-	
 }

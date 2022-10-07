@@ -6,20 +6,21 @@ import static db.JdbcUtil.getConnection;
 import static db.JdbcUtil.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import dao.Hotel_DAO;
-import vo.Hotel_main_DB;
-import vo.Hotel_review_DB;
-import vo.Hotel_room_DB;
+import vo.Hotel_main_DTO;
+import vo.Hotel_review_DTO;
+import vo.Hotel_room_DTO;
 
 
 public class Hotel_RoomService {
 
 	//	룸
-	public ArrayList<Hotel_room_DB> getArticle(int hot_main_num) throws Exception{
+	public ArrayList<Hotel_room_DTO> getArticle(int hot_main_num) throws Exception{
 		// TODO Auto-generated method stub
 		
-		ArrayList<Hotel_room_DB> article = null;
+		ArrayList<Hotel_room_DTO> article = null;
 		Connection con = getConnection();
 		Hotel_DAO hotel_DAO = Hotel_DAO.getInstance();
 		hotel_DAO.setConnection(con);
@@ -53,9 +54,9 @@ public class Hotel_RoomService {
 //	}
 	
 	//	메인 셀렉
-	public ArrayList<Hotel_main_DB> jjinmainService(int hot_main_num) throws Exception{
+	public ArrayList<Hotel_main_DTO> jjinmainService(int hot_main_num) throws Exception{
 		
-		ArrayList<Hotel_main_DB> article = null;
+		ArrayList<Hotel_main_DTO> article = null;
 		Connection con = getConnection();
 		Hotel_DAO hotel_DAO = Hotel_DAO.getInstance();
 		hotel_DAO.setConnection(con);
@@ -85,9 +86,9 @@ public class Hotel_RoomService {
 	}
 	
 	//	리뷰2
-	public ArrayList<Hotel_review_DB> reviewList(int hot_main_num,int page, int limit) throws Exception{
+	public ArrayList<Hotel_review_DTO> reviewList(int hot_main_num,int page, int limit) throws Exception{
 		
-		ArrayList<Hotel_review_DB> reviewList = null;
+		ArrayList<Hotel_review_DTO> reviewList = null;
 		Connection con = getConnection();
 		Hotel_DAO hotel_DAO = Hotel_DAO.getInstance();		
 		hotel_DAO.setConnection(con);		

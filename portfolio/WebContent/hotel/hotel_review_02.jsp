@@ -1,5 +1,5 @@
 <%@page import="dao.Hotel_DAO"%>
-<%@page import="vo.Hotel_review_DB"%>
+<%@page import="vo.Hotel_review_DTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -185,18 +185,17 @@
 	
 	/* for(int i=0;i<arr.size();i++){
 		out.println("<tr>");
-			out.println("<td class='number_box' name='hotel_reviw_num'>"+arr.get(i).getHotel_review_num()+"</td>");				
-			out.println("<td class='addbox' name='hotel_add'>"+ arr.get(i).getHotel_add()+"</td>");
-			out.println("<td class='smallbox' name='hotel_name'>"+ arr.get(i).getHotel_name()+"</td>");
-			out.println("<td class='centerbox' name='hotel_rv_title'><a href='Review_02.jsp?getHotel_rv_title="+ arr.get(i).getHotel_rv_title()+"'>"+ arr.get(i).getHotel_rv_title()+"</a></td>");
-			out.println("<td class='smallbox' name='id'>"+ arr.get(i).getId()+"</td>");
+	out.println("<td class='number_box' name='hotel_reviw_num'>"+arr.get(i).getHotel_review_num()+"</td>");				
+	out.println("<td class='addbox' name='hotel_add'>"+ arr.get(i).getHotel_add()+"</td>");
+	out.println("<td class='smallbox' name='hotel_name'>"+ arr.get(i).getHotel_name()+"</td>");
+	out.println("<td class='centerbox' name='hotel_rv_title'><a href='Review_02.jsp?getHotel_rv_title="+ arr.get(i).getHotel_rv_title()+"'>"+ arr.get(i).getHotel_rv_title()+"</a></td>");
+	out.println("<td class='smallbox' name='id'>"+ arr.get(i).getId()+"</td>");
 		out.print("</tr>");
 	} */
 	
 	
-	ArrayList<Hotel_review_DB> arr=members.select_02(Integer.parseInt(hot_re_num));
-	
-	%>
+	ArrayList<Hotel_review_DTO> arr=members.select_02(Integer.parseInt(hot_re_num));
+%>
 	<form action="hotel_review_01.jsp">
 		<section class="main_bigbox">
 		

@@ -9,11 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.sql.DataSource;
-
 import vo.Item;
 import vo.ItemOption;
 import vo.ItemReview;
-import vo.Qna;
+import vo.ItemQna;
 import vo.ItemImg;
 
 public class ItemDAO {
@@ -79,8 +78,8 @@ public class ItemDAO {
 				item.setItemDetail(rs.getString("itemDetail"));
 				item.setItemWon(rs.getInt("itemWon"));
 				item.setItemDollar(rs.getInt("itemDollar"));
+				item.setDiscount(rs.getInt("discount"));
 				item.setDiscountWon(rs.getInt("discountWon"));
-				item.setDiscountDollar(rs.getInt("discountDollar"));
 				item.setCount(rs.getInt("count"));
 			}
 		}catch(Exception ex){
@@ -290,8 +289,8 @@ public class ItemDAO {
 				item.setItemDetail(rs.getString("itemDetail"));
 				item.setItemWon(rs.getInt("itemWon"));
 				item.setItemDollar(rs.getInt("itemDollar"));
+				item.setDiscount(rs.getInt("discount"));
 				item.setDiscountWon(rs.getInt("discountWon"));
-				item.setDiscountDollar(rs.getInt("discountDollar"));
 				item.setCount(rs.getInt("count"));
 				articleList.add(item);
 			}
@@ -335,8 +334,8 @@ public class ItemDAO {
 				item.setItemDetail(rs.getString("itemDetail"));
 				item.setItemWon(rs.getInt("itemWon"));
 				item.setItemDollar(rs.getInt("itemDollar"));
+				item.setDiscount(rs.getInt("discount"));
 				item.setDiscountWon(rs.getInt("discountWon"));
-				item.setDiscountDollar(rs.getInt("discountDollar"));
 				item.setCount(rs.getInt("count"));
 				articleList.add(item);
 			}
@@ -380,8 +379,8 @@ public class ItemDAO {
 				item.setItemDetail(rs.getString("itemDetail"));
 				item.setItemWon(rs.getInt("itemWon"));
 				item.setItemDollar(rs.getInt("itemDollar"));
+				item.setDiscount(rs.getInt("discount"));
 				item.setDiscountWon(rs.getInt("discountWon"));
-				item.setDiscountDollar(rs.getInt("discountDollar"));
 				item.setCount(rs.getInt("count"));
 				articleList.add(item);
 			}
@@ -395,21 +394,43 @@ public class ItemDAO {
 		return articleList;
 	}
 	
+	//검색한 아이템 개수
+	public int searchListCount(String keyword) {
+		int listCount= 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		String sql="select count(*) from item where (brandName like '%"+keyword+"%' or itemName like '%"+keyword+"%')";
+		try{
+			//데이터 개수 출력
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()){
+				listCount=rs.getInt(1);
+			}
+		}catch(Exception ex){
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
 	//브랜드 또는 상품 검색
-	public ArrayList<Item> searchSelectArticleList(String keyword){
+	public ArrayList<Item> searchSelectArticleList(int page,int limit, String keyword){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(keyword);
-		String sql="select * from item where brandName like '%"+keyword+"%' or itemName like '%"+keyword+"%'";
+		String sql="select * from item where brandName like '%"+keyword+"%' or itemName like '%"+keyword+"%' limit ?,10";
 		ArrayList<Item> articleList = new ArrayList<Item>();
 		Item item = null;
-		System.out.println(keyword);
+		int startrow=(page-1)*10; 
 		System.out.println(sql);
 		
 		try{
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startrow);
 			rs = pstmt.executeQuery();
-			System.out.println(pstmt);
+			System.out.println(pstmt.toString());
 			
 			while(rs.next()){
 				item = new Item();
@@ -423,8 +444,8 @@ public class ItemDAO {
 				item.setItemDetail(rs.getString("itemDetail"));
 				item.setItemWon(rs.getInt("itemWon"));
 				item.setItemDollar(rs.getInt("itemDollar"));
+				item.setDiscount(rs.getInt("discount"));
 				item.setDiscountWon(rs.getInt("discountWon"));
-				item.setDiscountDollar(rs.getInt("discountDollar"));
 				item.setCount(rs.getInt("count"));
 				articleList.add(item);
 			}
@@ -462,13 +483,13 @@ public class ItemDAO {
 	}
 	
 	//해당 아이템에 대한 문의게시판  글 개수
-	public ArrayList<Qna> totalQnaSelectArticleList(String itemCode) {
+	public ArrayList<ItemQna> totalQnaSelectArticleList(String itemCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="select * from itemQna where itemCode = ?";	
 		
-		ArrayList<Qna> articleList = new ArrayList<Qna>();
-		Qna qna = null;
+		ArrayList<ItemQna> articleList = new ArrayList<ItemQna>();
+		ItemQna qna = null;
 	
 		try{
 			pstmt = con.prepareStatement(sql);
@@ -478,7 +499,7 @@ public class ItemDAO {
 			rs = pstmt.executeQuery();
 
 			while(rs.next()){
-				qna = new Qna();
+				qna = new ItemQna();
 				qna.setMb_id(rs.getString("mb_id"));
 				qna.setItemCode(rs.getString("itemCode"));
 				qna.setQsubject(rs.getString("qsubject"));
@@ -498,15 +519,15 @@ public class ItemDAO {
 	}
 	
 	//문의게시판 select
-	public ArrayList<Qna> qnaSelectArticleList(int page,int limit, String itemCode) {
+	public ArrayList<ItemQna> qnaSelectArticleList(int page,int limit, String itemCode) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from itemQna where itemCode = ? order by qnaNo desc  limit ?,10";
+		String sql="select * from itemQna where itemCode = ? order by qupdate desc limit ?,10 ";
 			
 		System.out.println(sql);
-		ArrayList<Qna> articleList = new ArrayList<Qna>();
-		Qna qna = null;
+		ArrayList<ItemQna> articleList = new ArrayList<ItemQna>();
+		ItemQna qna = null;
 		int startrow=(page-1)*10; 
 		
 		try{
@@ -518,7 +539,7 @@ public class ItemDAO {
 			rs = pstmt.executeQuery();
 
 			while(rs.next()){
-				qna = new Qna();
+				qna = new ItemQna();
 				qna.setMb_id(rs.getString("mb_id"));
 				qna.setItemCode(rs.getString("itemCode"));
 				qna.setQsubject(rs.getString("qsubject"));
@@ -584,7 +605,6 @@ public class ItemDAO {
 			System.out.println(pstmt.toString());
 			
 			rs = pstmt.executeQuery();
-
 			while(rs.next()){
 				item = new Item();
 				item.setItemCode(rs.getString("itemCode"));
@@ -597,14 +617,14 @@ public class ItemDAO {
 				item.setItemDetail(rs.getString("itemDetail"));
 				item.setItemWon(rs.getInt("itemWon"));
 				item.setItemDollar(rs.getInt("itemDollar"));
+				item.setDiscount(rs.getInt("discount"));
 				item.setDiscountWon(rs.getInt("discountWon"));
-				item.setDiscountDollar(rs.getInt("discountDollar"));
 				item.setCount(rs.getInt("count"));
-//				item.setReRate(rs.getInt("reRate"));
 				articleList.add(item);
 			}
 			System.out.println("전체 select 성공");
 		}catch(Exception ex) {
+			System.out.println(ex);
 			System.out.println("select 실패");
 		}finally{
 			close(rs);
@@ -615,69 +635,39 @@ public class ItemDAO {
 	}
 
 
-	//게시글 번호 update 및 답글 insert
-//	public int insertReplyArticle(BoardBean article){
-//
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		
-//		//게시글 마지막 번호
-//		String board_max_sql="select max(board_num) from board";
-//		String sql="";
-//		int num=0;
-//		int insertCount=0;
-//		int re_ref=article.getBOARD_RE_REF();
-//		int re_lev=article.getBOARD_RE_LEV();
-//		int re_seq=article.getBOARD_RE_SEQ();
-//
-//		try{
-//			pstmt=con.prepareStatement(board_max_sql);
-//			rs = pstmt.executeQuery();
-//			
-//			if(rs.next())num =rs.getInt(1)+1;
-//			else num=1;
-//			
-//			//답변 작성시 글번호는 게시글 마지막 번호+1
-//			sql="update board set BOARD_RE_SEQ=BOARD_RE_SEQ+1 where BOARD_RE_REF=? ";
-//			sql+="and BOARD_RE_SEQ>?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1,re_ref);
-//			pstmt.setInt(2,re_seq);
-//			int updateCount=pstmt.executeUpdate();
-//
-//			//답글 insert
-//			if(updateCount > 0){
-//				commit(con);
-//			}
-//
-//			re_seq = re_seq + 1;
-//			re_lev = re_lev+1;
-//			sql="insert into board (BOARD_NUM,BOARD_NAME,BOARD_PASS,BOARD_SUBJECT,";
-//			sql+="BOARD_CONTENT, BOARD_FILE,BOARD_RE_REF,BOARD_RE_LEV,BOARD_RE_SEQ,";
-//			sql+="BOARD_READCOUNT,BOARD_DATE) values(?,?,?,?,?,?,?,?,?,?,now())";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, num);
-//			pstmt.setString(2, article.getBOARD_NAME());
-//			pstmt.setString(3, article.getBOARD_PASS());
-//			pstmt.setString(4, article.getBOARD_SUBJECT());
-//			pstmt.setString(5, article.getBOARD_CONTENT());
-//			pstmt.setString(6, ""); //���忡�� ������ ���ε����� ����.
-//			pstmt.setInt(7, re_ref);
-//			pstmt.setInt(8, re_lev);
-//			pstmt.setInt(9, re_seq);
-//			pstmt.setInt(10, 0);
-//			insertCount = pstmt.executeUpdate();
-//			System.out.println("insert");
-//		}catch(SQLException ex){
-//		}finally{
-//			close(rs);
-//			close(pstmt);
-//		}
-//
-//		return insertCount;
+	//댓글 insert
+	public int re_insertArticle(ItemReview article){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql="";
+		int insertCount=0;
 
-//	}
-//
+		try{
+			sql="insert into itemReview (mb_id,itemCode,reRate,reText,rePhoto1,rePhoto2,rePhoto3,reDate)"
+					+ "values(?,?,?,?,?,?,?,now())";
+			System.out.println("sql");
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, article.getMb_id());
+			pstmt.setString(2, article.getItemCode());
+			pstmt.setInt(3, article.getReRate());
+			pstmt.setString(4, article.getReText());
+			pstmt.setString(5, article.getRePhoto1());
+			pstmt.setString(6, article.getRePhoto2());
+			pstmt.setString(7, article.getRePhoto3());
+
+			insertCount=pstmt.executeUpdate();
+
+		}catch(Exception ex){
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+
+		return insertCount;
+
+	}
+	
+	
 //	//update문
 //	public int updateArticle(BoardBean article){
 //

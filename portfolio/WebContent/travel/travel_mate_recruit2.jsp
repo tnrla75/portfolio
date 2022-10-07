@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="travel_package.MateController" %>   
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
 			String travelmateDate= request.getParameter("writedate");
 			MateController mc = new MateController();
 			mc.insert(id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate);
-			response.sendRedirect("travel_mate.jsp");
+			response.sendRedirect("travel_mate.travel");
 	%>
 </body>
 </html>

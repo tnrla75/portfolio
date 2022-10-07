@@ -1,6 +1,6 @@
 
 <%@page import="dao.Hotel_DAO"%>
-<%@page import="vo.Hotel_review_DB"%>
+<%@page import="vo.Hotel_review_DTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -23,9 +23,9 @@
 	
 	String hot_re_id=request.getParameter("mb_id");
 	String hot_country=request.getParameter("hot_country");
-	String hot_re_title=request.getParameter("hot_re_title");
+	
 	String hot_re_content=request.getParameter("hot_re_content");
-	String hot_re_comments=request.getParameter("hot_re_comments");
+	
 	
 	String hot_re_rate=request.getParameter("hot_re_rate");		
 	
@@ -33,7 +33,7 @@
 	
 	Hotel_DAO upddate = new Hotel_DAO();
 	
-	upddate.update_01(hot_re_num,hot_main_num,hot_re_id,hot_re_content);
+	upddate.update_01(hot_re_num,hot_main_num,hot_re_id,hot_re_content,hot_re_rate);
 	
 	response.sendRedirect("../hotel/hotelRoomForm.ho?hot_re_num="+hot_re_num+"&hot_main_num="+hot_main_num+"&hot_re_rate="+hot_re_rate); 
 	

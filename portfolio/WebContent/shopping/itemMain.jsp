@@ -35,8 +35,7 @@
 	a:visited {
 		color: black;
 	}
-	
-	
+
 	/* side nav */
 	#left_nav {
 		background-color: rgba( 255, 255, 255, 0.8 );

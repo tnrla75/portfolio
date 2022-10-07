@@ -57,7 +57,7 @@ public class TravelattService {
 		return travelimg;
 	}
 	
-	public int getListCount() throws Exception{
+	public int getListCount() throws Exception{													//∆‰¿Ã¬°
 		int listCount = 0;
 		Connection con = getConnection();
 		TravelDAO travelDAO = TravelDAO.getInstance();

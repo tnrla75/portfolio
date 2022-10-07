@@ -18,6 +18,8 @@
 		int startPage2=pageInfo2.getStartPage();
 		int endPage2=pageInfo2.getEndPage();
 		
+		System.out.println(request.getParameter("ticketNum1"));
+		
 		
 	%>
 <!DOCTYPE html>
@@ -428,6 +430,7 @@
         	background-color: #002266;
         	border-style: none;
         	float:right;
+        	cursor: pointer;
         }
         .pageinfo{
         	float: left;
@@ -463,7 +466,35 @@
 <script>	
 $(document).ready(function() {
 	
-	$('.choicebtn').on('click',function(){
+	$("input:radio[name='choicebtn']").change(function(){
+		var checkBtn = $(this);
+		var tr = checkBtn.parent().parent();
+		var td = tr.children();
+	
+		var numberStr1 = "<%= request.getParameter("totalprice") %>";
+		var numberStr2 = td.eq(5).text();
+		
+		var number1 = numberStr1.replace(/,/g, "");
+		var number2 = numberStr2.replace(/,/g, "");	
+		
+		num1 = parseInt(number1);
+		num2 = parseInt(number2);
+		var total = num1 + num2;
+		
+		var result = total.toLocaleString();
+		
+		
+		$('#ticketNum2').val(td.eq(0).find("input[type='hidden']").val());
+		$('.span2').val(result);
+		$('.span3').text("원");
+		
+	});
+	$('.footer_backchoice').on('click',function(){
+		myform.action = "../flight/flightDetail.air";
+		myform.submit();
+	});
+	
+	<%-- $('.choicebtn').on('click',function(){
 		var checkBtn = $(this);
 	
 		
@@ -487,7 +518,7 @@ $(document).ready(function() {
 		
 		myform.action = "../flight/flightDetail.air"
 		myform.submit();
-	});
+	}); --%>
 	
 	
 	<% if( people.equals("1")){ %>
@@ -537,7 +568,7 @@ function getPost(mode)
 <body>
 	<form name="myform" action="../flight/flightTicketDetail.air">
 		<%
-		String id = (String)session.getAttribute("id"); 
+		String id = (String)session.getAttribute("mb_id"); 
 		if(id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
@@ -551,13 +582,12 @@ function getPost(mode)
 	<div id="footerprice">
 	<div id="textdiv">
 		<div class="footer_amount">
-		<input type="hidden" id="total" value='' name="total">
 			<span class="span1">예상 결제 금액</span>
 			<input type="button" class="footer_backchoice" value="오는 편 선택">
 			<span class="span3"></span>
 			<input class="span2" name="totalprice" value='<%= request.getParameter("totalprice") %>' readonly>
-			
-			
+			<input type="hidden" value="" name="ticketNum2" id="ticketNum2">
+			<input type="hidden" value="<%=request.getParameter("ticketNum1")%>" name="ticketNum1" id="ticketNum1">
 			
 		</div>
 		
@@ -703,15 +733,15 @@ function getPost(mode)
 					
 				}
 				%>
-				<input type="hidden" value="<%= request.getParameter("ticketNum1") %>" name="ticketNum1">
-				<input type="hidden" value="<%= ticketBeanList2.get(i).getFlight_Ticket_Num() %>" name="ticketNum2">
+				
+				<input type="hidden" value="<%= ticketBeanList2.get(i).getFlight_Ticket_Num() %>">
 				<img src="../img/flight/<%= flightimg1 %>" class="flightimg"></td>
 				<td class="td1" style="text-align: left;"><%= ticketBeanList2.get(i).getFlight_name() %></td>
 				<td class="td1"><span class="time"><%= ticketBeanList2.get(i).getFlight_departureTime()%></span><br><span class="airport"><%= ticketBeanList2.get(i).getFlight_departure() %></span></td>
 				<td class="td1"><span class="airport"><%= ticketBeanList2.get(i).getEstimated_time() %></span><br><img src="aaa.jpg"></td>
 				<td class="td1"><span class="time"><%= ticketBeanList2.get(i).getFlight_arrivalTime() %></span><br><span class="airport"><%= ticketBeanList2.get(i).getFlight_arrival() %></span></td>
 
-				<td class="td1" rowspan="2"><fmt:formatNumber value="<%= ticketBeanList2.get(i).getFlight_Ticket_Price() %>" groupingUsed="true" />원<input type="button" value="선택" class="choicebtn" ></td>
+				<td class="td1" rowspan="2"><fmt:formatNumber value="<%= ticketBeanList2.get(i).getFlight_Ticket_Price() %>" groupingUsed="true" />원<input type="radio" value="선택" class="choicebtn" name="choicebtn"></td>
 			</tr>
 			
 			

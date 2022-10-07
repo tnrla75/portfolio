@@ -1,4 +1,4 @@
-<%@page import="vo.Hotel_review_DB"%>
+<%@page import="vo.Hotel_review_DTO"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -145,7 +145,6 @@
 <jsp:useBean id="members" class="dao.Hotel_DAO"/>
 
 <%
-	
 	request.setCharacterEncoding("UTF-8");
 	
 	String hot_re_num=request.getParameter("hot_re_num");
@@ -159,20 +158,20 @@
 %>
 <body>
 <%
-		String mb_id = (String)session.getAttribute("mb_id"); 
+	String mb_id = (String)session.getAttribute("mb_id"); 
 		if(mb_id == null){
-			%>
+%>
 			
 			<jsp:include page="../overlap/header_login.jsp"/>
 			
 			<%
-		}else{
-			%>
+							}else{
+						%>
 			<jsp:include page="../overlap/header_logout.jsp"/>
 			<%
-		}
-	%>
-	<input type="hidden" name="hot_re_content" value="<%= hot_re_content %>"/>
+				}
+			%>
+	<input type="hidden" name="hot_re_content" value="<%=hot_re_content%>"/>
 		<script>
 		
 	<%-- 	function write() {
@@ -248,22 +247,20 @@
 		</tr>
 				
 		<%
-		
-		ArrayList<Hotel_review_DB> arr=members.select_01();
-	
-		for(int i=0;i<arr.size();i++){
-			out.println("<tr>");
-				out.println("<td class='number_box' name='hot_re_num'>"+(i+1)+"</td>");				
-//				out.println("<td class='addbox' name='hot_country' >"+ arr.get(i).getHot_country()+"</td>");
-				out.println("<td class='smallbox' name='hot_main_num'>"+ arr.get(i).getHot_main_num()+"</td>");
-//				out.println("<td class='centerbox' name='hot_re_num'><a href='hotel_review_02.jsp?+="+arr.get(i).getHot_re_num()+"'>"+ arr.get(i).getHot_re_title()+"</a></td>");
-				out.println("<td class='smallbox' name='hot_re_id'> "+arr.get(i).getHot_re_id()+"</td>");
-				out.println("<td class='datebox' style='overflow: hidden;' name='hot_re_date' id='hot_re_date' maxlength='10'> "+arr.get(i).getHot_re_date()+"</td>");
-			out.print("</tr>");
-			
-		}
-		
-		%>
+							ArrayList<Hotel_review_DTO> arr=members.select_01();
+							
+								for(int i=0;i<arr.size();i++){
+							out.println("<tr>");
+								out.println("<td class='number_box' name='hot_re_num'>"+(i+1)+"</td>");				
+						//				out.println("<td class='addbox' name='hot_country' >"+ arr.get(i).getHot_country()+"</td>");
+								out.println("<td class='smallbox' name='hot_main_num'>"+ arr.get(i).getHot_main_num()+"</td>");
+						//				out.println("<td class='centerbox' name='hot_re_num'><a href='hotel_review_02.jsp?+="+arr.get(i).getHot_re_num()+"'>"+ arr.get(i).getHot_re_title()+"</a></td>");
+								out.println("<td class='smallbox' name='hot_re_id'> "+arr.get(i).getHot_re_id()+"</td>");
+								out.println("<td class='datebox' style='overflow: hidden;' name='hot_re_date' id='hot_re_date' maxlength='10'> "+arr.get(i).getHot_re_date()+"</td>");
+							out.print("</tr>");
+							
+								}
+						%>
 		</table>
 		
 		<div class='down_box'>

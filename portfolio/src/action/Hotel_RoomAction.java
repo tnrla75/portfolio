@@ -2,6 +2,7 @@ package action;
 
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import svc.Hotel_MainService;
 import svc.Hotel_RoomService;
 import vo.ActionForward;
-import vo.Hotel_main_DB;
-import vo.Hotel_review_DB;
-import vo.Hotel_room_DB;
+import vo.Hotel_main_DTO;
+import vo.Hotel_review_DTO;
+import vo.Hotel_room_DTO;
 import vo.PageInfo;
 
 public class Hotel_RoomAction implements Action {
@@ -29,9 +30,9 @@ public ActionForward execute(HttpServletRequest request,HttpServletResponse resp
 		Hotel_RoomService hotel_RoomService = new Hotel_RoomService();	
 		
 		
-		ArrayList<Hotel_room_DB> roomList = hotel_RoomService.getArticle(hot_main_num);	
+		ArrayList<Hotel_room_DTO> roomList = hotel_RoomService.getArticle(hot_main_num);	
 		
-		ArrayList<Hotel_main_DB> mainList = hotel_RoomService.jjinmainService(hot_main_num);
+		ArrayList<Hotel_main_DTO> mainList = hotel_RoomService.jjinmainService(hot_main_num);
 		
 		ActionForward forward_hotel = new ActionForward();
 		
@@ -40,7 +41,7 @@ public ActionForward execute(HttpServletRequest request,HttpServletResponse resp
 		
 		
 //		 �샇�뀛 �젙蹂� 媛��졇�삩 怨�
-		ArrayList<Hotel_review_DB> reviewList=new ArrayList<Hotel_review_DB>();
+		ArrayList<Hotel_review_DTO> reviewList=new ArrayList<Hotel_review_DTO>();
 
 		int page=1;
 		int limit=4;
@@ -67,8 +68,9 @@ public ActionForward execute(HttpServletRequest request,HttpServletResponse resp
 		pageInfo.setPage(page);
 		pageInfo.setStartPage(startPage);	
 		
-		System.out.println(hot_main_num);
-		System.out.println(mainList+"�뿊�뀡 mainList");
+		System.out.println(roomList+" : 엑션 roomList");
+		System.out.println(hot_main_num+" : 엑션 hot_main_num");
+		System.out.println(mainList+" : 엑션 mainList");
 		
 		request.setAttribute("hot_main_num", hot_main_num);
 		request.setAttribute("reviewList", reviewList);

@@ -14,6 +14,7 @@
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");	
 
 	String category = request.getParameter("category");
+	session.setAttribute("category", category);
 	
 	int listCount=pageInfo.getListCount();
 	int nowPage=pageInfo.getPage();
@@ -35,7 +36,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <title>상품 선택</title>
 <style type="text/css">
-	a {
+	/* a {
 		text-decoration: none;
 		text-decoration-line: none;
 		color: black;
@@ -48,7 +49,7 @@
 	}
 	a:visited {
 		color: black;
-	}
+	} */
 	#search {
 		width: 1200px;
 		height: 50px;
@@ -235,7 +236,7 @@
 		border-width: 1px;
 		border-color: white;
 		width: 270px;
-		height: 410px;
+		height: 450px;
 		overflow: hidden;
 	}
 	#item_wr:hover{
@@ -254,13 +255,19 @@
 		font-size: 12pt;
 	}
 	.itemDetail p:nth-of-type(2) {
+		width: 240px;
 		font-weight: bold;
 		font-size: 10pt;
-		color: #8C8C8C;
+		color: #7474746;
+		overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 	}
 	.itemDetail b:first-of-type {
 		font-weight: bold;
-		font-size: 17pt;
+		font-size: 20pt;
+		color: #CC3D3D;
+		line-height: 10px;
 	}
 	.itemDetail b:last-of-type {
 		font-weight: normal;
@@ -279,6 +286,9 @@
 		margin: 40px auto;
 		text-align: center;
 	}
+	.on {
+		color: yellow;
+	}
 </style>
 </head>
 <% 
@@ -286,44 +296,22 @@
 	String reviewNo=request.getParameter("reviewNo");
 %>
 <script>
+
 	$(document).ready(function() {
- 		$('.insert1').hide();
- 		
- 		
-        $('#travel1').mouseover(function(){
-            $('.insert1').show();
-        });
-        $('#travel1').mouseout(function(){
-            $('.insert1').hide();
-        });
-        $('.insert2').hide();
-        $('#travel2').mouseover(function(){
-            $('.insert2').show();
-        });
-        $('#travel2').mouseout(function(){
-            $('.insert2').hide();
-        });
-        $('.insert3').hide();
-        $('#travel3').mouseover(function(){
-            $('.insert3').show();
-        });
-        $('#travel3').mouseout(function(){
-            $('.insert3').hide();
-        });
-        $('.insert4').hide();
-        $('#travel4').mouseover(function(){
-            $('.insert4').show();
-        });
-        $('#travel4').mouseout(function(){
-            $('.insert4').hide();
-        }); 
-        
-      	/* $('#filter img:first-of-type').hide();
-      	$('#filter input[type=submit]:first-of-type').on('click', function() {
-      		 $('#filter img:first-of-type').show();
-        });  */
-        
-    
+		if(location.href.indexOf('item_countOrder.shop?category=스킨케어') > -1){ // location.href 로 현재 페이지 주소를 가져옵니다.
+			alert("a");
+		/* 	$(".filter_sort").addClass('on');; //매칭된 페이지에 한해 특정 요소에 스타일을 부여합니다. */
+		}
+        $(".filter_sort").on('click',function() {
+      		toggleClass(".active-color");
+        });	
+        	
+
+     	$('.filter_sort').click(function() {
+	  		alert("click");
+	  		$(this).addClass('bg');
+	 	});
+
 	});
 </script>
 <body>
@@ -339,7 +327,6 @@
 				<%
 			}
 		%>
-		
 		<nav>
 			<div id="search">
 				<input type="text" name="keyword">
@@ -389,7 +376,6 @@
 								<div><b>$</b><input type="text" name="price_op" value="" class="price_op" placeholder="0"></div>
 								<b>&nbsp~&nbsp</b>
 								<div>&nbsp<b>$</b><input type="text" name="price_op" value="" class="price_op" placeholder="0"></div>
-								
 							</td>
 						</tr>
 					</table>	
@@ -401,24 +387,20 @@
 		<section id="wrap">
 			<div id="filter">
 				<h3></h3>
-				<img src="../img/dutyfree/check.png" width="25px" height="25px">
-				<a href="item_countOrder.shop?category=<%= category%>">조회수순&nbsp|</a>
-				<a href="item_highPrice.shop?category=<%= category%>">높은가격순&nbsp|</a>
-				<a href="item_lowPrice.shop?category=<%= category%>">낮은가격순</a>
+				<a href="item_countOrder.shop?category=<%= category%>" class="filter_sort">조회수순&nbsp|</a>
+				<a href="item_highPrice.shop?category=<%= category%>"  class="filter_sort">높은가격순&nbsp|</a>
+				<a href="item_lowPrice.shop?category=<%= category%>"  class="filter_sort">낮은가격순</a>
 				<!-- <input type="submit" value="조회수순	|" onclick="javascript: form.action='item_countOrder.shop?category=category';">
 				<input type="submit" value="높은가격순	|" onclick="javascript: form.action='item_highPrice.shop';">
 				<input type="submit" value="낮은가격순" onclick="javascript: form.action='item_lowPrice.shop';"/> -->
 			</div>
-			<table id="itemIndex" align="center" cellpadding="10" >
+			<table id="itemIndex" align="center" cellpadding="10">
 				<tr>
-					<% if (articleList.size()==0) {%>
-						등록된 아이템이 없습니다.
-					<% } %>
 					<%
-					
-					if(articleList != null && listCount > 0){
-					
-						for(int i=0; i<articleList.size(); i++) { 
+						if(articleList != null && listCount > 0){
+							for(int i=0; i<articleList.size(); i++) { 
+								 double discount = (double)articleList.get(i).getDiscount()/(double)100; 
+								 double discountDollar = articleList.get(i).getItemDollar()*(1-discount);
 					%>	
 					<td>
 						<div id="item_wr">
@@ -428,8 +410,12 @@
 								<p><%= articleList.get(i).getBrandName() %></p>
 								<p><%= articleList.get(i).getItemName() %></p>
 								<p>
-									<b>$<%= articleList.get(i).getDiscountDollar() %></b>
-									<b>(<fmt:formatNumber value="<%= articleList.get(1).getDiscountWon() %>" groupingUsed="true" />원)</b>
+									<span style="color: #8C8C8C; text-decoration: line-through;">$<%= articleList.get(i).getItemDollar() %></span>
+									<span style="font-weight: bold;"><%= articleList.get(i).getDiscount()+"%" %></span>
+								</p>
+								<p>
+									<b>$<fmt:formatNumber value="<%= discountDollar %>" pattern='0.0' /></b>
+									<b>(<fmt:formatNumber value="<%= articleList.get(i).getDiscountWon() %>"  groupingUsed="true"/>원)</b>
 								</p>
 								<div class="like"><img src="../img/dutyfree/heart.png" height="30px" width="30px"></div>
 							</td>
@@ -438,15 +424,18 @@
 								<p><%= articleList.get(i).getBrandName()%></p>
 								<p><%= articleList.get(i).getItemName() %></p>
 								<p>
-									<b>$<%= articleList.get(i).getDiscountDollar() %></b>
-									<b>(<fmt:formatNumber value="<%= articleList.get(1).getDiscountWon() %>" groupingUsed="true" />원)</b>
+									<span style="color: #8C8C8C; text-decoration: line-through;">$<%= articleList.get(i).getItemDollar() %></span>
+									<span style="font-weight: bold;"><%= articleList.get(i).getDiscount()+"%" %></span>
+								</p>
+								<p>
+									<b>$<fmt:formatNumber value="<%= discountDollar %>" pattern='0.0' /></b>
+									<b>(<fmt:formatNumber value="<%= articleList.get(i).getDiscountWon() %>" groupingUsed="true"/>원)</b>
 								</p>
 								<div class="like"><img src="../img/dutyfree/heart.png" height="30px" width="30px" class="heart"></div>
 							<% } %>
 						</a>
 						</div>
-					</td>
-					
+					</td>	
 						<% } %>	
 				</tr>
 			</table>
@@ -467,7 +456,7 @@
 				<%if (nowPage>=maxPage) { %>
 					[다음]
 				<% } else { %>
-					<a href="itemList.shop?page=<%=nowPage+1 %>&category=<%= category%>">[다음]</a>
+					<a href="itemList.shop?page=<%=nowPage+1 %>">[다음]</a>
 				<% } %>
 			</section>
 				<% } else { %>

@@ -12,7 +12,7 @@ import vo.Item;
 import vo.ItemImg;
 import vo.ItemOption;
 import vo.ItemReview;
-import vo.Qna;
+import vo.ItemQna;
 
 public class ItemDetailService {
 	
@@ -119,8 +119,8 @@ public class ItemDetailService {
 	}
 	
 	//qna
-	public ArrayList<Qna> qnaGetArticleList(int page, int limit, String itemCode) throws Exception{
-		ArrayList<Qna> articleList = null;
+	public ArrayList<ItemQna> qnaGetArticleList(int page, int limit, String itemCode) throws Exception{
+		ArrayList<ItemQna> articleList = null;
 		Connection con = getConnection();
 		ItemDAO itemDAO = ItemDAO.getInstance();
 		itemDAO.setConnection(con);
@@ -131,8 +131,8 @@ public class ItemDetailService {
 	}
 
 	//qna 해당 아이템에 대한 글 개수
-	public ArrayList<Qna> totalQnaGetArticleList(String itemCode) throws Exception {
-		ArrayList<Qna> articleList = null;
+	public ArrayList<ItemQna> totalQnaGetArticleList(String itemCode) throws Exception {
+		ArrayList<ItemQna> articleList = null;
 		Connection con = getConnection();
 		ItemDAO itemDAO = ItemDAO.getInstance();
 		itemDAO.setConnection(con);

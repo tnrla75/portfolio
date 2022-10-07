@@ -12,8 +12,8 @@
 		<header>
 			<div id="header">
 			<div id="title">
-				<a href="../overlap/indexpage.jsp" style="width: 300px;height: 200px;">
-					<header style="width: 250px;height: 250px; z-index: -2;position: relative;">
+				<a href="../index.jsp" style="width: 300px;height: 150px;">
+					<header style="width: 250px;height: 150px; z-index: -2;position: relative;">
 						<img src="../img/logo/logo1.png">
 					</header>
 				</a>
@@ -27,34 +27,34 @@
 						}
 					%>
 						<li class='commonnav'><a href='../overlap/logout.jsp' >로그아웃</a></li>
-						<li class="commonnav"><a href="#">마이페이지</a></li>
+						<li class="commonnav"><a href="info.mypage?command=info&mb_id=<%= (String)session.getAttribute("mb_id")%>">마이페이지</a></li>
 						<li class="commonnav"><a href="#">즐겨찾기</a></li>
 						<li class="commonnav"><a href="#">고객센터</a></li>
 					</ul>
 				<ul id="main">
 						
 						<li class="commonnav2">
-							<p><a class="commonlink" href="../overlap/indexpage.jsp">항공</a></p>
+							<p><a class="commonlink" href="../index.jsp">항공</a></p>
 							<ul class="list">
-								<li><a href="../flight/">최저가 항공권</a></li>
-								<li><a href="../flight/">부가 서비스 안내</a></li>
-								<li><a href="../flight/">좌석 안내</a></li>
+								<li><a href="flight/">최저가 항공권</a></li>
+								<li><a href="flight/">부가 서비스 안내</a></li>
+								<li><a href="flight/">좌석 안내</a></li>
 							</ul>
 						</li>
 						<li class="commonnav3">
-							<p><a class="commonlink" href="hotel_main.html">호텔</a></p>
+							<p><a class="commonlink" href="../hotel_main.html">호텔</a></p>
 							<ul class="list">
-								<li><a href="../hotel/">추천 호텔</a></li>
-								<li><a href="../hotel/">호텔 검색</a></li>
-								<li><a href="../hotel/Hotel_review_01.jsp">호텔 Q&A 게시판</a></li>
+								<li><a href="hotel/">추천 호텔</a></li>
+								<li><a href="hotel/">호텔 검색</a></li>
+								<li><a href="hotel/Hotel_review_01.jsp">호텔 Q&A 게시판</a></li>
 							</ul>
 						</li>
 						<li class="commonnav4">
 							<p><a class="commonlink" href="../shopping/itemMain.jsp">면세점</a></p>
 							<ul class="list">
-								<li><a href="../shoping/">Best샵</a></li>
-								<li><a href="../shoping/">세일</a></li>
-								<li><a href="../shoping/">명품관</a></li>
+								<li><a href="shoping/">Best샵</a></li>
+								<li><a href="shoping/">세일</a></li>
+								<li><a href="shoping/">명품관</a></li>
 							</ul>
 						</li>
 						<li class="commonnav1">
@@ -62,7 +62,7 @@
 							<ul class="list">
 								<li><a href="../travel/TripGuide.travel">트립 가이드</a></li>
 								<li><a href="../travel/travel_route.jsp">여행루트</a></li>
-								<li><a href="../travel/travel_mate.jsp">여행메이트</a></li>
+								<li><a href="../travel/travel_mate.travel">여행메이트</a></li>
 							</ul>
 						</li>
 					</ul>

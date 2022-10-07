@@ -12,9 +12,16 @@ public class FlightTicketBean {
 	private Date flight_departureDay;
 	private int flight_Ticket_Price;
 	private String estimated_time;
+	private String flight_airplaneName;
 	
 	
 
+	public String getFlight_airplaneName() {
+		return flight_airplaneName;
+	}
+	public void setFlight_airplaneName(String flight_airplaneName) {
+		this.flight_airplaneName = flight_airplaneName;
+	}
 	public String getEstimated_time() {
 		return estimated_time;
 	}

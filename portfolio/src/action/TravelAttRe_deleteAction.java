@@ -1,6 +1,7 @@
 package action;
 
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +32,8 @@ public class TravelAttRe_deleteAction implements Action {
 		else{
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("Attraction.travel?att="+att);
+			String encodedParam = URLEncoder.encode(att, "UTF-8");
+			forward.setPath("Attraction.travel?att="+encodedParam);
 		}
 		return forward;
 	}

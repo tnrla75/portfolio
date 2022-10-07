@@ -2,6 +2,7 @@ package action;
 
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,11 +38,8 @@ public class TravelAttRe_updateAction implements Action {
 		else{
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			System.out.println(att+"---2"); 
-			//String test = new String(att .getBytes("8859_1"), "UTF-8");
-			String text = URLDecoder.decode(att, "UTF-8") ;
-			//System.out.println(text+"--44");
-			forward.setPath("Attraction.travel?att="+text);
+			String encodedParam = URLEncoder.encode(att, "UTF-8");
+			forward.setPath("Attraction.travel?att="+encodedParam);
 		}
 
 		

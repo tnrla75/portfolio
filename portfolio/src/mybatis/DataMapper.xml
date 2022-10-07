@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="abcd">
+<!--여행-->
+	<insert id="insert" parameterType="vo.Travelatt_reservation">
+		insert into attraction_reserve (mb_id, att_num, att_adult_num, att_student_num, att_reserve_date) values(#{mb_id}, #{att_num}, #{att_adult_num}, #{att_student_num}, now() );
+	</insert>
+	
+<!-- 면세점 -->
+	<select parameterType="String" resultType="vo.Item" id="item">
+		select * from item where itemCode=#{itemCode} 
+	</select>
+	<select parameterType="vo.ItemOrder" id="itemOrder">
+		insert into itemOrder values(#{order_no},#{mb_id},#{itemCode},#{count},#{option}) 
+	</select>
+
+<!-- 마이페이지 -->
+	<select resultType="vo.Member_info" id="member">
+		select * from member_info where mb_id=#{mb_id} 
+	</select>
+	<update parameterType="vo.Member_info" id="update">
+		update member_info set mb_pw=#{mb_pw}, mb_address=#{mb_address}, mb_detailaddress=#{mb_detailaddress} where mb_id=#{mb_id} 
+	</update>
+	<update parameterType="vo.Member_info" id="board_update">
+		update member_info set mb_passnum=#{mb_passnum}, mb_exdate=#{mb_exdate} where mb_id=#{mb_id} 
+	</update>
+	<select resultType="vo.Mypage_qna" id="item_qna">
+		select item.itemCode, brandName, itemName, itemImg, qsubject, question, qupdate, qanswer from item left outer join itemQna on item.itemCode=itemQna.itemCode where mb_id=#{mb_id}; 
+	</select>
+	<select resultType="vo.Mypage_review" id="item_review">
+		select item.itemCode, brandName, itemName, itemImg, reRate, reText, rePhoto1, rePhoto2, rePhoto3, reDate from item left outer join itemReview on item.itemCode=itemReview.itemCode where mb_id=#{mb_id}; 
+	</select>
+<!--ID찾기 -->
+	<select id="findid" resultType="vo.Member_info" parameterType="vo.Member_info">
+		select * from member_info where mb_name=#{mb_name} and mb_email= #{mb_email}
+	</select>
+	<select id="findpw" resultType="vo.Member_info" parameterType="vo.Member_info">
+		select * from member_info where mb_id=#{mb_id} and mb_name=#{mb_name} and mb_email= #{mb_email}
+	</select>
+	<update id="changepw" parameterType="vo.Member_info">
+		update member_info set mb_pw=#{mb_pw} where mb_id= #{mb_id}	
+	</update>
+	
+	<!-- 항공  -->
+	<select resultType="vo.Travelatt" id="flightend_att">select * from attraction order by rand() limit 4; </select>
+
+<select resultType="vo.FlightTicketBean" id="ticketNum1" parameterType="String">select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; </select>
+
+<select resultType="vo.FlightTicketBean" id="ticketNum2" parameterType="String">select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; </select>
+
+<select resultType="vo.FlightSeatBean" id="seat1" parameterType="String">select res.seatNum, res.flight_Ticket_Num, tic.flight_airplaneName from flight_reserve res, flight_ticket tic where res.flight_Ticket_Num=#{flight_Ticket_Num} and tic.flight_Ticket_Num=#{flight_Ticket_Num}; </select>
+
+<!-- 호텔 -->
+	<insert parameterType="vo.Hotel_yoyaku_DTO" id="yoyaku">	
+		insert into hot_yoyaku (mb_id,hot_main_num,hot_room_num) values (#{mb_id},#{hot_main_num},#{hot_room_num})
+	</insert>
+
+
+
+
+</mapper>

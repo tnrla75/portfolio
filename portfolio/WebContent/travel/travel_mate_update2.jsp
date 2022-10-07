@@ -21,7 +21,8 @@
 			String travelmateNum= request.getParameter("travelmateNum");
 			MateController mc = new MateController();
 			mc.update(id, travelmateTitle,destination,travelmateMember,travelmateContent,departureDate,arriveDate,reservation,travelmateDate,travelmateNum);
-			response.sendRedirect("travel_mate.jsp");
+			System.out.println("bbb");
+			response.sendRedirect("../travel/travel_mate.travel");
 	%>
 </body>
 </html>

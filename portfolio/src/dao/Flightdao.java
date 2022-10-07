@@ -38,11 +38,11 @@ public class Flightdao {
 		this.con = con;
 	}
 
-	public ArrayList<FlightTicketBean> selectArticleList(String departure,String arrive, String people, String seat, String departureday, int page,int limit){
+public ArrayList<FlightTicketBean> selectArticleList(String departure,String arrive, String people, String seat, String departureday, int page,int limit){
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String FlightTicket_sql="select * from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=? order by flight_Ticket_Price asc limit ?, 10 ;";
+		String FlightTicket_sql="select * from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=? order by flight_Ticket_Price asc ;";
 		ArrayList<FlightTicketBean> ticketBeanList = new ArrayList<FlightTicketBean>();
 		FlightTicketBean ticketBean = null;
 		int startrow=(page-1)*10;
@@ -56,8 +56,9 @@ public class Flightdao {
 			pstmt.setString(1, departure);
 			pstmt.setString(2, arrive);
 			pstmt.setString(3, departureday);
-			pstmt.setInt(4, startrow);
+			/*pstmt.setInt(4, startrow);*/
 			rs = pstmt.executeQuery();
+			System.out.println(pstmt);
 			
 			while(rs.next()){
 				ticketBean = new FlightTicketBean();
@@ -75,7 +76,7 @@ public class Flightdao {
 				else{
 					ticketBean.setEstimated_time(timeH+"시간"+timeM+"분");
 				}
-				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Name"));
+				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Num"));
 				ticketBean.setFlight_name(rs.getString("flight_name"));
 				ticketBean.setFlight_departure(rs.getString("flight_departure"));
 				ticketBean.setFlight_arrival(rs.getString("flight_arrival"));
@@ -83,11 +84,11 @@ public class Flightdao {
 				ticketBean.setFlight_departureTime(rs.getString("flight_departureTime"));
 				ticketBean.setFlight_arrivalTime(rs.getString("flight_arrivalTime"));
 				ticketBean.setFlight_Ticket_Price(rs.getInt("flight_Ticket_Price"));
-
 				ticketBeanList.add(ticketBean);
 				
 			}
 		}catch(Exception ex){
+			System.out.println("실패");
 		}finally{
 			close(rs);
 			close(pstmt);
@@ -130,7 +131,7 @@ public class Flightdao {
 				}
 				
 				
-				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Name"));
+				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Num"));
 				ticketBean.setFlight_name(rs.getString("flight_name"));
 				ticketBean.setFlight_departure(rs.getString("flight_departure"));
 				ticketBean.setFlight_arrival(rs.getString("flight_arrival"));
@@ -138,6 +139,7 @@ public class Flightdao {
 				ticketBean.setFlight_departureTime(rs.getString("flight_departureTime"));
 				ticketBean.setFlight_arrivalTime(rs.getString("flight_arrivalTime"));
 				ticketBean.setFlight_Ticket_Price(rs.getInt("flight_Ticket_Price"));
+				ticketBean.setFlight_airplaneName(rs.getString("flight_airplaneName"));
 
 				ticketBeanList.add(ticketBean);
 			}
@@ -191,7 +193,7 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 					ticketBean.setEstimated_time(timeH+"시"+timeM+"분");
 				}
 				
-				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Name"));
+				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Num"));
 				ticketBean.setFlight_name(rs.getString("flight_name"));
 				ticketBean.setFlight_departure(rs.getString("flight_departure"));
 				ticketBean.setFlight_arrival(rs.getString("flight_arrival"));
@@ -199,6 +201,7 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 				ticketBean.setFlight_departureTime(rs.getString("flight_departureTime"));
 				ticketBean.setFlight_arrivalTime(rs.getString("flight_arrivalTime"));
 				ticketBean.setFlight_Ticket_Price(rs.getInt("flight_Ticket_Price"));
+				ticketBean.setFlight_airplaneName(rs.getString("flight_airplaneName"));
 			
 				ticketBeanList.add(ticketBean);
 			}
@@ -221,7 +224,7 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 		ResultSet rs = null;
 		String FlightTicket_sql ="";
 		
-		FlightTicket_sql ="select * from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=? ";
+		FlightTicket_sql ="select * from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=? and (";
 	
 		int startrow=(page-1)*10;
 		
@@ -229,12 +232,19 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 		
 		for(int i=0; i<filterArr.length; i++) {
 			if(filterArr[i].equals("제주")) {
-				FlightTicket_sql+=" and flight_name='제주'";
+				FlightTicket_sql+="flight_name='제주'";
 			}else if(filterArr[i].equals("아시아나")) {
-				FlightTicket_sql+=" and flight_name='아시아나'";
+				FlightTicket_sql+="flight_name='아시아나'";
+			}else if(filterArr[i].equals("대한")) {
+				FlightTicket_sql+="flight_name='대한'";
+			}
+			if(i < filterArr.length-1){
+				FlightTicket_sql+= " or ";
 			}
 		}
-		FlightTicket_sql += " order by flight_Ticket_Price asc limit ?, 10 ;";
+		FlightTicket_sql += ") order by flight_Ticket_Price asc limit ?, 10 ;";
+		
+		System.out.println(FlightTicket_sql);
 		
 		ArrayList<FlightTicketBean> ticketBeanList = new ArrayList<FlightTicketBean>();
 		FlightTicketBean ticketBean = null;
@@ -266,7 +276,7 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 					ticketBean.setEstimated_time(timeH+"분"+timeM+"시");
 				}
 				
-				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Name"));
+				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Num"));
 				ticketBean.setFlight_name(rs.getString("flight_name"));
 				ticketBean.setFlight_departure(rs.getString("flight_departure"));
 				ticketBean.setFlight_arrival(rs.getString("flight_arrival"));
@@ -274,6 +284,7 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 				ticketBean.setFlight_departureTime(rs.getString("flight_departureTime"));
 				ticketBean.setFlight_arrivalTime(rs.getString("flight_arrivalTime"));
 				ticketBean.setFlight_Ticket_Price(rs.getInt("flight_Ticket_Price"));
+				ticketBean.setFlight_airplaneName(rs.getString("flight_airplaneName"));
 			
 				ticketBeanList.add(ticketBean);
 			}
@@ -289,17 +300,23 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 		int listCount= 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String FlightTicket_sql="select count(*) from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=?";
+		String FlightTicket_sql="select count(*) from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=? and (";
 		
 		String[] filterArr = arr.split(",");
 		for(int i=0; i<filterArr.length; i++) {
 			if(filterArr[i].equals("제주")) {
-				FlightTicket_sql+=" and flight_name='제주'";
+				FlightTicket_sql+="flight_name='제주'";
 			}else if(filterArr[i].equals("아시아나")) {
-				FlightTicket_sql+=" or flight_name='아시아나'";
+				FlightTicket_sql+="flight_name='아시아나'";
+			}
+			else if(filterArr[i].equals("대한")) {
+				FlightTicket_sql+="flight_name='대한'";
+			}
+			if(i < filterArr.length-1){
+				FlightTicket_sql+= " or ";
 			}
 		}
-		
+		FlightTicket_sql+= ")";
 		try{
 			pstmt=con.prepareStatement(FlightTicket_sql);
 			pstmt.setString(1, departure);
@@ -346,7 +363,7 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String FlightTicket_sql="select * from flight_ticket where flight_Ticket_Name=?;";
+		String FlightTicket_sql="select * from flight_ticket where flight_Ticket_Num=?;";
 		ArrayList<FlightTicketBean> ticketBeanList = new ArrayList<FlightTicketBean>();
 		FlightTicketBean ticketBean = null;
 		SimpleDateFormat f = new SimpleDateFormat("HH:mm");
@@ -375,7 +392,7 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 				else{
 					ticketBean.setEstimated_time(timeH+"시간"+timeM+"분");
 				}
-				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Name"));
+				ticketBean.setFlight_Ticket_Num(rs.getString("flight_Ticket_Num"));
 				ticketBean.setFlight_name(rs.getString("flight_name"));
 				ticketBean.setFlight_departure(rs.getString("flight_departure"));
 				ticketBean.setFlight_arrival(rs.getString("flight_arrival"));
@@ -383,6 +400,7 @@ public ArrayList<FlightTicketBean> selectArticleList_oneway(String departure,Str
 				ticketBean.setFlight_departureTime(rs.getString("flight_departureTime"));
 				ticketBean.setFlight_arrivalTime(rs.getString("flight_arrivalTime"));
 				ticketBean.setFlight_Ticket_Price(rs.getInt("flight_Ticket_Price"));
+				ticketBean.setFlight_airplaneName(rs.getString("flight_airplaneName"));
 
 				ticketBeanList.add(ticketBean);
 				

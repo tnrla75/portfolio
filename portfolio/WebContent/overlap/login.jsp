@@ -7,8 +7,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 	<link rel="stylesheet" type="text/css" href="../css/login.css">
-	<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
-    <link type="text/css" rel="stylesheet" href="../css/style.css" />
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
@@ -36,8 +34,8 @@
 			<input type="password" name="login_pw" class="login_pw" placeholder="비밀번호를 입력해주세요.">
 		</div>
 		<div class="login_find">
-			<a href="">아이디찾기</a>
-			<a href="">비밀번호찾기</a>
+			<a href="../overlap/findID.jsp">아이디찾기</a>
+			<a href="../overlap/findPW.jsp">비밀번호찾기</a>
 		</div>
 		<div class="btn1">
 			<input type="submit" name="loginbtn" class="login_btn" value="로그인">
@@ -48,7 +46,7 @@
 	</section>
 </div>
 
-	<jsp:include page="../overlap/footer.jsp"/>
+	<jsp:include page="../overlap/footer.jsp" />
 	</form>
 </body>
 </html>

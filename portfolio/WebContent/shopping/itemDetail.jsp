@@ -8,21 +8,23 @@
 <%@ page import="vo.Item" %>
 <%@ page import="vo.ItemOption"%>
 <%@ page import="vo.PageInfo"%>
-<%@ page import="vo.Qna"%>
+<%@ page import="vo.ItemQna"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
 	Item article = (Item)request.getAttribute("article");
+	session.setAttribute("article", article);
 	ItemOption opArticle = (ItemOption)request.getAttribute("opArticle");
 	ItemImg imgArticle = (ItemImg)request.getAttribute("imgArticle");
 	ArrayList<ItemReview> reArticleList =(ArrayList<ItemReview>)request.getAttribute("reArticleList");
 	ArrayList<ItemReview> totalReArticleList = (ArrayList<ItemReview>)request.getAttribute("totalReArticleList");
-	ArrayList<Qna> qnaArticleList = (ArrayList<Qna>)request.getAttribute("qnaArticleList");
-	ArrayList<Qna> totalQnaArticleList = (ArrayList<Qna>)request.getAttribute("totalQnaArticleList");
+	ArrayList<ItemQna> qnaArticleList = (ArrayList<ItemQna>)request.getAttribute("qnaArticleList");
+	ArrayList<ItemQna> totalQnaArticleList = (ArrayList<ItemQna>)request.getAttribute("totalQnaArticleList");
 
 	String itemCode = article.getItemCode();
 	session.setAttribute("itemCode", itemCode);
 	
+	//상품문의 페이징
 	PageInfo qna_pageInfo = (PageInfo)request.getAttribute("qna_pageInfo");
 	int listCount=qna_pageInfo.getListCount();
 	int nowPage=qna_pageInfo.getPage();
@@ -30,13 +32,13 @@
 	int startPage=qna_pageInfo.getStartPage();
 	int endPage=qna_pageInfo.getEndPage();
 	
+	//리뷰 페이징
 	PageInfo re_pageInfo = (PageInfo)request.getAttribute("re_pageInfo");
 	int re_listCount = re_pageInfo.getListCount();
 	int re_nowPage = re_pageInfo.getPage();
 	int re_maxPage = re_pageInfo.getMaxPage();
 	int re_startPage = re_pageInfo.getStartPage();
-	int re_endPage = re_pageInfo.getEndPage(); 
-	
+	int re_endPage = re_pageInfo.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -148,15 +150,24 @@
 		border-collapse: collapse;
 	}
 	#select table font {
-		font-size: 18pt;
+		font-size: 25pt;
 		font-weight: bold;
+	}
+	#select table span {
+		font-weight: bold;
+	}
+	#total2 {
+		font-size: 25pt;
+		position: relative;
+		bottom: 12px;
 	}
 	#optionSel {
 		float: right;
 		width: 150px;
 		height: 40px;
+		margin-right: 20px;
 		position: relative;
-		bottom: 35px;
+		bottom: 10px;
 	}
 	#optionSel input[type=button]:first-of-type {
 		width: 30px;
@@ -164,7 +175,6 @@
 		background-color: white;
 		border-style: none;
 	}
-	
 	#optionSel input[type=button]:last-of-type {
 		width: 30px;
 		height: 30px;
@@ -176,10 +186,69 @@
 		width: 30px;
 		height: 30px;
 		position: relative;
-		left: 50px;
-		bottom: 40px;
+		left: 80px;
+		bottom: 7px;
 	}
-	
+	.option_wr1 {
+		border-style: solid;
+		border-color: #EAEAEA;
+		border-width: 1px;
+		height: 110px;
+		margin-top: 10px;
+		padding-left: 25px;
+		font-size: 14pt;
+	}
+	.option_wr1 div:first-of-type {
+		float: left;
+		margin-top: 10px;
+		width: 470px;
+		height: 40px;
+	}
+	.option_wr1 div:nth-of-type(2) {
+		float: right;
+		position: relative;
+		top: 15px;
+		right: 20px;
+	}
+	.option_wr1 div:nth-of-type(3) {
+		clear: left;
+		position: relative;
+		top: 20px;
+	}
+	.option_wr2 {
+		height: 65px;
+		margin-top: 30px;
+	}
+	.option_wr2 b:first-of-type {
+		font-size: 14pt;
+		padding-left: 10px;
+		position: relative;
+		top: 15px;
+	}
+	.option_wr2 b:nth-of-type(2) {
+		font-size: 10pt;
+		float:right;
+		padding-top: 20px;
+		padding-right: 20px;
+		font-weight: normal;
+		color: #8C8C8C;
+	}
+	.option_wr2 b:last-of-type {
+		font-size: 14pt;
+		float:right;
+		padding-top: 15px;
+		padding-right: 20px;
+	}
+	.select {
+		width: 150px;
+		height: 50px;
+		font-size: 14px;
+	}
+	.counter {
+	  width: 45px;  
+	  border-radius: 0px !important;
+	  text-align: center;
+	}
 	.up_count {
 		width: 30px;
 		height: 30px;
@@ -200,11 +269,6 @@
 		border-width: 1px;
 		border-color: #D5D5D5;
 		background-color: white;
-	}
-
-	#option {
-		width: 200px;
-		height: 40px;
 	}
 	#select .buy {
 		float: left;
@@ -258,11 +322,8 @@
 		width: 65px;
 		height: 65px;
 		position: relative;
-		bottom: 59px;
+		bottom: 58px;
 	}
-	/* .like lmg:first-of-type {
-		color: black;
-	} */
 
 	.tableLine {
 		border-bottom: 1px solid #D5D5D5;
@@ -466,66 +527,7 @@
 		filter: invert(84%) sepia(0%) saturate(1407%) hue-rotate(147deg) brightness(97%) contrast(76%);
 		Loss: 0.7. This is a perfect result.
 	}
-	#option {
-		font-size: 15px;
-	}
-	.option_wr1 {
-		border-style: solid;
-		border-color: #EAEAEA;
-		border-width: 1px;
-		height: 90px;
-		margin-top: 20px;
-		padding-left: 25px;
-		padding-top: 30px;
-		font-size: 14pt;
-	}
-	.option_wr1 div:first-of-type {
-		margin-top: 10px;
-	}
-	.option_wr1 div:first-of-type img {
-		position: relative;
-		left: 450px;
-		bottom: 25px;
-	}
-
-	.option_wr1 div:nth-of-type(2) {
-		position: relative;
-		top: 10px;
-	}
-	.option_wr2 {
-		height: 75px;
-		margin-top: 30px;
-	}
-	.option_wr2 b:first-of-type {
-		font-size: 14pt;
-		padding-left: 10px;
-		position: relative;
-		top: 15px;
-	}
-	.option_wr2 b:nth-of-type(2) {
-		font-size: 10pt;
-		float:right;
-		padding-top: 20px;
-		padding-right: 20px;
-		font-weight: normal;
-		color: #8C8C8C;
-	}
-	.option_wr2 b:last-of-type {
-		font-size: 14pt;
-		float:right;
-		padding-top: 15px;
-		padding-right: 20px;
-	}
-	.select {
-		width: 150px;
-		height: 50px;
-		font-size: 14px;
-	}
-	.counter {
-	  width: 45px;  
-	  border-radius: 0px !important;
-	  text-align: center;
-	}
+	
 	
 	/* tab */
 	#tab_wr {
@@ -758,7 +760,6 @@
 
 <% 
 	String mb_id = (String)session.getAttribute("mb_id");
-
 	String reviewNo=request.getParameter("reviewNo");
 %>
 <script>
@@ -772,6 +773,21 @@
 			var popupY = Math.ceil(( window.screen.height - 700 )/2); 
 			window.open("write.jsp?itemCode="+<%= itemCode %>,"popup",'width=600, height=700, left= '+popupX+', top= '+popupY+"'"); 
 		}
+	}
+	
+	function buy() {
+		var mb_id = '<%= (String)session.getAttribute("mb_id") %>';
+		var select =  document.getElementById('option').html;
+		
+		var count =  document.getElementById('result').innerHTML;
+		var option = document.getElementById('option').innerHTML;
+		
+		if (mb_id == "null") {
+			alert("로그인이 필요합니다.");
+			location.href="../overlap/login.jsp";
+		} else {
+			location.href="itemOrder.dutyfree?command=buy&itemCode=<%= article.getItemCode()%>&mb_id=<%= mb_id%>&count="+count+"&option="+option;
+		}	
 	}
 	
 	function qna() {
@@ -808,13 +824,11 @@
 	function doDisplay1(){
         var con = document.getElementById("terms1"); 	
         if(con.style.display=='none'){ 	
-
             con.style.display = 'block'; 	
         }else{ 		
             con.style.display = 'none'; 	
         } 
     } 
-	
 
 	function qnaDisplay(){
         var con = document.getElementsByName("qna_display1");
@@ -854,34 +868,51 @@
 		$('.qna_display1').hide();
 		$('.qna_display2').hide();
 		
+		$('#text').on('keyup', function() {
+			 $('.textLength').html($(this).val().length+" / 250자");
+			 
+			 if ($(this).val().length > 250) {
+				 alert("글자 수가 초과되었습니다.");
+				 $(this).val($(this).val().substring(0, 250));
+				 $('.textLength').html($(this).val().length+" / 250자");
+			 }	
+		});
+		
         //옵션 선택
         $('.option_wr1').hide();
+        <% double discount = (double)article.getDiscount()/(double)100; %>
         $('.select').on('change',function() {
-      		
-	        document.getElementById('option').innerText = this.value;
+	        document.getElementById('option').innerText = this.value;  
+	        var total1 = <%= article.getDiscountWon() %>;
+	        var total2 = <%= article.getItemDollar()*(1-discount) %>;
+	        
 	        if (this.value == "선택해 주세요.") {
 	        	 $('.option_wr1').hide();
-
 	        } else {
 	        	 $('.option_wr1').show();
+	        	 document.getElementById('total1').innerText = "("+total1.toLocaleString()+"원)";
+	         	 document.getElementById('total2').innerText = "$"+total2.toFixed(1);
 	        }
 	       
         	
         });
-        
+
       	//옵션 선택
         $('#optionSel input[type=button]').on('click',function() {
         	var result = document.getElementById('result');
-        	var price = <%= article.getDiscountWon() %>;
-        	/* result *= result.innerText; */
-        	/* var total = result.innerHTML*price; */
-        	document.getElementById('total1').innerText = "("+result.innerHTML*<%= article.getDiscountWon() %>+"원)";
-        	document.getElementById('total2').innerText = "$"+result.innerHTML*<%= article.getDiscountDollar() %>;
+        	var dollar = <%= article.getItemDollar()*(1-discount) %>;
+			
+        	var total1 = result.innerHTML*<%= article.getDiscountWon() %>;
+        	var total2 = result.innerHTML*dollar;
+        	document.getElementById('total1').innerText = "("+total1.toLocaleString()+"원)";
+        	document.getElementById('total2').innerText = "$"+total2.toFixed(1);
         });
        	
       	//옵션 딛기
         $('#option_close').on('click',function() {
         	document.getElementById('option').innerText = this.value;
+        	document.getElementById('total1').innerText = "(0원)";
+        	document.getElementById('total2').innerText = "$ 0";
         	$('.option_wr1').hide();
         });
         
@@ -916,13 +947,15 @@
         	}
         });
         
+        //찜하기
         $('#like_on').hide();
         $('#like_off').on('click', function() {
         	$('#like_on').show();
+        	<%-- location.href="like_on.shop?itemCode=<%= itemCode%>&mb_id=<%= mb_id%>"; --%>
         });
-        $('#like_off').on('click', function() {
-        	$('#like_off').show();
-            
+        $('#like_on').on('click', function() {
+        	$('#like_on').hide();
+
         });
 	});
 </script>
@@ -939,7 +972,6 @@
 			<%
 		}
 		%>
-		
 		<nav>
 			<div id="search">
 				<input type="text" name="keyword">
@@ -981,11 +1013,15 @@
 					<table cellpadding="15" align="center">
 						<tr>
 							<td>정상가</td>
-							<td style="color: #8C8C8C; text-decoration: line-through;">$<%=article.getItemDollar() %>&nbsp(<fmt:formatNumber value="<%= article.getItemWon() %>" groupingUsed="true" />원)</td>
+							<td style="color: #8C8C8C; text-decoration: line-through;">$<%= article.getItemDollar() %>&nbsp(<fmt:formatNumber value="<%= article.getItemWon() %>" groupingUsed="true" />원)</td>
 						</tr>
 						<tr class="tableLine">
 							<td>회원가</td>
-							<td><font>$<%=article.getDiscountDollar() %></font>&nbsp(<fmt:formatNumber value="<%= article.getDiscountWon() %>" groupingUsed="true" />원)</td>
+							<td>
+								<font>$<fmt:formatNumber value='<%=article.getItemDollar()*(1-discount) %>' pattern='.0' /></font>
+								&nbsp(<fmt:formatNumber value='<%=article.getDiscountWon() %>' groupingUsed="true" />원)
+								<span><%= article.getDiscount() %>% off</span>
+							</td>
 						</tr>
 						<tr class="tableLine">
 							<td>상품코드</td>
@@ -1025,24 +1061,24 @@
 						</tr>
 					</table>
 					<div class="option_wr1">
-						
-						<div><%=article.getItemName() %> <img src="../img/dutyfree/x_icon.png" width="20px" height="20px" id="option_close"></div>
+						<div><%=article.getItemName() %></div>
+						<div><img src="../img/dutyfree/x_icon.png" width="20px" height="20px" id="option_close"></div>
 						<div id="option"></div>
 						<div id="optionSel">
 							<input type='button' onclick='count("minus")' value='-'/>
 							<input type='button' onclick='count("plus")' value='+'/>
-							<div id='result'>0</div>
+							<div id='result'>1</div>
 						</div>
 					</div>
 					<div class="option_wr2">
-						<div><b>상품금액합계</b><b id="total1">(0 원)</b><b id="total2">$0</b></div>
+						<div><b>상품금액합계</b><b id="total1">(0원)</b><b id="total2">$0</b></div>
 					</div>
-					<input type="button" value="BUY NOW" class="buy">
+					<input type="button" value="BUY NOW" class="buy" onclick="buy()">
 					<input type="button" value="SHOPPING BAG" class="cart">
 					<button id="present"><img src="../img/dutyfree/present.png" width="35px" height="35px"></button>
 					<div class="like">
 						<div id="like_off" onclick="like_off()"><img src="../img/dutyfree/heart.png" width="30px" height="30px"></div>
-						<div id="like_on" onclick="like_on()"><img src="../img/dutyfree/heart1.png" width="30px" height="30px"></div>
+						<div id="like_on" onclick="like_on()"><img src="../img/dutyfree/heart3.png" width="35px" height="35px"></div>
 					</div> 
 				</div>
 			</div>
@@ -1114,7 +1150,6 @@
 							</div>
 						</div>
 						<div id="detailReview1">	
-
 							<table id="reviewTable">
 				        	<% if (reArticleList.size() == 0) { %>
 				        		<div id='empty1'><p>리뷰가 없습니다.</p><p>리뷰를 작성해보세요</p><input type='button' class='reviewBtn2' value='상품 리뷰 작성하기' onclick='review()'></div>
@@ -1230,7 +1265,10 @@
 				    			</tr>
 				    			<tr>
 				    				<td width="200px" align="center">내용</td>
-				    				<td><textarea name="question" placeholder="최소 10자 이상 입력해주세요." id="text"></textarea></td>
+				    				<td>
+				    					<textarea name="question" placeholder="최소 10자 이상 입력해주세요." id="text"></textarea>
+				    					<div class="textLength">0 / 250</div>
+				    				</td>
 				    			</tr>
 				    		</table>
 				    		<div>

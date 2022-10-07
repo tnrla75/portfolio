@@ -8,54 +8,78 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.Hotel_MainAction;
+import action.Hotel_NationAction;
+import action.Hotel_StarAction;
 import action.Hotel_RoomAction;
+import action.Hotel_YoyakuAction;
 import vo.ActionForward;
 
 
-@WebServlet("*.ho")  // �븳踰덈컰�뿉 �궗�슜 紐삵븿. �븯�굹�쓽 �뤃�윭留� 李얠븘媛� �닔 �엳�쓬. .bo瑜� �떎瑜몄씠由꾩쑝濡� �젙�븯硫� �뿬�젮媛� 留뚮뱾 �닔�뒗 �엳�쓬.
-					// ~.bo �벑�벑�� �떒�닔�삎�씠吏� 蹂듭닔�삎�쑝濡쒕뒗 �궗�슜 遺덇�
+@WebServlet("*.ho")  // 한번밖에 사용 못함. 하나의 폴러만 찾아갈 수 있음. .bo를 다른이름으로 정하면 여려개 만들 수는 있음.
+					// ~.bo 등등은 단수형이지 복수형으로는 사용 불가
 public class Hotel_Controller extends javax.servlet.http.HttpServlet 
-{		// �뿬湲곌� 吏꾩젙�븳 而⑦듃濡ㅻ윭.
+{		// 여기가 진정한 컨트롤러.
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		
 		String RequestURI=request.getRequestURI();
 		String contextPath=request.getContextPath();
-		String command=RequestURI.substring(contextPath.length()); // substring�씠 萸먮뱶�씪...
+		String command=RequestURI.substring(contextPath.length()); // substring이 뭐드라...
 		ActionForward forward=null;
 		Action action=null;
 		
 		System.out.println(command+" : controller");
 		
-		if(command.equals("/hotel/hotelMainForm.ho")){ // �꽌釉붾┸耳��씠釉붿쓣 �뿴 ���씠諛� 吏��젙. .bo濡� �뱾�뼱�삤硫� qna_board_write.jsp濡� �씠�룞			
+		if(command.equals("/hotel/hotelMainForm.ho")){ // 서블릿케이블을 열 타이밍 지정. .bo로 들어오면 qna_board_write.jsp로 이동		
+			System.out.println("2");
 			action= new Hotel_MainAction();
-			try {
-				forward=action.execute(request, response );
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else
-		if(command.equals("/hotel/hotelRoomForm.ho")) {
 			
-			action= new Hotel_RoomAction();
-		
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/hotel/hotelMainStarForm.ho")){ // 호텔 필터 성급 컨트롤		
+			action= new Hotel_StarAction();
+			
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/hotel/hotelMainNationForm.ho")){ // 호텔 필터 지역 컨트롤		
+			action= new Hotel_NationAction();
+			
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}else
-			if(command.equals("/reviewForm.ho")) {
-				System.out.println(command+" : 1");
-				forward=new ActionForward();		
-				System.out.println(command+" : 2");
-				forward.setPath("../overlap/login.jsp");
+		if(command.equals("/hotel/hotelRoomForm.ho")) {			
+			action= new Hotel_RoomAction();		
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-//		else if(command.equals("/boardWriteForm.bo")){ // �꽌釉붾┸耳��씠釉붿쓣 �뿴 ���씠諛� 吏��젙. .bo濡� �뱾�뼱�삤硫� qna_board_write.jsp濡� �씠�룞
-//			forward=new ActionForward_hotel();		// ~~.bo瑜쇳븯硫� 而⑦듃濡ㅻ윭瑜� 李얠븘�샂.
+		}else
+			if(command.equals("/reviewForm.ho")) {				
+				forward=new ActionForward();						
+				forward.setPath("../overlap/login.jsp");
+		}else
+			if(command.equals("/hotel/hotelYoyakuForm.ho")) {			
+				action=new Hotel_YoyakuAction();		
+				try {
+					forward=action.execute(request, response );
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+//		else if(command.equals("/boardWriteForm.bo")){ // 서블릿케이블을 열 타이밍 지정. .bo로 들어오면 qna_board_write.jsp로 이동
+//			forward=new ActionForward_hotel();		// ~~.bo를하면 컨트롤러를 찾아옴.
 //			forward.setPath("/qna_board_write.jsp");
 //		}else if(command.equals("/boardWritePro.bo")){
 //			action  = new BoardWriteProAction();
@@ -66,7 +90,7 @@ public class Hotel_Controller extends javax.servlet.http.HttpServlet
 //			}
 //		}
 //		else if(command.equals("/boardList.bo")){
-//			action = new BoardListAction();   // �뿬湲곗꽌 由ъ뒪�듃 ���옣
+//			action = new BoardListAction();   // 여기서 리스트 저장
 //			try{
 //				forward=action.execute(request, response);
 //			}catch(Exception e){
@@ -97,7 +121,7 @@ public class Hotel_Controller extends javax.servlet.http.HttpServlet
 //				e.printStackTrace();
 //			}
 //		}
-//		else if(command.equals("/boardModifyForm.bo")){  // �닔�젙 �븳 �뮘 �쐞�뿉�엳�뒗 list.bo濡� �씠�룞�븯�뒗�뜲 page媛믪씠 null媛믪엫.. �씠嫄� 議곗젙�빐�빞 �븿.
+//		else if(command.equals("/boardModifyForm.bo")){  // 수정 한 뒤 위에있는 list.bo로 이동하는데 page값이 null값임.. 이걸 조정해야 함.
 //			action = new BoardModifyFormAction();
 //			try{
 //				forward=action.execute(request, response);
@@ -107,14 +131,14 @@ public class Hotel_Controller extends javax.servlet.http.HttpServlet
 //		}else if(command.equals("/boardModifyPro.bo")){
 //			action = new BoardModifyProAction();
 //			try{
-//				forward=action.execute(request, response);  // �뿬湲곗꽌 �엯�젰�븳 �젣紐� 諛� �궡�슜 ���옣
+//				forward=action.execute(request, response);  // 여기서 입력한 제목 및 내용 저장
 //			}catch(Exception e){
 //				e.printStackTrace();
 //			}
 //		}else if(command.equals("/boardDeleteForm.bo")){ //
 //			String nowPage = request.getParameter("page");
 //			request.setAttribute("page", nowPage);
-//			int board_num=Integer.parseInt(request.getParameter("board_num")); // �럹�씠吏��� �꽆踰꾨�� ���옣 �썑 
+//			int board_num=Integer.parseInt(request.getParameter("board_num")); // 페이지와 넘버를 저장 후 
 //			request.setAttribute("board_num",board_num);
 //			forward=new ActionForward_hotel();
 //			forward.setPath("/qna_board_delete.jsp");
@@ -128,12 +152,12 @@ public class Hotel_Controller extends javax.servlet.http.HttpServlet
 //			}
 //		}
 		
-		if(forward != null){ // �쐞�뿉 forward�뒗 null 媛믪씠吏�留�, path�뿉 寃곕줈瑜� 吏��젙�빐以ъ쓬.
+		if(forward != null){ // 위에 forward는 null 값이지만, path에 결로를 지정해줬음.
 			
-			if(forward.isRedirect()){  // isRedirect�뒗 false�엫�쑝濡� 
+			if(forward.isRedirect()){  // isRedirect는 false임으로 
 				response.sendRedirect(forward.getPath());  
 			}else{
-				RequestDispatcher dispatcher= // �뿬湲곗꽌 媛믩뱾�쓣 遺덈윭�샂.
+				RequestDispatcher dispatcher= // 여기서 값들을 불러옴.
 						request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}

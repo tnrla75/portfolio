@@ -35,7 +35,6 @@ public class FlightController extends javax.servlet.http.HttpServlet
 			forward=new ActionForward();
 			
 		}else if(command.equals("/flight/flightTicketSearch_go.air")){
-			System.out.println("???");
 			action  = new FlightListAction_go();
 			try {
 				forward=action.execute(request, response );

@@ -27,7 +27,7 @@
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio","root","233895");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/portfolio","root","0000");
 			stmt = conn.createStatement();
 			
 			String command = String.format

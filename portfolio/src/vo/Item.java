@@ -11,8 +11,8 @@ public class Item {
 	private String itemDetail;
 	private int itemWon;
 	private int itemDollar;
+	private int discount;
 	private int discountWon;
-	private int discountDollar;
 	private int count;
 	private int reRate;
 	
@@ -76,17 +76,17 @@ public class Item {
 	public void setItemDollar(int itemDollar) {
 		this.itemDollar = itemDollar;
 	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
 	public int getDiscountWon() {
 		return discountWon;
 	}
 	public void setDiscountWon(int discountWon) {
 		this.discountWon = discountWon;
-	}
-	public int getDiscountDollar() {
-		return discountDollar;
-	}
-	public void setDiscountDollar(int discountDollar) {
-		this.discountDollar = discountDollar;
 	}
 	public int getCount() {
 		return count;

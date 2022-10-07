@@ -8,7 +8,7 @@ import svc.ItemDetailService;
 import vo.ActionForward;
 import vo.Item;
 import vo.ItemImg;
-import vo.Qna;
+import vo.ItemQna;
 import vo.ItemOption;
 import vo.ItemReview;
 import vo.PageInfo;
@@ -22,8 +22,8 @@ public class ItemDetailAction implements Action {
 		ItemDetailService itemDetailService = new ItemDetailService();
 		ArrayList<ItemReview> reArticleList = new ArrayList<ItemReview>();
 		ArrayList<ItemReview> totalReArticleList = new ArrayList<ItemReview>();
-		ArrayList<Qna> qnaArticleList = new ArrayList<Qna>();
-		ArrayList<Qna> totalQnaArticleList = new ArrayList<Qna>();
+		ArrayList<ItemQna> qnaArticleList = new ArrayList<ItemQna>();
+		ArrayList<ItemQna> totalQnaArticleList = new ArrayList<ItemQna>();
 		int page=1;
 		int limit=10;
 		if(request.getParameter("page")!=null){

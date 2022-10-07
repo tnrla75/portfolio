@@ -4,13 +4,12 @@
 	<%@ page import="java.util.*"%>
 	<%@page import="vo.FlightTicketBean"%>
 	
+	
+	
 	<%
 		ArrayList<FlightTicketBean> articleList_go=(ArrayList<FlightTicketBean>)request.getAttribute("ticketBeanList_go");
 		ArrayList<FlightTicketBean> articleList_back=(ArrayList<FlightTicketBean>)request.getAttribute("ticketBeanList_back");
 		String totalprice= request.getParameter("totalprice");
-		
-		System.out.println(articleList_go.get(0).getFlight_Ticket_Num());
-		System.out.println(articleList_back.get(0).getFlight_Ticket_Num());
 		
 	%>
 <!DOCTYPE html>
@@ -37,7 +36,7 @@
 	width: 300px;
 	height: fit-content;
 	position: fixed;
-	top: 160px;
+	top: 170px;
 	margin-left: 900px;
 	background-color: rgba(231,231,231,0.2);
 	border-radius: 10px;
@@ -84,11 +83,13 @@
 }
 
 .flightdiv1_indiv1 {
-	margin-top: 10px;
-	width: 850px;
-	height: 380px;
-	padding: 10px;
-	border-style:solid;
+	/* margin-top: 10px;
+	padding: 10px;  */
+	padding:0px;
+	margin: 20px 0px 0px 0px;
+	width: 880px;
+	height: 440px;
+	border:solid 1px rgba(0, 0, 0, 0.3);
 }
 
 .flightdiv1_indiv1 h2, .flightdiv1_indiv1 h3 {
@@ -99,7 +100,7 @@
 	border-bottom: solid 1px rgba(0, 0, 0, 0.3);
 	width: 340px;
 	float: left;
-	margin: 20px 30px;
+	margin: 25px 45px;
 }
 
 .infodiv > .infoinput {
@@ -108,23 +109,43 @@
 	float:left;
 	width: 340px;
 }
-#btndiv{
-	width: 850px;
+#btndiv1{
+	width: 860px;
 	height: 50px;
 	line-height: 50px;
 	text-align: center;
 	padding: 10px;
+	font-weight:bold;
+	font-size: 14pt;
+	border-bottom:solid 1px rgba(0, 0, 0, 0.3);
+	border-right:solid 1px rgba(0, 0, 0, 0.3);
+	border-left:solid 1px rgba(0, 0, 0, 0.3);
 }
-#btndiv:hover{
-	background-color: #287DFA1A ;
-}
-#nextdiv{
-	width: 850px;
-	height: 150px;
+#btndiv2{
+	width: 860px;
 	line-height: 50px;
 	text-align: center;
-	padding: 10px;
+	padding: 0px;
+	margin: 0px;
+	font-weight:bold;
+	font-size: 14pt;
+	height: 60px;
 }
+#btndiv1:hover{
+	background-color: #287DFA1A ;
+}
+#submitbtn{
+	border:none;
+	width: 880px;
+	height: 50px;
+	margin: 5px auto;
+	background-color: #002266;
+	font-size:12pt;
+	font-weight:bold;
+	color:white;
+	cursor: pointer;
+}
+
 
 		#footerprice {
         position: fixed;
@@ -201,11 +222,10 @@
 		.listtable{
 			text-align:center;
 			width :850px;			
-			height: 120px;
+			height: 100px;
 			position:relative;
 			margin: 20px;
 			border-radius: 10px;
-			background-color: white;
 		}
 		
 		.td1{
@@ -220,6 +240,8 @@
 			width: 200px;
 		}
 		.flightimg{
+			box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; 
+			
 			width: 50px;
 			height: 50px;
 			background-color: white;
@@ -231,6 +253,14 @@
 			font-size: 10pt;
 			color: rgba(0, 0, 0, 0.6);
 		}
+		.airplanename{
+			font-size: 10pt;
+			color: rgba(0, 0, 0, 0.6);
+		}
+		.flightname{
+			font-weight: bold;
+			font-size: 14pt;
+		}
 		.maindiv{
 			width: 1200px; margin: 30px auto 0 auto; height: 1200px; 
 		}
@@ -238,28 +268,58 @@
 			border-style:none;
 		}
 		.infonum{
-			width:850px;
-			height:50px;
+			width:880px;
+			height:60px;
+			background-color: #002266;
+			color:white;
+			margin-bottom: 20px;
 		}
 		.numspan{
 			font-weight:bold;
-			font-size:20pt;
+			font-size:18pt;
 			margin-left: 20px;
+			line-height: 60px;
 		}
 		.numspan:nth-child(1){
 			right:-15px;
 			position:relative;
 		}
 		.numbtn{
-			left: 500px;
+			left: 550px;
 			position:relative;
 			border-style:none;
-			background-color: white;
-			color:#3264FF;
+			background-color: #002266;
+			color: white;
 			font-size:12pt;
 			width: 80px;
 			height: 30px;
-			line-height:30px;
+			line-height:20px;
+		}
+		.numbtn:hover{
+			border:solid white 1px;
+			cursor: pointer;
+		
+		}
+		#tickettitle{
+		    width: 850px;
+		    height: 60px;
+		    background-color: #002266;
+		    color: white;
+		    font-size: 14pt;
+		    line-height: 60px;
+		    padding-left: 30px;
+		    font-weight: bold;
+		}
+		#ticketinfo1{
+			border-bottom: dotted 1px black;
+			
+		}
+		#ticketmaindiv{
+			width: 879px;
+			border: solid 1px rgba(0,0,0,0.3);
+		}
+		h4 > span{
+			color:red;
 		}
 </style>
 </head>
@@ -269,21 +329,28 @@ $(document).ready(function() {
 	
 });
 
+/* function reserveend() {
+	location.href = "flight_seat.do?command=flight_seat";
+} */
+
 function createAddRow() {
  	var divlist = document.getElementById("flightdiv1");
  	var i = document.getElementsByClassName('flightdiv1_indiv1').length;
 	var name = document.createElement("div");
+	var price1 = <%= articleList_go.get(0).getFlight_Ticket_Price() %>;
+	var price2 = <%= articleList_back.get(0).getFlight_Ticket_Price() %>;
+	var totalprice = (i+1)*(price1+price2);
 	
-	var price = <%= request.getParameter("total") %>;
-	var totalprice = (i+1)*price;
 	
 	var resultprice = totalprice.toLocaleString();
-	document.getElementsByClassName('span2')[0].value = resultprice;
-	document.getElementsByClassName('span2')[1].value = resultprice;
+	
 	
 	if(i<10){
-		name.innerHTML += "<div class='flightdiv1_indiv1'><div class='infonum'><span class='numspan'>"+(i+1)+"</span><span class='numspan'>. 탑승객 정보</span><button type='button' class='numbtn' onclick='delbtn(this)'><i class='fa-solid fa-trash-can'></i>&nbsp;삭제</button></div><div class='infodiv'><input type='text' placeholder='성' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='이름' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='성별' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='생년월일' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='국적' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='여권' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='여권번호' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='유효기간' class='infoinput'></div></div>";
+		name.innerHTML += "<div class='flightdiv1_indiv1'><div class='infonum'><span class='numspan'>"+(i+1)+"</span><span class='numspan'>. 탑승객 정보</span><button type='button' class='numbtn' onclick='delbtn(this)'><i class='fa-solid fa-trash-can'></i>&nbsp;삭제</button></div><div class='infodiv'><input type='text' placeholder='성' class='infoinput'  name='lastname'></div><div class='infodiv'><input type='text' placeholder='이름' class='infoinput'  name='firstname'></div><div class='infodiv'><input type='text' placeholder='성별' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='생년월일' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='국적' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='여권' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='여권번호' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='유효기간' class='infoinput'></div></div>";
 		divlist.appendChild(name);
+		document.getElementsByClassName('span2')[0].value = resultprice;
+		document.getElementsByClassName('span2')[1].value = resultprice;
+		document.getElementById("count").innerText = i+1+"명";
 	}else{
 		alert("더 이상 추가할 수 없습니다.");	
 	}
@@ -293,11 +360,13 @@ function delbtn(e){
 	var flightdiv1_indiv1 = e.parentNode.parentNode;
 	flightdiv1_indiv1.remove();
 	var num = document.getElementsByClassName('numspan');
-	var price = <%= request.getParameter("total") %>;
-	var totalprice = (div1.length)*price;
+	var price1 = <%= articleList_go.get(0).getFlight_Ticket_Price() %>;
+	var price2 = <%= articleList_back.get(0).getFlight_Ticket_Price() %>;
+	var totalprice = (div1.length)*(price1+price2);
 	var resultprice = totalprice.toLocaleString();
 	document.getElementsByClassName('span2')[0].value = resultprice;
 	document.getElementsByClassName('span2')[1].value = resultprice;
+	document.getElementById("count").innerText = div1.length+"명";
 	
  	for(var i =1; i <= div1.length; i++){
  		num[i*2-1].innerText = i+1; 
@@ -305,24 +374,23 @@ function delbtn(e){
  	alert("삭제되었습니다.");
 } 
 
-<%-- <fmt:formatNumber value='<%= request.getParameter("total") %>' groupingUsed="true"/> --%>
+
 
 </script>
 <body>
-			
-	<form>
+<form action="flight_seat.do?command=flightseat" method="post">
+	<%
+	String id = (String)session.getAttribute("mb_id"); 
+	if(id == null){
+		%>
+		<jsp:include page="../overlap/header_login.jsp"/>
 		<%
-		String id = (String)session.getAttribute("id"); 
-		if(id == null){
-			%>
-			<jsp:include page="../overlap/header_login.jsp"/>
-			<%
-		}else{
-			%>
-			<jsp:include page="../overlap/header_logout.jsp"/>
-			<%
-		}
-	%>
+	}else{
+		%>
+		<jsp:include page="../overlap/header_logout.jsp"/>
+		<%
+	}
+%>
 <div id="footerprice">
 	<div id="textdiv">
 		<div class="footer_amount">
@@ -330,7 +398,7 @@ function delbtn(e){
 			<span class="span1">예상 결제 금액</span>
 			<input type="button" class="footer_backchoice" value="회원 정보 입력">
 			<span class="span3">원</span>
-			<input class="span2" name="totalprice" value='<fmt:formatNumber value='<%= request.getParameter("total") %>' groupingUsed="true"/>' readonly>
+			<input class="span2" name="totalprice" value='<%= totalprice %>' readonly>
 			
 		</div>
 	</div>
@@ -339,99 +407,105 @@ function delbtn(e){
 	
 	
 	<div class="maindiv">
-	
-	
-		 <div>
-			<table class="listtable">
-				<tr class="tr1">
-					<td class="td1">
-					<% 
-					String flightimg1 = "";
-					if(articleList_go.get(0).getFlight_name().equals("제주")){ 
-						flightimg1 = "jejuair.png";
-					}else if(articleList_go.get(0).getFlight_name().equals("아시아나")){
-						flightimg1 = "asiana.png";
-					}else if(articleList_go.get(0).getFlight_name().equals("")){
+		<div id="ticketmaindiv">
+			<div id="tickettitle">
+				항공권 
+			</div>
+			
+			 <div style="" id="ticketinfo1">
+				<table class="listtable">
+					<tr class="tr1">
+						<td class="td1">
+						<% 
+						String flightimg1 = "";
+						if(articleList_go.get(0).getFlight_name().equals("제주")){ 
+							flightimg1 = "jejuair.png";
+						}else if(articleList_go.get(0).getFlight_name().equals("아시아나")){
+							flightimg1 = "asiana.png";
+						}else if(articleList_go.get(0).getFlight_name().equals("대한")){
+							flightimg1 = "koreanair.png";
+						}else if(articleList_go.get(0).getFlight_name().equals("")){
+							
+						}
+						%>
+						<input type="hidden" value="<%= articleList_go.get(0).getFlight_Ticket_Num() %>" name="ticketNum1">
 						
-					}else if(articleList_go.get(0).getFlight_name().equals("")){
+						<img src="../img/flight/<%= flightimg1 %>" class="flightimg"></td>
+						<td class="td1" style="text-align: left;"><span class="flightname"><%= articleList_go.get(0).getFlight_name() %></span><br><span class="airplanename"><%= articleList_go.get(0).getFlight_airplaneName() %></span></td>
+						<td class="td1"><span class="time"><%= articleList_go.get(0).getFlight_departureTime()%></span><br><span class="airport"><%= articleList_go.get(0).getFlight_departure() %></span></td>
+						<td class="td1"><span class="airport"><%= articleList_go.get(0).getEstimated_time() %></span><br><img src="aaa.jpg"></td>
+						<td class="td1"><span class="time"><%= articleList_go.get(0).getFlight_arrivalTime() %></span><br><span class="airport"><%= articleList_go.get(0).getFlight_arrival() %></span></td>
+					</tr>
+				</table>
+			</div>
+			
+			<div id="ticketinfo2">
+				<table class="listtable">
+					<tr class="tr1">
+						<td class="td1">
+						<% 
+						String flightimg2 = "";
+						if(articleList_back.get(0).getFlight_name().equals("제주")){ 
+							flightimg2 = "jejuair.png";
+						}else if(articleList_back.get(0).getFlight_name().equals("아시아나")){
+							flightimg2 = "asiana.png";
+						}else if(articleList_back.get(0).getFlight_name().equals("")){
+							
+						}else if(articleList_back.get(0).getFlight_name().equals("")){
+							
+						}
+						%>
+						<input type="hidden" value="<%= articleList_back.get(0).getFlight_Ticket_Num() %>" name="ticketNum2">
 						
-					}
-					%>
-					<input type="hidden" value="<%= articleList_go.get(0).getFlight_Ticket_Num() %>" name="ticketNum1">
-					
-					<img src="../img/flight/<%= flightimg1 %>" class="flightimg"></td>
-					<td class="td1" style="text-align: left;"><%= articleList_go.get(0).getFlight_name() %></td>
-					<td class="td1"><span class="time"><%= articleList_go.get(0).getFlight_departureTime()%></span><br><span class="airport"><%= articleList_go.get(0).getFlight_departure() %></span></td>
-					<td class="td1"><span class="airport"><%= articleList_go.get(0).getEstimated_time() %></span><br><img src="aaa.jpg"></td>
-					<td class="td1"><span class="time"><%= articleList_go.get(0).getFlight_arrivalTime() %></span><br><span class="airport"><%= articleList_go.get(0).getFlight_arrival() %></span></td>
-					
-					
-				</tr>
-			</table>
+						<img src="../img/flight/<%= flightimg2 %>" class="flightimg"></td>
+						<td class="td1" style="text-align: left;"><span class="flightname"><%= articleList_back.get(0).getFlight_name() %></span><br><span class="airplanename"><%= articleList_back.get(0).getFlight_airplaneName() %></span></td>
+						<td class="td1"><span class="time"><%= articleList_back.get(0).getFlight_departureTime()%></span><br><span class="airport"><%= articleList_back.get(0).getFlight_departure() %></span></td>
+						<td class="td1"><span class="airport"><%= articleList_back.get(0).getEstimated_time() %></span><br><img src="aaa.jpg"></td>
+						<td class="td1"><span class="time"><%= articleList_back.get(0).getFlight_arrivalTime() %></span><br><span class="airport"><%= articleList_back.get(0).getFlight_arrival() %></span></td>			
+					</tr>
+				</table>
+			</div> 
 		</div>
-		<div>
-			<table class="listtable">
-				<tr class="tr1">
-					<td class="td1">
-					<% 
-					String flightimg2 = "";
-					if(articleList_back.get(0).getFlight_name().equals("제주")){ 
-						flightimg2 = "jejuair.png";
-					}else if(articleList_back.get(0).getFlight_name().equals("아시아나")){
-						flightimg2 = "asiana.png";
-					}else if(articleList_back.get(0).getFlight_name().equals("")){
-						
-					}else if(articleList_back.get(0).getFlight_name().equals("")){
-						
-					}
-					%>
-					<input type="hidden" value="<%= articleList_back.get(0).getFlight_Ticket_Num() %>" name="ticketNum1">
-					
-					<img src="../img/flight/<%= flightimg2 %>" class="flightimg"></td>
-					<td class="td1" style="text-align: left;"><%= articleList_back.get(0).getFlight_name() %></td>
-					<td class="td1"><span class="time"><%= articleList_back.get(0).getFlight_departureTime()%></span><br><span class="airport"><%= articleList_back.get(0).getFlight_departure() %></span></td>
-					<td class="td1"><span class="airport"><%= articleList_back.get(0).getEstimated_time() %></span><br><img src="aaa.jpg"></td>
-					<td class="td1"><span class="time"><%= articleList_back.get(0).getFlight_arrivalTime() %></span><br><span class="airport"><%= articleList_back.get(0).getFlight_arrival() %></span></td>			
-				</tr>
-			</table>
-		</div> 
 			<div id="flightdiv1">
-				<h2>탑승객</h2>
+				<h2>승객 정보</h2>
+				<h4>[&nbsp;<span>*</span>&nbsp;는 필수 정보입니다.]</h4>
 				<div class="flightdiv1_indiv1">
 					<div class="infonum">
 						<span class="numspan">1. 탑승객 정보</span>
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="성" class="infoinput">
+						<input type="text" placeholder="성" class="infoinput" name="lastname">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="이름" class="infoinput">
+						<input type="text" placeholder="이름" class="infoinput" name="firstname">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="성별" class="infoinput">
+						<input type="text" placeholder="성별" class="infoinput" name="">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="생년월일" class="infoinput">
+						<input type="text" placeholder="생년월일" class="infoinput" name="">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="국적" class="infoinput">
+						<input type="text" placeholder="국적" class="infoinput" name="">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="여권" class="infoinput">
+						<input type="text" placeholder="여권" class="infoinput" name="">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="여권번호" class="infoinput">
+						<input type="text" placeholder="여권번호" class="infoinput" name="">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="유효기간" class="infoinput">
+						<input type="text" placeholder="유효기간" class="infoinput" name="">
 					</div>
 				</div>
 			</div>
-			<div id="btndiv" onclick="createAddRow()">
-				탑승객 추가
+			<div id="btndiv1" onclick="createAddRow()">
+				<i class="fa-solid fa-plus"></i>&nbsp;탑승객 추가
 			</div>
-			<div id="nextdiv">
-				다음
+			<div id="btndiv2">
+				<input type="submit" value="좌석 페이지 이동" id="submitbtn">
+			</div>
+			<div style="height:80px;">
 			</div>
 			<div id="flightdiv2">
 				<div id="flightdiv2_indiv1">
@@ -439,15 +513,14 @@ function delbtn(e){
 				</div>
 				<div id="flightdiv2_indiv2">
 					<div>
-						<span>운임비용</span> <span><fmt:formatNumber value='<%= request.getParameter("total") %>' groupingUsed="true" />원</span>
+						<span><i class="fa-solid fa-won-sign"></i>&nbsp;운임비용</span> <span><%= totalprice %>원</span>
 					</div>
 					<div>
-						<span>탑승객 수</span> <span>1명</span>
+						<span><i class="fa-solid fa-users"></i>&nbsp;탑승객 수</span> <span id="count" >1명</span>
 					</div>
 				</div>
 				<div id="flightdiv2_indiv3">
-					<span style="float: left;">총 금액</span> <span style="float: right;"><input readonly class="span2" name="totalprice" value='<fmt:formatNumber value='<%= request.getParameter("total") %>' groupingUsed="true" />' >원</span>
-					
+					<span style="float: left;">총 금액</span> <span style="float: right;"><input readonly class="span2" name="totalprice" value='<%= totalprice %>' groupingUsed="true" />원</span>
 				</div>
 			</div>
 		</div>
