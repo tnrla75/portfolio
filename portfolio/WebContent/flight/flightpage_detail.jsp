@@ -11,6 +11,9 @@
 		ArrayList<FlightTicketBean> articleList_back=(ArrayList<FlightTicketBean>)request.getAttribute("ticketBeanList_back");
 		String totalprice= request.getParameter("totalprice");
 		
+		System.out.println(articleList_go.get(0).getFlight_airplaneName());
+		System.out.println(articleList_back.get(0).getFlight_airplaneName());
+		
 	%>
 <!DOCTYPE html>
 <html>
@@ -329,11 +332,25 @@ $(document).ready(function() {
 	
 });
 
-/* function reserveend() {
-	location.href = "flight_seat.do?command=flight_seat";
-} */
+function seat() {
+	var myform = document.myform;
+	alert(myform.action);
+	var flight1 = "<%= articleList_go.get(0).getFlight_airplaneName() %>" ;
+	if(flight1 == "Boeing 737"){
+		alert(flight1);
+		myform.action = "flight_seat.do?command=flightseatB737_1";
+		alert(myform.action);
+		return true;
+	}
+	else if(flight1 == "A321"){
+		myform.action = "flight_seat.do?command=flightseatA321_1";
+		return true;
+	}
+	return false; 
+}
 
 function createAddRow() {
+	
  	var divlist = document.getElementById("flightdiv1");
  	var i = document.getElementsByClassName('flightdiv1_indiv1').length;
 	var name = document.createElement("div");
@@ -378,7 +395,7 @@ function delbtn(e){
 
 </script>
 <body>
-<form action="flight_seat.do?command=flightseat" method="post">
+<form name="myform" action="flight_seat.do?command=flightseat" method="post" onsubmit="seat()">
 	<%
 	String id = (String)session.getAttribute("mb_id"); 
 	if(id == null){

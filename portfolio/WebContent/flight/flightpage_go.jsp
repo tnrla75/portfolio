@@ -621,6 +621,13 @@
 <script>	
 $(document).ready(function() {
 	
+	$(window).scroll(function() {
+	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	alert("aa");
+	    }
+	}); 
+
+	
 	$("input:radio[name='choicebtn']").change(function(){
 		var checkBtn = $(this);
 		var tr = checkBtn.parent().parent().parent();
@@ -661,7 +668,7 @@ $(document).ready(function() {
                 error : function(){
                     alert("fail");
                 }
-            }); 
+            });
 		}
 		else{
 			location.reload();
@@ -671,12 +678,7 @@ $(document).ready(function() {
 
 	
 	
-	$(window).scroll(function() {
-	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-	    	
-	    }
-	}); 
-
+	
 
 	
 	<%-- <% if( people.equals("1")){ %>
