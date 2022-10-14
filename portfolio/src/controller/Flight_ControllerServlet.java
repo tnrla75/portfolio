@@ -27,11 +27,19 @@ public class Flight_ControllerServlet extends HttpServlet{
 				inter = Flightend_Impl.instance();
 				viewName = inter.showData(request, response);
 				request.getRequestDispatcher(viewName).forward(request, response);
-			} else if(command.equals("flightseat")){
-				inter = FlightSeat_Impl.instance();
+			} else if(command.equals("flightseatB737_1") || command.equals("flightseatB737_2")){
+				inter = FlightSeat_ImplB.instance();
 				viewName = inter.showData(request, response);
 				request.getRequestDispatcher(viewName).forward(request, response);
-			} 
+			} else if(command.equals("flightseatA321_1") || command.equals("flightseatA321_2")){
+				inter = FlightSeat_ImplA.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("flight_bag_meal")){
+				inter = Flight_bag_meal_Impl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			}
 			
 			else {
 				viewName = "error.html";

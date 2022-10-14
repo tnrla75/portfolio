@@ -33,12 +33,21 @@ String totalprice = request.getParameter("totalprice");
 		width:300px;
 		margin: 10px;
 	}
-	#mbinfo > div{
-		width:200px;
-		height:100px;
+	.mbinfo1{
+		width: 280px;
+	    height: 100px;
+	    border: 1px solid rgba(0, 0, 0, 0.3);
+	    padding: 0 10px;
+	    line-height: 50px;
+	    font-size: 14pt;
+	    font-weight: bold;
+	}
+	.seatinfo{
 		border: 1px solid rgba(0, 0, 0, 0.3);
-		padding:0 50px;
-		line-height: 50px;
+	}
+	.seatinfo > table{
+		margin: 0px;
+		padding: 0px;
 	}
 	#seatdiv{
 		width:850px;
@@ -239,18 +248,29 @@ String totalprice = request.getParameter("totalprice");
         	border-style: none;
         	float:right;
         }
+        .infotr td:nth-child(2n+1){
+        	width:50px;
+        	height:45px;
+        	text-align: center;
+        }
+        .infotr td:nth-child(2n+1) > img{
+        	width:30px;
+        	height:30px;
+        	background-color: #eaeaea;
+			border-radius: 5px;
+        }
+        .infotr td:nth-child(2n){
+        	width:150px;
+        	height:40px;
+        	font-size: 10pt;
+        	text-align: left;
+        	    line-height: 1px;
+        }
 	
 </style>
 <script>
 $(document).ready(function() {
 	$('#count').text('<%= lastname.length %>명 신청');
-	
-	
-	$("input:checkbox[class='seats']").change(function(){
-		if($("input:checkbox[class='seats']:checked").length > <%= lastname.length %>){
-			alert("더이상 좌석을 선택할수없습니다.");
-		}
-	});
 });
 
 function nextstep() {
@@ -338,13 +358,45 @@ if(id == null){
 	<div id="maindiv">
 		<div id="mbinfo">
 		<% for(int i = 0; i<lastname.length; i++){ %>
-		<div>
-			<input type="hidden" value="<%= lastname[i] %>" name="lastname">
-			<input type="hidden" value="<%= firstname[i] %>" name="firstname">
-			
-		<%= i+1 %> <%= lastname[i] %> <%= firstname[i] %>
-		</div>
-		<% }%>
+			<div class="mbinfo1">
+				<input type="hidden" value="<%= lastname[i] %>" name="lastname">
+				<input type="hidden" value="<%= firstname[i] %>" name="firstname">
+				
+			<%= i+1 %>. <%= lastname[i] %> <%= firstname[i] %>
+			</div>
+			<% }%>
+			<div class="seatinfo" style="margin-top: 30px;">
+				<table>
+					<tr class="infotr">
+						<td><img src="../img/flight/legend-unselectable.svg"></td>
+						<td>선택 불가 좌석</td>
+						<td><img src="../img/flight/legend-economy.svg"></td>
+						<td>일반석</td>
+					</tr>
+					<tr class="infotr" >
+						<td><img src="../img/flight/fl-icon-prefer.png"></td>
+						<td>선택된 좌석</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div class="seatinfo">
+				<table>
+					<tr class="infotr">
+						<td><img src="../img/flight/galley.png"></td>
+						<td>갤리</td>
+						<td><img src="../img/flight/toilet.png"></td>
+						<td>화장실</td>
+					</tr>
+					<tr class="infotr">
+						<td><img src="../img/flight/plane-exit.svg"></td>
+						<td>탈출구</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
 		</div>
 		<div id="seatdiv">
 		<div style=" width:fit-content; display: flex; margin:0 auto;">
@@ -701,10 +753,6 @@ window.onload = function(){
 			document.getElementsByClassName('seatslabel')[i].style.background = "url('../img/flight/legend-unselectable.svg') no-repeat 0 0px / contain"; 
  			document.getElementById(seat[i].id).style.background = "url('../img/flight/legend-unselectable.svg') no-repeat 0 0px / contain"; 
 		}
-		/* else(seats[i].id == seatNum){
-			document.getElementsByClassName('p_seatslabel')[i].style.background = "url('../img/flight/legend-unselectable.svg') no-repeat 0 0px / contain"; 
- 			document.getElementById(seats[i].id).style.background = "url('../img/flight/legend-unselectable.svg') no-repeat 0 0px / contain"; 
-		}  */
 		<% }%>
 	} 
 }
@@ -714,8 +762,9 @@ $(document).ready(function() {
 		var seatlength = $("input:checkbox[class='seats']:checked").length;
 		var p_seatlength = $("input:checkbox[class='p_seats']:checked").length;
 		var lengthsum = seatlength + p_seatlength;
-		if(lengthsum == <%= lastname.length %>){
-			$(":checkbox:not(:checked)").attr("disabled", "disabled");
+		if(lengthsum > <%= lastname.length %>){
+			$(this).prop("checked", false);
+			alert("더이상 좌석을 선택할수없습니다.");
 		} else {
             $("input:checkbox[class='seats']").removeAttr("disabled");
             $("input:checkbox[class='p_seats seats']").removeAttr("disabled");
@@ -725,13 +774,17 @@ $(document).ready(function() {
 		var seatlength = $("input:checkbox[class='seats']:checked").length;
 		var p_seatlength = $("input:checkbox[class='p_seats seats']:checked").length;
 		var lengthsum = seatlength + p_seatlength;
-		if(lengthsum == <%= lastname.length %>){
-			$(":checkbox:not(:checked)").attr("disabled", "disabled");
-		} else {
+		if(lengthsum > <%= lastname.length %>){
+			$(this).prop("checked", false);
+			alert("더이상 좌석을 선택할수없습니다.");
+		}
+		else {
             $("input:checkbox[class='p_seats seats']").removeAttr("disabled");
             $("input:checkbox[class='seats']").removeAttr("disabled");
         }
 	});
+	
+	
 });
 </script>
 </html>

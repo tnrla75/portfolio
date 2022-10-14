@@ -45,14 +45,26 @@
 	</update>
 	
 	<!-- 항공  -->
-	<select resultType="vo.Travelatt" id="flightend_att">select * from attraction order by rand() limit 4; </select>
+	<select resultType="vo.Travelatt" id="flightend_att">
+		select * from attraction order by rand() limit 4; 
+	</select>
+	<select resultType="vo.FlightTicketBean" id="ticketNum1" parameterType="String">
+		select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; 
+	</select>
 
-<select resultType="vo.FlightTicketBean" id="ticketNum1" parameterType="String">select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; </select>
-
-<select resultType="vo.FlightTicketBean" id="ticketNum2" parameterType="String">select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; </select>
-
-<select resultType="vo.FlightSeatBean" id="seat1" parameterType="String">select res.seatNum, res.flight_Ticket_Num, tic.flight_airplaneName from flight_reserve res, flight_ticket tic where res.flight_Ticket_Num=#{flight_Ticket_Num} and tic.flight_Ticket_Num=#{flight_Ticket_Num}; </select>
-
+	<select resultType="vo.FlightTicketBean" id="ticketNum2" parameterType="String">
+		select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; 
+	</select>
+	<select resultType="vo.FlightSeatBean" id="seat1" parameterType="String">
+		select res.seatNum, res.flight_Ticket_Num, tic.flight_airplaneName from flight_reserve res, flight_ticket tic where res.flight_Ticket_Num=#{flight_Ticket_Num} and tic.flight_Ticket_Num=#{flight_Ticket_Num}; 
+	</select>
+	<insert id ="reserve" parameterType="vo.FlightReserveBean">
+	    INSERT INTO flight_reserve(flight_Ticket_Num, seatNum, flight_Rlastname, flight_Rfirstname) VALUES
+	    <foreach collection="list" item="item" separator=",">
+	            (#{item.flight_Ticket_Num}, #{item.seatNum}, #{item.flight_Rlastname}, #{item.flight_Rfirstname})
+	    </foreach>
+	</insert>
+	
 <!-- 호텔 -->
 	<insert parameterType="vo.Hotel_yoyaku_DTO" id="yoyaku">	
 		insert into hot_yoyaku (mb_id,hot_main_num,hot_room_num) values (#{mb_id},#{hot_main_num},#{hot_room_num})

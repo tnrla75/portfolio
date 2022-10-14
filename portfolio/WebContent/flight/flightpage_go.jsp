@@ -33,7 +33,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
 	
 	<title></title>
 	<style>
@@ -618,12 +621,62 @@
 		}
 	</style>
 </head>
-<script>	
+<script>
+$(function(){
+    $('#slider-div').slick({
+        slide: 'div',        //슬라이드 되어야 할 태그 ex) div, li 
+        infinite : true,     //무한 반복 옵션     
+        slidesToShow : 10,        // 한 화면에 보여질 컨텐츠 개수
+        slidesToScroll : 10,        //스크롤 한번에 움직일 컨텐츠 개수
+        speed : 100,     // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+        arrows : true,         // 옆으로 이동하는 화살표 표시 여부
+        dots : true,         // 스크롤바 아래 점으로 페이지네이션 여부
+        autoplay : true,            // 자동 스크롤 사용 여부
+        autoplaySpeed : 10000,         // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+        pauseOnHover : true,        // 슬라이드 이동    시 마우스 호버하면 슬라이더 멈추게 설정
+        vertical : true,        // 세로 방향 슬라이드 옵션
+        prevArrow : "<button type='button' class='slick-prev'>Previous</button>",        // 이전 화살표 모양 설정
+        nextArrow : "<button type='button' class='slick-next'>Next</button>",        // 다음 화살표 모양 설정
+        dotsClass : "slick-dots",     //아래 나오는 페이지네이션(점) css class 지정
+        draggable : true,     //드래그 가능 여부
+        
+        responsive: [ // 반응형 웹 구현 옵션
+
+            {  
+                breakpoint: 960, //화면 사이즈 960px
+                settings: {
+                    //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+                    slidesToShow:3 
+                } 
+            },
+            { 
+                breakpoint: 768, //화면 사이즈 768px
+                settings: {    
+                    //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+                    slidesToShow:2 
+                } 
+            }
+        ]
+
+    });
+  })
 $(document).ready(function() {
 	
 	$(window).scroll(function() {
 	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 	    	alert("aa");
+	    	 $.ajax({
+	                url : "../flight/flightFilter.air?arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+	                dataType : "html" ,
+	                success:function(data){
+	                	alert("제작중..");
+	                    $('#flightdiv3').empty();  
+	                    $('#flightdiv3').append(data);
+	                }, 
+	                error : function(){
+	                    alert("fail");
+	                }
+	            });
 	    }
 	}); 
 
@@ -655,8 +708,6 @@ $(document).ready(function() {
             if($("#koreanair").is(":checked")){
             	arr.push($("#koreanair").val());
             }
-            <%-- location.href="../flight/flightTicketSearch_go.air?arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>"; --%>
-            
             $.ajax({
                 url : "../flight/flightFilter.air?arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
                 dataType : "html" ,
@@ -700,7 +751,7 @@ $(document).ready(function() {
 
 </script>
 <script>
-/* window.onload=function(){
+window.onload=function(){
 	document.getElementById('datechoice1').value = new Date().toISOString().substring(0, 10);
 	document.getElementById('datechoice2').value = new Date().toISOString().substring(0, 10);
 	var today = new Date().toISOString().substring(0, 10);
@@ -709,7 +760,7 @@ $(document).ready(function() {
 function changeDate1(){
 	document.getElementById('datechoice2').setAttribute("min", document.getElementById('datechoice1').value);
 	document.getElementById('datechoice2').value = document.getElementById('datechoice1').value;
-}  */
+}  
 
 function getPost(mode)
 {
@@ -951,7 +1002,7 @@ function getPost(mode)
 				</div>
 			</div>
 			<div id="flightdiv3">
-
+			<div id="slider-div">
 				<c:forEach  var="ticketBeanList1" items="${ticketBeanList1}">
 					<div class="flightlistdiv">
 					<table class="listtable" cellspacing="0">
@@ -984,7 +1035,7 @@ function getPost(mode)
 					</table>
 				</div>
 				</c:forEach> 
-				
+			</div>	
 			</div>
 			
 			
@@ -993,43 +1044,39 @@ function getPost(mode)
 	</form>
 </body>
 <script>
-const count = 10 // 한 번 새로운 item들이 추가될 때 추가되는 item의 갯수
-let index = 0 // item의 index
+$(document).ready(function(){
+	$('.single-item').slick({
+		infinite: false,
+	});
+	$('.multiple-items').slick({
+		infinite: false, // 무한
+		slidesToShow: 2, // 보여주는 갯수
+		slidesToScroll: 2, // 넘어가는 갯수
+		vertical:true, // 세로보기
+		// autoplay:true,
+		// autoplaySpeed: 500
+		// verticalSwiping:true, // 세로 스와이프
+		swipe: false,
+		arrows:false // 버튼 없앰
+	});
 
-// 옵션 객체
-const options = {
-  // null을 설정하거나 무엇도 설정하지 않으면 브라우저 viewport가 기준이 된다.
-  root: null,
-  // 타겟 요소의 10%가 루트 요소와 겹치면 콜백을 실행한다.
-  threshold: 0.1
-}
+	$('.multiple-items').on('wheel', (function(e) //마우스 휠로 넘기기
+	{
+		e.preventDefault();
 
-let observer = new IntersectionObserver(function(entries, observer) {
-  entries.forEach(entry => {
-    const list = document.querySelector('.list')
-    
-    // 타겟 요소와 루트 요소가 교차하면
-    if (entry.isIntersecting) {
-      for (let i = index; i < index + count; i++) {
-        // item을 count 숫자 만큼 생성하고 list에 추가해주기
-        let item = document.createElement('p')
-        
-        item.textContent = i
-        item.className += 'item'
-        list.appendChild(item)
-      }
-      
-      // index에 +count해서 갱신해주기
-      index += count
-    }
-  })
-} ,options)
+		if (e.originalEvent.deltaY < 0)
+		{
+			$(this).slick('slickPrev');
+		} else
+		{
+			$(this).slick('slickNext');
+		}
+	}));
+});
 
-// list의 끝부분을 알려주는 p 타겟 요소를 관찰
-observer.observe(document.querySelector('.list-end'))
+		
 
-
-// modal 창 1번 
+	// modal 창 1번 
 	var btnOpen1  = document.getElementById('btnOpen1');
 	var btnClose1 = document.getElementById('btnClose1');
 	
@@ -1038,7 +1085,6 @@ observer.observe(document.querySelector('.list-end'))
 		var modal1 = document.getElementById('modal1');
 		modal1.style.display = 'none';
 	}
-
 	// modal 창을 보여줌
 	btnOpen1.onclick = function(){
 		var modal1 = document.getElementById('modal1');
@@ -1050,13 +1096,11 @@ observer.observe(document.querySelector('.list-end'))
 		}
 	}
 	btnClose1.onclick = closeRtn;
-	
 	$(document).ready(function() {
 		$(".modalul li:nth-child(n+2)").on('click', function(e) {
 			$('#btnOpen1').val($(this).text());
 			modal1.style.display = 'none';
 		}); 
 	});
-	
 </script>
 </html>

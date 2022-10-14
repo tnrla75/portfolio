@@ -42,7 +42,7 @@ public ArrayList<FlightTicketBean> selectArticleList(String departure,String arr
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String FlightTicket_sql="select * from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=? order by flight_Ticket_Price asc ;";
+		String FlightTicket_sql="select * from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=? order by flight_Ticket_Price asc limit ?, 10 ";
 		ArrayList<FlightTicketBean> ticketBeanList = new ArrayList<FlightTicketBean>();
 		FlightTicketBean ticketBean = null;
 		int startrow=(page-1)*10;
@@ -56,7 +56,7 @@ public ArrayList<FlightTicketBean> selectArticleList(String departure,String arr
 			pstmt.setString(1, departure);
 			pstmt.setString(2, arrive);
 			pstmt.setString(3, departureday);
-			/*pstmt.setInt(4, startrow);*/
+			pstmt.setInt(4, startrow);
 			rs = pstmt.executeQuery();
 			System.out.println(pstmt);
 			
