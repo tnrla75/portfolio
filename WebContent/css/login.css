@@ -1,0 +1,72 @@
+boty{
+	margin:0;
+	padding: 0;
+
+}
+.mainlogin{
+	height: 700px;
+}
+section{
+	width: 300px;
+	height: 500px;
+	margin: 200px auto 0 auto;
+}
+.login{
+	width: 100px;
+	height: 40px;
+	font-size: 20pt;
+	margin: 30px auto 30px auto;
+
+}
+.login_text{
+	width: 300px;
+	height: 50px;
+	margin: 0 auto;
+	padding: 10px 0 10px 0;
+}
+.login_text>input{
+	width: 300px;
+	height: 60px;
+	border: 2px gray solid;
+	border-radius: 5px;
+	font-size: 12pt;
+}
+.login_find{
+	width: 300px;
+	margin: 10px auto;
+	float: right;
+	font-size: 9pt;
+	text-align: right;
+}
+.btn1{
+	
+	width: 300px;
+	height: 45px;
+	margin: 30px auto 15px auto;
+}
+.btn2{
+	
+	width: 300px;
+	height: 45px;
+	margin: 15px auto;
+}
+.btn1>input{
+	width: 300px;
+	height: 45px;
+	background: #030066;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.btn2>input{
+	width: 300px;
+	height: 45px;
+	background: white
+	color: black;
+	border: 2px gray solid;
+	font-weight: bold;
+	border-radius: 5px;
+	cursor: pointer;
+}
+

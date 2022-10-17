@@ -1,0 +1,199 @@
+      body{
+         margin: 0;
+         padding: 0;
+         /*background-color: rgba(231,237,237, 0.5*/
+      }
+      #header {
+         width: 1200px;
+         height: 150px;
+         margin: 0 auto;
+      }
+      #title {
+         float: left;
+         width: 300px;
+         height: 150px;
+      }
+      #title{
+      	width: 300px;
+        height: 150px;
+      }
+      h1 {
+         font-family: 'Koulen', cursive;
+         font-size: 90pt;
+         position: relative;
+         bottom: 100px;
+         /*font-variant-position: buttom;*/
+      }
+      #nav { 
+         float: right;
+         margin-right: 0;
+         width: 700px;
+         height: 100px;
+      }
+      #top {
+         text-align: right;
+         margin-top: 0;
+         font-size: 10pt;
+      }
+      #main {
+         text-align: right;
+         font-size: 15pt;
+         margin-bottom: 0;
+         display: inline-block;
+         position: relative;
+         left: 110px;
+         z-index: 10;
+         top: 10px;
+         height: 70px;
+      }
+      #top .commonnav {
+         float: left;
+         width: 70px;
+         text-align: center;
+         line-height: 45pt;
+         list-style: none;
+         position: relative;
+         left: 270px;
+      }
+      .commonnav1 , .commonnav2, .commonnav3 ,.commonnav4 {
+         float: left;
+         width: 150px;
+         height: 70px;
+         bottom: 15px;
+         text-align: center;
+         line-height: 45pt;
+         list-style: none;
+         position: relative;
+         right: 100px;
+         z-index: 10;
+      }
+      #main li p {
+         position: relative;
+         bottom: 20px;
+      }
+      .list {
+         position: relative;
+         bottom: 40px;
+         list-style: none;
+         font-size: 10pt;
+         z-index: 10;
+         padding-top: 10px;
+         padding-bottom: 10px;
+         background-color: white;
+         /*border-style: solid;
+         border-left: 0px;
+         border-right: 0px;
+         border-bottom: 0px;
+         border-color: #CC3D3D;*/
+         line-height: 20pt;
+         opacity: 0.9;
+      }
+      .list a {
+         position: relative;
+         right: 20px;
+         z-index: 10;
+      }
+      .list li a:hover{
+         color: #CC3D3D;
+      }
+      /*#main {
+         text-align: right;
+         font-size: 15pt;
+         margin-bottom: 0;
+         z-index: 10;
+      }
+      .commonnav {
+         display: inline-block;
+         width: 110px;
+         text-align: center;
+         line-height: 45pt;
+         list-style: none;
+         z-index: 10;
+      }*/   
+
+      footer {
+         width: 100%;
+         height: 200px;
+         background-color: #000054;
+         text-align: center;
+         position: relative;
+      }
+      
+      #footer {
+         margin: 0 auto;
+         width: 1200px;
+         height: 120px;
+         margin-bottom: 0;
+         position: relative;
+         left: 100px;
+      }
+      #footer ul {
+         position: relative;
+         left: 100px;
+         padding-top: 10px;
+         list-style: none;
+         color: #EAEAEA;
+
+      }
+      .footerIn ul {
+         list-style: none;
+         padding-right: 50px;
+         float: left;
+      }
+      .footerIn ul li {
+         font-size: 10pt;
+      }
+      .footerIn ul li:first-child {
+         font-size: 13pt;
+         padding-bottom: 17px;
+         font-weight: bold;
+      }
+
+      .commonlink:link {
+         color: black;
+         text-decoration-line: none;
+      }      
+      .commonlink:visited{
+         color: black;
+      }
+      .commonlink{
+         font-size: 14pt;
+         font-weight: bold;
+      }
+      
+      .list a {
+        color: #333;
+        text-decoration: none;
+        display: inline-block;
+        padding: 15px 0;
+        position: relative;
+      }
+      .list a:after {    
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: #CC3D3D;
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+      }
+      .list a:hover:after { 
+        width: 100%; 
+        left: 0; 
+      }
+      a {
+         text-decoration-line: none;
+         color: black;
+      }
+      a:hover {
+         color: black;
+      }
+      a:active {
+         color: black;
+      }
+      a:visited {
+         color: black;
+      }

@@ -1,0 +1,112 @@
+section{
+	width: 1200px;
+	height: 700px;
+	border:  3px black solid;;
+	margin: 20px auto;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+.title{
+	width: 1190px;
+	height: 70px;
+	box-sizing: border-box;
+}
+.toptitle{
+	width:800px;
+	box-sizing: border-box;
+	font-size: 17pt;		
+	font-weight: bold;
+	float: left;
+	margin: 25px 0 0 30px;
+	margin-top: 25px;	
+}
+.writer1{
+	width:150px;
+	height: 30px;
+	box-sizing: border-box;
+	float: left; 
+	margin-left: 10px;
+	margin-top: 25px;
+	border-right: 2px #E7E7E7 solid;
+	padding-top: 10px;
+}
+.writer2{
+	width:150px;
+	height: 30px;
+	box-sizing: border-box;		
+	float: left; 
+	margin-left: 20px;
+	margin-top: 25px;
+	padding-top: 10px;
+}
+.information{
+	width: 1100px;
+	margin: 20px auto 0 auto;
+
+}
+.nav{
+	width: 700px;
+	height: 25px;
+}
+.destination{
+	width: 150px;
+	float:left;
+	margin-left: 40px;
+	border-right: 2px #E7E7E7 solid;
+}
+.startdate{
+	width: 300px;
+	float:left;
+	margin-left: 10px;
+	border-right: 2px #E7E7E7 solid;
+}
+.reservation{
+	width: 150px;
+	float:left;
+	margin-left: 10px;
+	border-right: 2px #E7E7E7 solid;
+}
+.maincontents{
+	width: 1100px;
+	height:500px;
+	margin: 10px auto 10px auto;
+	border: 2px black solid;
+	padding: 15px;
+	border-radius: 5px;
+}
+.buttonbox{
+	width:150px;
+	height: 30px;
+	margin-left: 1000px;
+}
+.updatebutton{
+	width: 65px;
+	height:30px;
+	background: #E7E7E7;
+	color: black;
+	font-weight: bold;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px black solid;
+}
+.deletebutton{
+	width: 65px;
+	height:30px;
+	margin-left:14px;
+	background: #CC3D3D;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+}
+.recruitbutton{
+	width:150px;
+	height:30px;
+	background: #030066;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+}
