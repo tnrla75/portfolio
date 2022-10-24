@@ -10,11 +10,12 @@ import vo.ActionForward;
 import vo.FlightTicketBean;
 import vo.PageInfo;;
 
-public class FlightListAction_go implements Action {
+public class FlightListAddAction implements Action {
 
 	 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{ 
 		
-		 ArrayList<FlightTicketBean> article1 =new ArrayList<FlightTicketBean>();
+		 
+		ArrayList<FlightTicketBean> article1 =new ArrayList<FlightTicketBean>();
 		 
 		String departure = request.getParameter("departure1");
 		String arrive =  request.getParameter("arrive1");
@@ -23,20 +24,17 @@ public class FlightListAction_go implements Action {
 		String arrivalday = request.getParameter("arrivalDay1");
 		String departureday = request.getParameter("departureDay1");
 		FlightListService FlightListService = new FlightListService();
-		String arr = request.getParameter("arr");
+		
+		int page1 = Integer.parseInt(request.getParameter("page1"));
 		
 		
+		System.out.println(departure + " / "+ arrive + " / "+ arrivalday + " / "+ departureday + " / "+ page1);
 		
-		int page1=1;
 		int limit=10;
 		int listCount;
-		if(request.getParameter("page1")!=null){
-			page1 = Integer.parseInt(request.getParameter("page1"));
-		}
-		
 		listCount=FlightListService.getListCount(departure, arrive, people, seat, departureday);
-		article1 = FlightListService.getArticle_go(departure, arrive, people, seat, departureday , page1, limit);
-		
+		article1 = FlightListService.getArticle_goListadd(departure, arrive, people, seat, departureday , page1, limit);
+		System.out.println("ajax article1 : " + article1.size());
    		int maxPage=(int)((double)listCount/limit+0.95);
    		// 10 / 10+0.95  1癰귣��뼄 占쎈튋揶쏄쑵寃� 
    		int startPage = (((int) ((double)page1 / 10 + 0.9)) - 1) * 10 + 1;
@@ -56,7 +54,9 @@ public class FlightListAction_go implements Action {
 		request.setAttribute("ticketBeanList1", article1);
 		request.setAttribute("pageInfo1", pageInfo);
 		ActionForward forward = new ActionForward();	
-		forward.setPath("/flight/flightpage_go.jsp");
+		
+		
+		forward.setPath("/flight/ticket_list.jsp");
 		
   		return forward;
 

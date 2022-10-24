@@ -14,6 +14,7 @@
 		System.out.println(articleList_go.get(0).getFlight_airplaneName());
 		System.out.println(articleList_back.get(0).getFlight_airplaneName());
 		
+		System.out.println(totalprice);
 	%>
 <!DOCTYPE html>
 <html>
@@ -43,6 +44,7 @@
 	margin-left: 900px;
 	background-color: rgba(231,231,231,0.2);
 	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #flightdiv2_indiv1 {
@@ -91,7 +93,7 @@
 	padding:0px;
 	margin: 20px 0px 0px 0px;
 	width: 880px;
-	height: 440px;
+	height: 400px;
 	border:solid 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -103,14 +105,19 @@
 	border-bottom: solid 1px rgba(0, 0, 0, 0.3);
 	width: 340px;
 	float: left;
-	margin: 25px 45px;
+	margin: 15px 45px;
 }
 
 .infodiv > .infoinput {
 	border-style: none;
-	line-height: 30px;
-	float:left;
-	width: 340px;
+    line-height: 30px;
+    height: 40px;
+    float: left;
+    width: 340px;
+}
+.infodiv > span:nth-child(2n){
+	color:red;
+
 }
 #btndiv1{
 	width: 860px;
@@ -324,22 +331,81 @@
 		h4 > span{
 			color:red;
 		}
+.infodiv label {
+    display: block;
+    padding: 10px 85px;
+    position: relative;
+    float: left;
+}
+.infodiv label input {
+	display: none;
+}
+.infodiv label span {
+	border: 1px solid #ccc;
+    width: 145px;
+    height: 40px;
+    position: absolute;
+    overflow: hidden;
+    line-height: 40px;
+    padding-left: 20px;
+    left: 0;
+    margin-top: 7.5px;
+    border-radius: 10px;
+}
+.infodiv input:checked + .genderspan {
+	background: #002266;
+	border-color: #002266;
+	color: white;
+}
 </style>
 </head>
 
 <script>
 $(document).ready(function() {
-	
+	var i = document.getElementsByClassName('flightdiv1_indiv1').length;
+	var price1 = <%= articleList_go.get(0).getFlight_Ticket_Price() %>;
+	var price2 = <%= articleList_back.get(0).getFlight_Ticket_Price() %>;
+	var totalprice = (price1+price2);
+	alert(totalprice);
+	$("#hiddenprice").val(totalprice);
+	alert($("#hiddenprice").val());
 });
 
 function seat() {
+	var flightdiv1_indiv1 = document.getElementsByClassName('flightdiv1_indiv1');
+	var lastname = document.getElementsByClassName('lastname');
+	var firstname = document.getElementsByClassName('firstname');
+	var birth = document.getElementsByClassName('birth');
+	var passport = document.getElementsByClassName('passport');
+	var gender = document.getElementsByName('gender');
+	
+	var checkEng = /[a-zA-Z]/;
+	var checkNum = /[0-9]/;
+	var checkEN = /[a-zA-Z0-9]/;
+	
+	for(var i =0; i<flightdiv1_indiv1.length; i++){
+		if(!checkEng.test(lastname[i].value)){
+			alert("성에는 영어만 입력해주세요.");
+			return false;
+		}
+		else if(!checkEng.test(firstname[i].value)){
+			alert("성에는 영어만 입력해주세요.");
+			return false;
+		}
+		else if(!checkNum.test(birth[i].value)){
+			alert("생년월일에는 숫자만 입력해주세요.");
+			return false;
+		}
+		else if(!checkEN.test(passport[i].value)){
+			alert("여권번호를 다시 확인해주세요.");
+			return false;
+		} 
+	}
+	
 	var myform = document.myform;
-	alert(myform.action);
 	var flight1 = "<%= articleList_go.get(0).getFlight_airplaneName() %>" ;
 	if(flight1 == "Boeing 737"){
-		alert(flight1);
 		myform.action = "flight_seat.do?command=flightseatB737_1";
-		alert(myform.action);
 		return true;
 	}
 	else if(flight1 == "A321"){
@@ -349,6 +415,7 @@ function seat() {
 	return false; 
 }
 
+
 function createAddRow() {
 	
  	var divlist = document.getElementById("flightdiv1");
@@ -357,13 +424,13 @@ function createAddRow() {
 	var price1 = <%= articleList_go.get(0).getFlight_Ticket_Price() %>;
 	var price2 = <%= articleList_back.get(0).getFlight_Ticket_Price() %>;
 	var totalprice = (i+1)*(price1+price2);
-	
-	
+	$("#hiddenprice").val(totalprice);
+	alert($("#hiddenprice").val());
 	var resultprice = totalprice.toLocaleString();
 	
-	
-	if(i<10){
-		name.innerHTML += "<div class='flightdiv1_indiv1'><div class='infonum'><span class='numspan'>"+(i+1)+"</span><span class='numspan'>. 탑승객 정보</span><button type='button' class='numbtn' onclick='delbtn(this)'><i class='fa-solid fa-trash-can'></i>&nbsp;삭제</button></div><div class='infodiv'><input type='text' placeholder='성' class='infoinput'  name='lastname'></div><div class='infodiv'><input type='text' placeholder='이름' class='infoinput'  name='firstname'></div><div class='infodiv'><input type='text' placeholder='성별' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='생년월일' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='국적' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='여권' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='여권번호' class='infoinput'></div><div class='infodiv'><input type='text' placeholder='유효기간' class='infoinput'></div></div>";
+	if(i<5){
+		name.innerHTML += "<div class='flightdiv1_indiv1'><div class='infonum'><span class='numspan'>"+(i+1)+"</span><span class='numspan'>. 탑승객 정보</span><button type='button' class='numbtn' onclick='delbtn(this)'><i class='fa-solid fa-trash-can'></i>&nbsp;삭제</button></div><div class='infodiv'><span>승객 성</span><span>&nbsp;*</span><input type='text' placeholder='예) KIM' class='infoinput lastname' name='lastname'></div><div class='infodiv'><span>승객 이름</span><span>&nbsp;*</span><input type='text' placeholder='예) GREEN' class='infoinput firstname' name='firstname'></div><div class='infodiv'><span>생년월일(YYYY.MM.DD)</span><span>&nbsp;*</span><input type='text' placeholder='생년월일' class='infoinput birth' name='birth'></div><div class='infodiv'><span>여권번호</span><span>&nbsp;*</span><input type='text' placeholder='여권번호' class='infoinput passport' name='passport'></div><div class='infodiv' style='border-bottom: none;'>	<span>성별</span><span>&nbsp;</span><br>	<label><input type='radio' name='firstname"+(i+1)+"' class='gender'/><span class='genderspan'>남자</span></label>	<label><input type='radio' name='firstname"+(i+1)+"' class='gender'/><span class='genderspan'>여자</span></label>	</div></div>";
+		
 		divlist.appendChild(name);
 		document.getElementsByClassName('span2')[0].value = resultprice;
 		document.getElementsByClassName('span2')[1].value = resultprice;
@@ -371,6 +438,7 @@ function createAddRow() {
 	}else{
 		alert("더 이상 추가할 수 없습니다.");	
 	}
+	
 }
 function delbtn(e){
 	var div1 = document.getElementsByClassName('flightdiv1_indiv1');
@@ -380,6 +448,7 @@ function delbtn(e){
 	var price1 = <%= articleList_go.get(0).getFlight_Ticket_Price() %>;
 	var price2 = <%= articleList_back.get(0).getFlight_Ticket_Price() %>;
 	var totalprice = (div1.length)*(price1+price2);
+	$("#hiddenprice").val(totalprice);
 	var resultprice = totalprice.toLocaleString();
 	document.getElementsByClassName('span2')[0].value = resultprice;
 	document.getElementsByClassName('span2')[1].value = resultprice;
@@ -395,7 +464,7 @@ function delbtn(e){
 
 </script>
 <body>
-<form name="myform" action="flight_seat.do?command=flightseat" method="post" onsubmit="seat()">
+<form name="myform" action="flight_seat.do?command=flightseat" method="post" onsubmit="return seat()">
 	<%
 	String id = (String)session.getAttribute("mb_id"); 
 	if(id == null){
@@ -411,7 +480,7 @@ function delbtn(e){
 <div id="footerprice">
 	<div id="textdiv">
 		<div class="footer_amount">
-			<input type="hidden" value="" id="hiddenprice">
+			<input type="hidden" value="" id="hiddenprice" name="hiddenprice">
 			<span class="span1">예상 결제 금액</span>
 			<input type="button" class="footer_backchoice" value="회원 정보 입력">
 			<span class="span3">원</span>
@@ -491,28 +560,26 @@ function delbtn(e){
 						<span class="numspan">1. 탑승객 정보</span>
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="성" class="infoinput" name="lastname">
+						<span>승객 성</span><span>&nbsp;*</span>
+						<input type="text" placeholder="예) KIM" class="infoinput lastname" name="lastname">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="이름" class="infoinput" name="firstname">
+						<span>승객 이름</span><span>&nbsp;*</span>
+						<input type="text" placeholder="예) GREEN" class="infoinput firstname" name="firstname">
+					</div>
+					
+					<div class="infodiv">
+						<span>생년월일(YYYY.MM.DD)</span><span>&nbsp;*</span>
+						<input type="text" placeholder="생년월일" class="infoinput birth" name="birth">
 					</div>
 					<div class="infodiv">
-						<input type="text" placeholder="성별" class="infoinput" name="">
+						<span>여권번호</span><span>&nbsp;*</span>
+						<input type="text" placeholder="여권번호" class="infoinput passport" name="passport">
 					</div>
-					<div class="infodiv">
-						<input type="text" placeholder="생년월일" class="infoinput" name="">
-					</div>
-					<div class="infodiv">
-						<input type="text" placeholder="국적" class="infoinput" name="">
-					</div>
-					<div class="infodiv">
-						<input type="text" placeholder="여권" class="infoinput" name="">
-					</div>
-					<div class="infodiv">
-						<input type="text" placeholder="여권번호" class="infoinput" name="">
-					</div>
-					<div class="infodiv">
-						<input type="text" placeholder="유효기간" class="infoinput" name="">
+					<div class="infodiv" style="border-bottom: none;">
+						<span>성별</span><span>&nbsp;</span><br>
+						<label><input type="radio" name="firstname1" value="man" class="gender"/><span class="genderspan">남자</span></label>
+						<label><input type="radio" name="firstname1" value="woman" class="gender"/><span class="genderspan">여자</span></label>
 					</div>
 				</div>
 			</div>

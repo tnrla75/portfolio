@@ -23,6 +23,11 @@ public class FlightFilterAction implements Action  {
 		String seat = request.getParameter("seatGrade1");
 		String departureday = request.getParameter("departureDay1");
 		String arrivalday = request.getParameter("arrivalDay1");
+		String startleftval1 = request.getParameter("startleftval1");
+		String startrightval1 = request.getParameter("startrightval1");
+		String startleftval2 = request.getParameter("startleftval2");
+		String startrightval2 = request.getParameter("startrightval2");
+		System.out.println("bb");
 		FlightFilterService FlightFilterService = new FlightFilterService();		
 		String arr = request.getParameter("arr");
 		
@@ -35,9 +40,8 @@ public class FlightFilterAction implements Action  {
 			page1 = Integer.parseInt(request.getParameter("page1"));
 		}
 		
-		article1 = FlightFilterService.getArticle_fliter(departure, arrive, people, seat, departureday , page1, limit, arr);
-		listCount=FlightFilterService.getListCountFilter(departure, arrive, people, seat, departureday, arr);
-
+		article1 = FlightFilterService.getArticle_fliter(departure, arrive, people, seat, departureday , startleftval1 , startrightval1 , startleftval2 , startrightval2 ,  page1, limit, arr);
+		listCount=FlightFilterService.getListCountFilter(departure, arrive, people, seat, departureday, startleftval1 , startrightval1 , startleftval2 , startrightval2 , arr);
 
   		int maxPage=(int)((double)listCount/limit+0.95);
   		// 10 / 10+0.95  1蹂대떎 �빟媛꾪겮 
@@ -54,12 +58,10 @@ public class FlightFilterAction implements Action  {
 		pageInfo.setPage(page1);
 		pageInfo.setStartPage(startPage);	
 	
-		
 		request.setAttribute("ticketBeanList1_filter", article1);
 		request.setAttribute("pageInfo1_filter", pageInfo);
 		ActionForward forward = new ActionForward();	
-		
- 		forward.setPath("/flight/ticket_list.jsp");
+ 		forward.setPath("/flight/ticket_filterlist.jsp");
  		
  		return forward;
 

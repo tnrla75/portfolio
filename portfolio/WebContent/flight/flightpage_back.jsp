@@ -18,9 +18,6 @@
 		int startPage2=pageInfo2.getStartPage();
 		int endPage2=pageInfo2.getEndPage();
 		
-		System.out.println(request.getParameter("ticketNum1"));
-		
-		
 	%>
 <!DOCTYPE html>
 <html>
@@ -30,6 +27,8 @@
 	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 	
 	<title></title>
 	<style>
@@ -278,14 +277,19 @@
 		}
 		#flightdiv1{
 			width: 1200px; margin: 20px auto; height: 150px;
-
+			background-color: white; 
+			border-radius: 10px;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+			position: relative;			   
+    		top: 10px;
 		}
 		#flightdiv2{
 			width: 290px;
 			height: 600px;
 			margin-right: 10px;
 			float: left;
-			overflow-y: scroll;		
+			overflow-y: scroll;	
+			background-color: white;
 		}
 		/* 스크롤바 설정*/
 		#flightdiv2::-webkit-scrollbar{
@@ -295,13 +299,13 @@
 		/* 스크롤바 막대 설정*/
 		#flightdiv2::-webkit-scrollbar-thumb{
 		    height: 17%;
-		    background-color: rgba(33,133,133,1);
+		    background-color: rgba(3,0,102,1);
 		    border-radius: 10px;  
 		}
 
 		/* 스크롤바 뒷 배경 설정*/
 		#flightdiv2::-webkit-scrollbar-track{
-		    background-color: rgba(33,133,133,0.33);
+		    background-color: rgba(0,51,155,0.33);
 		}
 		.flightdiv2_indiv{
 			width: 265px;
@@ -311,18 +315,22 @@
 
 		}
 		#flightdiv3{
+		
 			width: 900px;
 			border-radius: 5px;
 			height: fit-content;
 			float: left;
+			background-color:white;
+			border-radius: 10px;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 		}
 		#flightdivmain{
 			width: 1200px; height: 1500px; margin: 0 auto;
 			
 		}
 		.flightlistdiv{
-			border-bottom: solid 1px rgba(0,0,0,0.2); 
-			
+			border: solid 1px rgba(0,0,0,0.2);
+			border-radius:5px;
 			background-color:white;
 			width: 880px;
 			height: 120px;
@@ -347,11 +355,15 @@
 			margin: 0px;
 			padding: 0px;
 		}
-		.listtable  tr  td:nth-child(odd){
+		.listtable  tr  td:nth-child(1), .listtable  tr  td:nth-child(3){
 			width: 80px;
 		}
 		.listtable  tr  td:nth-child(even){
 			width: 200px;
+		}
+		.listtable  tr  td:nth-child(5){
+			width: 100px;
+			padding-right:50px;
 		}
 		.flightimg{
 			width: 50px;
@@ -364,6 +376,14 @@
 		.airport{
 			font-size: 10pt;
 			color: rgba(0, 0, 0, 0.6);
+		}
+		.airplanename{
+			font-size: 10pt;
+			color: rgba(0, 0, 0, 0.6);
+		}
+		.flightname{
+			font-weight: bold;
+			font-size: 14pt;
 		}
 		.choicebtn{
 			border-radius: 3px;
@@ -395,6 +415,10 @@
 			line-height: 60px;
 			font-size: 14pt;
 			font-weight: bold;
+			position: relative;
+			left: 200px;
+			padding-left: 150px;
+			
         }
         .footer_amount > .span2{
         	height: 60px;
@@ -437,21 +461,23 @@
         	background-color: white;
         	width: 300px;
         	height: 60px;
-        	line-height: 60px;
-        	
+        	line-height: 60px;        	
         }
         .pageinfo > button {
         	border-style: none;
         	background-color: white;
         	margin: 5px;
-        	
+        	font-size: 12pt;
         }
-        .pageinfo > button:hover{
-        	outline: solid;
-        	
+        
+        .pageinfo > button > img {
+        	width:25px;
+        	height:25px;
+        	position: relative;
+    		top: 6px;
         }
         #pagelistdiv{
-        	margin:0 auto;
+        	margin:10px auto;
         }
         #pagelistdiv div{
         	margin: 0 auto;
@@ -461,64 +487,348 @@
 	 	.flightlistdiv:hover {
 	 	background-color: rgba(242,242,242, 0.4);
 		}  
+		/* 모달 */
+		#modal1 > *{
+			padding: 0px;
+			margin: 0px;
+		}
+		
+		#modal1{
+			display : none;
+			z-index : 999;
+			position:absolute;
+			left:0;
+			top: 198px;
+			width:70%;
+			height:650px;
+		}
+		#modal1>#content1{
+			width:500px;
+			height:484px;
+			margin:100px auto;
+			padding:20px;
+			position: relative;
+			background-color:#fff;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		}
+		
+		#modal1 .close{
+			position:absolute;
+			top:4px;
+			right:4px;	
+			font-size:20px;
+			border:0;
+			background-color:#F0F0F0;
+		}
+		
+		#modal1 .close:hover,
+		#modal1 .close:focus {
+		  color : #000;
+		  text-decoration: none;
+		  cursor :pointer;
+		}
+		.modalul {
+			width:500px;
+		}
+		.modalul li{
+			list-style: none;
+			float: left;
+			width: 95px;
+			height: 50px;
+			line-height: 50px;
+			position: relative;
+			left:-60px;
+			top:-36px;
+		}
+		.modalul li:nth-child(1){
+			width: 540px;
+			height: 40px;
+			background-color: #F0F0F0;
+			font-weight: bold;
+			font-size:12pt;
+			line-height: 40px;
+		}
+		.modalul li:nth-child(n+2){
+			font-size:10pt;
+			padding: 0 10px;
+			margin: 2px 5px;
+		}
+		.modalul li:nth-child(n+2):hover{
+			background-color: #5AA0FF ;
+			color:white;
+		}
+		#btnOpen1:focus{
+			outline: none;
+			border-bottom: solid rgba(211, 10, 20, 0.9) 2px;
+		}
+		#backdiv{
+			background-color: #f5f7fa;
+			position: relative;
+			top:-13px;
+		}
+		.flex{
+		  display:flex
+		}
+		/* 라디오버튼 */
+		.container {
+		  display: flex;
+		  position: relative;
+		  cursor: pointer;
+		  font-size: 22px;
+		  width:202px;
+		  height:120px;
+		  -webkit-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		  
+		}
+		
+		.container input {
+		  position: absolute;
+		  opacity: 0;
+		  cursor: pointer;
+		}
+		
+		.checkmark {
+		  display: flex;
+		  flex-direction: column;
+		  padding: 15px 25px;
+		  background: #fff;
+		  min-width: 150px;
+/* 		  transition: all 0.3s linear */
+		}
+		
+		.container:hover input ~ .checkmark {
+		  background-color: #f7f7f7;
+		}
+		.container input:checked ~ .checkmark {
+		  border: #002266 2px solid;
+		  -webkit-box-shadow: 0px 3px 6px 2px rgba(0,0,0,0.16);
+		  -moz-box-shadow: 0px 3px 6px 2px rgba(0,0,0,0.16);
+		  box-shadow: 0px 3px 6px 2px rgba(0,0,0,0.16);
+		  background-color: #002266;
+		  color:white;
+		  width: 202px;
+		}
+		
+	.middle1, .middle2 {
+  position: relative;
+  width: 250px;
+  max-width: 500px;
+  margin-left: 10px;
+}
+
+.slider1, .slider2 {
+  position: relative;
+  z-index: 1;
+  height: 10px;
+  margin: 25px 0px;
+}
+
+.slider1 > .track1 , .slider2 > .track2 { 
+	/* 배경 바 */
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  height: 5px;
+  background-color: #c6aee7;
+}
+.slider1 > .range1, .slider2 > .range2 {
+	/* 가운데 색깔 바 */
+  position: absolute;
+  height: 5px;
+  z-index: 2;
+  left: 0%;
+  right: 0%;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #6200ee;
+}
+.slider1 > .thumb1, .slider2 > .thumb2 {
+  position: absolute;
+  z-index: 3;
+  width: 15px;
+  height: 15px;
+  background-color: #6200ee;
+  border-radius: 50%;
+}
+.slider1 > .thumb1.left1, .slider2 > .thumb2.left2 {
+  left: 5%;
+  transform: translate(-14px, -5px);
+}
+.slider1 > .thumb1.right1, .slider2 > .thumb2.right2 {
+  right: 5%;
+  transform: translate(14px, -5px);
+}
+
+input[type="range"] {
+  position: absolute;
+  /* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 2;
+  height: 10px;
+  width: 100%;
+  opacity: 0;
+}
+input[type="range"]::-webkit-slider-thumb {
+  /* 겹쳐진 두 thumb를 모두 활성화 */
+  pointer-events: all;
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  border: 0 none;
+  background-color: red;
+  cursor: pointer;
+
+  /* appearance를 해야 위의 스타일들을 볼 수 있음 */
+  -webkit-appearance: none;
+}
 	</style>
 </head>
 <script>	
 $(document).ready(function() {
+	var arr = new Array();
+	var count = <%=nowPage2%>+1;
+	var filtercount = <%=nowPage2%>+1;
+	
+	$(window).scroll(function() {
+	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	if($("input:checkbox[class='filter']").is(':checked') || ($('#startleftval1').text()!=00) || ($('#startrightval1').text() != 24) || ($('#startleftval2').text() != 00) || ($('#startrightval2').text() != 24)){
+	    		arr = [];
+	    		var startleftval1 = $('#startleftval1').text();
+	    		var startrightval1 = $('#startrightval1').text();
+	    		var startleftval2 = $('#startleftval2').text();
+	    		var startrightval2 = $('#startrightval2').text();
+	    		if($("#jejuair").is(":checked")){
+	            	arr.push($("#jejuair").val());	
+	            }
+	            if($("#asianaair").is(":checked")){
+	            	arr.push($("#asianaair").val());
+	            }
+	            if($("#koreanair").is(":checked")){
+	            	arr.push($("#koreanair").val());
+	            }
+	    		$.ajax({
+	                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+filtercount ,
+	                dataType : "html" ,
+	                success:function(data){
+	                    $('#flightdiv3').append(data);
+	                    filtercount++;
+	                }, 
+	                error : function(){
+	                    alert("fail");
+	                }
+	            });
+	    	}
+	    	else{
+	    		 $.ajax({
+		                url : "../flight/TicketList.air?departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+count ,
+		                dataType : "html" ,
+		                success:function(data){
+		                    $('#flightdiv3').append(data);
+		                    count++;
+		                }, 
+		                error : function(){
+		                    alert("fail");
+		                }
+		         });
+	    	}
+	    	
+	    }
+	}); 
+
 	
 	$("input:radio[name='choicebtn']").change(function(){
+		
 		var checkBtn = $(this);
-		var tr = checkBtn.parent().parent();
+		var tr = checkBtn.parent().parent().parent();
 		var td = tr.children();
-	
-		var numberStr1 = "<%= request.getParameter("totalprice") %>";
-		var numberStr2 = td.eq(5).text();
 		
-		var number1 = numberStr1.replace(/,/g, "");
-		var number2 = numberStr2.replace(/,/g, "");	
-		
-		num1 = parseInt(number1);
-		num2 = parseInt(number2);
-		var total = num1 + num2;
-		
-		var result = total.toLocaleString();
-		
-		
-		$('#ticketNum2').val(td.eq(0).find("input[type='hidden']").val());
-		$('.span2').val(result);
-		$('.span3').text("원");
-		
+		$('#ticketNum1').val(td.eq(0).find("input[type='hidden']").val());
+		$('.span2').val(td.eq(5).find("h4").text()+"원");
 	});
 	$('.footer_backchoice').on('click',function(){
-		myform.action = "../flight/flightDetail.air";
+		myform.action = "../flight/flightTicketSearch_back.air";
 		myform.submit();
 	});
 	
-	<%-- $('.choicebtn').on('click',function(){
-		var checkBtn = $(this);
 	
+	$('.flightdiv2_indiv > input').change(function(){
+		/* 체크를 했을시에 해당 체크된 부분을 넘김 */
+		count = 2;
+		filtercount = 2;
+		arr = [];
+		var startleftval1 = $('#startleftval1').text();
+		var startrightval1 = $('#startrightval1').text();
+		var startleftval2 = $('#startleftval2').text();
+		var startrightval2 = $('#startrightval2').text();
 		
-		var tr = checkBtn.parent().parent();
-		var td = tr.children();
+		if($(".flightdiv2_indiv > input").is(":checked")){
+            if($("#jejuair").is(":checked")){
+            	arr.push($("#jejuair").val());	
+            }
+            if($("#asianaair").is(":checked")){
+            	arr.push($("#asianaair").val());
+            }
+            if($("#koreanair").is(":checked")){
+            	arr.push($("#koreanair").val());
+            }
+            $.ajax({
+                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+                dataType : "html" ,
+                success:function(data){
+                    $('#flightdiv3').empty();  
+                    $('#flightdiv3').append(data);
+                }, 
+                error : function(){
+                    alert("fail");
+                }
+            });
+		}
+		else{
+			location.reload();
+		}
+	}); 
+	$('.range').change(function(){
+		count = 2;
+		filtercount = 2;
+		/* 체크를 했을시에 해당 체크된 부분을 넘김 */
+		arr = [];
+		var startleftval1 = $('#startleftval1').text();
+		var startrightval1 = $('#startrightval1').text();
+		var startleftval2 = $('#startleftval2').text();
+		var startrightval2 = $('#startrightval2').text();
 		
-		var numberStr1 = "<%= request.getParameter("totalprice") %>";
-		var numberStr2 = td.eq(5).text();
-		
-		var number1 = numberStr1.replace(/,/g, "");
-		var number2 = numberStr2.replace(/,/g, "");		
-		
+            if($("#jejuair").is(":checked")){
+            	arr.push($("#jejuair").val());	
+            }
+            if($("#asianaair").is(":checked")){
+            	arr.push($("#asianaair").val());
+            }
+            if($("#koreanair").is(":checked")){
+            	arr.push($("#koreanair").val());
+            }
+            $.ajax({
+                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+                dataType : "html" ,
+                success:function(data){
+                    $('#flightdiv3').empty();  
+                    $('#flightdiv3').append(data);
+                }, 
+                error : function(){
+                    alert("fail");
+                }
+            });
+	}); 
 	
-		num1 = parseInt(number1);
-		num2 = parseInt(number2);
-		var total = num1 + num2;
-		
-		alert("토탈금액"+ total);
-		
-		$('#total').val(total);
-		
-		myform.action = "../flight/flightDetail.air"
-		myform.submit();
-	}); --%>
+});	
 	
 	
 	<% if( people.equals("1")){ %>

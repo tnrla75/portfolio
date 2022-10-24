@@ -23,7 +23,7 @@ public class FlightListAction_back implements Action{
 		String arrivalday = request.getParameter("arrivalDay1");
 		String departureday = request.getParameter("departureDay1");
 		String totalprice = request.getParameter("totalprice");
-		System.out.println(totalprice);
+		System.out.println(arrivalday + " / " + departureday);
 		FlightListService FlightListService = new FlightListService();
 		/*BoardBean article = boardDetailService.getArticle(board_num);*/
 		int page2=1;

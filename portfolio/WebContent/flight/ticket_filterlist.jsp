@@ -5,13 +5,14 @@
 	<%@ page import="java.util.*"%>
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <% 
-    PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo1");
+    PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo1_filter");
 	int listCount1=pageInfo1.getListCount();
 	int nowPage1=pageInfo1.getPage();
 	int maxPage1=pageInfo1.getMaxPage();
 	int startPage1=pageInfo1.getStartPage();
 	int endPage1=pageInfo1.getEndPage();
-	ArrayList<FlightTicketBean> ticketBeanList1 = (ArrayList<FlightTicketBean>)request.getAttribute("ticketBeanList1");
+	ArrayList<FlightTicketBean> ticketBeanList1 = (ArrayList<FlightTicketBean>)request.getAttribute("ticketBeanList1_filter");
+	String arr = request.getParameter("arr");
 	
     %>
 	<% 
@@ -52,6 +53,4 @@
 		</table>					
 	</div>
 	<%} %>
-	<div id="pagelistdiv">
 	
-	</div> 

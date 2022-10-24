@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+	<script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
 <title>Insert title here</title>
 <%
 String[] lastname= request.getParameterValues("lastname");
@@ -16,19 +18,15 @@ String[] box2 = request.getParameterValues("box2");
 String ticketNum1 = request.getParameter("ticketNum1");
 String ticketNum2 = request.getParameter("ticketNum2");
 
-for( int i =0; i<box1.length; i++){
-	System.out.println(box1[i] + " / "+ box2[i]);
-}
-System.out.println("box1 길이 : "+box1.length);
-System.out.println(box2[0]);
+
+System.out.println(totalprice);
 
 %>
 </head>
 <style>
 	#mb_name{
 		width:900px;
-		border-style:solid;
-		margin:0 auto;
+		margin:15px auto;
 		display: flex;
 		flex-wrap: wrap;	
 	}
@@ -84,7 +82,6 @@ System.out.println(box2[0]);
 .tab_container9, .tab_container10{
 	width: 900px;
 	margin: 0 auto;
-	padding-top: 70px;
 	position: relative;
 }
 
@@ -95,13 +92,14 @@ System.out.println(box2[0]);
   font-size: 18px;
   display: block;
   float: left;
-  width: 44%;
+  width: 42.8%;
   padding: 1.5em;
   color: black;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
   background: white;
+  font-size: 16pt;
 }
 
 #tab1:checked ~ #content1,
@@ -114,11 +112,13 @@ System.out.println(box2[0]);
 #tab8:checked ~ #content8,
 #tab9:checked ~ #content9,
 #tab10:checked ~ #content10 {
-  display: block;
-  padding: 20px;
-  background: #fff;
-  color: #999;
-  border-bottom: 2px solid #f0f0f0;
+ 	display: block;
+    padding: 20px;
+    background: #fff;
+    color: black;
+    border: 1px solid #000063;
+    border-radius: 0 0 10px 10px;
+  
 }
 
 .tab_container1 [id^="tab"]:checked + label,
@@ -126,10 +126,11 @@ System.out.println(box2[0]);
 .tab_container3 [id^="tab"]:checked + label,
 .tab_container4 [id^="tab"]:checked + label,
 .tab_container5 [id^="tab"]:checked + label {
-  background: #fff;
-  box-shadow: inset 0 3px #0CE;
-  background-color: #0CE;
-  color: white;
+	background: #fff;
+    background-color: rgba(211, 10, 20, .7);
+    color: white;
+    border-bottom: 4px solid black;
+    font-size: 16pt;
 }
 
 /*Media query*/
@@ -146,7 +147,7 @@ System.out.println(box2[0]);
 
 .tab-content label {
 	margin: 10px;
-	height: 150px;
+	height: 120px;
 	width: 250px;
 	display: block;
 	padding: 5px;
@@ -157,35 +158,38 @@ System.out.println(box2[0]);
 	display: none;
 }
 .tab-content label span {
-	border: 1px solid #ccc;
-	width: 250px;
-	height: 150px;
-	position: absolute;
-	overflow: hidden;
-	line-height: 50px;
-	text-align: left;
-	font-size: 10pt;
-	left: 0;
+	border: 4px solid #ccc;
+    width: 210px;
+    height: 100px;
+    position: absolute;
+    overflow: hidden;
+    line-height: 30px;
+    text-align: left;
+    font-size: 12pt;
+    color: black;
+    left: 0;
+    padding-left: 20px;
+    border-radius: 10px;
+    padding-top: 10px;
 }
 .tab-content input:checked + span {
-	background: #ccf;
-	border-color: #ccf;
+	background: white;
+	border: rgba(211, 10, 20, .7) 4px solid;
+	border-radius:10px;
 }
 .tab-content{
-	width: 900px;
-	border-style: solid;
+	width: 860px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-	
-	
-	#footerprice {
-        position: fixed;
-        background-color: white;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 60px;
-      	box-shadow: 0 0 4px rgba(0,0,0,0.5);
-        z-index: 1000;
+		#footerprice {
+	        position: fixed;
+	        background-color: white;
+	        left: 0;
+	        right: 0;
+	        bottom: 0;
+	        height: 60px;
+	      	box-shadow: 0 0 4px rgba(0,0,0,0.5);
+	        z-index: 1000;
         }
         #textdiv{
         	margin: 0 auto;
@@ -234,12 +238,29 @@ System.out.println(box2[0]);
         	float:right;
         }
         .bagdiv{
-        	height: 800px;
+        	height: 530px;
         }
         .bagdiv input, .bagdiv section{
         	clear: both;
 			padding-top: 10px;
 			display: none;
+        }
+        #headtext{
+        	width:900px;
+        	margin: 0 auto;
+        	font-size: 18pt;
+        	font-weight: bold;
+        	line-height:100px;
+        	height: 70px;
+        }
+        #footertext{
+        	margin: 0 auto 50px auto;
+		    height: 150px;
+		    width: 900px;
+		    font-size: 12pt;
+		    color: #ABABAB;
+		    font-weight: bold;
+		    line-height: 50px;
         }
 </style>
 <script>
@@ -290,13 +311,31 @@ $(document).ready(function() {
 			$('.tab_container5').show();
 		}
 	});
+	$("input:radio[name='select1']").change(function(){
+		var price = 30000;
+		for(var i = 0; i<6; i++){
+			if($("input:radio[name='select1']:checked").val() == (price*(i+1))){
+				var result = <%= request.getParameter("hiddenprice") %> + (price*(i+1));
+				$("input[class='span2']").val(result.toLocaleString());
+			}
+		}
+	});
+
+	
+	$("#myform").submit(function(){
+		if(!($("input:radio[name='select1']").is(':checked') && $("input:radio[name='select2']").is(':checked'))){
+			alert("수화물 무게를 선택해주세요");
+			return false;
+		}
+		return true;
+	});
 });
+
+
 </script>
 <body>
-	<form name="myform" action="flight_seat.do?command=flight_end" method="post">
-<% for(int i = 0; i<lastname.length; i++){ %>
-<span>	<%= box1[i] %><%= box2[i] %><%= lastname[i]%><%= firstname[i]%><%= ticketNum1 %><%= ticketNum2 %></span><br>
-	<%} %>
+	<form id="myform" name="myform" action="flight_seat.do?command=flight_end" method="post">
+
 	<%
 	String id = (String)session.getAttribute("mb_id"); 
 	if(id == null){
@@ -309,9 +348,12 @@ $(document).ready(function() {
 		<%
 	}
 %>
+<div id="headtext">
+	추가 수하물로 마음까지 넉넉한 여행
+</div>
 <div id="mb_name">
+	
 	<% for(int i =0; i<lastname.length; i++){ %>
-
 		<label class="container">
 		  <input type="radio" class="choicebtn" name="choicebtn" value="<%=i%>">
 		  <span class="checkmark">
@@ -319,7 +361,7 @@ $(document).ready(function() {
 			<input type="hidden" value="<%= firstname[i] %>" name="firstname">
 			<input type="hidden" value="<%= box1[i] %>" name="box1">
 			<input type="hidden" value="<%= box2[i] %>" name="box2">
-		    <h4> &nbsp;<%=i %> <%= lastname[i] %><%= firstname[i] %></h4>
+		    <h4> &nbsp;<%=i+1 %> <%= lastname[i] %> &nbsp; <%= firstname[i] %></h4>
 		  </span>
 		</label>
 
@@ -330,7 +372,7 @@ $(document).ready(function() {
 	<div id="footerprice">
 		<div id="textdiv">
 			<div class="footer_amount">
-				<input type="hidden" value="" id="hiddenprice">
+				<input type="hidden" value="<%= request.getParameter("hiddenprice") %>" id="hiddenprice">
 				<span class="span1">예상 결제 금액</span>
 				<input type="submit" class="footer_backchoice" value="예약하기">
 				<span class="span3">원</span>
@@ -347,32 +389,32 @@ $(document).ready(function() {
 			<input id="tab2" type="radio" name="tabs1">
 			<label for="tab2" class="tab_label"><span>오는편</span></label>
 			<section id="content1" class="tab-content">
-				<h3>가는 편 위탁 수하물11111111111</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">1 . 가는 편 위탁 수하물</h3>
 				<table>
 					<tr>
-						<td><label><input type="radio" name="select1" /><span>0kg<br><br>30,000원</span></label></td>
-						<td><label><input type="radio" name="select1" /><span>15kg<br><br>60,000원</span></label></td>
-						<td><label><input type="radio" name="select1" /><span>20kg<br><br>90,000원</span></label></td>
+						<td><label><input type="radio" name="select1" value="30000"/><span>0kg<br><br>30,000원</span></label></td>
+						<td><label><input type="radio" name="select1" value="60000" /><span>15kg<br><br>60,000원</span></label></td>
+						<td><label><input type="radio" name="select1" value="90000" /><span>20kg<br><br>90,000원</span></label></td>
 		     		</tr>
 					<tr>
-						<td><label><input type="radio" name="select1" /><span>25kg<br><br>120,000원</span></label></td>
-						<td><label><input type="radio" name="select1" /><span>30kg<br><br>150,000원</span></label></td>
-						<td><label><input type="radio" name="select1" /><span>35kg<br><br>180,000원</span></label></td>
+						<td><label><input type="radio" name="select1" value="120000" /><span>25kg<br><br>120,000원</span></label></td>
+						<td><label><input type="radio" name="select1" value="150000" /><span>30kg<br><br>150,000원</span></label></td>
+						<td><label><input type="radio" name="select1" value="180000" /><span>35kg<br><br>180,000원</span></label></td>
 		     		</tr>
 				</table>
 			</section>
 			<section id="content2" class="tab-content">
-				<h3>오는 편 위탁 수하물2222222222</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">1 . 오는 편 위탁 수하물</h3>
 		   		<table>
 					<tr>
-						<td><label><input type="radio" name="select2" /><span>0kg<br><br>30,000원</span></label></td>
-						<td><label><input type="radio" name="select2" /><span>15kg<br><br>60,000원</span></label></td>
-						<td><label><input type="radio" name="select2" /><span>20kg<br><br>90,000원</span></label></td>
+						<td><label><input type="radio" name="select2" value="30000" /><span>0kg<br><br>30,000원</span></label></td>
+						<td><label><input type="radio" name="select2" value="60000" /><span>15kg<br><br>60,000원</span></label></td>
+						<td><label><input type="radio" name="select2" value="90000" /><span>20kg<br><br>90,000원</span></label></td>
 		     		</tr>
 					<tr>
-						<td><label><input type="radio" name="select2" /><span>25kg<br><br>120,000원</span></label></td>
-						<td><label><input type="radio" name="select2" /><span>30kg<br><br>150,000원</span></label></td>
-						<td><label><input type="radio" name="select2" /><span>35kg<br><br>180,000원</span></label></td>
+						<td><label><input type="radio" name="select2" value="120000" /><span>25kg<br><br>120,000원</span></label></td>
+						<td><label><input type="radio" name="select2" value="150000" /><span>30kg<br><br>150,000원</span></label></td>
+						<td><label><input type="radio" name="select2" value="180000" /><span>35kg<br><br>180,000원</span></label></td>
 		      		</tr>
 				</table>
 			</section>
@@ -385,7 +427,7 @@ $(document).ready(function() {
 			<input id="tab4" type="radio" name="tabs2">
 			<label for="tab4" class="tab_label"><span>오는편</span></label>
 			<section id="content3" class="tab-content">
-				<h3>가는 편 위탁 수하물3333333333</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">2 . 가는 편 위탁 수하물</h3>
 				<table>
 					<tr>
 						<td><label><input type="radio" name="select3" /><span>0kg<br><br>30,000원</span></label></td>
@@ -400,7 +442,7 @@ $(document).ready(function() {
 				</table>
 			</section>
 			<section id="content4" class="tab-content">
-				<h3>오는 편 위탁 수하물4444444444</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">2 . 오는 편 위탁 수하물</h3>
 		   		<table>
 					<tr>
 						<td><label><input type="radio" name="select4" /><span>0kg<br><br>30,000원</span></label></td>
@@ -424,7 +466,7 @@ $(document).ready(function() {
 			<label for="tab6" class="tab_label"><span>오는편</span></label>
 			
 			<section id="content5" class="tab-content">
-				<h3>가는 편 위탁 수하물55</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">3 . 가는 편 위탁 수하물</h3>
 				<table>
 					<tr>
 						<td><label><input type="radio" name="select5" /><span>0kg<br><br>30,000원</span></label></td>
@@ -439,7 +481,7 @@ $(document).ready(function() {
 				</table>
 			</section>
 			<section id="content6" class="tab-content">
-				<h3>오는 편 위탁 수하물666</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">3 . 오는 편 위탁 수하물</h3>
 		   		<table>
 					<tr>
 						<td><label><input type="radio" name="select6" /><span>0kg<br><br>30,000원</span></label></td>
@@ -461,7 +503,7 @@ $(document).ready(function() {
 			<input id="tab8" type="radio" name="tabs4">
 			<label for="tab8" class="tab_label"><span>오는편</span></label>
 			<section id="content7" class="tab-content">
-				<h3>가는 편 위탁 수하물77</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">4 . 가는 편 위탁 수하물</h3>
 				<table>
 					<tr>
 						<td><label><input type="radio" name="select7" /><span>0kg<br><br>30,000원</span></label></td>
@@ -476,7 +518,7 @@ $(document).ready(function() {
 				</table>
 			</section>
 			<section id="content8" class="tab-content">
-				<h3>오는 편 위탁 수하물4888888</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">4 . 오는 편 위탁 수하물</h3>
 		   		<table>
 					<tr>
 						<td><label><input type="radio" name="select8" /><span>0kg<br><br>30,000원</span></label></td>
@@ -498,7 +540,7 @@ $(document).ready(function() {
 			<input id="tab10" type="radio" name="tabs5">
 			<label for="tab10" class="tab_label"><span>오는편</span></label>
 			<section id="content9" class="tab-content">
-				<h3>가는 편 위탁 수하물9999</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">5 . 가는 편 위탁 수하물</h3>
 				<table>
 					<tr>
 						<td><label><input type="radio" name="select9" /><span>0kg<br><br>30,000원</span></label></td>
@@ -513,7 +555,7 @@ $(document).ready(function() {
 				</table>
 			</section>
 			<section id="content10" class="tab-content">
-				<h3>오는 편 위탁 수하물5101010</h3>
+				<h3><img src="../img/flight/travel-bag.png" style=" width: 50px; height: 35px;">5 . 오는 편 위탁 수하물</h3>
 		   		<table>
 					<tr>
 						<td><label><input type="radio" name="select10" /><span>0kg<br><br>30,000원</span></label></td>
@@ -528,6 +570,9 @@ $(document).ready(function() {
 				</table>
 			</section>
 		</div>
+		</div>
+		<div id="footertext">
+			<i class="fa-regular fa-circle-question"></i>무게 초과 시 초과 수하물 요금이 발생합니다.
 		</div>
 	</form>
 </body>

@@ -281,7 +281,7 @@ if(id == null){
 <div id="footerprice">
 	<div id="textdiv">
 		<div class="footer_amount">
-			<input type="hidden" value="" id="hiddenprice">
+			<input type="hidden" value="<%= request.getParameter("hiddenprice") %>" id="hiddenprice" name="hiddenprice">
 			<span class="span1">예상 결제 금액</span>
 			<input type="button" class="footer_backchoice" value="수화물 / 기내식 선택" onclick="nextstep()">
 			<span class="span3">원</span>

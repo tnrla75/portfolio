@@ -19,6 +19,20 @@ public class FlightListService {
 		close(con);
 		return articleList;
 	}
+	
+	public ArrayList<FlightTicketBean> getArticle_goListadd(String departure, String arrive, String people, String seat, String departureday, int page, int limit) throws Exception{
+		
+		ArrayList<FlightTicketBean> articleList = null;
+		
+		Connection con = getConnection();
+		Flightdao flightdao = Flightdao.getInstance();
+		flightdao.setConnection(con);
+		articleList = flightdao.selectArticleList(departure, arrive, people, seat, departureday, page,limit);
+		
+		close(con);
+		return articleList;
+	}
+	
 	public ArrayList<FlightTicketBean> getArticle_back(String arrive, String departure,String people, String seat, String arrivalday, int page, int limit) throws Exception{
 		
 		ArrayList<FlightTicketBean> articleList = null;

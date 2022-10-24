@@ -13,16 +13,15 @@
 		String people =request.getParameter("flight_people1");
 		String seat = request.getParameter("seatGrade1");
 		String arrivalday = request.getParameter("arrivalDay1");
-		
-		System.out.println(ticketBeanList1.size()); 
-		
-		
+				
 		PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo1");
 		int listCount1=pageInfo1.getListCount();
 		int nowPage1=pageInfo1.getPage();
 		int maxPage1=pageInfo1.getMaxPage();
 		int startPage1=pageInfo1.getStartPage();
 		int endPage1=pageInfo1.getEndPage();
+		
+		
 	%>
 <!DOCTYPE html>
 <html>
@@ -34,12 +33,11 @@
 	<script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
-	
+	<!-- <link rel="stylesheet" href="../css/bootstrap.css">
+	<script type="text/javascript" src="../js/bootstrap.js"></script> -->
 	<title></title>
 	<style>
+		
 		.people {
 			width: 120px;
 			padding: 5px;
@@ -512,7 +510,7 @@
 		}
 		#modal1>#content1{
 			width:500px;
-			height:650px;
+			height:484px;
 			margin:100px auto;
 			padding:20px;
 			position: relative;
@@ -619,69 +617,142 @@
 		  color:white;
 		  width: 202px;
 		}
+		
+	.middle1, .middle2 {
+  position: relative;
+  width: 250px;
+  max-width: 500px;
+  margin-left: 10px;
+}
+
+.slider1, .slider2 {
+  position: relative;
+  z-index: 1;
+  height: 10px;
+  margin: 25px 0px;
+}
+
+.slider1 > .track1 , .slider2 > .track2 { 
+	/* 배경 바 */
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  height: 5px;
+  background-color: #c6aee7;
+}
+.slider1 > .range1, .slider2 > .range2 {
+	/* 가운데 색깔 바 */
+  position: absolute;
+  height: 5px;
+  z-index: 2;
+  left: 0%;
+  right: 0%;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #6200ee;
+}
+.slider1 > .thumb1, .slider2 > .thumb2 {
+  position: absolute;
+  z-index: 3;
+  width: 15px;
+  height: 15px;
+  background-color: #6200ee;
+  border-radius: 50%;
+}
+.slider1 > .thumb1.left1, .slider2 > .thumb2.left2 {
+  left: 5%;
+  transform: translate(-14px, -5px);
+}
+.slider1 > .thumb1.right1, .slider2 > .thumb2.right2 {
+  right: 5%;
+  transform: translate(14px, -5px);
+}
+
+input[type="range"] {
+  position: absolute;
+  /* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 2;
+  height: 10px;
+  width: 100%;
+  opacity: 0;
+}
+input[type="range"]::-webkit-slider-thumb {
+  /* 겹쳐진 두 thumb를 모두 활성화 */
+  pointer-events: all;
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  border: 0 none;
+  background-color: red;
+  cursor: pointer;
+
+  /* appearance를 해야 위의 스타일들을 볼 수 있음 */
+  -webkit-appearance: none;
+}
 	</style>
 </head>
 <script>
-$(function(){
-    $('#slider-div').slick({
-        slide: 'div',        //슬라이드 되어야 할 태그 ex) div, li 
-        infinite : true,     //무한 반복 옵션     
-        slidesToShow : 10,        // 한 화면에 보여질 컨텐츠 개수
-        slidesToScroll : 10,        //스크롤 한번에 움직일 컨텐츠 개수
-        speed : 100,     // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
-        arrows : true,         // 옆으로 이동하는 화살표 표시 여부
-        dots : true,         // 스크롤바 아래 점으로 페이지네이션 여부
-        autoplay : true,            // 자동 스크롤 사용 여부
-        autoplaySpeed : 10000,         // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
-        pauseOnHover : true,        // 슬라이드 이동    시 마우스 호버하면 슬라이더 멈추게 설정
-        vertical : true,        // 세로 방향 슬라이드 옵션
-        prevArrow : "<button type='button' class='slick-prev'>Previous</button>",        // 이전 화살표 모양 설정
-        nextArrow : "<button type='button' class='slick-next'>Next</button>",        // 다음 화살표 모양 설정
-        dotsClass : "slick-dots",     //아래 나오는 페이지네이션(점) css class 지정
-        draggable : true,     //드래그 가능 여부
-        
-        responsive: [ // 반응형 웹 구현 옵션
-
-            {  
-                breakpoint: 960, //화면 사이즈 960px
-                settings: {
-                    //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-                    slidesToShow:3 
-                } 
-            },
-            { 
-                breakpoint: 768, //화면 사이즈 768px
-                settings: {    
-                    //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-                    slidesToShow:2 
-                } 
-            }
-        ]
-
-    });
-  })
 $(document).ready(function() {
+	var arr = new Array();
+	var count = <%=nowPage1%>+1;
+	var filtercount = <%=nowPage1%>+1;
 	
 	$(window).scroll(function() {
 	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-	    	alert("aa");
-	    	 $.ajax({
-	                url : "../flight/flightFilter.air?arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+	    	if($("input:checkbox[class='filter']").is(':checked') || ($('#startleftval1').text()!=00) || ($('#startrightval1').text() != 24) || ($('#startleftval2').text() != 00) || ($('#startrightval2').text() != 24)){
+	    		arr = [];
+	    		var startleftval1 = $('#startleftval1').text();
+	    		var startrightval1 = $('#startrightval1').text();
+	    		var startleftval2 = $('#startleftval2').text();
+	    		var startrightval2 = $('#startrightval2').text();
+	    		if($("#jejuair").is(":checked")){
+	            	arr.push($("#jejuair").val());	
+	            }
+	            if($("#asianaair").is(":checked")){
+	            	arr.push($("#asianaair").val());
+	            }
+	            if($("#koreanair").is(":checked")){
+	            	arr.push($("#koreanair").val());
+	            }
+	    		$.ajax({
+	                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+filtercount ,
 	                dataType : "html" ,
 	                success:function(data){
-	                	alert("제작중..");
-	                    $('#flightdiv3').empty();  
 	                    $('#flightdiv3').append(data);
+	                    filtercount++;
 	                }, 
 	                error : function(){
 	                    alert("fail");
 	                }
 	            });
+	    	}
+	    	else{
+	    		 $.ajax({
+		                url : "../flight/TicketList.air?departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+count ,
+		                dataType : "html" ,
+		                success:function(data){
+		                    $('#flightdiv3').append(data);
+		                    count++;
+		                }, 
+		                error : function(){
+		                    alert("fail");
+		                }
+		         });
+	    	}
+	    	
 	    }
 	}); 
 
 	
 	$("input:radio[name='choicebtn']").change(function(){
+		
 		var checkBtn = $(this);
 		var tr = checkBtn.parent().parent().parent();
 		var td = tr.children();
@@ -693,11 +764,18 @@ $(document).ready(function() {
 		myform.action = "../flight/flightTicketSearch_back.air";
 		myform.submit();
 	});
-	$("input:radio[name='choicebtn']").is(':checked')
+	
 	
 	$('.flightdiv2_indiv > input').change(function(){
 		/* 체크를 했을시에 해당 체크된 부분을 넘김 */
-		var arr = new Array();
+		count = 2;
+		filtercount = 2;
+		arr = [];
+		var startleftval1 = $('#startleftval1').text();
+		var startrightval1 = $('#startrightval1').text();
+		var startleftval2 = $('#startleftval2').text();
+		var startrightval2 = $('#startrightval2').text();
+		
 		if($(".flightdiv2_indiv > input").is(":checked")){
             if($("#jejuair").is(":checked")){
             	arr.push($("#jejuair").val());	
@@ -709,10 +787,9 @@ $(document).ready(function() {
             	arr.push($("#koreanair").val());
             }
             $.ajax({
-                url : "../flight/flightFilter.air?arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
                 dataType : "html" ,
                 success:function(data){
-                	alert("제작중..");
                     $('#flightdiv3').empty();  
                     $('#flightdiv3').append(data);
                 }, 
@@ -725,6 +802,38 @@ $(document).ready(function() {
 			location.reload();
 		}
 	}); 
+	$('.range').change(function(){
+		count = 2;
+		filtercount = 2;
+		/* 체크를 했을시에 해당 체크된 부분을 넘김 */
+		arr = [];
+		var startleftval1 = $('#startleftval1').text();
+		var startrightval1 = $('#startrightval1').text();
+		var startleftval2 = $('#startleftval2').text();
+		var startrightval2 = $('#startrightval2').text();
+		
+            if($("#jejuair").is(":checked")){
+            	arr.push($("#jejuair").val());	
+            }
+            if($("#asianaair").is(":checked")){
+            	arr.push($("#asianaair").val());
+            }
+            if($("#koreanair").is(":checked")){
+            	arr.push($("#koreanair").val());
+            }
+            $.ajax({
+                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+                dataType : "html" ,
+                success:function(data){
+                    $('#flightdiv3').empty();  
+                    $('#flightdiv3').append(data);
+                }, 
+                error : function(){
+                    alert("fail");
+                }
+            });
+	}); 
+	
 });	
 
 	
@@ -751,7 +860,7 @@ $(document).ready(function() {
 
 </script>
 <script>
-window.onload=function(){
+/* window.onload=function(){
 	document.getElementById('datechoice1').value = new Date().toISOString().substring(0, 10);
 	document.getElementById('datechoice2').value = new Date().toISOString().substring(0, 10);
 	var today = new Date().toISOString().substring(0, 10);
@@ -760,7 +869,7 @@ window.onload=function(){
 function changeDate1(){
 	document.getElementById('datechoice2').setAttribute("min", document.getElementById('datechoice1').value);
 	document.getElementById('datechoice2').value = document.getElementById('datechoice1').value;
-}  
+}   */
 
 function getPost(mode)
 {
@@ -820,8 +929,6 @@ function getPost(mode)
 			<div class="modaltitle">
 				<ul class="modalul">
 					<li>&nbsp;&nbsp;인기지역 <input type='button' value='X' class="close" id='btnClose1'/></li>
-					<li>aaa</li>
-					<li>bbb</li>
 					<li>서울</li>
 					<li>제주도</li>
 				</ul>
@@ -844,21 +951,10 @@ function getPost(mode)
 					<li>나고야</li>
 					<li>오키나와</li>
 				</ul>
-			</div>
+			</div>			
 			<div class="modaltitle">
 				<ul class="modalul">
-					<li>&nbsp;&nbsp;일본</li>
-					<li>도쿄</li>
-					<li>오사카</li>
-					<li>교토</li>
-					<li>삿포로</li>
-					<li>나고야</li>
-					<li>오키나와</li>
-				</ul>
-			</div>
-			<div class="modaltitle">
-				<ul class="modalul">
-					<li>&nbsp;&nbsp;태국</li>
+					<li>&nbsp;&nbsp;베트남</li>
 					<li>호치민</li>
 					<li>호이안</li>
 					<li>다낭</li>
@@ -869,8 +965,7 @@ function getPost(mode)
 				<ul class="modalul">
 					<li>&nbsp;&nbsp;기타 국가</li>
 					<li>싱가포르</li>
-					<li>홍콩</li>
-					
+					<li>홍콩</li>					
 				</ul>
 			</div>
 			
@@ -971,35 +1066,40 @@ function getPost(mode)
 			<div id="flightdiv2">
 				<div class="flightdiv2_indiv">
 					<h4>&nbsp;&nbsp;항공사</h4>
-						<input type="checkbox" name="jejuair" id="jejuair" value="제주"> 제주<br><br>
-						<input type="checkbox" name="asianaair" id="asianaair" value="아시아나"> 아시아나 <br><br>
-						<input type="checkbox" name="koreanair" id="koreanair" value="대한"> 대한 <br><br>
-						<input type="checkbox" name="jejuair" id="jejuair" value="이스타">이스타항공<br><br>
-						<input type="checkbox" name="asianaair" id="asianaair" value="아시아나"> 진에어 <br><br>
+						<input type="checkbox" name="jejuair" id="jejuair" value="제주" class="filter"> 제주<br><br>
+						<input type="checkbox" name="asianaair" id="asianaair" value="아시아나" class="filter"> 아시아나 <br><br>
+						<input type="checkbox" name="koreanair" id="koreanair" value="대한" class="filter"> 대한 <br><br>
 				</div>
 				<div class="flightdiv2_indiv">
-					<h4>가격</h4>
-						<input type="checkbox" name=""> 가격 낮은순<br><br>
-						<input type="checkbox" name=""> 가격 높은순<br><br>
-					
+				<h4> &nbsp;&nbsp;항공편 시간</h4>
+				<i class="fa-solid fa-plane-departure"></i><span>출발 시간</span><span id="startleftval1">00</span><span>: 00 - </span><span id="startrightval1">24</span><span>: 00</span>
+					<div class="middle1">
+					  <div class="multi-range-slider1" >
+					    <input type="range" id="input1-left1" min="0" max="24" value="0" class="range" />
+    					<input type="range" id="input1-right1" min="0" max="24" value="24" class="range" />
+					    <div class="slider1">
+					      <div class="track1"></div>
+					      <div class="range1"></div>
+					      <div class="thumb1 left1"></div>
+					      <div class="thumb1 right1"></div>
+					    </div>
+					  </div>
+					</div>	
+					<i class="fa-solid fa-plane-arrival"></i><span>도착 시간</span><span id="startleftval2">00</span><span>: 00 - </span><span id="startrightval2">24</span><span>: 00</span>
+					<div class="middle2">
+					  <div class="multi-range-slider2">
+					    <input type="range" id="input2-left2" min="0" max="24" value="0" class="range" />
+    					<input type="range" id="input2-right2" min="0" max="24" value="24" class="range" />
+					    <div class="slider2">
+					      <div class="track2"></div>
+					      <div class="range2"></div>
+					      <div class="thumb2 left2"></div>
+					      <div class="thumb2 right2"></div>
+					    </div>
+					  </div>
+					</div>			 
 				</div>
-				<div class="flightdiv2_indiv">
-					<h4>경유</h4>
-					
-						<input type="checkbox" name="">
-					
-				</div>
-				<div class="flightdiv2_indiv">
-					<h4>출발 시간대 설정</h4>
-					
-						<input type="checkbox" name="">
 				
-				</div>
-				<div class="flightdiv2_indiv">
-					<h4>총 소요시간</h4>
-						
-						<input type="checkbox" name="">
-				</div>
 			</div>
 			<div id="flightdiv3">
 			<div id="slider-div">
@@ -1029,52 +1129,119 @@ function getPost(mode)
 							  <span class="checkmark">
 							    <h4><fmt:formatNumber value="${ticketBeanList1.flight_Ticket_Price}" groupingUsed="true"/></h4>
 							  </span>
-							</label>
+							</label> 
 							</td>
 						</tr>
 					</table>
 				</div>
 				</c:forEach> 
 			</div>	
+			
 			</div>
 			
 			
 		</div>
 </div>
+
 	</form>
 </body>
 <script>
-$(document).ready(function(){
-	$('.single-item').slick({
-		infinite: false,
-	});
-	$('.multiple-items').slick({
-		infinite: false, // 무한
-		slidesToShow: 2, // 보여주는 갯수
-		slidesToScroll: 2, // 넘어가는 갯수
-		vertical:true, // 세로보기
-		// autoplay:true,
-		// autoplaySpeed: 500
-		// verticalSwiping:true, // 세로 스와이프
-		swipe: false,
-		arrows:false // 버튼 없앰
-	});
-
-	$('.multiple-items').on('wheel', (function(e) //마우스 휠로 넘기기
-	{
-		e.preventDefault();
-
-		if (e.originalEvent.deltaY < 0)
-		{
-			$(this).slick('slickPrev');
-		} else
-		{
-			$(this).slick('slickNext');
-		}
-	}));
-});
-
 		
+const inputLeft1 = document.getElementById("input1-left1");
+const inputRight1 = document.getElementById("input1-right1");
+
+const thumbLeft1 = document.querySelector(".slider1 > .thumb1.left1");
+const thumbRight1 = document.querySelector(".slider1 > .thumb1.right1");
+const range1 = document.querySelector(".slider1 > .range1");
+	
+	const setLeftValue1 = () => {
+		  const _this = inputLeft1;
+		  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+		  // 교차되지 않게, 1을 빼준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+		  _this.value = Math.min(parseInt(_this.value), parseInt(inputRight1.value) - 1);
+		  // input, thumb 같이 움직이도록
+		  const percent = ((_this.value - min) / (max - min)) * 100;
+		  thumbLeft1.style.left = percent + "%";
+		  range1.style.left = percent + "%";
+	  if($('#input1-left1').val().length == 1){
+			var rightval = "0"+ $('#input1-left1').val();
+		  	$('#startleftval1').text(rightval);
+		  }
+		  else{
+			  $('#startleftval1').text($('#input1-left1').val());
+		  }
+	};
+	
+	const setRightValue1 = () => {
+		  const _this = inputRight1;
+		  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+		  // 교차되지 않게, 1을 더해준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+		  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft1.value) + 1);
+		  // input, thumb 같이 움직이도록
+		  const percent = ((_this.value - min) / (max - min)) * 100;
+		  thumbRight1.style.right = 100 - percent + "%";
+		  range1.style.right = 100 - percent + "%";
+	  
+	  if($('#input1-right1').val().length == 1){
+		var rightval = "0"+ $('#input1-right1').val();
+	  	$('#startrightval1').text(rightval);
+	  }
+	  else{
+		  $('#startrightval1').text($('#input1-right1').val());
+	  }
+	};
+	
+	inputLeft1.addEventListener("input", setLeftValue1);
+	inputRight1.addEventListener("input", setRightValue1);
+
+	
+	
+	const inputLeft2 = document.getElementById("input2-left2");
+	const inputRight2 = document.getElementById("input2-right2");
+
+	const thumbLeft2 = document.querySelector(".slider2 > .thumb2.left2");
+	const thumbRight2 = document.querySelector(".slider2 > .thumb2.right2");
+	const range2 = document.querySelector(".slider2 > .range2");
+		
+		const setLeftValue2 = () => {
+			  const _this = inputLeft2;
+			  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+			  // 교차되지 않게, 1을 빼준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+			  _this.value = Math.min(parseInt(_this.value), parseInt(inputRight2.value) - 1);
+			  // input, thumb 같이 움직이도록
+			  const percent = ((_this.value - min) / (max - min)) * 100;
+			  thumbLeft2.style.left = percent + "%";
+			  range2.style.left = percent + "%";
+		  if($('#input2-left2').val().length == 1){
+				var rightval = "0"+ $('#input2-left2').val();
+			  	$('#startleftval2').text(rightval);
+			  }
+			  else{
+				  $('#startleftval2').text($('#input2-left2').val());
+			  }
+		};
+		
+		const setRightValue2 = () => {
+			  const _this = inputRight2;
+			  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+			  // 교차되지 않게, 1을 더해준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+			  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft2.value) + 1);
+			  // input, thumb 같이 움직이도록
+			  const percent = ((_this.value - min) / (max - min)) * 100;
+			  thumbRight2.style.right = 100 - percent + "%";
+			  range2.style.right = 100 - percent + "%";
+		  
+		  if($('#input2-right2').val().length == 1){
+			var rightval = "0"+ $('#input2-right2').val();
+		  	$('#startrightval2').text(rightval);
+		  }
+		  else{
+			  $('#startrightval2').text($('#input2-right2').val());
+		  }
+		};
+		
+		inputLeft2.addEventListener("input", setLeftValue2);
+		inputRight2.addEventListener("input", setRightValue2);
 
 	// modal 창 1번 
 	var btnOpen1  = document.getElementById('btnOpen1');

@@ -34,10 +34,10 @@ String totalprice = request.getParameter("totalprice");
 		margin: 10px;
 	}
 	.mbinfo1{
-		width: 280px;
+		width: 250px;
 	    height: 100px;
 	    border: 1px solid rgba(0, 0, 0, 0.3);
-	    padding: 0 10px;
+	    padding: 0px 24px;
 	    line-height: 50px;
 	    font-size: 14pt;
 	    font-weight: bold;
@@ -53,7 +53,7 @@ String totalprice = request.getParameter("totalprice");
 		width:850px;
 		height:fit-content;
 		margin: 10px auto;
-		border-style:solid;
+		border: 1px solid rgba(0, 0, 0, 0.3);
 		box-sizing: border-box;
 	}
 	#ticketinfo{
@@ -63,10 +63,10 @@ String totalprice = request.getParameter("totalprice");
 		display: flex;
 	}	
 	#ticketinfo > div:nth-child(1){
-		background-color: #287DFA1A;
-		width: 1200px;
-		height:120px;
-		border: 1px solid rgba(0, 0, 0, 0.3);
+	    width: 1200px;
+	    height: 120px;
+	    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	    border: solid 2px rgba(0,34,102,0.3);
 	}
 	#ticketinfo > div:nth-child(2){
 		background-color: white;
@@ -99,9 +99,11 @@ String totalprice = request.getParameter("totalprice");
 		display: flex;
 	}
 	#departure, #arrive{
-		height:50px;
-		width:200px;
-		line-height: 45px;
+		height: 50px;
+    width: 200px;
+    line-height: 45px;
+    font-size: 14pt;
+    font-weight: bold;
 	}
 	#icon{
 		height:50px;
@@ -131,8 +133,8 @@ String totalprice = request.getParameter("totalprice");
 	}
 	.seats + label{
 	 	display:block;
-	 	width:40px;
-	 	height:40px;
+	 	width:50px;
+	 	height:45px;
 	 	background: url('../img/flight/legend-economy.svg') no-repeat 0 0px / contain; 
 
 	}
@@ -153,7 +155,7 @@ String totalprice = request.getParameter("totalprice");
 		height: 50px;
 	 	background: url('../img/flight/legend-prestige.svg') no-repeat 0 0px / contain;
 	 	float: left;
-	 	margin: 0 7px;
+	 	margin: 0 14px;
 	}
 	.p_seats:checked  + label{
 		background-repeat: no-repeat;
@@ -254,8 +256,8 @@ String totalprice = request.getParameter("totalprice");
         	text-align: center;
         }
         .infotr td:nth-child(2n+1) > img{
-        	width:30px;
-        	height:30px;
+        	width:35px;
+        	height:35px;
         	background-color: #eaeaea;
 			border-radius: 5px;
         }
@@ -264,7 +266,22 @@ String totalprice = request.getParameter("totalprice");
         	height:40px;
         	font-size: 10pt;
         	text-align: left;
-        	    line-height: 1px;
+       	    line-height: 1px;
+       	    font-weight: bold;
+        }
+        #headdiv{
+        	width: 1200px;
+        	background-color: #002266;
+        	margin: 20px auto 0 auto;
+        	height: 100px;
+        	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        #headdiv > span {
+        	font-size: 16pt;
+        	font-weight: bold;
+        	color: white;
+        	line-height: 100px;
+        	margin-left: 30px;
         }
 	
 </style>
@@ -273,18 +290,26 @@ $(document).ready(function() {
 	$('#count').text('<%= lastname.length %>명 신청');
 });
 
+
 function nextstep() {
+	var seatlength = $("input:checkbox[class='seats']:checked").length;
+	var p_seatlength = $("input:checkbox[class='p_seats seats']:checked").length;
+	var lengthsum = seatlength + p_seatlength;
 	var airplaneName = "<%= ticketBeanList2.get(0).getFlight_airplaneName() %>";
 	var myform = document.myform;
-	if(airplaneName == "Boeing 737"){
-		myform.action = "flight_seat.do?command=flightseatB737_2";
-		alert(myform.action);
-		myform.submit();
-	}
-	else if(airplaneName == "A321"){
-		myform.action = "flight_seat.do?command=flightseatA321_2";
-		alert(myform.action);
-		myform.submit();
+	if(lengthsum == <%= lastname.length %>){
+		if(airplaneName == "Boeing 737"){
+			myform.action = "flight_seat.do?command=flightseatB737_2";
+			alert(myform.action);
+			myform.submit();
+		}
+		else if(airplaneName == "A321"){
+			myform.action = "flight_seat.do?command=flightseatA321_2";
+			alert(myform.action);
+			myform.submit();
+		}
+	}else{
+		alert("좌석을 선택해주세요.");
 	}
 }
 
@@ -305,14 +330,14 @@ if(id == null){
 	<%
 }
 %>
-<form name="myform" onsubmit="seat()" method="post" >
+<form name="myform" method="post" >
 <input type="hidden" value="<%= ticketBeanList1.get(0).getFlight_Ticket_Num() %>" name="ticketNum1">
 <input type="hidden" value="<%= ticketBeanList2.get(0).getFlight_Ticket_Num() %>" name="ticketNum2">
 <input type="hidden" value="aa" name="bool">
 <div id="footerprice">
 	<div id="textdiv">
 		<div class="footer_amount">
-			<input type="hidden" value="" id="hiddenprice">
+			<input type="hidden" value="<%= request.getParameter("hiddenprice") %>" id="hiddenprice" name="hiddenprice">
 			<span class="span1">예상 결제 금액</span>
 			<input type="button" class="footer_backchoice" value="가는편 좌석 선택" onclick="nextstep()">
 			<span class="span3">원</span>
@@ -320,8 +345,12 @@ if(id == null){
 		</div>
 	</div>
 </div>
+<div id="headdiv" style="width: 1200px; background-color: #002266; margin: 20px auto 0 auto; height: 100px;">
+	<span>사전 좌석 배정</span>
+</div>
 <section>
 	<div id="ticketinfo">
+		
 		<div>
 			<div class="ticketinfodiv1">
 				<div class="ticketinfodiv2" style="border-right: solid 1px rgba(0,0,0,0.3)">
@@ -337,7 +366,7 @@ if(id == null){
 				</div>
 				<div class="ticketinfodiv2">
 					<div id="date">
-						<span> <%= ticketBeanList1.get(0).getFlight_airplaneName() %> </span>
+						<span style="font-weight: bold; font-size: 14pt;"> <%= ticketBeanList1.get(0).getFlight_airplaneName() %> </span>
 						<br>
 						<span id="day">출발날 : <%= ticketBeanList1.get(0).getFlight_departureDay() %></span>
 						<span id="time">출발 시간 : <%= ticketBeanList1.get(0).getFlight_departureTime() %></span>
@@ -365,7 +394,7 @@ if(id == null){
 			<%= i+1 %>. <%= lastname[i] %> <%= firstname[i] %>
 			</div>
 			<% }%>
-			<div class="seatinfo" style="margin-top: 30px;">
+			<div class="seatinfo" style="margin-top: 20px;">
 				<table>
 					<tr class="infotr">
 						<td><img src="../img/flight/legend-unselectable.svg"></td>
@@ -382,6 +411,7 @@ if(id == null){
 				</table>
 			</div>
 			<div class="seatinfo">
+			
 				<table>
 					<tr class="infotr">
 						<td><img src="../img/flight/galley.png"></td>
@@ -391,7 +421,7 @@ if(id == null){
 					</tr>
 					<tr class="infotr">
 						<td><img src="../img/flight/plane-exit.svg"></td>
-						<td>탈출구</td>
+						<td>비상구</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -399,7 +429,11 @@ if(id == null){
 			</div>
 		</div>
 		<div id="seatdiv">
+		<div style="height:50px; line-height: 50px;">
+			<span style="font-size: 18pt; font-weight: bold; margin-left: 40px;">좌석 선택</span>
+		</div>
 		<div style=" width:fit-content; display: flex; margin:0 auto;">
+		
 			<div class="wingleft">
 			</div>
 			<table id="seattable">
