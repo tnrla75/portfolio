@@ -14,7 +14,7 @@ public class FlightListAction_go implements Action {
 
 	 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{ 
 		
-		 ArrayList<FlightTicketBean> article1 =new ArrayList<FlightTicketBean>();
+		ArrayList<FlightTicketBean> article1 =new ArrayList<FlightTicketBean>();
 		 
 		String departure = request.getParameter("departure1");
 		String arrive =  request.getParameter("arrive1");

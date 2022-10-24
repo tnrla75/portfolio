@@ -300,12 +300,10 @@ function nextstep() {
 	if(lengthsum == <%= lastname.length %>){
 		if(airplaneName == "Boeing 737"){
 			myform.action = "flight_seat.do?command=flightseatB737_2";
-			alert(myform.action);
 			myform.submit();
 		}
 		else if(airplaneName == "A321"){
 			myform.action = "flight_seat.do?command=flightseatA321_2";
-			alert(myform.action);
 			myform.submit();
 		}
 	}else{

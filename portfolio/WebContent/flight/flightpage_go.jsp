@@ -722,7 +722,7 @@ $(document).ready(function() {
 	            	arr.push($("#koreanair").val());
 	            }
 	    		$.ajax({
-	                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+filtercount ,
+	                url : "../flight/flightFilter_go.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+filtercount ,
 	                dataType : "html" ,
 	                success:function(data){
 	                    $('#flightdiv3').append(data);
@@ -735,7 +735,7 @@ $(document).ready(function() {
 	    	}
 	    	else{
 	    		 $.ajax({
-		                url : "../flight/TicketList.air?departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+count ,
+		                url : "../flight/TicketList_go.air?departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+count ,
 		                dataType : "html" ,
 		                success:function(data){
 		                    $('#flightdiv3').append(data);
@@ -787,7 +787,7 @@ $(document).ready(function() {
             	arr.push($("#koreanair").val());
             }
             $.ajax({
-                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+                url : "../flight/flightFilter_go.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
                 dataType : "html" ,
                 success:function(data){
                     $('#flightdiv3').empty();  
@@ -822,7 +822,7 @@ $(document).ready(function() {
             	arr.push($("#koreanair").val());
             }
             $.ajax({
-                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+                url : "../flight/flightFilter_go.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
                 dataType : "html" ,
                 success:function(data){
                     $('#flightdiv3').empty();  
@@ -972,6 +972,57 @@ function getPost(mode)
 		</div>
 	</div>
 </div>
+
+<!-- 
+<div id='modal2'>
+	<div id='content2'>
+		<div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;인기지역 <input type='button' value='X' class="close" id='btnClose1'/></li>
+					<li>서울</li>
+					<li>제주도</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;한국</li>
+					<li>ICN 서울/인천</li>
+					<li>GMP 서울/김포</li>
+					<li>CJU 제주</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;중국</li>
+					<li>도쿄</li>
+					<li>오사카</li>
+					<li>교토</li>
+					<li>삿포로</li>
+					<li>나고야</li>
+					<li>오키나와</li>
+				</ul>
+			</div>			
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;베트남</li>
+					<li>호치민</li>
+					<li>호이안</li>
+					<li>다낭</li>
+					<li>하노이</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;기타 국가</li>
+					<li>싱가포르</li>
+					<li>홍콩</li>					
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</div> -->
 <div id="backdiv">
 		<div id="flightdiv1">
 			<div class="tabset">

@@ -26,6 +26,7 @@ public class Flight_bag_meal_Impl implements CommandInter {
 		
 		System.out.println("box1 : "+box1);
 		System.out.println("box2 : "+box2);
+		
 		request.setAttribute("lastname", lastname);
 		request.setAttribute("firstname", firstname);
 		request.setAttribute("totalprice", totalprice);

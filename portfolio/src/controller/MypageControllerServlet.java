@@ -19,7 +19,7 @@ public class MypageControllerServlet extends HttpServlet {
 		MypageCommandInter inter = null;
 		String viewName = "";
 		System.out.println(command);
-		try {
+		try { 
 			if(command.equals("info")) {
 				inter = Mypage_infoImpl.instance();
 				viewName = inter.showData(request, response);
@@ -56,7 +56,12 @@ public class MypageControllerServlet extends HttpServlet {
 				inter = Mypage_itemreviewImpl.instance();
 				viewName = inter.showData(request, response);
 				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("ticketOrder")) {
+				inter = Mypage_ticketImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
 			}
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}

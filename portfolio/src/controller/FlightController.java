@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.FlightDetailAction;
-import action.FlightFilterAction;
+import action.FlightFilterAction_back;
+import action.FlightFilterAction_go;
 import action.FlightListAction_back;
 import action.FlightListAction_go;
 import action.FlightListAction_oneway;
-import action.FlightListAddAction;
+import action.FlightListAddAction_back;
+import action.FlightListAddAction_go;
 import vo.ActionForward;
 
 @WebServlet("*.air")
@@ -65,25 +67,36 @@ public class FlightController extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/flight/flightFilter.air")){
-			action  = new FlightFilterAction();
+		else if(command.equals("/flight/flightFilter_go.air")){
+			action  = new FlightFilterAction_go();
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/flight/TicketList.air")){
-			action  = new FlightListAddAction();
+		}else if(command.equals("/flight/TicketList_go.air")){
+			action  = new FlightListAddAction_go();
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		
+		else if(command.equals("/flight/flightFilter_back.air")){
+			action  = new FlightFilterAction_back();
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/flight/TicketList_back.air")){
+			action  = new FlightListAddAction_back();
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		

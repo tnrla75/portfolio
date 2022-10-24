@@ -14,7 +14,7 @@ public class FlightListService {
 		Connection con = getConnection();
 		Flightdao flightdao = Flightdao.getInstance();
 		flightdao.setConnection(con);
-		articleList = flightdao.selectArticleList(departure, arrive, people, seat, departureday, page,limit);
+		articleList = flightdao.selectArticleList_go(departure, arrive, people, seat, departureday, page,limit);
 		
 		close(con);
 		return articleList;
@@ -27,7 +27,7 @@ public class FlightListService {
 		Connection con = getConnection();
 		Flightdao flightdao = Flightdao.getInstance();
 		flightdao.setConnection(con);
-		articleList = flightdao.selectArticleList(departure, arrive, people, seat, departureday, page,limit);
+		articleList = flightdao.selectArticleList_go(departure, arrive, people, seat, departureday, page,limit);
 		
 		close(con);
 		return articleList;
@@ -41,11 +41,24 @@ public class FlightListService {
 		Flightdao flightdao = Flightdao.getInstance();
 		flightdao.setConnection(con);
 		
-		articleList = flightdao.selectArticleList_turn(departure, arrive, people, seat, arrivalday, page,limit);
+		articleList = flightdao.selectArticleList_back(departure, arrive, people, seat, arrivalday, page,limit);
 		
 		close(con);
 		return articleList;
 	}
+public ArrayList<FlightTicketBean> getArticle_backListadd(String arrive, String departure,String people, String seat, String arrivalday, int page, int limit) throws Exception{
+		
+		ArrayList<FlightTicketBean> articleList = null;
+		
+		Connection con = getConnection();
+		Flightdao flightdao = Flightdao.getInstance();
+		flightdao.setConnection(con);
+		articleList = flightdao.selectArticleList_back(departure, arrive, people, seat, arrivalday, page,limit);
+		
+		close(con);
+		return articleList;
+	}
+	
 	public ArrayList<FlightTicketBean> getArticle_oneway(String departure,String arrive, String people, String seat, String departureday, int page, int limit) throws Exception{
 		
 		ArrayList<FlightTicketBean> articleList = null;
@@ -70,5 +83,14 @@ public class FlightListService {
 		return listCount;
 		
 	}
-	
+	public int getListCount_back(String arrive, String departure,String people, String seat, String arrivalday) throws Exception{
+		int listCount = 0;
+		Connection con = getConnection();
+		Flightdao flightdao = Flightdao.getInstance();
+		flightdao.setConnection(con);
+		listCount = flightdao.selectListCount_back(departure, arrive, people, seat, arrivalday);
+		close(con);
+		return listCount;
+		
+	}
 }

@@ -5,6 +5,8 @@
 	<%@page import="vo.FlightTicketBean"%>
 	<%@page import="vo.PageInfo"%>
 	<%@ page import="java.text.SimpleDateFormat"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 	<%
 		ArrayList<FlightTicketBean> ticketBeanList2 = (ArrayList<FlightTicketBean>)request.getAttribute("ticketBeanList2"); 
 		String people =request.getParameter("flight_people1");
@@ -716,7 +718,7 @@ $(document).ready(function() {
 	            	arr.push($("#koreanair").val());
 	            }
 	    		$.ajax({
-	                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+filtercount ,
+	                url : "../flight/flightFilter_back.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+filtercount ,
 	                dataType : "html" ,
 	                success:function(data){
 	                    $('#flightdiv3').append(data);
@@ -729,7 +731,7 @@ $(document).ready(function() {
 	    	}
 	    	else{
 	    		 $.ajax({
-		                url : "../flight/TicketList.air?departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+count ,
+		                url : "../flight/TicketList_back.air?departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>&page1="+count ,
 		                dataType : "html" ,
 		                success:function(data){
 		                    $('#flightdiv3').append(data);
@@ -746,16 +748,30 @@ $(document).ready(function() {
 
 	
 	$("input:radio[name='choicebtn']").change(function(){
-		
 		var checkBtn = $(this);
 		var tr = checkBtn.parent().parent().parent();
 		var td = tr.children();
+	
+		var numberStr1 = "<%= request.getParameter("totalprice") %>";
+		var numberStr2 = td.find('.checkmark h4').text();
 		
-		$('#ticketNum1').val(td.eq(0).find("input[type='hidden']").val());
-		$('.span2').val(td.eq(5).find("h4").text()+"원");
+		var number1 = numberStr1.replace(/,/g, "");
+		var number2 = numberStr2.replace(/,/g, "");	
+		
+		num1 = parseInt(number1);
+		num2 = parseInt(number2);
+		var total = num1 + num2;
+		var result = total.toLocaleString();
+		
+		
+		$('#ticketNum2').val(td.eq(0).find("input[type='hidden']").val());
+		
+		$('.span2').val(result);
+		$('.span3').text("원");
+		
 	});
 	$('.footer_backchoice').on('click',function(){
-		myform.action = "../flight/flightTicketSearch_back.air";
+		myform.action = "../flight/flightDetail.air";
 		myform.submit();
 	});
 	
@@ -781,7 +797,7 @@ $(document).ready(function() {
             	arr.push($("#koreanair").val());
             }
             $.ajax({
-                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+                url : "../flight/flightFilter_back.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
                 dataType : "html" ,
                 success:function(data){
                     $('#flightdiv3').empty();  
@@ -816,7 +832,7 @@ $(document).ready(function() {
             	arr.push($("#koreanair").val());
             }
             $.ajax({
-                url : "../flight/flightFilter.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
+                url : "../flight/flightFilter_back.air?startleftval1="+startleftval1+"&startrightval1="+startrightval1+"&startleftval2="+startleftval2+"&startrightval2="+startrightval2+"&arr="+arr+"&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>" ,
                 dataType : "html" ,
                 success:function(data){
                     $('#flightdiv3').empty();  
@@ -845,7 +861,6 @@ $(document).ready(function() {
 	<%}else if(seat.equals("퍼스트 클래스")){%>
 		$('#seatGrade1').val('퍼스트 클래스').prop("selected",true);	
 	<%}%> 
-});	
 
 
 </script>
@@ -876,7 +891,7 @@ function getPost(mode)
 };
 </script>
 <body>
-	<form name="myform" action="../flight/flightTicketDetail.air">
+	<form name="myform">
 		<%
 		String id = (String)session.getAttribute("mb_id"); 
 		if(id == null){
@@ -889,7 +904,7 @@ function getPost(mode)
 			<%
 		}
 	%>
-	<div id="footerprice">
+<div id="footerprice">
 	<div id="textdiv">
 		<div class="footer_amount">
 			<span class="span1">예상 결제 금액</span>
@@ -898,12 +913,62 @@ function getPost(mode)
 			<input class="span2" name="totalprice" value='<%= request.getParameter("totalprice") %>' readonly>
 			<input type="hidden" value="" name="ticketNum2" id="ticketNum2">
 			<input type="hidden" value="<%=request.getParameter("ticketNum1")%>" name="ticketNum1" id="ticketNum1">
-			
 		</div>
 		
 	</div>
 </div>
 
+
+<div id='modal1'>
+	<div id='content1'>
+		<div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;인기지역 <input type='button' value='X' class="close" id='btnClose1'/></li>
+					<li>서울</li>
+					<li>제주도</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;한국</li>
+					<li>ICN 서울/인천</li>
+					<li>GMP 서울/김포</li>
+					<li>CJU 제주</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;중국</li>
+					<li>도쿄</li>
+					<li>오사카</li>
+					<li>교토</li>
+					<li>삿포로</li>
+					<li>나고야</li>
+					<li>오키나와</li>
+				</ul>
+			</div>			
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;베트남</li>
+					<li>호치민</li>
+					<li>호이안</li>
+					<li>다낭</li>
+					<li>하노이</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;기타 국가</li>
+					<li>싱가포르</li>
+					<li>홍콩</li>					
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div id="backdiv">
 		<div id="flightdiv1">
 			<div class="tabset">
 							<!-- Tab 1 -->
@@ -996,98 +1061,210 @@ function getPost(mode)
 		<div id="flightdivmain">
 			<div id="flightdiv2">
 				<div class="flightdiv2_indiv">
-					<h4>항공사</h4>
-					<p>
-						<input type="checkbox" name=""> 제주<br><br>
-						<input type="checkbox" name=""> 아시아나
-					</p>
+					<h4>&nbsp;&nbsp;항공사</h4>
+						<input type="checkbox" name="jejuair" id="jejuair" value="제주" class="filter"> 제주<br><br>
+						<input type="checkbox" name="asianaair" id="asianaair" value="아시아나" class="filter"> 아시아나 <br><br>
+						<input type="checkbox" name="koreanair" id="koreanair" value="대한" class="filter"> 대한 <br><br>
 				</div>
 				<div class="flightdiv2_indiv">
-					<h4>경유</h4>
-					<p>
-						<input type="checkbox" name="">
-					</p>
+				<h4> &nbsp;&nbsp;항공편 시간</h4>
+				<i class="fa-solid fa-plane-departure"></i><span>출발 시간</span><span id="startleftval1">00</span><span>: 00 - </span><span id="startrightval1">24</span><span>: 00</span>
+					<div class="middle1">
+					  <div class="multi-range-slider1" >
+					    <input type="range" id="input1-left1" min="0" max="24" value="0" class="range" />
+    					<input type="range" id="input1-right1" min="0" max="24" value="24" class="range" />
+					    <div class="slider1">
+					      <div class="track1"></div>
+					      <div class="range1"></div>
+					      <div class="thumb1 left1"></div>
+					      <div class="thumb1 right1"></div>
+					    </div>
+					  </div>
+					</div>	
+					<i class="fa-solid fa-plane-arrival"></i><span>도착 시간</span><span id="startleftval2">00</span><span>: 00 - </span><span id="startrightval2">24</span><span>: 00</span>
+					<div class="middle2">
+					  <div class="multi-range-slider2">
+					    <input type="range" id="input2-left2" min="0" max="24" value="0" class="range" />
+    					<input type="range" id="input2-right2" min="0" max="24" value="24" class="range" />
+					    <div class="slider2">
+					      <div class="track2"></div>
+					      <div class="range2"></div>
+					      <div class="thumb2 left2"></div>
+					      <div class="thumb2 right2"></div>
+					    </div>
+					  </div>
+					</div>			 
 				</div>
-				<div class="flightdiv2_indiv">
-					<h4>출발 시간대 설정</h4>
-					<p>
-						<input type="checkbox" name="">
-					</p>
-				</div>
-				<div class="flightdiv2_indiv">
-					<h4>총 소요시간</h4>
-					<p>
-						<input type="checkbox" name="">
-					</p>
-				</div>
+				
 			</div>
 			<div id="flightdiv3">
-
-			 	<% for(int i = 0; i< ticketBeanList2.size(); i++){
-						/*if(ticketBeanList1.get(i).getFlight_arrivalTime() < ticketBeanList2.get(i).getFlight_departureTime()){
- 						if문을 넣어서  배열 1 도착시간 < 배열2 출발시간 일 경우에만 배열2를 쓴다*/
-				%> 
-				<div class="flightlistdiv">
-				<table class="listtable">
-			<tr class="tr1">
-				<td class="td1">
-				<% 
-				String flightimg1 = "";
-				if(ticketBeanList2.get(i).getFlight_name().equals("제주")){ 
-					flightimg1 = "jejuair.png";
-				}else if(ticketBeanList2.get(i).getFlight_name().equals("아시아나")){
-					flightimg1 = "asiana.png";
-				}else if(ticketBeanList2.get(i).getFlight_name().equals("")){
-					
-				}else if(ticketBeanList2.get(i).getFlight_name().equals("")){
-					
-				}
-				%>
-				
-				<input type="hidden" value="<%= ticketBeanList2.get(i).getFlight_Ticket_Num() %>">
-				<img src="../img/flight/<%= flightimg1 %>" class="flightimg"></td>
-				<td class="td1" style="text-align: left;"><%= ticketBeanList2.get(i).getFlight_name() %></td>
-				<td class="td1"><span class="time"><%= ticketBeanList2.get(i).getFlight_departureTime()%></span><br><span class="airport"><%= ticketBeanList2.get(i).getFlight_departure() %></span></td>
-				<td class="td1"><span class="airport"><%= ticketBeanList2.get(i).getEstimated_time() %></span><br><img src="aaa.jpg"></td>
-				<td class="td1"><span class="time"><%= ticketBeanList2.get(i).getFlight_arrivalTime() %></span><br><span class="airport"><%= ticketBeanList2.get(i).getFlight_arrival() %></span></td>
-
-				<td class="td1" rowspan="2"><fmt:formatNumber value="<%= ticketBeanList2.get(i).getFlight_Ticket_Price() %>" groupingUsed="true" />원<input type="radio" value="선택" class="choicebtn" name="choicebtn"></td>
-			</tr>
-			
-			
-
-		</table> 
-					
+			<div id="slider-div">
+				<c:forEach  var="ticketBeanList2" items="${ticketBeanList2}">
+					<div class="flightlistdiv">
+					<table class="listtable" cellspacing="0">
+						<tr class="tr1">
+							<td class="td1">
+							<input type="hidden" value="${ticketBeanList2.flight_Ticket_Num}" class="ticketNum2">
+							<c:if test="${ticketBeanList2.flight_name eq '제주'}" var="bool">
+								<img src="../img/flight/jejuair.png" class="flightimg">
+							</c:if>
+							<c:if test="${ticketBeanList2.flight_name eq '아시아나'}" var="bool">
+								<img src="../img/flight/asiana.png" class="flightimg">
+							</c:if>
+							<c:if test="${ticketBeanList2.flight_name eq '대한'}" var="bool">
+								<img src="../img/flight/koreanair.png" class="flightimg">
+							</c:if>
+							</td>
+							<td class="td1" style="text-align: left;"><span class="flightname">${ticketBeanList2.flight_name}</span><br><span class="airplanename">${ticketBeanList2.flight_airplaneName}</span></td>
+							<td class="td1"><span class="time">${ticketBeanList2.flight_departureTime}</span><br><span class="airport">${ticketBeanList2.flight_departure}</span></td>
+							<td class="td1"><span class="airport">${ticketBeanList2.estimated_time}</span><br><img src="aaa.jpg"></td>
+							<td class="td1"><span class="time">${ticketBeanList2.flight_arrivalTime}</span><br><span class="airport">${ticketBeanList2.flight_arrival}</span></td>
+							<td class="td1" rowspan="2" style="border-right: #E6E6E6 2px solid; border-left: #E6E6E6 2px solid;">
+							<label class="container">
+							  <input type="radio" class="choicebtn" name="choicebtn">
+							  <span class="checkmark">
+							    <h4><fmt:formatNumber value="${ticketBeanList2.flight_Ticket_Price}" groupingUsed="true"/></h4>
+							  </span>
+							</label> 
+							</td>
+						</tr>
+					</table>
 				</div>
-				
-				<%} %> 
-				<div id="pagelistdiv"><div>
-				<section id="pageList">
-		<%if(nowPage2<=1){ %>
-		[이전]&nbsp;
-		<%}else{ %>
-		<a href="flightTicketSearch_back.air?page2=<%=nowPage2-1 %>&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>">[이전]</a>&nbsp;
-		<%} %>
-
-		<%for(int a=startPage2;a<=endPage2;a++){
-				if(a==nowPage2){%>
-		[<%=a %>]
-		<%}else{ %>
-		<a href="flightTicketSearch_back.air?page2=<%=a %>&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>">[<%=a %>]
-		</a>&nbsp;
-		<%} %>
-		<%} %>
-
-		<%if(nowPage2>=maxPage2){ %>
-		[다음]
-		<%}else{ %>
-		<a href="flightTicketSearch_back.air?page2=<%=nowPage2+1 %>&departure1=<%= request.getParameter("departure1") %>&arrive1=<%= request.getParameter("arrive1") %>&departureDay1=<%= request.getParameter("departureDay1") %>&arrivalDay1=<%= request.getParameter("arrivalDay1") %>">[다음]</a>
-		<%} %>
-	</section>
-	</div></div>
+				</c:forEach> 
+			</div>	
+			
 			</div>
 			
+			
 		</div>
+</div>
+
 	</form>
 </body>
+<script>
+		
+const inputLeft1 = document.getElementById("input1-left1");
+const inputRight1 = document.getElementById("input1-right1");
+
+const thumbLeft1 = document.querySelector(".slider1 > .thumb1.left1");
+const thumbRight1 = document.querySelector(".slider1 > .thumb1.right1");
+const range1 = document.querySelector(".slider1 > .range1");
+	
+	const setLeftValue1 = () => {
+		  const _this = inputLeft1;
+		  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+		  // 교차되지 않게, 1을 빼준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+		  _this.value = Math.min(parseInt(_this.value), parseInt(inputRight1.value) - 1);
+		  // input, thumb 같이 움직이도록
+		  const percent = ((_this.value - min) / (max - min)) * 100;
+		  thumbLeft1.style.left = percent + "%";
+		  range1.style.left = percent + "%";
+	  if($('#input1-left1').val().length == 1){
+			var rightval = "0"+ $('#input1-left1').val();
+		  	$('#startleftval1').text(rightval);
+		  }
+		  else{
+			  $('#startleftval1').text($('#input1-left1').val());
+		  }
+	};
+	
+	const setRightValue1 = () => {
+		  const _this = inputRight1;
+		  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+		  // 교차되지 않게, 1을 더해준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+		  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft1.value) + 1);
+		  // input, thumb 같이 움직이도록
+		  const percent = ((_this.value - min) / (max - min)) * 100;
+		  thumbRight1.style.right = 100 - percent + "%";
+		  range1.style.right = 100 - percent + "%";
+	  
+	  if($('#input1-right1').val().length == 1){
+		var rightval = "0"+ $('#input1-right1').val();
+	  	$('#startrightval1').text(rightval);
+	  }
+	  else{
+		  $('#startrightval1').text($('#input1-right1').val());
+	  }
+	};
+	
+	inputLeft1.addEventListener("input", setLeftValue1);
+	inputRight1.addEventListener("input", setRightValue1);
+
+	
+	
+	const inputLeft2 = document.getElementById("input2-left2");
+	const inputRight2 = document.getElementById("input2-right2");
+
+	const thumbLeft2 = document.querySelector(".slider2 > .thumb2.left2");
+	const thumbRight2 = document.querySelector(".slider2 > .thumb2.right2");
+	const range2 = document.querySelector(".slider2 > .range2");
+		
+		const setLeftValue2 = () => {
+			  const _this = inputLeft2;
+			  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+			  // 교차되지 않게, 1을 빼준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+			  _this.value = Math.min(parseInt(_this.value), parseInt(inputRight2.value) - 1);
+			  // input, thumb 같이 움직이도록
+			  const percent = ((_this.value - min) / (max - min)) * 100;
+			  thumbLeft2.style.left = percent + "%";
+			  range2.style.left = percent + "%";
+		  if($('#input2-left2').val().length == 1){
+				var rightval = "0"+ $('#input2-left2').val();
+			  	$('#startleftval2').text(rightval);
+			  }
+			  else{
+				  $('#startleftval2').text($('#input2-left2').val());
+			  }
+		};
+		
+		const setRightValue2 = () => {
+			  const _this = inputRight2;
+			  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+			  // 교차되지 않게, 1을 더해준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+			  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft2.value) + 1);
+			  // input, thumb 같이 움직이도록
+			  const percent = ((_this.value - min) / (max - min)) * 100;
+			  thumbRight2.style.right = 100 - percent + "%";
+			  range2.style.right = 100 - percent + "%";
+		  
+		  if($('#input2-right2').val().length == 1){
+			var rightval = "0"+ $('#input2-right2').val();
+		  	$('#startrightval2').text(rightval);
+		  }
+		  else{
+			  $('#startrightval2').text($('#input2-right2').val());
+		  }
+		};
+		
+		inputLeft2.addEventListener("input", setLeftValue2);
+		inputRight2.addEventListener("input", setRightValue2);
+
+	// modal 창 1번 
+	var btnOpen1  = document.getElementById('btnOpen1');
+	var btnClose1 = document.getElementById('btnClose1');
+	
+	// modal 창을 감춤
+	var closeRtn = function(){
+		var modal1 = document.getElementById('modal1');
+		modal1.style.display = 'none';
+	}
+	// modal 창을 보여줌
+	btnOpen1.onclick = function(){
+		var modal1 = document.getElementById('modal1');
+		modal1.style.display = 'block';
+	}
+	window.onclick = function(e) {
+		if(e.target == modal1){
+			modal1.style.display = 'none';
+		}
+	}
+	btnClose1.onclick = closeRtn;
+	$(document).ready(function() {
+		$(".modalul li:nth-child(n+2)").on('click', function(e) {
+			$('#btnOpen1').val($(this).text());
+			modal1.style.display = 'none';
+		}); 
+	});
+</script>
 </html>
+
