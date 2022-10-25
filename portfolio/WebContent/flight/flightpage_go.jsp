@@ -973,8 +973,7 @@ function getPost(mode)
 	</div>
 </div>
 
-<!-- 
-<div id='modal2'>
+<!-- <div id='modal2'>
 	<div id='content2'>
 		<div>
 			<div class="modaltitle">
@@ -1022,7 +1021,7 @@ function getPost(mode)
 			
 		</div>
 	</div>
-</div> -->
+</div>  -->
 <div id="backdiv">
 		<div id="flightdiv1">
 			<div class="tabset">
@@ -1299,7 +1298,7 @@ const range1 = document.querySelector(".slider1 > .range1");
 	var btnClose1 = document.getElementById('btnClose1');
 	
 	// modal 창을 감춤
-	var closeRtn = function(){
+	var closeRtn1 = function(){
 		var modal1 = document.getElementById('modal1');
 		modal1.style.display = 'none';
 	}
@@ -1320,5 +1319,32 @@ const range1 = document.querySelector(".slider1 > .range1");
 			modal1.style.display = 'none';
 		}); 
 	});
+	
+	// modal 창 1번 
+	/* var btnOpen2  = document.getElementById('btnOpen2');
+	var btnClose2 = document.getElementById('btnClose2');
+	
+	// modal 창을 감춤
+	var closeRtn2 = function(){
+		var modal2 = document.getElementById('modal2');
+		modal2.style.display = 'none';
+	}
+	// modal 창을 보여줌
+	btnOpen2.onclick = function(){
+		var modal2 = document.getElementById('modal2');
+		modal2.style.display = 'block';
+	}
+	window.onclick = function(e) {
+		if(e.target == modal2){
+			modal2.style.display = 'none';
+		}
+	}
+	btnClose2.onclick = closeRtn;
+	$(document).ready(function() {
+		$(".modalul li:nth-child(n+2)").on('click', function(e) {
+			$('#btnOpen2').val($(this).text());
+			modal2.style.display = 'none';
+		}); 
+	}); */
 </script>
 </html>
