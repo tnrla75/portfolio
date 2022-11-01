@@ -12,6 +12,7 @@ import action.Hotel_NationAction;
 import action.Hotel_StarAction;
 import action.Hotel_RoomAction;
 import action.Hotel_YoyakuAction;
+
 import vo.ActionForward;
 
 
@@ -33,7 +34,7 @@ public class Hotel_Controller extends javax.servlet.http.HttpServlet
 		System.out.println(command+" : controller");
 		
 		if(command.equals("/hotel/hotelMainForm.ho")){ // 서블릿케이블을 열 타이밍 지정. .bo로 들어오면 qna_board_write.jsp로 이동		
-			System.out.println("2");
+		
 			action= new Hotel_MainAction();
 			
 			try {
@@ -42,42 +43,46 @@ public class Hotel_Controller extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}else if(command.equals("/hotel/hotelMainStarForm.ho")){ // 호텔 필터 성급 컨트롤		
-			action= new Hotel_StarAction();
 			
+			action= new Hotel_StarAction();			
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/hotel/hotelMainNationForm.ho")){ // 호텔 필터 지역 컨트롤		
-			action= new Hotel_NationAction();
+		}else if(command.equals("/hotel/hotelMainNationForm.ho")){ // 호텔 필터 지역 컨트롤	
 			
+			action= new Hotel_NationAction();			
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else
-		if(command.equals("/hotel/hotelRoomForm.ho")) {			
+		}else if(command.equals("/hotel/hotelRoomForm.ho")) {		
+				
 			action= new Hotel_RoomAction();		
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
+						e.printStackTrace();
+			}
+		}/*else if(command.equals("/hotel/hotelYoyakuDateForm.ho")) {	
+			
+			action= new Hotel_Yoyaku_DateAction();		
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else
-			if(command.equals("/reviewForm.ho")) {				
-				forward=new ActionForward();						
-				forward.setPath("../overlap/login.jsp");
-		}else
-			if(command.equals("/hotel/hotelYoyakuForm.ho")) {			
-				action=new Hotel_YoyakuAction();		
-				try {
-					forward=action.execute(request, response );
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		}*/else if(command.equals("/hotel/hotelYoyakuForm.ho")) {		
+					
+			action=new Hotel_YoyakuAction();		
+			try {
+				forward=action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+		}
 //		else if(command.equals("/boardWriteForm.bo")){ // 서블릿케이블을 열 타이밍 지정. .bo로 들어오면 qna_board_write.jsp로 이동
 //			forward=new ActionForward_hotel();		// ~~.bo를하면 컨트롤러를 찾아옴.
 //			forward.setPath("/qna_board_write.jsp");

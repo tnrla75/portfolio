@@ -21,6 +21,8 @@
 	ArrayList<ItemQna> qnaArticleList = (ArrayList<ItemQna>)request.getAttribute("qnaArticleList");
 	ArrayList<ItemQna> totalQnaArticleList = (ArrayList<ItemQna>)request.getAttribute("totalQnaArticleList");
 
+	Item wishArticle = (Item)request.getAttribute("wishArticle");
+	
 	String itemCode = article.getItemCode();
 	session.setAttribute("itemCode", itemCode);
 	
@@ -45,13 +47,15 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css" />
-<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
-<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
-<link type="text/css" rel="stylesheet" href="../css/style2.css" />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../css/header_footer.css">
 <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <title>상품 상세 설명</title>
 <style>
 	a {
@@ -80,7 +84,7 @@
 		width: 800px;
 		height: 50px;
 		margin-left: 200px;
-		margin-top: 20px;
+		margin-top: 30px;
 		border-width: 0 0 1px 0;
 	}
 	.searchIcon {
@@ -136,24 +140,24 @@
 		position: relative;
 		top: 20px;
 	}
-	#select {
+	#select_wr {
 		float: right;
 		width: 590px;
 		height: 500px;
 		position: relative;
-		bottom: 90px;
+		bottom: 120px;
 		/* border-style: solid;
 		border-color: #EAEAEA; */
 	}
-	#select table {
+	#select_wr table {
 		width: 590px;
 		border-collapse: collapse;
 	}
-	#select table font {
+	#select_wr table font {
 		font-size: 25pt;
 		font-weight: bold;
 	}
-	#select table span {
+	#select_wr table span {
 		font-weight: bold;
 	}
 	#total2 {
@@ -239,7 +243,7 @@
 		padding-top: 15px;
 		padding-right: 20px;
 	}
-	.select {
+	#select {
 		width: 150px;
 		height: 50px;
 		font-size: 14px;
@@ -270,7 +274,7 @@
 		border-color: #D5D5D5;
 		background-color: white;
 	}
-	#select .buy {
+	#select_wr .buy {
 		float: left;
 		width: 212px;
 		height: 65px;
@@ -278,7 +282,7 @@
 		margin-top: 15px;
 		color: white;
 	}
-	#select .cart {
+	#select_wr .cart {
 		float: left;
 		width: 212px;
 		height: 65px;
@@ -288,7 +292,7 @@
 		margin-left: 12px;
 		color: white;
 	}
-	#select #present {
+	#select_wr #present {
 		float: left;
 		width: 65px;
 		height: 65px;
@@ -334,9 +338,10 @@
 		display: block;
 		line-height: 15pt;
 	}
-	.brand:nth-of-type(2n) {
+	.brand:nth-of-type(2) {
 		font-size: 18pt;
 		font-weight: bold;
+		line-height: 25pt;
 	}
 	#detail2 {
 		width: 1200px;
@@ -357,16 +362,19 @@
 	#review1 {
 		width: 1200px;
 		height: 220px;
-		border-style: none;
-		background-color: #EAEAEA;
+		border-top: 1px solid black;
+		/* background-color: #EAEAEA; */
 		margin: 0 auto;
 		position: relative;
 		right: 40px;
 	}
 	#rate1 {
 		float: left;
-		width: 590px;
-		height: 220px;
+		margin-top: 15px;
+		padding-top: 10px;
+		border-right: 1px solid black;
+		width: 480px;
+		height: 200px;
 	}
 	#rate1 p:first-of-type {
 		text-align: center;
@@ -385,7 +393,7 @@
 		height: 50px;
 		background-color: black;
 		color: white;
-		margin-left: 210px;
+		margin-left: 160px;
 		font-size: bold;
 	}
 	.reviewBtn2 {
@@ -397,11 +405,24 @@
 	}
 	#rate2 {
 		float: right;
-		width: 590px;
+		margin-top: 20px;
+		width: 670px;
 		height: 200px;
+	}
+	#rate2 div {
+		float: left;
+	}
+	#rate2 div:first-of-type {
+		width: 200px;
+	}
+	#rate2 div:last-of-type {
+		width: 370px;
 	}
 	#rate2 li {
 		list-style: none;
+		font-weight: bold;
+		font-size: 12pt;
+		line-height: 20pt;
 		padding-top: 5px;
 	}
 	#detailReview1 {
@@ -498,6 +519,7 @@
 	}
 	#text {
 		width: 1200px;
+		min-height: 100px;
 		height: fit-content;
 		margin-top: 10px;
 		resize: none;
@@ -627,9 +649,10 @@
 		height: 40px;
 		margin-bottom: 10px;
 	}
-	#text{
+	#qText {
 		width: 1000px;
 		height: 200px;
+		resize: none;
 	}
 	#terms1 table font {
 		font-size: 18pt;
@@ -755,6 +778,82 @@
 		width: 500px;
 		text-align: center;
 	}
+	#shopping_cart {
+		position: absolute;
+		top: 30px;
+		right: 350px;
+	} 
+	#dialog-message {
+		text-align: center;
+		font-size: 16pt;
+		font-weight: bold;
+		line-height: 40pt;
+		margin-top: 30px;
+	}
+	#dialog-message img {
+		float: right;
+	}
+	#dialog-message input {
+		width: 210px;
+		height: 60px;
+		margin-top: 40px;
+		border-style: none;
+		color: white;
+		font-weight: bold;
+		font-size: 13pt;
+	}
+	#dialog-message input:first-of-type {
+		background-color: #747474;
+	}
+	#dialog-message input:last-of-type {
+		background-color: black;
+		margin-left: 20px;
+	}
+	
+	/* 평점 */
+	.container {
+		width: 400px;
+		padding: 20px;
+		/* overflow: hidden; */
+		float: left;
+	}
+	.horizontal {
+		position: relative;
+		right: 20px;
+	}
+	.horizontal .progress-bar {
+		float: left;
+		height: 5px;
+		width: 100%;
+		padding: 13px 0;
+	}
+	
+	.horizontal .progress-track {
+		position: relative;
+		width: 100%;
+		height: 10px;
+	}
+	
+	.horizontal .progress-fill {
+		position: relative;
+		background-color: black;
+		font-weight: bold;
+		color: #747474;
+		height: 10px;
+		width: 50%;
+		font-family: "Lato","Verdana",sans-serif;
+		font-size: 12px;
+	}
+	.horizontal .progress-fill span {
+		position: relative;
+		left: 400px;
+	}
+	
+	.rounded .progress-track,
+	.rounded .progress-fill {
+		border-radius: 3px;
+		box-shadow: inset 0 0 35px rgba(0,0,0,0.2);
+	}
 </style>
 </head>
 
@@ -782,12 +881,57 @@
 		var count =  document.getElementById('result').innerHTML;
 		var option = document.getElementById('option').innerHTML;
 		
+		var select = document.getElementById('option').innerText;
+		
 		if (mb_id == "null") {
 			alert("로그인이 필요합니다.");
 			location.href="../overlap/login.jsp";
+		} else if (select == "선택해 주세요.") {
+			alert("옵션을 선택해 주세요.");
 		} else {
 			location.href="itemOrder.dutyfree?command=buy&itemCode=<%= article.getItemCode()%>&mb_id=<%= mb_id%>&count="+count+"&option="+option;
 		}	
+	}
+	
+	//쇼핑백
+	function cart() {
+		var mb_id = '<%= (String)session.getAttribute("mb_id") %>';
+		var select =  document.getElementById('option').html;
+		
+		var count =  document.getElementById('result').innerHTML;
+		var option = document.getElementById('option').innerHTML;
+		
+		var select = document.getElementById('option').innerText;
+		if (mb_id == "null") {
+			alert("로그인이 필요합니다.");
+			location.href="../overlap/login.jsp";
+		} else if (select == "선택해 주세요." || select == "") {
+			alert("옵션을 선택해 주세요.");
+		} else {
+			/* $("#dialog-message").dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+			$('#dialog-message').dialog({
+				modal: true, 
+				width : '650',
+				height : '350',
+				resizeable : false,	
+				buttons: {	
+					"쇼핑 계속하기": function() { $(this).dialog('close'); },
+					"쇼핑백 확인하기": function() { $(this).dialog('close'); }
+				} 
+			}); */
+			alert("선택하신 상품이 쇼핑백에 담겼습니다.");
+			location.href = "itemCart.dutyfree?command=cart&itemCode=<%= article.getItemCode()%>&mb_id=<%= mb_id%>&count="+count+"&option="+option;
+			
+		}
+	}
+	
+	function cart_go() {
+		var mb_id = '<%= (String)session.getAttribute("mb_id") %>';
+		var select =  document.getElementById('option').html;
+		var count =  document.getElementById('result').innerHTML;
+		var option = document.getElementById('option').innerHTML;
+
+		location.href = "itemCart.dutyfree?command=cart&itemCode=<%= article.getItemCode()%>&mb_id=<%= mb_id%>&count="+count+"&option="+option;	
 	}
 	
 	function qna() {
@@ -868,9 +1012,31 @@
 		$('.qna_display1').hide();
 		$('.qna_display2').hide();
 		
-		$('#text').on('keyup', function() {
+		
+		$(".dialog_close").click(function(){
+			$('#dialog-message').dialog('close');
+		
+		});
+		
+		
+		$('.horizontal .progress-fill span').each(function(){
+			var percent = $(this).html();
+			$(this).parent().css('width', percent);
+		});
+
+
+		$('.vertical .progress-fill span').each(function(){
+			var percent = $(this).html();
+			var pTop = 100 - ( percent.slice(0, percent.length - 1) ) + "%";
+			$(this).parent().css({
+				'height' : percent,
+				'top' : pTop
+			});
+		});
+		
+		
+		$('#qText').on('keyup', function() {
 			 $('.textLength').html($(this).val().length+" / 250자");
-			 
 			 if ($(this).val().length > 250) {
 				 alert("글자 수가 초과되었습니다.");
 				 $(this).val($(this).val().substring(0, 250));
@@ -881,7 +1047,7 @@
         //옵션 선택
         $('.option_wr1').hide();
         <% double discount = (double)article.getDiscount()/(double)100; %>
-        $('.select').on('change',function() {
+        $('#select').on('change',function() {
 	        document.getElementById('option').innerText = this.value;  
 	        var total1 = <%= article.getDiscountWon() %>;
 	        var total2 = <%= article.getItemDollar()*(1-discount) %>;
@@ -892,15 +1058,13 @@
 	        	 $('.option_wr1').show();
 	        	 document.getElementById('total1').innerText = "("+total1.toLocaleString()+"원)";
 	         	 document.getElementById('total2').innerText = "$"+total2.toFixed(1);
-	        }
-	       
-        	
+	        }	
         });
 
       	//옵션 선택
         $('#optionSel input[type=button]').on('click',function() {
         	var result = document.getElementById('result');
-        	var dollar = <%= article.getItemDollar()*(1-discount) %>;
+    		var dollar = <%= article.getItemDollar()*(1-discount) %>;
 			
         	var total1 = result.innerHTML*<%= article.getDiscountWon() %>;
         	var total2 = result.innerHTML*dollar;
@@ -913,6 +1077,7 @@
         	document.getElementById('option').innerText = this.value;
         	document.getElementById('total1').innerText = "(0원)";
         	document.getElementById('total2').innerText = "$ 0";
+        
         	$('.option_wr1').hide();
         });
         
@@ -948,14 +1113,46 @@
         });
         
         //찜하기
-        $('#like_on').hide();
+		<% if (wishArticle == null) { %>
+			$('#like_on').hide();
+		<% } else { %>
+			$('#like_on').show();
+		<% } %>
+  	 	
+        var mb_id = '<%= (String)session.getAttribute("mb_id") %>';
+    	var like_off = document.getElementById('like_off');
+    	var like_on = document.getElementById('like_on');
         $('#like_off').on('click', function() {
-        	$('#like_on').show();
-        	<%-- location.href="like_on.shop?itemCode=<%= itemCode%>&mb_id=<%= mb_id%>"; --%>
+        	if (mb_id == "null") {
+    			alert("로그인이 필요합니다.");
+    			location.href="../overlap/login.jsp";
+    		} else {
+    			$.ajax({
+           	    	url : "itemWish.dutyfree?command=itemWish&itemCode=<%= article.getItemCode()%>" ,
+           	   		dataType : "html" ,
+           	    	success:function(){
+           	    		like_on.style.display = 'block';
+           	    		alert("찜 등록")
+           	      	}, 
+    	       	    error : function(){
+    	       	        alert("fail");
+    	       	    }
+           	  	});
+    		}
         });
         $('#like_on').on('click', function() {
+        	$.ajax({
+       	    	url : "itemWish_del.dutyfree?command=itemWish_del&itemCode=<%= article.getItemCode()%>" ,
+       	   		dataType : "html" ,
+       	    	success:function(){
+       	    		like_off.style.display = 'block';
+       	    		alert("찜 삭제")
+       	      	}, 
+	       	    error : function(){
+	       	        alert("fail");
+	       	    }
+       	  	});
         	$('#like_on').hide();
-
         });
 	});
 </script>
@@ -981,7 +1178,6 @@
 			<div id="sort">
 				<p class="sort1"><a href="itemMain.jsp"><img src="../img/dutyfree/home.png" width="20px" height="20px">	<</a></p>
 				<p class="sort1"><a href="itemList.shop?category=<%=article.getBigCategory()%>"><%=article.getBigCategory() %> <</a></p>
-				<p class="sort1"><a href="itemList.shop?category=<%=article.getMidCategory()%>"><%=article.getMidCategory() %> <</a></p>
 				<p class="sort1"><a href="itemList.shop?category=<%=article.getSmCategory()%>"><%=article.getSmCategory() %> </a></p>
 			</div>
 		</nav>
@@ -1007,7 +1203,7 @@
 					    <% } %>
 					</p>
 				</div>
-				<div id="select">
+				<div id="select_wr">
 					<p class="brand"><%=article.getBrandName() %></p>
 					<p class="brand"><%=article.getItemName() %></p>
 					<table cellpadding="15" align="center">
@@ -1029,32 +1225,32 @@
 						</tr>
 						<tr class="tableLine">
 							<td><%=opArticle.getOptionName() %></td>
-							<td><select class="select" name="suntack" onchange="select(itemDetail.suntack)">
-									<option>선택해 주세요.</option>
+							<td><select id="select" name="suntack" onchange="select(itemDetail.suntack)">
+									<option value="선택해 주세요." selected>선택해 주세요.</option>
 									<% if(opArticle.getOption2() == null) { %>
-										<option><%=opArticle.getOption1() %></option>
+										<option value="<%=opArticle.getOption1() %>"><%=opArticle.getOption1() %></option>
 									<% } 
 									else if (opArticle.getOption3() == null) {%>
-										<option><%=opArticle.getOption1() %></option>
-							    		<option><%=opArticle.getOption2() %></option>
+										<option value="<%=opArticle.getOption1() %>"><%=opArticle.getOption1() %></option>
+							    		<option value="<%=opArticle.getOption2() %>"><%=opArticle.getOption2() %></option>
 							    	<% }
 									else if (opArticle.getOption4() == null) {%>
-										<option><%=opArticle.getOption1() %></option>
-								    	<option><%=opArticle.getOption2() %></option>
-								    	<option><%=opArticle.getOption3() %></option>
+										<option value="<%=opArticle.getOption1() %>"><%=opArticle.getOption1() %></option>
+								    	<option value="<%=opArticle.getOption2() %>"><%=opArticle.getOption2() %></option>
+								    	<option value="<%=opArticle.getOption3() %>"><%=opArticle.getOption3() %></option>
 								    <% } 
 									else if (opArticle.getOption5() == null) {%>
-										<option><%=opArticle.getOption1() %></option>
-								    	<option><%=opArticle.getOption2() %></option>
-								    	<option><%=opArticle.getOption3() %></option>
-								    	<option><%=opArticle.getOption4() %></option>
+										<option value="<%=opArticle.getOption1() %>"><%=opArticle.getOption1() %></option>
+								    	<option value="<%=opArticle.getOption2() %>"><%=opArticle.getOption2() %></option>
+								    	<option value="<%=opArticle.getOption3() %>"><%=opArticle.getOption3() %></option>
+								    	<option value="<%=opArticle.getOption4() %>"><%=opArticle.getOption4() %></option>
 							   		<% }
 									else if (opArticle.getOption5() != null) {%>
-										<option><%=opArticle.getOption1() %></option>
-								    	<option><%=opArticle.getOption2() %></option>
-								    	<option><%=opArticle.getOption3() %></option>
-								    	<option><%=opArticle.getOption4() %></option>
-								    	<option><%=opArticle.getOption5() %></option>
+										<option value="<%=opArticle.getOption1() %>"><%=opArticle.getOption1() %></option>
+								    	<option value="<%=opArticle.getOption2() %>"><%=opArticle.getOption2() %></option>
+								    	<option value="<%=opArticle.getOption3() %>"><%=opArticle.getOption3() %></option>
+								    	<option value="<%=opArticle.getOption4() %>"><%=opArticle.getOption4() %></option>
+								    	<option value="<%=opArticle.getOption5() %>"><%=opArticle.getOption5() %></option>
 							   		<% }%>
 							    </select>
 							</td>
@@ -1074,13 +1270,22 @@
 						<div><b>상품금액합계</b><b id="total1">(0원)</b><b id="total2">$0</b></div>
 					</div>
 					<input type="button" value="BUY NOW" class="buy" onclick="buy()">
-					<input type="button" value="SHOPPING BAG" class="cart">
+					<input type="button" value="SHOPPING BAG" class="cart" onclick="cart()">
 					<button id="present"><img src="../img/dutyfree/present.png" width="35px" height="35px"></button>
 					<div class="like">
-						<div id="like_off" onclick="like_off()"><img src="../img/dutyfree/heart.png" width="30px" height="30px"></div>
+		
+						<div id="like_off" onclick="like_off()" ><img src="../img/dutyfree/heart.png" width="30px" height="30px"></div>
 						<div id="like_on" onclick="like_on()"><img src="../img/dutyfree/heart3.png" width="35px" height="35px"></div>
+					
 					</div> 
 				</div>
+			</div>
+			<div id="dialog-message" style='display:none'>
+			  	<img src="../img/dutyfree/x_icon.png" width="30px" height="30px" class="dialog_close"></br>
+				<span>선택하신 상품이</span></br>
+				<span>SHOPPING BAG에 추가 되었습니다.</span></br>
+				<input type="button" value="쇼핑 계속하기" class="dialog_close">
+				<input type="button" value="쇼핑백 확인하기" onclick="cart_go()">
 			</div>
 			</section>
 			<div id="tab_wr">
@@ -1106,7 +1311,12 @@
 								<%	
 									int sum = 0;
 									double avg = 0;
-									
+									double count1 = 0;
+									double count2 = 0;
+									double count3 = 0;
+									double count4 = 0;
+									double count5 = 0;
+				    				String star0 = "<img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'>";
 									String star1 = "<img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'>";
 									String star2 = "<img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'>";
 									String star3 = "<img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star.png' width='20px' height='20px'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'><img src='../img/dutyfree/star3.png' width='20px' height='20px' class='star'>";
@@ -1116,37 +1326,100 @@
 									for(int i = 0; i<reArticleList.size(); i++) {
 										sum += reArticleList.get(i).getReRate();
 										avg = (double)sum/(double)reArticleList.size(); 
-										/* avg = sum/reArticleList.size(); */
+										
+										if (reArticleList.get(i).getReRate() == 1) {
+											count1 ++;
+										}
+										if (reArticleList.get(i).getReRate() == 2) {
+											count2 ++;
+										}
+										if (reArticleList.get(i).getReRate() == 3) {
+											count3 ++;
+										}
+										if (reArticleList.get(i).getReRate() == 4) {
+											count4 ++;
+										}
+										if (reArticleList.get(i).getReRate() == 5) {
+											count5 ++;
+										}
+										
 									}
 								%>
 								
-								<p><fmt:formatNumber value='<%= avg %>' pattern=".0" />/5.0</p>
+								<p>
+									<% if (avg == 0) { %>
+										0/5.0
+									<% } else { %>
+										<fmt:formatNumber value='<%= avg %>' pattern=".0" />/5.0
+									<% } %>
+								</p>
 								<p>
 									<%
 										if (avg == 5.0) {
 											out.println(star5);	
-										} else if (avg < 5.0) {
+										} else if (avg < 5 && avg >= 4) {
 											out.println(star4);	
-										} else if (avg < 4.0) {
+										} else if (avg < 4 && avg >= 3) {
 											out.println(star3);
-										} else if (avg < 3.0) {
+										} else if (avg < 3 && avg >= 2) {
 											out.println(star2);
-										} else {
+										} else if (avg < 2 && avg >= 1) {
 											out.println(star1);
+										} else {
+											out.println(star0);
 										}
 									%>
 								</p>
-								<input type="button" class="reviewBtn1" value="상품 리뷰 작성하기" onclick="review()">				
+								<input type="button" class="reviewBtn1" value="상품 리뷰 작성하기" onclick="review()">		
+								
 							</div>
 							<div id="rate2">
-								<p>평점</p>
-								<ul>
-									<li>아주 좋아요</li>
-									<li>맘에 들어요</li>
-									<li>보통이에요</li>
-									<li>그냥 그래요</li>
-									<li>별로에요</li>		
-								</ul>
+								<div>
+									<ul>
+										<li>아주 좋아요</li>
+										<li>맘에 들어요</li>
+										<li>보통이에요</li>
+										<li>그냥 그래요</li>
+										<li>별로에요</li>		
+									</ul>
+								</div>
+								<div class="container horizontal rounded">
+									<div class="progress-bar horizontal">
+									    <div class="progress-track">
+									      <div class="progress-fill">
+									        <span><fmt:formatNumber value='<%= count5/totalReArticleList.size()*100 %>' pattern='0' />%</span>
+									      </div>
+									    </div>
+								  	</div>
+								    <div class="progress-bar horizontal">
+									    <div class="progress-track">
+									      <div class="progress-fill">
+									        <span><fmt:formatNumber value='<%= count4/totalReArticleList.size()*100 %>' pattern='0' />%</span>
+									      </div>
+									    </div>
+									</div>							
+								    <div class="progress-bar horizontal">
+									    <div class="progress-track">
+									    	<div class="progress-fill">
+										        <span><fmt:formatNumber value='<%= count3/totalReArticleList.size()*100 %>' pattern='0' />%</span>
+										    </div>
+									    </div>
+									</div>		
+								  	<div class="progress-bar horizontal">
+								    	<div class="progress-track">
+								      		<div class="progress-fill">
+								       			<span><fmt:formatNumber value='<%= count2/totalReArticleList.size()*100 %>' pattern='0' />%</span>
+								     		</div>
+								   		</div>
+								  	</div>	
+								  	<div class="progress-bar horizontal">
+								    	<div class="progress-track">
+								      		<div class="progress-fill">
+								        		<span><fmt:formatNumber value='<%= count1/totalReArticleList.size()*100 %>' pattern='0' />%</span>
+										    </div>
+										</div>
+								    </div>
+								</div>
 							</div>
 						</div>
 						<div id="detailReview1">	
@@ -1211,43 +1484,6 @@
 									<%} %>
 							</section>
 							<% } %>
-							
-
-							<%-- <table id="reviewTable" >
-								<%
-									String a;
-									String star;
-				
-									for(int i = 0; i<reArticleList.size(); i++) {
-										 if(reArticleList.get(i).getReRate() == 1){
-											star = star1;
-										} else if(reArticleList.get(i).getReRate() == 2){
-											star = star2;
-										} else if(reArticleList.get(i).getReRate() == 3){
-											star = star3;
-										} else if(reArticleList.get(i).getReRate() == 4){
-											star = star4;
-										}  else if(reArticleList.get(i).getReRate() == 5){
-											star = star5;
-										} else {
-											star = "";
-										}	
-										out.println("<tr class='tableLine' height='= 80'><td><div><b>"+reArticleList.get(i).getMb_id()+"</b>");	
-												
-										/* if (mb_id.equals(articleList.get(i).getMb_id())) {
-											a = "<input type='button' value='삭제' class='update' onclick='del("+articleList.get(i).getReviewNo()+")'><input type='button' value='수정' class='update' onclick='update("+articleList.get(i).getReviewNo()+")'></div><div id='reviewRate'>";
-											out.println(a);
-										} */
-										out.println("<p>"+star+"<b class='reDate'>"+reArticleList.get(i).getReDate()+"</b></p></div><div id='text'>"+reArticleList.get(i).getReText()+"</div>");
-										if (reArticleList.get(i).getRePhoto1()==null || reArticleList.get(i).getRePhoto2()==null || reArticleList.get(i).getRePhoto3()==null) {
-											out.println("<div class='recom'><b>이 리뷰가 도움이 돼요!</b><b><img src='../img/dutyfree/finger1.png' width='15px' height='15px'></b></div></td></tr>");	
-										} else {
-											out.println("<div id='photo'>"+reArticleList.get(i).getRePhoto1()+reArticleList.get(i).getRePhoto2()+reArticleList.get(i).getRePhoto3()+
-												"</div><div class='recom'><b>이 리뷰가 도움이 돼요!</b><b><img src='../img/dutyfree/finger1.png' width='15px' height='15px'></b></div></td></tr>");
-										}
-									} 
-								%> 
-							</table> --%>
 						</div> 
 						<div id="list">
 							
@@ -1266,7 +1502,7 @@
 				    			<tr>
 				    				<td width="200px" align="center">내용</td>
 				    				<td>
-				    					<textarea name="question" placeholder="최소 10자 이상 입력해주세요." id="text"></textarea>
+				    					<textarea name="question" placeholder="최소 10자 이상 입력해주세요." id="qText"></textarea>
 				    					<div class="textLength">0 / 250</div>
 				    				</td>
 				    			</tr>

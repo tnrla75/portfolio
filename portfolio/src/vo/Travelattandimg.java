@@ -2,7 +2,7 @@ package vo;
 
 public class Travelattandimg {
 	int att_num;
-	String travel_img1;
+	String att_img1;
 	String travel_img2;
 	String travel_img3;
 	String travel_img4;
@@ -23,11 +23,12 @@ public class Travelattandimg {
 	public void setAtt_num(int att_num) {
 		this.att_num = att_num;
 	}
-	public String getTravel_img1() {
-		return travel_img1;
+	
+	public String getAtt_img1() {
+		return att_img1;
 	}
-	public void setTravel_img1(String travel_img1) {
-		this.travel_img1 = travel_img1;
+	public void setAtt_img1(String att_img1) {
+		this.att_img1 = att_img1;
 	}
 	public String getTravel_img2() {
 		return travel_img2;

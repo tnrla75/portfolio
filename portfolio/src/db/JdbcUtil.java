@@ -10,15 +10,17 @@ public class JdbcUtil {
 	//DB connect
 	public static Connection getConnection(){
 		Connection con=null;
-		
+		System.out.println("con");
 		try {
 			Context initCtx = new InitialContext();
-			
+			System.out.println("con1");
 			//context.xml 연결
 			Context envCtx = (Context)initCtx.lookup("java:comp/env");
 			DataSource ds = (DataSource)envCtx.lookup("jdbc/MySQLDB");
+			System.out.println("con2");
 			con = ds.getConnection();
 			con.setAutoCommit(false);
+			System.out.println("con3");
 		} catch (Exception e) {
 			System.out.print(e);
 		}

@@ -197,7 +197,7 @@ function count(type)  {
 	var number1 = resultElement1.innerText;
 	var number2 = resultElement2.innerText;
 	  
-	// 더하기/빼기
+
 	if(type === 'plus1' && number1<99) {
 		number1 = parseInt(number1) + 1;
 	} else if(type === 'minus1' && number1>1)  { 

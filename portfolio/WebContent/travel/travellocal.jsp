@@ -405,7 +405,7 @@ $(function(){
 		    </span>
 		  </div>
 		  <div class="carousel-item carousel-item--1">
-		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(4).getTravel_img1() %>');"></div>
+		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(4).getAtt_img1() %>');"></div>
 		    <div class="carousel-item__info">
 		      <div class="carousel-item__container">
 		      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
@@ -416,7 +416,7 @@ $(function(){
 		    </div>
 		  </div>
 		  <div class="carousel-item carousel-item--2">
-		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(5).getTravel_img1() %>');"></div>
+		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(5).getAtt_img1() %>');"></div>
 		    <div class="carousel-item__info">
 		      <div class="carousel-item__container">
 		      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
@@ -427,7 +427,7 @@ $(function(){
 		    </div>
 		  </div>
 		    <div class="carousel-item carousel-item--3">
-		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(6).getTravel_img1() %>');"></div>
+		    <div class="carousel-item__image" style="background-image: url('../img/travel<%=travelatt.get(6).getAtt_img1() %>');"></div>
 		    <div class="carousel-item__info">
 		      <div class="carousel-item__container">
 		      <h2 class="carousel-item__subtitle"><%=travellocal.getLocal_nation() %></h2>
@@ -463,7 +463,7 @@ $(function(){
 			<h4>주변 관광명소</h4>
 					<a href="../travel/Attraction.travel?att=<%=travelatt.get(0).getAtt_name() %>">
 						<div class="travellist2">
-							<img src="../img/travel<%=travelatt.get(0).getTravel_img1() %>">
+							<img src="../img/travel<%=travelatt.get(0).getAtt_img1() %>">
 							<div class="detail">
 								<p><%=travelatt.get(0).getAtt_name() %></p>
 								
@@ -472,7 +472,7 @@ $(function(){
 					</a>
 					<a href="../travel/Attraction.travel?att=<%=travelatt.get(1).getAtt_name() %>">
 						<div class="travellist2">
-							<img src="../img/travel<%=travelatt.get(1).getTravel_img1()%>">
+							<img src="../img/travel<%=travelatt.get(1).getAtt_img1()%>">
 							<div class="detail">
 								<p><%=travelatt.get(1).getAtt_name() %></p>
 								
@@ -481,7 +481,7 @@ $(function(){
 					</a>
 					<a href="../travel/Attraction.travel?att=<%=travelatt.get(2).getAtt_name() %>">
 						<div class="travellist2">
-							<img src="../img/travel<%=travelatt.get(2).getTravel_img1()%>">
+							<img src="../img/travel<%=travelatt.get(2).getAtt_img1()%>">
 							<div class="detail">
 								<p><%=travelatt.get(2).getAtt_name() %></p>
 							</div>
@@ -489,7 +489,7 @@ $(function(){
 					</a>
 					<a href="../travel/Attraction.travel?att=<%=travelatt.get(3).getAtt_name() %>">
 						<div class="travellist2">
-							<img src="../img/travel<%=travelatt.get(3).getTravel_img1()%>">
+							<img src="../img/travel<%=travelatt.get(3).getAtt_img1()%>">
 							<div class="detail">
 								<p><%=travelatt.get(3).getAtt_name() %></p>
 							</div>

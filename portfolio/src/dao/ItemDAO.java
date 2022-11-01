@@ -170,7 +170,6 @@ public class ItemDAO {
 		try{
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,itemCode);
-			System.out.println(pstmt.toString());
 
 			rs = pstmt.executeQuery();
 
@@ -233,7 +232,6 @@ public class ItemDAO {
 					"select * from itemReview where itemCode = ? limit ?,10");
 			pstmt.setString(1, itemCode);
 			pstmt.setInt(2,startrow);
-			System.out.println(pstmt.toString());
 			rs = pstmt.executeQuery();
 
 			while(rs.next()){
@@ -263,10 +261,10 @@ public class ItemDAO {
 	public ArrayList<Item> lowSelectArticleList(int page,int limit, String category){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from item where bigCategory=? or midCategory=? or smCategory=? order by discountWon asc limit ?,10";
+		String sql="select * from item where bigCategory=? or midCategory=? or smCategory=? order by discountWon asc limit ?,16";
 		ArrayList<Item> articleList = new ArrayList<Item>();
 		Item item = null;
-		int startrow=(page-1)*10; 
+		int startrow=(page-1)*16; 
 		
 		try{			
 			pstmt = con.prepareStatement(sql);
@@ -274,7 +272,6 @@ public class ItemDAO {
 			pstmt.setString(2,category);
 			pstmt.setString(3,category);
 			pstmt.setInt(4, startrow);
-			System.out.println(pstmt.toString());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -308,10 +305,10 @@ public class ItemDAO {
 	public ArrayList<Item> highSelectArticleList(int page,int limit, String category){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from item where bigCategory=? or midCategory=? or smCategory=? order by discountWon desc limit ?,10";
+		String sql="select * from item where bigCategory=? or midCategory=? or smCategory=? order by discountWon desc limit ?,16";
 		ArrayList<Item> articleList = new ArrayList<Item>();
 		Item item = null;
-		int startrow=(page-1)*10; 
+		int startrow=(page-1)*16; 
 		
 		try{
 			pstmt = con.prepareStatement(sql);
@@ -319,7 +316,6 @@ public class ItemDAO {
 			pstmt.setString(2,category);
 			pstmt.setString(3,category);
 			pstmt.setInt(4, startrow);
-			System.out.println(pstmt.toString());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -353,10 +349,10 @@ public class ItemDAO {
 	public ArrayList<Item> countSelectArticleList(int page,int limit, String category){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from item where bigCategory=? or midCategory=? or smCategory=? order by count desc limit ?,10 ";
+		String sql="select * from item where bigCategory=? or midCategory=? or smCategory=? order by count desc limit ?,16 ";
 		ArrayList<Item> articleList = new ArrayList<Item>();
 		Item item = null;
-		int startrow=(page-1)*10; 
+		int startrow=(page-1)*16; 
 		
 		try{
 			pstmt = con.prepareStatement(sql);
@@ -364,7 +360,6 @@ public class ItemDAO {
 			pstmt.setString(2,category);
 			pstmt.setString(3,category);
 			pstmt.setInt(4, startrow);
-			System.out.println(pstmt.toString());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -420,18 +415,16 @@ public class ItemDAO {
 	public ArrayList<Item> searchSelectArticleList(int page,int limit, String keyword){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from item where brandName like '%"+keyword+"%' or itemName like '%"+keyword+"%' limit ?,10";
+		String sql="select * from item where brandName like '%"+keyword+"%' or itemName like '%"+keyword+"%' limit ?,16";
 		ArrayList<Item> articleList = new ArrayList<Item>();
 		Item item = null;
-		int startrow=(page-1)*10; 
-		System.out.println(sql);
+		int startrow=(page-1)*16; 
 		
 		try{
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startrow);
 			rs = pstmt.executeQuery();
-			System.out.println(pstmt.toString());
-			
+
 			while(rs.next()){
 				item = new Item();
 				item.setItemCode(rs.getString("itemCode"));
@@ -494,7 +487,6 @@ public class ItemDAO {
 		try{
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,itemCode);
-			System.out.println(pstmt.toString());
 					
 			rs = pstmt.executeQuery();
 
@@ -524,8 +516,7 @@ public class ItemDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="select * from itemQna where itemCode = ? order by qupdate desc limit ?,10 ";
-			
-		System.out.println(sql);
+
 		ArrayList<ItemQna> articleList = new ArrayList<ItemQna>();
 		ItemQna qna = null;
 		int startrow=(page-1)*10; 
@@ -534,7 +525,6 @@ public class ItemDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,itemCode);
 			pstmt.setInt(2,startrow);
-			System.out.println(pstmt.toString());
 				
 			rs = pstmt.executeQuery();
 
@@ -557,6 +547,65 @@ public class ItemDAO {
 		}
 		return articleList;
 	}
+	
+	//해당 데이터 select
+	public Item wishSelectArticle(String itemCode, String mb_id){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Item item = null;
+
+		try{
+			pstmt = con.prepareStatement(
+					"select * from itemWish where itemCode = ? and mb_id = ?");
+			pstmt.setString(1, itemCode);
+			pstmt.setString(2, mb_id);
+			rs= pstmt.executeQuery();
+			System.out.println(pstmt.toString());
+			
+			//해당 게시글 내용
+			if(rs.next()){
+				item = new Item();
+				item.setMb_id(rs.getString("mb_id"));
+				item.setItemCode(rs.getString("itemCode"));
+			}
+		}catch(Exception ex){
+			System.out.println("실패");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return item;
+	}
+	
+	//wish select
+	/*public ArrayList<Item> wishSelectArticleList(String mb_id, String ItenCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql="select * from itemWish where mb_id = ?  ";
+
+		ArrayList<Item> articleList = new ArrayList<Item>();
+		Item item = null;
+		
+		try{
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,mb_id);
+					
+			rs = pstmt.executeQuery();
+
+			while(rs.next()){
+				item = new Item();
+				item.setMb_id(rs.getString("mb_id"));
+				item.setItemCode(rs.getString("itemCode"));
+				articleList.add(item);
+			}
+			System.out.println("wish select 성공");
+		}catch(Exception ex) {
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return articleList;
+	}*/
 	
 	//데이터 개수
 	public int selectListCount(String category) {
@@ -587,14 +636,11 @@ public class ItemDAO {
 	public ArrayList<Item> selectArticleList(int page,int limit, String category) throws UnsupportedEncodingException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-//		String sql="select item.itemCode, bigCategory, midCategory, smCategory, itemName, itemImg, discountWon,"
-//				+ "discountDollar, reRate from item left outer join itemReview on item.itemCode = itemReview.itemCode";
-		String sql="select * from item where bigCategory=? or midCategory=? or smCategory=? limit ?,10";
-		
-		System.out.println(sql);
+		String sql="select * from item where bigCategory=? or midCategory=? or smCategory=? limit ?,16";
+
 		ArrayList<Item> articleList = new ArrayList<Item>();
 		Item item = null;
-		int startrow=(page-1)*10; 
+		int startrow=(page-1)*16; 
 	
 		try{
 			pstmt = con.prepareStatement(sql);
@@ -602,7 +648,6 @@ public class ItemDAO {
 			pstmt.setString(2,category);
 			pstmt.setString(3,category);
 			pstmt.setInt(4, startrow);
-			System.out.println(pstmt.toString());
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()){

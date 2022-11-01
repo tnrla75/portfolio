@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import vo.Travel_selectroute;
+
 
 public class RouteController {
 	Connection conn = null;
@@ -27,20 +29,49 @@ public class RouteController {
 		}
 		close();
 	}
-	public ArrayList<RouteDTO> routeselect() {
-		ArrayList<RouteDTO> arr = new ArrayList<RouteDTO>();
+	public ArrayList<Travel_selectroute> routeselect() {
+		ArrayList<Travel_selectroute> arr = new ArrayList<Travel_selectroute>();
 		
 		try{
 			conn();
 			
-			String command = "select * from travel_route;";
+			String command = "select travel_makeroute.*,travel_local.local_latitude,travel_local.local_longitude,local_img from travel_local left outer join travel_makeroute on travel_makeroute.local= travel_local.local_name where travel_makeroute.local = travel_local.local_name;";
 			ResultSet rs = stmt.executeQuery(command);
 			while(rs.next()) {
-				RouteDTO select = new RouteDTO();
-				select.setRouteTitle(rs.getString("routeTitle"));
-				select.setId(rs.getString("id"));
-				select.setRouteContent(rs.getString("routeContent"));
-				select.setRouteNum(rs.getString("routeNum"));
+				Travel_selectroute select = new Travel_selectroute();
+				select.setRoutetitle(rs.getString("routetitle"));
+				select.setWritedate(rs.getString("writedate"));
+				select.setMb_id(rs.getString("mb_id"));
+				select.setLocal(rs.getString("local"));
+				select.setLocal_img(rs.getString("local_img"));
+				select.setLocal_latitude(rs.getString("local_latitude"));
+				select.setLocal_longitude(rs.getString("local_longitude"));
+				select.setRoute1_1(rs.getString("route1_1"));
+				select.setRoute1_2(rs.getString("route1_2"));
+				select.setRoute1_3(rs.getString("route1_3"));
+				select.setRoute1_4(rs.getString("route1_4"));
+				select.setRoute1_5(rs.getString("route1_5"));
+				select.setRoute2_1(rs.getString("route2_1"));
+				select.setRoute2_2(rs.getString("route2_2"));
+				select.setRoute2_3(rs.getString("route2_3"));
+				select.setRoute2_4(rs.getString("route2_4"));
+				select.setRoute2_5(rs.getString("route2_5"));
+				select.setRoute3_1(rs.getString("route3_1"));
+				select.setRoute3_2(rs.getString("route3_2"));
+				select.setRoute3_3(rs.getString("route3_3"));
+				select.setRoute3_4(rs.getString("route3_4"));
+				select.setRoute3_5(rs.getString("route3_5"));
+				select.setRoute4_1(rs.getString("route4_1"));
+				select.setRoute4_2(rs.getString("route4_2"));
+				select.setRoute4_3(rs.getString("route4_3"));
+				select.setRoute4_4(rs.getString("route4_4"));
+				select.setRoute4_5(rs.getString("route4_5"));
+				select.setRoute5_1(rs.getString("route5_1"));
+				select.setRoute5_2(rs.getString("route5_2"));
+				select.setRoute5_3(rs.getString("route5_3"));
+				select.setRoute5_4(rs.getString("route5_4"));
+				select.setRoute5_5(rs.getString("route5_5"));
+				
 				
 				arr.add(select);
 			}

@@ -39,16 +39,13 @@ public class TravelattAction implements Action {
 		ArrayList<Travelattre> travelattre=new ArrayList<Travelattre>();
 		//att글 select
 		String att=request.getParameter("att");
-		System.out.println(att+"=====1");
 		travelatt=travelattservice.attselect(att);
 		travelattimg=travelattservice.attselect_att();
 		request.setAttribute("travelatt", travelatt);
 		request.setAttribute("travelattimg", travelattimg);
-		System.out.println(travelatt+"=====12++");
 		if(travelatt==null) {	
 	   		response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out=response.getWriter();
-			System.out.println("hello");
 			out.println("<script>");
 			out.println("alert('일치하는 값이 없습니다.');");
 			out.println("history.back();");

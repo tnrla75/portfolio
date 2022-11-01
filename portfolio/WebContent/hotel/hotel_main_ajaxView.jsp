@@ -19,9 +19,8 @@
 	ArrayList<Hotel_main_DTO> ajaxList=(ArrayList<Hotel_main_DTO>)request.getAttribute("ajaxList");	
 	TreeMap<Integer, Hotel_room_DTO> main_roomList=(TreeMap<Integer, Hotel_room_DTO>)request.getAttribute("main_roomList");	
 	
-	
-	System.out.println(main_roomList.size()+" : mainViewJsp main_roomList");
-	System.out.println(ajaxList.get(0).getHot_main_num()+" : mainViewJsp starList");
+	System.out.println(main_roomList.size()+" : mainAjaxJsp main_roomList");
+	System.out.println(ajaxList+" : mainAjaxJsp ajaxList");
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -36,28 +35,37 @@
 	String start_date=(String)request.getParameter("start_date");
 	String finish_date=(String)request.getParameter("finish_date");
 	%>	
+	<script>
+	
+	$(function(){
+		$(".plus").slice(0, 4).show(); // 최초 4개 선택
+		$(".plus").click(function(e){ // Load More를 위한 클릭 이벤트e
+		e.preventDefault();
+		$("#plus:hidden").slice(0, 4).show(); // 숨김 설정된 다음 10개를 선택하여 표시
+		if($("#plus:hidden").length == 0){ // 숨겨진 DIV가 있는지 체크
+		alert("더 이상 등록된 호텔이 없습니다.."); // 더 이상 로드할 항목이 없는 경우 경고
+		}
+		});
+		});
+	
+	</script>
 	<div id="up_rightbox">
 		
 	<h3 style="font-size: 20pt;">머무르고 싶은 지역을 입력하세요.</h3>
 		<div>
 			<img src="../img/icon/hotel.png" width="20" height="20"	class="hotelIcon"> 
-			<input type="text" placeholder="여행지 또는 숙소 이름으로 검색" size="40"> 
-			<select height="30">
+			<input type="text" placeholder="여행지 또는 숙소 이름으로 검색"  id="btnOpen1" name="hot_nation" size="40"> 
+			<select height="30" name="hot_room_maxpeople">
 				<option value="인원수">인원수</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
 				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
+				
 			</select> 
-			<input type="date" name="checkin" id="datechoice3"> 
-			<input type="date" name="checkout" id="datechoice4"> 
-			<input type="button" name="hotelBtn" class="hotelBtn" onClick="getPost('05')">
+			<input type="date"  name="hot_checkin_date" id="datechoice3"> 
+			<input type="date" name="hot_checkout_date" id="datechoice4"> 
+			<input type="button"  name="kensakuBtn"  class="kensakuBtn" onClick="getPost('02')">
 		</div><hr>
 		<script>
 			document.getElementById('datechoice1').valueAsDate=new Date();
@@ -71,7 +79,63 @@
 			$("#datechoice4").datepicker();
 			$("#datechoice5").datepicker();
 				</script>
-
+<div id='modal1'>
+	<div id='content1'>
+		
+		<div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;인기지역 <input type='button' value='X' class="close" id='btnClose1'/></li>
+					<li>aaa</li>
+					<li>bbb</li>
+					<li>서울</li>
+					<li>제주도</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;대한민국</li>
+					<li>서울</li>
+					<li>부산</li>
+					<li>제주</li>
+					<li>강릉</li>
+					<li>경주</li>
+					<li>전주</li>
+					<li>여수</li>
+					<li>인천</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;일본</li>
+					<li>도쿄</li>
+					<li>오사카</li>
+					<li>교토</li>
+					<li>삿포로</li>
+					<li>나고야</li>
+					<li>오키나와</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;베트남</li>
+					<li>호치민</li>
+					<li>호이안</li>
+					<li>다낭</li>
+					<li>하노이</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul">
+					<li>&nbsp;&nbsp;기타국가</li>
+					<li>태국</li>
+					<li>싱가포르</li>
+					<li>홍콩</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
 					</div> 	     	
 	
 		     		<%if(ajaxList != null ){	%>
@@ -95,8 +159,8 @@
 								
 							</div>
 							<div class="hot_centerbox_up_right">
-									<div>리뷰좋다<br></div>
-									<div>리뷰좋다<br></div>
+									<br>
+									<div id="star"><%=ajaxList.get(i).getHot_star()%>성급<br></div>
 							</div>
 						</div>
 						<div class="hot_centerbox_down">
@@ -142,6 +206,7 @@
 		     
 		      
 		      <%} %>  
+		      <div id="plus"><div class="plus"><input type="button" name="plus" value="더보기" onclick="" ></div></div>
 		      
 		      <section id="pageList">
 			<%if(nowPage<=1){ %>

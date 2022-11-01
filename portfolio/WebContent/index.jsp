@@ -7,7 +7,6 @@
 	IndexselectAction indexselect = new IndexselectAction();
 		indexselect.execute(request, response);
 		ArrayList<Travellocal> travellocal=(ArrayList<Travellocal>)request.getAttribute("travellocal");
-		System.out.println("asd");
 %> 	
 <!DOCTYPE html>
 <html>
@@ -310,7 +309,7 @@
 
 .searchicon2 {
 	position: relative;
-	left: 70px;
+	left: 300px;
 	width: 50px;
 	height: 40px;
 	border-style: none;
@@ -458,7 +457,7 @@
 
 .travel {
 	width: 1200px;
-	height: 400px;
+	height: 350px;
 }
 
 .travel:last-of-type {
@@ -486,9 +485,9 @@
 }
 
 .travellist1 p {
-	font-size: 17pt;
+	font-size: 35pt;
 	font-weight: bold;
-	margin-left: 15px;
+	margin-left: 30px;
 	color: white;
 	position: relative;
 	margin-top: -150px;
@@ -830,6 +829,173 @@ a:visited {
 .mainsection{
 	height:2500px;	
 }
+a{
+	cursor: pointer;
+}
+/* 모달 */
+		#modal1 > *{
+			padding: 0px;
+			margin: 0px;
+		}
+		
+		#modal1{
+			display : none;
+			z-index : 999;
+			position:absolute;
+    		left: 30px;
+    		top: 550px;
+			width:70%;
+			height:650px;
+		}
+		#modal1>#content1{
+			width:500px;
+			height: 390px;
+			margin:100px auto;
+			padding:20px;
+			position: relative;
+			background-color:#fff;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		}
+		
+		#modal1 .close{
+			position:absolute;
+			top:4px;
+			right:4px;	
+			font-size:20px;
+			border:0;
+			background-color:#F0F0F0;
+		}
+		
+		#modal1 .close:hover,
+		#modal1 .close:focus {
+		  color : #000;
+		  text-decoration: none;
+		  cursor :pointer;
+		}
+		.modalul1 {
+			width:500px;
+		}
+		.modalul1 li{
+			list-style: none;
+			float: left;
+			width: 95px;
+			height: 50px;
+			line-height: 50px;
+			position: relative;
+			left:-60px;
+			top:-36px;
+		}
+		.modalul1 li:nth-child(1){
+			width: 540px;
+			height: 40px;
+			background-color: #F0F0F0;
+			font-weight: bold;
+			font-size:12pt;
+			line-height: 40px;
+		}
+		.modalul1 li:nth-child(n+2){
+			font-size:10pt;
+			padding: 0 10px;
+			margin: 2px 5px;
+		}
+		.modalul1 li:nth-child(n+2):hover{
+			background-color: #5AA0FF ;
+			color:white;
+		}
+		#btnOpen1:focus{
+			outline: none;
+			border-bottom: solid rgba(211, 10, 20, 0.9) 2px;
+		}
+		#backdiv{
+			background-color: #f5f7fa;
+			position: relative;
+			top:-13px;
+		}
+		.flex{
+		  display:flex
+		}
+		#modal2 > *{
+			padding: 0px;
+			margin: 0px;
+		}
+		
+		#modal2{
+			display : none;
+			z-index : 999;
+			position:absolute;
+    		left: 280px;
+    		top: 550px;
+			width:70%;
+			height:650px;
+		}
+		#modal2>#content2{
+			width:500px;
+			height: 390px;
+			margin:100px auto;
+			padding:20px;
+			position: relative;
+			background-color:#fff;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		}
+		
+		#modal2 .close{
+			position:absolute;
+			top:4px;
+			right:4px;	
+			font-size:20px;
+			border:0;
+			background-color:#F0F0F0;
+		}
+		
+		#modal2 .close:hover,
+		#modal2 .close:focus {
+		  color : #000;
+		  text-decoration: none;
+		  cursor :pointer;
+		}
+		.modalul2 {
+			width:500px;
+		}
+		.modalul2 li{
+			list-style: none;
+			float: left;
+			width: 95px;
+			height: 50px;
+			line-height: 50px;
+			position: relative;
+			left:-60px;
+			top:-36px;
+		}
+		.modalul2 li:nth-child(1){
+			width: 540px;
+			height: 40px;
+			background-color: #F0F0F0;
+			font-weight: bold;
+			font-size:12pt;
+			line-height: 40px;
+		}
+		.modalul2 li:nth-child(n+2){
+			font-size:10pt;
+			padding: 0 10px;
+			margin: 2px 5px;
+		}
+		.modalul2 li:nth-child(n+2):hover{
+			background-color: #5AA0FF ;
+			color:white;
+		}
+		#btnOpen2:focus{
+			outline: none;
+			border-bottom: solid rgba(211, 10, 20, 0.9) 2px;
+		}
+		#backdiv{
+			background-color: #f5f7fa;
+			position: relative;
+			top:-13px;
+		}
+		.flex{
+		  display:flex
+		}
+
 </style>
 </head>
 
@@ -866,6 +1032,17 @@ a:visited {
 	});	
 </script>
 <script>
+window.onload=function(){
+	document.getElementById('datechoice1').value = new Date().toISOString().substring(0, 10);
+	document.getElementById('datechoice2').value = new Date().toISOString().substring(0, 10);
+	var today = new Date().toISOString().substring(0, 10);
+	document.getElementById('datechoice1').setAttribute("min", today);
+	document.getElementById('datechoice2').setAttribute("min", today);
+}
+function changeDate1(){
+	document.getElementById('datechoice2').setAttribute("min", document.getElementById('datechoice1').value);
+	document.getElementById('datechoice2').value = document.getElementById('datechoice1').value;
+}  
 
 function getPost(mode)
 {
@@ -888,17 +1065,6 @@ function getPost(mode)
 	myform.submit();
 };
 
-/* window.onload=function(){
-	document.getElementById('datechoice1').value = new Date().toISOString().substring(0, 10);
-	document.getElementById('datechoice2').value = new Date().toISOString().substring(0, 10);
-	var today = new Date().toISOString().substring(0, 10);
-	document.getElementById('datechoice1').setAttribute("min", today);
-}
-function changeDate1(){
-	document.getElementById('datechoice2').setAttribute("min", document.getElementById('datechoice1').value);
-	document.getElementById('datechoice2').value = document.getElementById('datechoice1').value;
-} */
-
 </script>
 <body>
 	<form name="myform">
@@ -914,6 +1080,91 @@ function changeDate1(){
 		<%
 		}
 	%>
+	
+<div id='modal1'>
+	<div id='content1'>
+		<div>
+			<div class="modaltitle">
+				<ul class="modalul1">
+					<li>&nbsp;&nbsp;한국<input type='button' value='X' class="close" id='btnClose1'/></li>
+					<li>서울/인천</li>
+					<li>제주</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul1">
+					<li>&nbsp;&nbsp;중국</li>
+					<li>도쿄</li>
+					<li>오사카</li>
+					<li>교토</li>
+					<li>삿포로</li>
+					<li>나고야</li>
+					<li>오키나와</li>
+				</ul>
+			</div>			
+			<div class="modaltitle">
+				<ul class="modalul1">
+					<li>&nbsp;&nbsp;베트남</li>
+					<li>호치민</li>
+					<li>호이안</li>
+					<li>다낭</li>
+					<li>하노이</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul1">
+					<li>&nbsp;&nbsp;기타 국가</li>
+					<li>싱가포르</li>
+					<li>홍콩</li>					
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div id='modal2'>
+	<div id='content2'>
+		<div>
+			<div class="modaltitle">
+				<ul class="modalul2">
+					<li>&nbsp;&nbsp;한국<input type='button' value='X' class="close" id='btnClose2'/></li>
+					<li>서울/인천</li>
+					<li>제주</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul2">
+					<li>&nbsp;&nbsp;중국</li>
+					<li>도쿄</li>
+					<li>오사카</li>
+					<li>교토</li>
+					<li>삿포로</li>
+					<li>나고야</li>
+					<li>오키나와</li>
+				</ul>
+			</div>			
+			<div class="modaltitle">
+				<ul class="modalul2">
+					<li>&nbsp;&nbsp;베트남</li>
+					<li>호치민</li>
+					<li>호이안</li>
+					<li>다낭</li>
+					<li>하노이</li>
+				</ul>
+			</div>
+			<div class="modaltitle">
+				<ul class="modalul2">
+					<li>&nbsp;&nbsp;기타 국가</li>
+					<li>싱가포르</li>
+					<li>홍콩</li>					
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</div>
+	
 		<section>
 			<div class="main_visual_wrap">
 				<div class="imageBox">
@@ -988,28 +1239,16 @@ function changeDate1(){
 										<img src="img/icon/take-off.png" width="20" height="20" class="flighticon"> 
 										
 												<input type="text" placeholder="출발지" class="departure"
-													name='departure1'>
+													name='departure1' id='btnOpen1'>
 											</section>
 											<section class="airplainchoice">
 												<img src="img/icon/landing.png" width="20" height="20" class="flighticon"> 
 												<input type="text" placeholder="도착지" class="arrive"
-													name='arrive1'> 
-													<select class="people"
-													name="flight_people1">
-													<option>인원수</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select> <select class="seatGrade" name='seatGrade1'>
-													<option>좌석등급</option>
-													<option>이코노미 클래스</option>
-													<option>비지니스 클래스</option>
-													<option>퍼스트 클래스</option>
-												</select>
+													name='arrive1' id='btnOpen2'> 
 											</section>
 											<section class="airplainchoice">
 												<input type="date" placeholder="출발일" id="datechoice1"
-													name='departureDay1'>
+													name='departureDay1'  onchange="changeDate1()">
 											</section>
 											<section class="airplainchoice">
 												<input type="date" placeholder="도착일" id="datechoice2"
@@ -1101,154 +1340,7 @@ function changeDate1(){
 		</section>
 		<section class="mainsection">
 			<div class="contents">
-				 <div class="travel">
-					<h5 style="margin-left: -10px;">국내 인기 여행지</h5>
-			
-						<div class="travellist1" id="travel1">
-							<a href="travel/local.travel?local=<%=travellocal.get(0).getLocal_name()%>">
-								<div style="width: 280px; height: 230px; overflow: hidden;">
-								<img src="img/travel<%=travellocal.get(0).getLocal_img()%>" width="280px"
-									height="230px">
-								<p class="insert1">
-									자세히 보러가기<img src="img/icon/next.png" width="25" height="25">
-								</p>
-							</div></a>
-							<div style="width: 280px; height: 100px;">
-								<div>
-								<a style="margin-left: 20px; font-size: 13pt; font-weight: bold;" href="travel/local.travel?local=<%=travellocal.get(0).getLocal_name()%>">
-									<%=travellocal.get(0).getLocal_name()%>
-									<div style="margin: 5px auto 0 auto; border: 2px solid #BDBDBD; width: 230px; height: auto;">
-										<button class="travelbtn"
-											style="border-style: none; background-color: white; width: 200px; height: 25px;">
-											<i style="float: left; margin-top: 3px;" class="fa-solid fa-location-dot"></i>여행지 바로가기
-											<i style="float: right; margin-top: 3px;" class="fa-solid fa-chevron-right"></i>
-										</button>
-									</div>
-									</a>
-									<div
-										style="margin: 5px auto 0 auto; border: 2px solid #BDBDBD; width: 230px; height: auto;">
-										<a> <button class="travelbtn">
-											<i style="float: left; margin-top: 3px;"
-												class="fa-solid fa-plane"></i>항공권특가<i
-												style="float: right; margin-top: 3px;"
-												class="fa-solid fa-chevron-right"></i>
-										</button>
-										</a>
-									</div>
-								</div>
-							</div>
-							<!-- <input type="button" class="gide" value="트립 가이드"> -->
-						</div>
-					</a> <a href="travel/local.travel?local=<%=travellocal.get(1).getLocal_name()%>">
-						<div class="travellist1" id="travel2">
-							<div style="width: 280px; height: 230px; overflow: hidden;">
-								<img src="img/travel<%=travellocal.get(1).getLocal_img()%>" width="280px"
-									height="230px">
-								<p class="insert2">
-									자세히 보러가기<img src="img/icon/next.png" width="25" height="25">
-								</p>
-							</div>
-							<div style="width: 280px; height: 100px;">
-								<a
-									style="margin-left: 20px; font-size: 13pt; font-weight: bold;"
-									href="travel/local.travel?local=<%=travellocal.get(1).getLocal_name()%>"><%=travellocal.get(1).getLocal_name()%></a>
-								<div>
-									<div
-										style="margin: 5px auto 0 auto; border: 2px solid #BDBDBD; width: 230px; height: auto;">
-										<button class="travelbtn">
-											<i style="float: left; margin-top: 3px;"
-												class="fa-solid fa-location-dot"></i>여행지 바로가기<i
-												style="float: right; margin-top: 3px;"
-												class="fa-solid fa-chevron-right"></i>
-										</button>
-									</div>
-									<div
-										style="margin: 5px auto 0 auto; border: 2px solid #BDBDBD; width: 230px; height: auto;">
-										<button class="travelbtn"
-											style="border-style: none; background-color: white; width: 200px; height: 25px;">
-											<i style="float: left; margin-top: 3px;"
-												class="fa-solid fa-plane"></i>항공권특가<i
-												style="float: right; margin-top: 3px;"
-												class="fa-solid fa-chevron-right"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a> <a href="travel/local.travel?local=<%=travellocal.get(2).getLocal_name()%>">
-						<div class="travellist1" id="travel3">
-							<div style="width: 280px; height: 230px; overflow: hidden;">
-								<img src="img/travel<%=travellocal.get(2).getLocal_img()%>" width="280px" height="230px">
-								<p class="insert3">
-									자세히 보러가기<img src="img/icon/next.png" width="25" height="25">
-								</p>
-							</div>
-							<div style="width: 280px; height: 100px;">
-								<a
-									style="margin-left: 20px; font-size: 13pt; font-weight: bold;"
-									href="travel/local.travel?local=<%=travellocal.get(2).getLocal_name()%>"><%=travellocal.get(2).getLocal_name()%></a>
-								<div>
-									<a href="travel/local.travel?local=<%=travellocal.get(2).getLocal_name()%>"><div
-										style="margin: 5px auto 0 auto; border: 2px solid #BDBDBD; width: 230px; height: auto;">
-										<button class="travelbtn">
-											<i style="float: left; margin-top: 3px;"
-												class="fa-solid fa-location-dot"></i>여행지 바로가기<i
-												style="float: right; margin-top: 3px;"
-												class="fa-solid fa-chevron-right"></i>
-										</button>
-									</div></a>
-									<div style="margin: 5px auto 0 auto; border: 2px solid #BDBDBD; width: 230px; height: auto;">
-										<button class="travelbtn">
-											<i style="float: left; margin-top: 3px;"
-												class="fa-solid fa-plane"></i>항공권특가<i
-												style="float: right; margin-top: 3px;"
-												class="fa-solid fa-chevron-right"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a> <a href="travel/local.travel?local=<%=travellocal.get(3).getLocal_name()%>">
-						<div class="travellist1" id="travel4">
-							<div style="width: 280px; height: 230px; overflow: hidden;">
-								<img src="img/travel<%=travellocal.get(3).getLocal_img()%>" width="280px"
-									height="230px">
-								<p class="insert4">
-									자세히 보러가기<img src="img/icon/next.png" width="25" height="25">
-								</p>
-							</div>
-							<div style="width: 280px; height: 100px;">
-								<a style="margin-left: 20px; font-size: 13pt; font-weight: bold;"
-									href="travel/local.travel?local=<%=travellocal.get(3).getLocal_name()%>"><%=travellocal.get(3).getLocal_name()%>
-									</a>
-								<div>
-									<div style="margin: 5px auto 0 auto; border: 2px solid #BDBDBD; width: 230px; height: auto;">
-										<button class="travelbtn">
-											<i style="float: left; margin-top: 3px;"
-												class="fa-solid fa-location-dot"></i>여행지 바로가기<i
-												style="float: right; margin-top: 3px;"
-												class="fa-solid fa-chevron-right"></i>
-										</button>
-										
-										
-									</div>
-									<div
-										style="margin: 5px auto 0 auto; border: 2px solid #BDBDBD; width: 230px; height: auto;">
-										<button class="travelbtn">
-											<i style="float: left; margin-top: 3px;"
-												class="fa-solid fa-plane"></i>항공권특가<i
-												style="float: right; margin-top: 3px;"
-												class="fa-solid fa-chevron-right"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					<div class="plus">
-						<input type="button" name="plus" class="plusBtn" value="> 더보기">
-					</div>
-				</div> 
+				
 				<div class="travel">
 					<div class="contents2">
 						<h5 style="margin-left: -15px;">추천 항공권</h5>
@@ -1471,6 +1563,60 @@ function changeDate1(){
 	                $tabs.responsiveTabs('activate', $(this).val());
 	            });
 	        });
+	        
+	        var btnOpen1  = document.getElementById('btnOpen1');
+	    	var btnClose1 = document.getElementById('btnClose1');
+	    	
+	    	// modal 창을 감춤
+	    	var closeRtn1 = function(){
+	    		var modal1 = document.getElementById('modal1');
+	    		modal1.style.display = 'none';
+	    	}
+	    	// modal 창을 보여줌
+	    	btnOpen1.onclick = function(){
+	    		var modal1 = document.getElementById('modal1');
+	    		modal1.style.display = 'block';
+	    	}
+	    	window.onclick = function(e) {
+	    		if(e.target == modal1){
+	    			modal1.style.display = 'none';
+	    		}
+	    	}
+	    	btnClose1.onclick = closeRtn1;
+	    	
+	    	$(document).ready(function() {
+	    		$(".modalul1 li:nth-child(n+2)").on('click', function(e) {
+	    			$('#btnOpen1').val($(this).text());
+	    			modal1.style.display = 'none'; 
+	    		}); 
+	    	});
+	    	
+	    	// modal 창 1번 
+	    	var btnOpen2  = document.getElementById('btnOpen2');
+	    	var btnClose2 = document.getElementById('btnClose2');
+	    	
+	    	// modal 창을 감춤
+	    	var closeRtn2 = function(){
+	    		var modal2 = document.getElementById('modal2');
+	    		modal2.style.display = 'none';
+	    	}
+	    	// modal 창을 보여줌
+	    	btnOpen2.onclick = function(){
+	    		var modal2 = document.getElementById('modal2');
+	    		modal2.style.display = 'block';
+	    	}
+	    	window.onclick = function(e) {
+	    		if(e.target == modal2){
+	    			modal2.style.display = 'none';
+	    		}
+	    	}
+	    	btnClose2.onclick = closeRtn2;
+	    	$(document).ready(function() {
+	    		$(".modalul2 li:nth-child(n+2)").on('click', function(e) {
+	    			$('#btnOpen2').val($(this).text());
+	    			modal2.style.display = 'none';
+	    		}); 
+	    	}); 
    		</script>
 
 	</form>

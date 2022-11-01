@@ -34,7 +34,6 @@ public class TravelMateAction implements Action{
 		pageInfo.setPage(page);
 		pageInfo.setStartPage(startPage);	
 		request.setAttribute("pageInfo", pageInfo);
-		
 		ArrayList<MateDTO> customer = mc.travelmate(page, limit);
 		request.setAttribute("customer", customer);
 		forward.setPath("../travel/travel_mate.jsp");

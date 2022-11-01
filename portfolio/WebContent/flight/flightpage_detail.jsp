@@ -366,9 +366,7 @@ $(document).ready(function() {
 	var price1 = <%= articleList_go.get(0).getFlight_Ticket_Price() %>;
 	var price2 = <%= articleList_back.get(0).getFlight_Ticket_Price() %>;
 	var totalprice = (price1+price2);
-	alert(totalprice);
 	$("#hiddenprice").val(totalprice);
-	alert($("#hiddenprice").val());
 });
 
 function seat() {
@@ -425,11 +423,10 @@ function createAddRow() {
 	var price2 = <%= articleList_back.get(0).getFlight_Ticket_Price() %>;
 	var totalprice = (i+1)*(price1+price2);
 	$("#hiddenprice").val(totalprice);
-	alert($("#hiddenprice").val());
 	var resultprice = totalprice.toLocaleString();
 	
 	if(i<5){
-		name.innerHTML += "<div class='flightdiv1_indiv1'><div class='infonum'><span class='numspan'>"+(i+1)+"</span><span class='numspan'>. 탑승객 정보</span><button type='button' class='numbtn' onclick='delbtn(this)'><i class='fa-solid fa-trash-can'></i>&nbsp;삭제</button></div><div class='infodiv'><span>승객 성</span><span>&nbsp;*</span><input type='text' placeholder='예) KIM' class='infoinput lastname' name='lastname'></div><div class='infodiv'><span>승객 이름</span><span>&nbsp;*</span><input type='text' placeholder='예) GREEN' class='infoinput firstname' name='firstname'></div><div class='infodiv'><span>생년월일(YYYY.MM.DD)</span><span>&nbsp;*</span><input type='text' placeholder='생년월일' class='infoinput birth' name='birth'></div><div class='infodiv'><span>여권번호</span><span>&nbsp;*</span><input type='text' placeholder='여권번호' class='infoinput passport' name='passport'></div><div class='infodiv' style='border-bottom: none;'>	<span>성별</span><span>&nbsp;</span><br>	<label><input type='radio' name='firstname"+(i+1)+"' class='gender'/><span class='genderspan'>남자</span></label>	<label><input type='radio' name='firstname"+(i+1)+"' class='gender'/><span class='genderspan'>여자</span></label>	</div></div>";
+		name.innerHTML += "<div class='flightdiv1_indiv1'><div class='infonum'><span class='numspan'>"+(i+1)+"</span><span class='numspan'>. 탑승객 정보</span><button type='button' class='numbtn' onclick='delbtn(this)'><i class='fa-solid fa-trash-can'></i>&nbsp;삭제</button></div><div class='infodiv'><span>승객 성</span><span>&nbsp;*</span><input type='text' placeholder='예) KIM' class='infoinput lastname' name='lastname'></div><div class='infodiv'><span>승객 이름</span><span>&nbsp;*</span><input type='text' placeholder='예) GREEN' class='infoinput firstname' name='firstname'></div><div class='infodiv'><span>생년월일(YYYYMMDD)</span><span>&nbsp;*</span><input type='text' placeholder='생년월일' class='infoinput birth' name='birth'></div><div class='infodiv'><span>여권번호</span><span>&nbsp;*</span><input type='text' placeholder='여권번호' class='infoinput passport' name='passport'></div><div class='infodiv' style='border-bottom: none;'>	<span>성별</span><span>&nbsp;</span><br>	<label><input type='radio' name='firstname"+(i+1)+"' class='gender'/><span class='genderspan'>남자</span></label>	<label><input type='radio' name='firstname"+(i+1)+"' class='gender'/><span class='genderspan'>여자</span></label>	</div></div>";
 		
 		divlist.appendChild(name);
 		document.getElementsByClassName('span2')[0].value = resultprice;
@@ -569,7 +566,7 @@ function delbtn(e){
 					</div>
 					
 					<div class="infodiv">
-						<span>생년월일(YYYY.MM.DD)</span><span>&nbsp;*</span>
+						<span>생년월일(YYYYMMDD)</span><span>&nbsp;*</span>
 						<input type="text" placeholder="생년월일" class="infoinput birth" name="birth">
 					</div>
 					<div class="infodiv">

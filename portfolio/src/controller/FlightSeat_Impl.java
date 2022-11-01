@@ -27,6 +27,7 @@ public class FlightSeat_Impl implements CommandInter {
 		String[] lastname= request.getParameterValues("lastname");
 		String[] firstname= request.getParameterValues("firstname");
 		
+		System.out.println("시트 액션 진입");
 		FlightSeatModel model = FlightSeatModel.instance();
 		ArrayList<FlightTicketBean> list1 = (ArrayList<FlightTicketBean>) model.ticket1(ticketNum1);
 		ArrayList<FlightTicketBean> list2 = (ArrayList<FlightTicketBean>) model.ticket2(ticketNum2);
@@ -38,6 +39,6 @@ public class FlightSeat_Impl implements CommandInter {
 		request.setAttribute("firstname", firstname);
 		request.setAttribute("seat1", seat1);
 		
-		return "flight_seatB737.jsp";
+		return "flight_seat.jsp";
 	}
 }

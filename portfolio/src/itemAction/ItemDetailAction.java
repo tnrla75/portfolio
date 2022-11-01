@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import svc.ItemDetailService;
 import vo.ActionForward;
 import vo.Item;
@@ -15,15 +17,17 @@ import vo.PageInfo;
 
 public class ItemDetailAction implements Action {
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{ 
-	   	
+		HttpSession session = request.getSession();
+		String mb_id = (String)session.getAttribute("mb_id");
 		String itemCode = request.getParameter("itemCode");
-		System.out.println(itemCode);
+		
 		
 		ItemDetailService itemDetailService = new ItemDetailService();
 		ArrayList<ItemReview> reArticleList = new ArrayList<ItemReview>();
 		ArrayList<ItemReview> totalReArticleList = new ArrayList<ItemReview>();
 		ArrayList<ItemQna> qnaArticleList = new ArrayList<ItemQna>();
 		ArrayList<ItemQna> totalQnaArticleList = new ArrayList<ItemQna>();
+
 		int page=1;
 		int limit=10;
 		if(request.getParameter("page")!=null){
@@ -32,6 +36,7 @@ public class ItemDetailAction implements Action {
 		
 		//ItemDetailService의 getArticle 메소드 호출
 		Item article = itemDetailService.getArticle(itemCode);
+		Item wishArticle = itemDetailService.wishGetArticle(itemCode, mb_id);
 		ItemOption opArticle = itemDetailService.optionGetArticle(itemCode);
 		ItemImg imgArticle = itemDetailService.imgGetArticle(itemCode);
 		totalReArticleList = itemDetailService.totalReGetArticleList(itemCode);
@@ -74,6 +79,7 @@ public class ItemDetailAction implements Action {
 		// select된 정보
 		ActionForward forward = new ActionForward();
 	   	request.setAttribute("article", article);
+		request.setAttribute("wishArticle", wishArticle);
 	   	request.setAttribute("qnaArticleList", qnaArticleList);
 	   	request.setAttribute("totalQnaArticleList", totalQnaArticleList);
 	   	request.setAttribute("reArticleList", reArticleList);

@@ -256,33 +256,39 @@
 			padding-top: 20px;
 			overflow: auto;
 		}
-		.terms1 {
+		#terms1 {
 			padding-top: 20px;
-			width: 600px;
+			width: 598px;
 			height: 100px;
 			margin: 0 auto;
 			border-style: solid;
-			border-width: 2px;
+			border-color: #D5D5D5;
+			border-width: 1px;
 			overflow: auto;
 			font-size: 10pt;
 		}
-		.terms2 {
+		.terms_wr {
 			padding-top: 20px;
-			width: 600px;
+		}
+		#terms2 {
+			padding-top: 20px;
+			width: 598px;
 			height: 100px;
 			margin: 0 auto;
 			border-style: solid;
-			border-width: 2px;
+			border-color: #D5D5D5;
+			border-width: 1px;
 			overflow: auto;
 			font-size: 10pt;
 		}
-		.terms3 {
+		#terms3 {
 			padding-top: 20px;
-			width: 600px;
+			width: 598px;
 			height: 100px;
 			margin: 0 auto;
 			border-style: solid;
-			border-width: 2px;
+			border-color: #D5D5D5;
+			border-width: 1px;
 			overflow: auto;
 			font-size: 10pt;
 		}
@@ -303,17 +309,20 @@
 			border-color: #D5D5D5;
 			border-width: 0 0 1px 0;
 		}
-		.terms button {
+		.terms a {
 			float: right;
+			font-size: 10pt;
+			border-style: solid;
 			background-color: white;
-			/*border-style: none;*/
-			/*text-decoration-line: underline;*/
+			border-radius: 2px;
+			padding: 3px;
 			border-width: 1px;
 			color: #003399;
 			border-color: #003399;
 		}
 		.terms .checks:last-of-type{
-			border-style: none;
+			border-style: solid;
+			border-width: 0 0 1px 0;
 			padding-bottom: 15px;
 			border-color: #BDBDBD;
 		}
@@ -422,6 +431,20 @@
 			text-align: center;
 			border: 1px solid #6cc0e5;
 		}
+		a {
+			text-decoration-line: none;
+			color: black;
+		}
+		a:hover {
+			color: black;
+		}
+		a:active {
+			color: black;
+		}
+		a:visited {
+			color: black;
+		}
+		
 	</style>
 </head>
 <script>
@@ -464,30 +487,7 @@
 		$('.terms1').hide();
 		$('.terms2').hide();
 		$('.terms3').hide();
-		$('.termsBtn1').mouseenter (function(){
-			$('.terms1').slideDown(300);
- 			$('.terms1').show();
- 		});
- 		$('.terms1').mouseleave (function(){
- 			$('.terms1').slideUp(300);
- 			$('.terms1').hide();
- 		});
- 		$('.termsBtn2').mouseenter (function(){
-			$('.terms2').slideDown(300);
- 			$('.terms2').show();
- 		});
- 		$('.terms2').mouseleave (function(){
- 			$('.terms2').slideUp(300);
- 			$('.terms2').hide();
- 		});
- 		$('.termsBtn3').mouseenter (function(){
-			$('.terms3').slideDown(300);
- 			$('.terms3').show();
- 		});
- 		$('.terms3').mouseleave (function(){
- 			$('.terms3').slideUp(300);
- 			$('.terms3').hide();
- 		});
+
 	});
 	
 	function selectEmail(ele){
@@ -503,6 +503,36 @@
 	        $email2.val($ele.val());
 	    }
 	}
+	
+	// 이용약관
+	var bDisplay1 = true; 
+	function doDisplay1(){
+        var con = document.getElementById("terms1"); 	
+        if(con.style.display=='none'){ 	
+            con.style.display = 'block'; 	
+        }else{ 		
+            con.style.display = 'none'; 	
+        } 
+    }
+    var bDisplay2 = true; 
+    function doDisplay2(){ 	
+        var con = document.getElementById("terms2"); 	
+        if(con.style.display=='none'){ 		
+            con.style.display = 'block'; 	
+        }else{ 		
+            con.style.display = 'none'; 	
+        } 
+    }
+    var bDisplay3 = true; 
+    function doDisplay3(){ 	
+        var con = document.getElementById("terms3"); 	
+        if(con.style.display=='none'){ 		
+            con.style.display = 'block'; 	
+        }else{ 		
+            con.style.display = 'none'; 	
+        } 
+    }
+	
 	</script>
 
 <body>
@@ -740,8 +770,8 @@
 			<div class="checks etrans">
 			  <input type="checkbox" id="ex_chk2" name="check"> 
 			  <label for="ex_chk2">[필수] 이용약관 동의</label> 
-			  <button class="termsBtn1">약관보기</button>
-			  <div class="terms1">
+			   <a href="javascript:doDisplay1();"> 약관보기</a>
+			  <div class="terms1"  id="terms1">
 			  <b>제1조(목적)</b><br/>
 				이 약관은 (주)세정서울지사(전자상거래 사업자)가 운영하는 디디에 두보 공식몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리.의무 및 책임사항을 규정함을 목적으로 합니다.<br/>
 				※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」<br/>
@@ -815,8 +845,8 @@
 			<div class="checks etrans">
 			  <input type="checkbox" id="ex_chk3" name="check"> 
 			  <label for="ex_chk3">[필수] 개인정보 수집 이용 동의</label>
-			  <button class="termsBtn2">약관보기</button>
-			   <div class="terms2">
+			  <a href="javascript:doDisplay2();"> 약관보기</a>
+			   <div class="terms2"  id="terms2">
 			   		1. 개인정보 수집목적 및 이용목적<br/>
 
 					가. 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산<br/>
@@ -871,8 +901,8 @@
 			  <label for="ex_chk4">[선택]SNS 수신 동의</label>
 			  <span><input type="checkbox" id="ex_chk5" name="check" name="mb_agree2">  
 			  <label for="ex_chk5">[선택]이메일 수신 동의</label></span>
-			  <button class="termsBtn3">약관보기</button>
-			  <div class="terms3">
+			   <a href="javascript:doDisplay3();"> 약관보기</a>
+			  <div class="terms3"  id="terms3">
 			  	할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑정보를 이메일로 받아보실 수 있습니다.<br/>
 
 				단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.<br/>

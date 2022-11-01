@@ -36,20 +36,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <title>상품 선택</title>
 <style type="text/css">
-	/* a {
-		text-decoration: none;
-		text-decoration-line: none;
-		color: black;
-	}
-	a:hover {
-		color: black;
-	}
-	a:active {
-		color: black;
-	}
-	a:visited {
-		color: black;
-	} */
 	#search {
 		width: 1200px;
 		height: 50px;
@@ -116,7 +102,7 @@
 		width: 300px;
 	}
 	#sortBox a:hover {
-		border-style: solid;
+		font-weight: bold;
 	}
 	#sortBox2 {
 		margin-top: 20px;
@@ -211,6 +197,9 @@
 		position: relative;
 		left: 870px;
 		bottom: 20px;
+	}
+	#filter a:hover {
+		font-weight: bold;
 	}
 	#filter img {
 		position: relative;
@@ -333,10 +322,10 @@
 				<input type="submit" value="" onclick="javascript: form.action='search.shop';" class="searchIcon">
 			</div>
 			<div id="sort">
-				<p class="sort1"><a href="itemMain.jsp"><img src="../img/dutyfree/home.png" width="20px" height="20px">	<</a></p>
-				<p class="sort1"><%= category %> <</p>
-				<p class="sort1">중분류 <</p>
-				<p class="sort1">소분류</p>
+				<p class="sort1"><a href="../shopping/itemMain.dutyfree?command=itemMain"><img src="../img/dutyfree/home.png" width="20px" height="20px">	<</a></p>
+				<p class="sort1"><%= category %></p>
+				<!-- <p class="sort1">중분류 <</p>
+				<p class="sort1">소분류</p> -->
 			</div>
 			<div id="sortBox">
 				<h3><%= articleList.get(0).getBigCategory() %></h3>
@@ -353,7 +342,7 @@
 								<td><a href="itemList.shop?category=크림">크림</a></td>
 								<td><a href="itemList.shop?category=페이스오일">페이스오일</a></td>
 								<td><a href="itemList.shop?category=마스크/팩">마스크/팩</a></td>
-								<td><a href="itemList.shop?category=미스트">미스트</a></td>
+								<td></td>
 							</tr>
 						</table>
 					<%}%>		
@@ -363,11 +352,11 @@
 						<tr>
 							<td width="100px" class="tableLine">브랜드</td>
 							<td>
-								<input type="checkbox" value="설화수" name=brand_op>설화수
-								<input type="checkbox" value="설화수" name=brand_op>키엘
-								<input type="checkbox" value="설화수" name=brand_op>라 메르
-								<input type="checkbox" value="설화수" name=brand_op>클리니크
-								<input type="checkbox" value="설화수" name=brand_op>니들리
+								<input type="checkbox" value="SULWHASOO" name=brand_op>설화수
+								<input type="checkbox" value="NEEDLY" name=brand_op>키엘
+								<input type="checkbox" value="LA MER" name=brand_op>라 메르
+								<input type="checkbox" value="YVES SAINT LAURENT" name=brand_op>입생로랑
+								<input type="checkbox" value="KIEHL S" name=brand_op>니들리
 							</td>
 						</tr>
 						<tr>
@@ -401,6 +390,7 @@
 							for(int i=0; i<articleList.size(); i++) { 
 								 double discount = (double)articleList.get(i).getDiscount()/(double)100; 
 								 double discountDollar = articleList.get(i).getItemDollar()*(1-discount);
+							
 					%>	
 					<td>
 						<div id="item_wr">
@@ -417,7 +407,7 @@
 									<b>$<fmt:formatNumber value="<%= discountDollar %>" pattern='0.0' /></b>
 									<b>(<fmt:formatNumber value="<%= articleList.get(i).getDiscountWon() %>"  groupingUsed="true"/>원)</b>
 								</p>
-								<div class="like"><img src="../img/dutyfree/heart.png" height="30px" width="30px"></div>
+								<!-- <div class="like"><img src="../img/dutyfree/heart.png" height="30px" width="30px"></div> -->
 							</td>
 							</tr>
 							<% } else { %>
@@ -431,7 +421,7 @@
 									<b>$<fmt:formatNumber value="<%= discountDollar %>" pattern='0.0' /></b>
 									<b>(<fmt:formatNumber value="<%= articleList.get(i).getDiscountWon() %>" groupingUsed="true"/>원)</b>
 								</p>
-								<div class="like"><img src="../img/dutyfree/heart.png" height="30px" width="30px" class="heart"></div>
+								<!-- <div class="like"><img src="../img/dutyfree/heart.png" height="30px" width="30px" class="heart"></div> -->
 							<% } %>
 						</a>
 						</div>

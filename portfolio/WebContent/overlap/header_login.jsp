@@ -20,11 +20,9 @@
 			</div>
 			<div id="nav">
 				<nav>
-					<ul id="top" style="margin-left: 70px;">
+					<ul id="top" style="margin-left: 155px;">
 						<li class='commonnav'><a href='../overlap/login.jsp'>로그인</a></li>
 						<li class="commonnav"><a href="../overlap/signuppage.jsp">회원가입</a></li>
-						<li class="commonnav"><a href="../overlap/myfavorites.jsp">즐겨찾기</a></li>
-						<li class="commonnav"><a href="../overlap/service_center.jsp">고객센터</a></li>
 					</ul>
 					<ul id="main">
 						
@@ -45,7 +43,7 @@
 							</ul>
 						</li>
 						<li class="commonnav4">
-							<p><a class="commonlink" href="../shopping/itemMain.jsp">면세점</a></p>
+							<p><a class="commonlink" href="../shopping/itemMain.dutyfree?command=itemMain">면세점</a></p>
 							<ul class="list">
 								<li><a href="shoping/">Best샵</a></li>
 								<li><a href="shoping/">세일</a></li>

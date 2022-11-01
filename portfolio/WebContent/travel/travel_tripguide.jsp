@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@page import="vo.Travellocal"%> 
-    
-   <% ArrayList<Travellocal> travellocal=(ArrayList<Travellocal>)request.getAttribute("travellocal");%>
-   <%System.out.println(travellocal+"==222"); %>
+<%@page import="vo.Hotel_main_DTO"%> 
+   <% ArrayList<Travellocal> travellocal=(ArrayList<Travellocal>)request.getAttribute("travellocal");
+   	  ArrayList<Hotel_main_DTO> hotel=(ArrayList<Hotel_main_DTO>)request.getAttribute("hotel");
+ 	System.out.println(hotel.get(0).getHot_main_img());
+   %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -260,6 +262,8 @@
 					<li>전주</li>
 					<li>여수</li>
 					<li>인천</li>
+					<li>대구</li>
+					<li>속초</li>
 				</ul>
 			</div>
 			<div class="modaltitle">
@@ -323,18 +327,18 @@
 		<div class="recommand">추천 호텔</div>
 		<div class="localbox">
 			<div class="localimg">
-				<img src="https://ak-d.tripcdn.com/images/01013120003uuicgh8950.png" width="280px" height="200px">
-				<div>강릉</div>
+				<img src="../img/hotel/hotel_main/<%=hotel.get(0).getHot_main_img()%>" width="280px" height="200px">
+				<div><%=hotel.get(0).getHot_name() %></div>
 			</div>
 			<div class="localimg">
-				<img src="https://ak-d.tripcdn.com/images/01013120003uuicgh8950.png" width="280px" height="200px">
-				<div>서울</div>
+				<img src="../img/hotel/hotel_main/<%=hotel.get(1).getHot_main_img()%>" width="280px" height="200px">
+				<div><%=hotel.get(1).getHot_name() %></div>
 			</div>
-			<div class="localimg"><img src="https://ak-d.tripcdn.com/images/01013120003uuicgh8950.png" width="280px" height="200px">
-				<div>부산</div>
+			<div class="localimg"><img src="../img/hotel/hotel_main/<%=hotel.get(2).getHot_main_img()%>" width="280px" height="200px">
+				<div><%=hotel.get(2).getHot_name() %></div>
 			</div>
-			<div class="localimg"><img src="https://ak-d.tripcdn.com/images/01013120003uuicgh8950.png" width="280px" height="200px">
-				<div>제주</div>
+			<div class="localimg"><img src="../img/hotel/hotel_main/<%=hotel.get(3).getHot_main_img()%>" width="280px" height="200px">
+				<div><%=hotel.get(3).getHot_name() %></div>
 			</div>
 		</div>
 	</article>

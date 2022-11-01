@@ -372,12 +372,6 @@
 			margin-top: 10px;
 			border-radius: 3px;
 		}
-		.ticket div{
-			margin: 3px auto 0 auto;
-			width: 80px;
-			height: 25px;	
-			padding: 5px;
-		}
 		.ticket div input{
 			float: center;
 			width: 80px; height: 25px;
@@ -394,11 +388,19 @@
 		.people{
 			width: 150px;
 			height:35px;
+			margin: 3px auto 0 auto;
+			width: 80px;
+			height: 25px;	
+			padding: 5px;
 		}
 		.money{
 			margin-top: -5px;
 			width:150px;
 			height:35px;
+			margin: 3px auto 0 auto;
+			width: 80px;
+			height: 25px;	
+			padding: 5px;
 		}
 		.mainimage img{
 				border-radius: 5px;
@@ -413,6 +415,29 @@
 		.star {
 		filter: invert(84%) sepia(0%) saturate(1407%) hue-rotate(147deg) brightness(97%) contrast(76%);
 		Loss: 0.7. This is a perfect result.
+	}
+	.like {
+		float: right;
+		width: 65px;
+		height: 56px;
+		border-width: 1px;
+		text-align: center;
+		padding-top: 7px;
+		font-size: 25pt;
+		position: relative;
+		top: -325px;		
+		overflow: hidden;
+	}
+	#like_off {
+		width: 65px;
+		height: 65px;
+		position: relative;
+	}
+	#like_on {
+		width: 65px;
+		height: 65px;
+		position: relative;
+		bottom: 63px;
 	}
 
 </style>
@@ -436,6 +461,7 @@ function reservation(){
 		location.href="../travel/travelAtt_reservation.jsp?adult=<%=travelatt.get(0).getAtt_adult_ticket()%>&student=<%=travelatt.get(0).getAtt_student_ticket()%>&att=<%=travelatt.get(0).getAtt_name()%>&attnum=<%=travelatt.get(0).getAtt_num()%>";
 	}
 }
+
 
 </script>
 
@@ -473,7 +499,7 @@ function reservation(){
 						<div class="people">학생</div>
 						<div class="money">₩<fmt:formatNumber value="<%=travelatt.get(0).getAtt_student_ticket()%>" groupingUsed="true" /></div>
 					</article>
-					<div><input type="button" value="예약" onclick="reservation()"></div>
+					<div style="width:80px;margin:0 auto;"><input type="button" value="예약" onclick="reservation()"></div>
 				</div>
 				<%}else if(travelatt.get(0).getAtt_adult_ticket() != 0 || travelatt.get(0).getAtt_student_ticket() != 0){ %>
 				<div class="ticket">
@@ -482,10 +508,14 @@ function reservation(){
 					<div class="people">성인</div>
 						<div class="money">₩<fmt:formatNumber value="<%=travelatt.get(0).getAtt_adult_ticket()%>" groupingUsed="true" /></div>
 					</article>
-					<div><input type="button" value="예약" onclick="reservation()"></div>
+					<div style="width:80px;margin:0 auto;"><input type="button" value="예약" onclick="reservation()"></div>
 				<%}else if (travelatt.get(0).getAtt_adult_ticket() == 0 ){ %>
 					<div class="ticket">
 					<header>입장권 예약</header>
+					<div class="like">
+						<div id="like_off" onclick="like_off()"><img src="../img/dutyfree/heart.png" width="30px" height="30px"></div>
+						<div id="like_on" onclick="like_on()"><img src="../img/dutyfree/heart3.png" width="35px" height="35px"></div>
+					</div> 
 					<section>이 관광지는 입장권이 필요하지 않습니다.</section>	
 				</div>
 				<%} %>
@@ -510,9 +540,11 @@ function reservation(){
 							<%=travelattre.get(i).getMb_id() %>
 						</div>
 						<div style="width:110px;height:2px;margin-bottom:30px;margin-left:750px;padding-right: 10px;">
+						<%if(travelattre.get(i).getMb_id() == mb_id){ %>
 							<a href="Attraction_Review_updatepage.travel?renum=<%=travelattre.get(i).getAtt_reNum()%>&att=<%=travelatt.get(0).getAtt_name()%>&recon=<%=travelattre.get(i).getAtt_reContent()%>">수정</a>
 								&nbsp;|&nbsp;
 							<a href="Attraction_Review_delete.travel?renum=<%=travelattre.get(i).getAtt_reNum()%>&att=<%=travelatt.get(0).getAtt_name()%>">삭제</a>
+						<%} %>
 						</div>
 						<div style="width:300px;height:20px;float:right;font-size:10pt;text-align:right;margin:3px 10px 0 0;">
 							<%=travelattre.get(i).getAtt_reDate()%>&nbsp;작성
@@ -580,6 +612,19 @@ function reservation(){
 			</div>
 		</div>
 <script>
+	$(document).ready(function() {
+		$('#like_on').hide();
+		$('#like_off').on('click', function() {
+			$('#like_on').show();
+			<%-- location.href="like_on.shop?itemCode=<%= itemCode%>&mb_id=<%= mb_id%>"; --%>
+		});
+		$('#like_on').on('click', function() {
+			$('#like_on').hide();
+		
+		});
+	});
+</script>
+<script>
 window. onload=function(){
 
 	$('.div').hide();
@@ -601,20 +646,20 @@ $(function() {
 			</div>
 			<div id="attraction" class="div attraction">
 				<a href="../travel/Attraction.travel?att=<%=travelattimg.get(0).getAtt_name() %>">
-					<section class="rightimg"><img src="../img/travel<%=travelattimg.get(0).getTravel_img1() %>"></section>
+					<section class="rightimg"><img src="../img/travel<%=travelattimg.get(0).getAtt_img1() %>"></section>
 					<article class="righttext"><%=travelattimg.get(0).getAtt_name() %></article>
 				</a>
 				<a href="../travel/Attraction.travel?att=<%=travelattimg.get(1).getAtt_name() %>">
-					<section class="rightimg"><img src="../img/travel<%=travelattimg.get(1).getTravel_img1() %>"></section>
+					<section class="rightimg"><img src="../img/travel<%=travelattimg.get(1).getAtt_img1() %>"></section>
 					<article class="righttext"><%=travelattimg.get(1).getAtt_name() %></article>
 				</a>
 				
 				<a href="../travel/Attraction.travel?att=<%=travelattimg.get(2).getAtt_name() %>">
-					<section class="rightimg"><img src="../img/travel<%=travelattimg.get(2).getTravel_img1() %>"></section>
+					<section class="rightimg"><img src="../img/travel<%=travelattimg.get(2).getAtt_img1() %>"></section>
 					<article class="righttext"><%=travelattimg.get(2).getAtt_name() %></article>
 				</a>
 				<a href="../travel/Attraction.travel?att=<%=travelattimg.get(3).getAtt_name() %>">
-					<section class="rightimg"><img src="../img/travel<%=travelattimg.get(3).getTravel_img1() %>"></section>
+					<section class="rightimg"><img src="../img/travel<%=travelattimg.get(3).getAtt_img1() %>"></section>
 					<article class="righttext"><%=travelattimg.get(3).getAtt_name() %></article>
 				</a>
 			</div>

@@ -30,7 +30,39 @@ public class ItemControllerServlet extends HttpServlet{
 				inter = ItemOrderImpl.instance();
 				viewName = inter.showData(request, response);
 				request.getRequestDispatcher(viewName).forward(request, response);
-			} /*else {
+			} else if(command.equals("ticket")) {
+				inter = ItemOrder_ticketImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("buyList")) {
+				inter = ItemBuyListImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("orderList")) {
+				inter = ItemOrderListImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("cart")) {
+				inter = ItemCartImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("cartList")) {
+				inter = ItemCartListImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("itemMain")) {
+				inter = ItemMainImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("itemWish")) {
+				inter = ItemwishImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			} else if(command.equals("itemWish_del")) {
+				inter = Itemwish_delImpl.instance();
+				viewName = inter.showData(request, response);
+				request.getRequestDispatcher(viewName).forward(request, response);
+			}/*else {
 				viewName = "error.html";
 				response.sendRedirect(viewName);
 			}*/

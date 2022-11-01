@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import mybatis.SqlMapConfig;
 import vo.FlightReserveBean;
 import vo.Travelatt;
+import vo.Travelattandimg;
 
 
 
@@ -24,27 +25,27 @@ public class FlightEndModel {
 	public static FlightEndModel instance(){
 		return model;
 	}
-	// 서비스에 해당
+	// �꽌鍮꾩뒪�뿉 �빐�떦
 	private SqlSessionFactory factory = SqlMapConfig.getSqlSession();
 	
-	public List<Travelatt> flightend_att(){
-		List<Travelatt> list = null;
+	public List<Travelattandimg> flightend_att(){
+		List<Travelattandimg> list = null;
 		SqlSession sqlSession = factory.openSession();
 		list = sqlSession.selectList("flightend_att");
-		// 나머지(insert, update, delete)는 수행만 하기때문에 커밋이 추가되야함 , sqlSession.commit(); 		
-		// DB닫음
 		sqlSession.close();		
 		return list;
 	}
 	
 	public void flightReserveInsert(ArrayList<FlightReserveBean> flightReserveBean){
-		//DB연결
-		
+		//DB�뿰寃�
+		for(int i =0; i<flightReserveBean.size(); i++) {
+			System.out.println(flightReserveBean.get(i).getSeatNum());
+			System.out.println(flightReserveBean.get(i).getFlight_Rfirstname());
+		}
 		SqlSession sqlSession = factory.openSession();
 		sqlSession.insert("reserve", flightReserveBean);
 		sqlSession.commit(); 	
 		sqlSession.close();		
-		System.out.println("예약 모델 끝");
 	}
 }
 

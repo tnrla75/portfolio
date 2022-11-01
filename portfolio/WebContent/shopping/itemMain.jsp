@@ -1,24 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="vo.Item" %>    
+<%
+	ArrayList<Item> list = (ArrayList<Item>)request.getAttribute("itemMain"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css" />
 <link rel="stylesheet" type="text/css" href="../css/header_footer.css">
-<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
 <link type="text/css" rel="stylesheet" href="../css/style2.css" />
-<script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <link rel="stylesheet" href="bang.css">
-<style type="text/css"></style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="bang.js"></script>
-<script type="text/javascript"></script>
 <title>인터넷 면세점</title>
-  
 <style type="text/css">
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
 	a {
@@ -71,9 +70,8 @@
 		height: 70px;
 		filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(189deg) brightness(102%) contrast(102%);
 		position: relative;
-		left: 310px;
-		top: 20px;
-		
+		left: 280px;
+		top: 20px;	
 	}
 	#hamburger-menu {
 	    position: relative;
@@ -135,11 +133,9 @@
 	    position: relative;
 	    letter-spacing: 1px;
 	}
-	
 	.accordion-content {
 	    display: none;
 	}
-	
 	.accordion-toggle a:before, .accordion-toggle a:after {
 	    content: '';
 	    display: block;
@@ -405,16 +401,127 @@
 		background: #fff;
 		width: 40px;
 	}
-	  section {
+	section {
 		margin-top: 850px;
-		height: 400px;
+		height: 2000px;
+		margin-bottom: 40px;
 	} 
-	 #item_wr {
-		border-style: solid;
+	#item_cate {
 		width: 1200px;
-		height: 300px;
-		margin: 0 auto;
+		height: 250px;
+		margin: 20px auto;
 	} 
+	.category {
+		float: left;
+		width: 180px;
+		height: 180px;
+		margin-top: 25px;
+		margin-left: 30px;
+		overflow: hidden;
+		border: 1px solid #A6A6A6;
+		border-radius: 150px;
+	}
+	.category:first-of-type {
+		margin-left: 80px;
+	}
+	#wrap {
+		width: 100%;
+		height: 600px;
+		margin-top: 70px;
+		padding-top: 10px;
+		background-color: #F6F6F6;
+	}
+	#item_wr {
+		width: 1200px;
+		height: 500px;
+		margin: 30px auto;
+	} 
+	#item_wr h2 {
+		margin-top: 15px;
+	}
+	#item1 {
+		float: left;
+		width: 285px;
+		height: 445px;
+		/* border: 1px solid #EAEAEA; */
+		/* box-shadow: 7px 7px 7px #BDBDBD; */
+		background-color: white;
+		padding-top: 20px;
+	}
+	#item1:nth-of-type(2), #item1:nth-of-type(3) {
+		margin-left: 15px;
+	}
+	#item1:last-of-type {
+		float: right;
+	}
+	#item1 img {
+		padding: 20px;
+		margin-bottom: 40px;
+	}
+	.itemDetail {
+		margin-left: 10px;
+	}
+	.itemDetail p {
+		margin-top: 0px;
+		margin-left: 24px;
+		position: relative;
+		bottom: 35px;
+	}
+	.itemDetail p:first-of-type {
+		font-weight: bold;
+		font-size: 12pt;
+	}
+	.itemDetail p:nth-of-type(2) {
+		width: 240px;
+		font-weight: bold;
+		font-size: 10pt;
+		color: #7474746;
+		overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+	}
+	.itemDetail b:first-of-type {
+		font-weight: bold;
+		font-size: 20pt;
+		color: #CC3D3D;
+		line-height: 10px;
+	}
+	.itemDetail b:last-of-type {
+		font-weight: normal;
+		font-size: 12pt;
+		margin-left: 10px; 
+		color: #8C8C8C;
+	}
+	#item2 {
+		width: 1200px;
+		height: 400px;
+		margin: 70px auto;
+	}
+	#item2 div:first-of-type img:last-of-type{
+		margin-left: 100px;
+		padding-bottom: 70px;
+	}
+	#brand {
+		margin-top: 30px;
+	}
+	#brand div:first-of-type {
+		margin-top: 150px;
+		margin-left: 90px;
+		letter-spacing: 10px;
+		float: left;
+		font-weight: bold;
+		line-height: 50pt;
+		font-size: 30pt;
+		text-decoration: underline;
+		text-decoration-color: #DEB84F;
+		text-decoration-thickness: 5px;
+		text-underline-offset : 5px;
+	}
+	#brand div:last-of-type {
+		float: right;
+		margin-right: 20px;
+		
+	}
 </style>
 </head>
 <% 
@@ -423,9 +530,8 @@
 %>
 <script type="text/javascript">
   	//>>>>>>메인 슬라이드
-	$(document).ready(function() {
+	$(document).ready(function() {		
 		slide();
-	  
 	 	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
 			$(this).toggleClass('open');
 		});
@@ -577,12 +683,10 @@
 					<ul class="menu-submenu accordion-content">
 						<li><a href="itemList.shop?category=스킨케어">스킨케어</a></li>
 						<li><a href="itemList.shop?category=메이크업">메이크업</a></li>
-						<li><a href="itemList.shop?category=기초케어">기초케어</a></li>
-						<li><a href="itemList.shop?category=기초케어">향수/헤어/바디</a></li>
+						<li><a href="itemList.shop?category=향수/헤어/바디">향수/헤어/바디</a></li>
 						<li><a href="itemList.shop?category=기초케어">가방/지갑</a></li>
 						<li><a href="itemList.shop?category=기초케어">시계/쥬얼리</a></li>
 						<li><a href="itemList.shop?category=기초케어">패션/잡화</a></li>
-						<li><a href="itemList.shop?category=기초케어">전자/리빙</a></li>
 					</ul>
 					<!-- menu-submenu accordon-content-->
 					<li id="nav2" class="toggle accordion-toggle"> 
@@ -674,13 +778,57 @@
 	  		<a href="javascript:doDisplay1();" ><img src="../img/dutyfree/menu.png" width="35px" height="35px;"></a>
 		</div>
 		<section>
-			<div id="item_wr">
-				<div></div>
+			<div id="item_cate">
+				<div class="category"><a href="itemList.shop?category=스킨케어"><img src="../img/dutyfree/cate1.jpg" width="180px" height="190px;" style="position: relative; bottom: 10px;"></a></div>
+				<div class="category"><a href="itemList.shop?category=메이크업"><img src="../img/dutyfree/cate2.jpg" width="180px" height="210px;" style="position: relative; bottom: 13px;"></a></div>
+				<div class="category"><a href="itemList.shop?category=향수/헤어/바디"><img src="../img/dutyfree/cate3.jpg" width="180px" height="210px;"></a></div>
+				<div class="category"><img src="../img/dutyfree/cate4.jpg" width="180px" height="180px"></div>
+				<div class="category"><img src="../img/dutyfree/cate5.jpg" width="180px" height="230px;" style="position: relative; bottom: 15px;"></div>
+			</div>
+			<div id="wrap">
+				<div id="item_wr">
+					<h2>NEW NOW</h2>
+					<% for (int i=0; i<list.size(); i++) { 
+						 double discount = (double)list.get(i).getDiscount()/(double)100; 
+						 double discountDollar = list.get(i).getItemDollar()*(1-discount);
+					%>
+					<div id="item1">
+						<a href="itemDetail.shop?itemCode=<%= list.get(i).getItemCode()%>" class="itemDetail">
+							<img src="<%= list.get(i).getItemImg() %>" width="220px" height="230px;"></br>
+							<p><%= list.get(i).getBrandName() %></p>
+							<p><%= list.get(i).getItemName() %></p>
+							<p>
+								<span style="color: #8C8C8C; text-decoration: line-through;">$<%= list.get(i).getItemDollar() %></span>
+								<span style="font-weight: bold;"><%= list.get(i).getDiscount()+"%" %></span>
+							</p>
+							<p>
+								<b>$<fmt:formatNumber value="<%= discountDollar %>" pattern='0.0' /></b>
+								<b>(<fmt:formatNumber value="<%= list.get(i).getDiscountWon() %>"  groupingUsed="true"/>원)</b>
+							</p>
+						</a>
+					</div>	 
+						<% } %>		
+				</div>
+			</div>
+			<div id="item2">
+				<div>
+					<img src="../img/dutyfree/item1.jpg" width="470px" height="526px;">
+					<img src="../img/dutyfree/item3.png" width="500px" height="366px;">
+				</div>
+				<div id="brand">
+					<div>
+						<span> ABOUT </span></br>
+						<span> DIPTYQUE </span>
+					</div>
+					<div>
+						<img src="../img/dutyfree/item4.jpg" width="690px" height="370px;">
+					</div>
+				</div>				
 			</div>
 		</section>
+		<jsp:include page="../overlap/footer.jsp"/>
 	  </form>
 	  
-	  	 <jsp:include page="../overlap/footer.jsp" /> 
 </body>
 </html>
 

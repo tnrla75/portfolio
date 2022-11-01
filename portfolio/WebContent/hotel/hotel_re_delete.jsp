@@ -8,9 +8,11 @@
 <jsp:useBean id="members" class="dao.Hotel_DAO"/>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String hot_re_num=request.getParameter("hot_re_num");
-	String hot_main_num=request.getParameter("hot_main_num");
-	members.delete_01(hot_re_num);
 	
+	String hot_re_num=request.getParameter("hot_re_num");
+	String hot_main_num= request.getParameter("hot_main_num");
+	
+	members.delete_01(hot_re_num);
+	System.out.println(hot_main_num+" 삭제 ");
 	response.sendRedirect("../hotel/hotelRoomForm.ho?hot_main_num="+hot_main_num);
 %>

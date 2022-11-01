@@ -2,7 +2,6 @@ package vo;
 
 import java.sql.Date;
 
-
 public class Hotel_main_DTO {
 	private int hot_main_num;
 	private int hot_room_num;
@@ -11,8 +10,8 @@ public class Hotel_main_DTO {
 	private String hot_main_img;
 	private String hot_nation;
 	private String hot_name;
+	private int hot_room_people;
 	private String hot_address;
-	
 	
 	private int hot_star;
 	private String hot_wifi;
@@ -23,15 +22,19 @@ public class Hotel_main_DTO {
 	private String hot_restaurant;	
 	private String hot_bar;
 	private String hot_cafe;
-	private Date hot_checkin_date;
-	private Date hot_checkout_date;
+	
 	private String hot_checkin_time;
 	private String hot_checkout_time;
 	
+	private int startrow;
 	
+	private String hot_latitude;
+	private String hot_longitude;
 	
-	private int hot_latitude;
-	private int hot_longitude;
+	private Date hot_checkin_date;
+	private Date hot_checkout_date;
+	private int hot_room_maxpeople;
+	
 	
 	
 	
@@ -70,6 +73,13 @@ public class Hotel_main_DTO {
 	}
 	public void setHot_name(String hot_name) {
 		this.hot_name = hot_name;
+	}
+	
+	public int getHot_room_people() {
+		return hot_room_people;
+	}
+	public void setHot_room_people(int hot_room_people) {
+		this.hot_room_people = hot_room_people;
 	}
 	public String getHot_address() {
 		return hot_address;
@@ -138,18 +148,7 @@ public class Hotel_main_DTO {
 	public void setHot_cafe(String hot_cafe) {
 		this.hot_cafe = hot_cafe;
 	}
-	public Date getHot_checkin_date() {
-		return hot_checkin_date;
-	}
-	public void setHot_checkin_date(Date hot_checkin_date) {
-		this.hot_checkin_date = hot_checkin_date;
-	}
-	public Date getHot_checkout_date() {
-		return hot_checkout_date;
-	}
-	public void setHot_checkout_date(Date hot_checkout_date) {
-		this.hot_checkout_date = hot_checkout_date;
-	}
+	
 	public String getHot_checkin_time() {
 		return hot_checkin_time;
 	}
@@ -162,17 +161,42 @@ public class Hotel_main_DTO {
 	public void setHot_checkout_time(String hot_checkout_time) {
 		this.hot_checkout_time = hot_checkout_time;
 	}
-	public int getHot_latitude() {
+	
+	public String getHot_latitude() {
 		return hot_latitude;
 	}
-	public void setHot_latitude(int hot_latitude) {
+	public void setHot_latitude(String hot_latitude) {
 		this.hot_latitude = hot_latitude;
 	}
-	public int getHot_longitude() {
+	public String getHot_longitude() {
 		return hot_longitude;
 	}
-	public void setHot_longitude(int hot_longitude) {
+	public void setHot_longitude(String hot_longitude) {
 		this.hot_longitude = hot_longitude;
+	}
+	public int getStartrow() {
+		return startrow;
+	}
+	public void setStartrow(int startrow) {
+		this.startrow = startrow;
+	}
+	public Date getHot_checkin_date() {
+		return hot_checkin_date;
+	}
+	public void setHot_checkin_date(Date hot_checkin_date) {
+		this.hot_checkin_date = hot_checkin_date;
+	}
+	public Date getHot_checkout_date() {
+		return hot_checkout_date;
+	}
+	public void setHot_checkout_date(Date hot_checkout_date) {
+		this.hot_checkout_date = hot_checkout_date;
+	}
+	public int getHot_room_maxpeople() {
+		return hot_room_maxpeople;
+	}
+	public void setHot_room_maxpeople(int hot_room_maxpeople) {
+		this.hot_room_maxpeople = hot_room_maxpeople;
 	}
 	
 	

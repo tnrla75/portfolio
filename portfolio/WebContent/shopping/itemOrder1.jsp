@@ -3,11 +3,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="vo.Item" %>
-
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="vo.FlightReserveListBean" %>
 
 <%
 	Item item = (Item)request.getAttribute("item");
 	Member_info member = (Member_info)request.getAttribute("member");
+	ArrayList<FlightReserveListBean> airTicket = (ArrayList<FlightReserveListBean>)request.getAttribute("airTicket"); 
+	ArrayList<String> ticketList = new ArrayList<String>();
+	ArrayList<String> ticket = new ArrayList<>();
+	
+	for(int i=0; i<airTicket.size(); i++) {
+		ticketList.add(airTicket.get(i).getFlight_Ticket_Num());
+	}
+	for(String ticketNum : ticketList){
+        if(!ticket.contains(ticketNum))
+        	ticket.add(ticketNum);
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -16,16 +31,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css" />
 <link rel="stylesheet" type="text/css" href="../css/header_footer.css">
-<link type="text/css" rel="stylesheet" href="../css/responsive-tabs.css" />
 <link type="text/css" rel="stylesheet" href="../css/style2.css" />
 <script src="http://use.fontawesome.com/releases/v6.1.2/js/all.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<link rel="stylesheet" href="bang.css">
-<style type="text/css"></style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="bang.js"></script>
-<script type="text/javascript"></script>
 <title>상품 구매</title>
 <style>
 	header h3 {
@@ -124,6 +133,9 @@
 	.order_info .td2 {
 		width: 300px;
 	}
+	.order_info .td2 select {
+		width: 150px;
+	}
 	.eng-name {
 		width: 115px;
 		height: 35px;
@@ -139,6 +151,10 @@
 	.passDate {
 		width: 280px;
 		height: 35px;
+	}
+	.mb_phone {
+		height: 35px;
+		width: 280px;
 	}
 	#order_info:last-of-type {
 		margin-bottom: 80px;
@@ -269,22 +285,60 @@
 	}
 	#itemDetail div:last-of-type {
 		margin-top: 58px;
+		float: left;
+		width: 270px;
 	} 
 	#itemDetail div p:first-of-type {
 		font-size: 10pt;
 	}
-</style>
-<script type="text/javascript">
-	$(document).ready(function() {
+	#itemDetail div p:nth-of-type(2) {
 		
-		$(window).scroll(function(){    $("#result").css("margin-top",Math.max(-250,0-$(this).scrollTop()));});
+	}
+</style>
+<script>
+	$(document).ready(function() {
+		$(window).scroll(function(){    
+			$("#result").css("margin-top",Math.max(-250,0-$(this).scrollTop()));});
+		}
+		
+		$('#ticket').on('change',function() {
+			var departure = document.getElementById('departure');
+			if (this.value != "항공편 선택") {
+				 <%-- for (var i=0; i<<%=ticket.size()%>; i++ ) {
+					if (<%=airTicket.get(i).getFlight_Ticket_Num()%> == this.value) {
+						departure.innnerText = <%= airTicket.get(i).getFlight_departure()%>;
+						alert("a")
+					}
+				} --%>
+				<%-- <% for (int i=0; i<ticket.size(); i++) { %>
+					if (<%=airTicket.get(i).getFlight_Ticket_Num()%> == this.value ) {
+						departure.innnerText = <%= airTicket.get(i).getFlight_departure()%>;
+					}
+				%> --%>
+			}
+        });
+		
 	});
+</script>
+<script>
+	
 
-
+	function check() {
+		var check = document.getElementById("agree");
+		if (check.checked == false) {
+			alert("주문 내역 확인에 동의해 주세요.");
+			return false
+		}
+	}
+	
+	/* function select() {
+		var ticket = document.getElementById('ticket').innerText;
+		alert(ticket);
+	} */
 </script>
 </head>
 <body>
-	<form action="itemBuy.dutyfree?command=order" method="post">
+	<form action="itemBuy.dutyfree?command=order" method="post" onsubmit="return check()">
 		<%
 			String mb_id = (String)session.getAttribute("mb_id");
 			String itemCode = request.getParameter("itemCode"); 
@@ -296,16 +350,7 @@
 			session.setAttribute("count", item_count);
 			
 			int count = Integer.parseInt(item_count);
-			
-			String num="";
-			
-			for (int i=0; i<9; i++) {
-				num += (int)(Math.random()*10)+1;
 				
-			}
-			session.setAttribute("order_no", num);
-			
-			
 			double discount = (double)item.getDiscount()/(double)100;
 			
 			if(mb_id == null){
@@ -333,27 +378,27 @@
 					<div class="price">
 						<span>총 주문 금액 합계</span>
 						<div>
-							<p>$<%= item.getItemDollar() %></p>
-							<p><fmt:formatNumber value="<%= item.getItemWon() %>" groupingUsed="true" />원</p>
+							<p>$<%= count*item.getItemDollar() %></p>
+							<p><fmt:formatNumber value="<%= count*item.getItemWon() %>" groupingUsed="true" />원</p>
 						</div>
 					</div>
 					<div class="price">
 						<span>총 할인 금액</span>
 						<div>	
-							<p>$<fmt:formatNumber value='<%= item.getItemDollar()*discount %>' pattern='.0' /></p>
-							<p><fmt:formatNumber value="<%= item.getItemWon()-item.getDiscountWon() %>" groupingUsed="true" />원</p>
+							<p>$<fmt:formatNumber value='<%= count*item.getItemDollar()*discount %>' pattern='.0' /></p>
+							<p><fmt:formatNumber value="<%= count*item.getItemWon()-count*item.getDiscountWon() %>" groupingUsed="true" />원</p>
 						</div>
 					</div>
 					<div class="finish">
 						<span>최종 결제 금액</span>
 						<div>
-							<p>$<fmt:formatNumber value='<%= item.getItemDollar()*(1-discount) %>' pattern='.0' /></p>
-							<p><fmt:formatNumber value="<%= item.getDiscountWon() %>" groupingUsed="true" />원</p>
+							<p>$<fmt:formatNumber value='<%= count*item.getItemDollar()*(1-discount) %>' pattern='.0' /></p>
+							<p><fmt:formatNumber value="<%=count* item.getDiscountWon() %>" groupingUsed="true" />원</p>
 						</div>
 					</div>
 					<input type="submit" value="결제하기">
 					<div class="check">
-						<input type="checkbox">주문내역 확인 동의</br>
+						<input type="checkbox" id="agree">주문내역 확인 동의</br>
 						<span> 주문할 상품의 정보를 확인하였으며,</span></br>
 						<span> 해당 주문에 대한 구매에 동의 합니다.</span>
 					</div>						
@@ -370,44 +415,46 @@
 					<td class="td2"><%= member.getMb_birth() %></td>
 				</tr>
 				<tr class="tableLine">
-					<td class="td1">국적</td>
-					<td class="td2"></td>
-					<td class="td1">여권번호</td>
-					<td class="td2"><input type="text" name="mb_passnum" class="passnum" value="<%= member.getMb_passnum()%>"></td>
-				</tr>
-				<tr class="tableLine">
 					<td class="td1">여권이름(영문)</td>
 					<td class="td2">
 						<input type="text" name="mb_lastname" placeholder="Last name(성)" class="eng-name" value="<%= member.getMb_lastname()%>">
 						<input type="text" name="mb_firstname" placeholder="First name(이름)" class="eng-name" value="<%= member.getMb_firstname()%>">
 					</td>
-					<td class="td1">여권만료일</td>
-					<td class="td2"><input type="date" class="passDate"></td>
+					<td class="td1">여권번호</td>
+					<td class="td2"><input type="text" name="mb_passnum" class="passnum" value="<%= member.getMb_passnum()%>"></td>
 				</tr>
+				
 			</table>
 			<div class="title">
 				<h3>출국 정보</h3>
 			</div>
 			<table align="center" cellpadding="10px" class="order_info">
 				<tr class="tableLine">
-					<td class="td1">출발지</td>
+					<td class="td1">항공편</td>
 					<td class="td2">
-						<select>
+						<select id="ticket" onchange="select()">
+							<option value="항공편 선택">항공편 선택</option>
+							<% for (int i=0; i<ticket.size(); i++) { %>
+								<option value="<%= ticket.get(i) %>"><%= ticket.get(i) %></option>
+							<% } %>
+						</select>
+					</td>
+					<td class="td1">연락처</td>
+					<td class="td2"><input type="text" name="mb_phone" class="mb_phone" value="<%= member.getMb_phonenum()%>"></td>
+				</tr>
+				<tr class="tableLine">
+					<td class="td1">출발지</td>
+					<td class="td2" id="departure">
+						<!-- <select>
 							<option>출발장소 선택</option>
 							<option>인천국제공항</option>
 							<option>김포국제공항</option>
 							<option>김해(부산)국제공항</option>
 							<option>제주국제공항</option>
-						</select>
+						</select> -->
 					</td>
 					<td class="td1">출국일시</td>
-					<td class="td2"></td>
-				</tr>
-				<tr class="tableLine">
-					<td class="td1">항공편</td>
-					<td class="td2"></td>
-					<td class="td1">연락처</td>
-					<td class="td2"><input type="text" name="mb_passnum" class="passnum"></td>
+					<td class="td2" id="departure_day"></td>
 				</tr>
 			</table>
 			<div class="title">
@@ -417,7 +464,7 @@
 				<tr class="tableLine" align="center">
 					<td width="530px">상품정보</td>
 					<td width="40px">수량</td>
-					<td width="70px">가격</td>
+					<td width="80px">가격</td>
 					<td width="100px">총 상품 금액</td>
 					<td width="80px">할인 금액</td>
 				</tr>
@@ -441,7 +488,7 @@
 					</td>
 					<td>
 						<p>$<fmt:formatNumber value='<%= count*item.getItemDollar()*discount %>' pattern='.0' /></p>
-						<p><fmt:formatNumber value="<%= count*item.getItemWon()-item.getDiscountWon() %>" groupingUsed="true" />원</p>	
+						<p><fmt:formatNumber value="<%= count*item.getItemWon()-count*item.getDiscountWon() %>" groupingUsed="true" />원</p>	
 					</td>
 				</tr>
 			</table>

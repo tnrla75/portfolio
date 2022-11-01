@@ -95,7 +95,7 @@
 </head>
 <script>
 	function gomain(){
-		location.href="../overlap/indexpage.jsp";
+		location.href="../index.jsp";
 	}
 </script>
 <body>

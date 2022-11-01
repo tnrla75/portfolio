@@ -24,22 +24,17 @@ public class Hotel_MainAction implements Action {
 			int limit=4;
 		 	
 		 	
-		 	Hotel_MainService hotel_mainService = new Hotel_MainService();	
+			Hotel_MainService hotel_MainService = new Hotel_MainService();
 			ArrayList<Hotel_main_DTO> mainList=new ArrayList<Hotel_main_DTO>();
-			TreeMap<Integer, Hotel_room_DTO> main_roomList = hotel_mainService.getArticle();	
+			TreeMap<Integer, Hotel_room_DTO> main_roomList = hotel_MainService.main_roomList();	
 			
-			
-//			HttpSession session=request.getSession();
+//			HttpSession session=request.getSession();			
 			
 			if(request.getParameter("page")!=null){
 				page=Integer.parseInt(request.getParameter("page"));
 			}
 			
-			Hotel_MainService hotel_MainService = new Hotel_MainService();
-			
-			
 			mainList=hotel_MainService.mainList(page,limit);
-			
 			
 			int listCount=hotel_MainService.getListCount();
 	   		int maxPage=(int)((double)listCount/limit+0.95); 
@@ -54,6 +49,10 @@ public class Hotel_MainAction implements Action {
 			pageInfo.setMaxPage(maxPage);
 			pageInfo.setPage(page);
 			pageInfo.setStartPage(startPage);	
+
+			System.out.println(pageInfo+" 엑션 pageInfo");
+			System.out.println(main_roomList+" 엑션 main_roomList");
+			System.out.println(mainList+" 엑션 mainList");
 			
 			request.setAttribute("pageInfo", pageInfo);
 		

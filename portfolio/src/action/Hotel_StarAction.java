@@ -26,7 +26,7 @@ package action;
 			 	
 			 	Hotel_MainService hotel_mainService = new Hotel_MainService();	
 				
-				TreeMap<Integer, Hotel_room_DTO> main_roomList = hotel_mainService.getArticle();	
+				TreeMap<Integer, Hotel_room_DTO> main_roomList =hotel_mainService.main_roomList();	
 				ArrayList<Hotel_main_DTO> ajaxList=new ArrayList<Hotel_main_DTO>();
 				
 //				HttpSession session=request.getSession();
@@ -35,16 +35,14 @@ package action;
 					page=Integer.parseInt(request.getParameter("page"));
 				}
 				
-				Hotel_MainService hotel_MainService = new Hotel_MainService();
-				
-				
 			
-				ajaxList=hotel_MainService.starList(page,limit,hot_star);
+				ajaxList=hotel_mainService.starList(page,limit,hot_star);
 				
 				
-				System.out.println(ajaxList+" : 엑션 startList");
+				System.out.println(ajaxList+" : 스타엑션 startList");
+				System.out.println(main_roomList+" : 스타엑션 main_roomList");
 				
-				int listCount=hotel_MainService.getListCount();
+				int listCount=hotel_mainService.getListCount();
 		   		int maxPage=(int)((double)listCount/limit+0.95); 
 		   		int startPage = (((int) ((double)page / limit + 0.9)) - 1) * limit + 1;  // 10媛좊뜲 �냼�닽�젏�씠 �솢 �뱾�뼱媛�吏� �씠�빐媛� �븞媛�..
 		   	    int endPage = startPage+limit-1;

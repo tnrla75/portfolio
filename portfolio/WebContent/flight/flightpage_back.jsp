@@ -325,9 +325,10 @@
 			background-color:white;
 			border-radius: 10px;
 			box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+			margin-bottom: 90px;
 		}
 		#flightdivmain{
-			width: 1200px; height: 1500px; margin: 0 auto;
+			width: 1200px; height: 1200px; margin: 0 auto;
 			
 		}
 		.flightlistdiv{
@@ -638,7 +639,7 @@
   bottom: 0;
   border-radius: 5px;
   height: 5px;
-  background-color: #c6aee7;
+  background-color: #FFCDCD;
 }
 .slider1 > .range1, .slider2 > .range2 {
 	/* 가운데 색깔 바 */
@@ -650,14 +651,14 @@
   top: 0;
   bottom: 0;
   border-radius: 5px;
-  background-color: #6200ee;
+  background-color: #CC3D3D;
 }
 .slider1 > .thumb1, .slider2 > .thumb2 {
   position: absolute;
   z-index: 3;
   width: 15px;
   height: 15px;
-  background-color: #6200ee;
+  background-color: #CC3D3D;
   border-radius: 50%;
 }
 .slider1 > .thumb1.left1, .slider2 > .thumb2.left2 {
@@ -676,7 +677,8 @@ input[type="range"] {
   -webkit-appearance: none;
   z-index: 2;
   height: 10px;
-  width: 100%;
+  width: 270px;
+  right: -7px;
   opacity: 0;
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -846,23 +848,6 @@ $(document).ready(function() {
 	
 });	
 	
-	
-	<% if( people.equals("1")){ %>
-		$('#flight_people1').val('1').prop("selected",true);
-	<%}else if(people.equals("2")){%>
-		$('#flight_people1').val('2').prop("selected",true);
-	<%}else if(people.equals("3")){%>
-		$('#flight_people1').val('3').prop("selected",true);	
-	<%}%>
-	<% if( seat.equals("이코노미 클래스")){ %>
-		$('#seatGrade1').val('이코노미 클래스').prop("selected",true);
-	<%}else if(seat.equals("비지니스 클래스")){%>
-		$('#seatGrade1').val('비지니스 클래스').prop("selected",true);
-	<%}else if(seat.equals("퍼스트 클래스")){%>
-		$('#seatGrade1').val('퍼스트 클래스').prop("selected",true);	
-	<%}%> 
-
-
 </script>
 <script>
 /* window.onload=function(){
@@ -993,18 +978,6 @@ function getPost(mode)
 												<img src="../img/icon/landing.png" width="20" height="20" class="flighticon"> 
 												<input type="text" placeholder="도착지" class="arrive"
 													name='arrive1' value="<%= request.getParameter("arrive1") %>"> 
-													<select class="people"
-													name="flight_people1">
-													<option>인원수</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select> <select class="seatGrade" name='seatGrade1'>
-													<option>좌석등급</option>
-													<option>이코노미 클래스</option>
-													<option>비지니스 클래스</option>
-													<option>퍼스트 클래스</option>
-												</select>
 											</section>
 											<section class="airplainchoice">
 												<input type="date" placeholder="출발일" id="datechoice1"
@@ -1031,17 +1004,6 @@ function getPost(mode)
 											<section class="airplainchoice">
 											<img src="../img/icon/landing.png" width="20" height="20" class="flighticon"> 
 												<input type="text" placeholder="도착지" class="arrive" name='arrive2'>
-												<select class="people" name="flight_people2">
-													<option>인원수</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select> <select class="seatGrade" name="seatGrade2">
-													<option>좌석등급</option>
-													<option>이코노미 클래스</option>
-													<option>비지니스 클래스</option>
-													<option>퍼스트 클래스</option>
-												</select>
 											</section>
 											<section class="airplainchoice">
 												<input type="date" placeholder="출발일" id="datechoice5"

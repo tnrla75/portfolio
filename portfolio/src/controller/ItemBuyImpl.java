@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 
-
+import vo.FlightReserveListBean;
 import vo.Item;
 import vo.Member_info;
 import model.ItemModel;
@@ -34,30 +34,11 @@ public  class ItemBuyImpl implements ItemCommandInter{
 		
 		Item item = (Item) model.selectItem(itemCode);
 		Member_info member = (Member_info) model.selectMember(mb_id);
+		ArrayList<FlightReserveListBean> list = (ArrayList<FlightReserveListBean>) model.select_airTicket(mb_id);
+		request.setAttribute("airTicket", list);
 		request.setAttribute("item", item);
 		request.setAttribute("member", member);
 		//controller
 		return "/shopping/itemOrder1.jsp";
 	}
-
-
-	
-	
-	/*public String insertData(HttpServletRequest request, HttpServletResponse response) {
-		SawonDto sawon = null;
-		
-		sawon = new SawonDto();
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-
-		sawon.setId(id);
-		sawon.setPw(pw);
-		System.out.println(id + " "+ pw);
-		System.out.println(sawon.getId() + " " + sawon.getPw());
-		ItemModel model = ItemModel.instance();
-		int insertSawon = model.insertSawon(sawon);
-		request.setAttribute("data", insertSawon);
-		//controller
-		return "sang.do?command=sawon";
-	}*/
 }

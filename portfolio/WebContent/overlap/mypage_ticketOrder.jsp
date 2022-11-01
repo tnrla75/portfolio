@@ -43,6 +43,7 @@ for(int i =0 ; i<list1.size(); i++){
 		min-height: 900px;
 		height: fit-content;
 		margin: 10px auto;
+		display:table;
 	}
 	#side div{
 		float: left;
@@ -361,7 +362,7 @@ for(int i =0 ; i<list1.size(); i++){
 			
 		}
 		.listtable tr td:nth-child(-n+2){
-			width: 100px;
+			width: 130px;
     		font-size: 10pt;
     		border-bottom: solid 2px rgba(0,0,0,0.3);
 		}
@@ -463,72 +464,7 @@ for(int i =0 ; i<list1.size(); i++){
 			<h3>MY PAGE</h3>
 		</header>
 		<section>
-			<nav id="side"> 	
-				<%-- <h3><%= member.getMb_id()%> 님</h3> --%>
-				<div>
-					<!-- menu-wrapper -->
-					<ul class="menu-list accordion">
-						<li id="nav1" class="toggle accordion-toggle"> 
-							<span class="icon-plus"></span>
-							<a class="menu-link" href="#">개인정보관리</a>
-						</li>
-						<!-- accordion-toggle -->
-						<ul class="menu-submenu accordion-content">
-							<li><a href="info.mypage?command=info&mb_id=<%= mb_id %>">회원정보 수정</a></li>
-							<li><a href="boradpass.mypage?command=board&mb_id=<%= mb_id %>">여권정보 관리</a></li>
-						</ul>
-						<!-- menu-submenu accordon-content-->
-						<li id="nav2" class="toggle accordion-toggle"> 
-							<span class="icon-plus"></span>
-							<a class="menu-link" href="#">주문/예약 내역</a>
-						</li>
-						<!-- accordion-toggle -->
-						<ul class="menu-submenu accordion-content">
-							<li><a class="head" href="#">여행</a></li>
-							<li><a class="head" href="#">항공</a></li>
-							<li><a class="head" href="#">호텔</a></li>
-							<li><a class="head" href="#">면세점</a></li>
-						</ul>
-						<!-- menu-submenu accordon-content-->
-						<li id="nav3" class="toggle accordion-toggle"> 
-							<span class="icon-plus"></span>
-							<a class="menu-link" href="#">MY ♡</a>
-						</li>
-						<!-- accordion-toggle -->
-						<ul class="menu-submenu accordion-content">
-							<li><a class="head" href="#">여행</a></li>
-							<li><a class="head" href="#">항공</a></li>
-							<li><a class="head" href="#">호텔</a></li>
-							<li><a class="head" href="#">면세점</a></li>
-						</ul>
-						<!-- menu-submenu accordon-content-->
-						<li id="nav4" class="toggle accordion-toggle"> 
-							<span class="icon-plus"></span>
-							<a class="menu-link" href="#">내가 쓴 Q&A</a>
-						</li>
-						<!-- accordion-toggle -->
-						<ul class="menu-submenu accordion-content">
-							<li><a class="head" href="#">여행</a></li>
-							<li><a class="head" href="#">항공</a></li>
-							<li><a class="head" href="#">호텔</a></li>
-							<li><a class="head" href="mypage_itemqna.mypage?command=item_qna&mb_id=<%= mb_id %>">면세점</a></li>
-						</ul>
-						<!-- menu-submenu accordon-content-->
-						<li id="nav4" class="toggle accordion-toggle"> 
-							<span class="icon-plus"></span>
-							<a class="menu-link" href="#">내가 쓴 리뷰</a>
-						</li>
-						<!-- accordion-toggle -->
-						<ul class="menu-submenu accordion-content">
-							<li><a class="head" href="#">여행</a></li>
-							<li><a class="head" href="#">항공</a></li>
-							<li><a class="head" href="#">호텔</a></li>
-							<li><a class="head" href="mypage_itemreview.mypage?command=item_review&mb_id=<%= mb_id %>">면세점</a></li>
-						</ul>
-					</ul>
-				   	<!-- menu-list accordion-->
-				</div>
-			</nav>
+			<jsp:include page="myPageMenu.jsp" />
 			<div id="infoBox">
 				<div id="info_title">
 					<h2>항공 예약 정보 확인</h2>
@@ -539,7 +475,6 @@ for(int i =0 ; i<list1.size(); i++){
 								<td colspan="2">항공사</td>
 								<td> 출발시간 / 출발지</td>
 								<td> 도착시간 / 도착지</td>
-								<td>여권번호</td>
 								<td>성/이름</td>
 								<td>좌석</td>					
 							</tr>
@@ -552,10 +487,8 @@ for(int i =0 ; i<list1.size(); i++){
 									flightimg2 = "jejuair.png";
 								}else if(list1.get(i).getFlight_name().equals("아시아나")){
 									flightimg2 = "asiana.png";
-								}else if(list1.get(i).getFlight_name().equals("")){
-									
-								}else if(list1.get(i).getFlight_name().equals("")){
-									
+								}else if(list1.get(i).getFlight_name().equals("대한")){
+									flightimg2 = "koreanair.png";
 								}
 								%>
 								<input type="hidden" value="<%= list1.get(i).getFlight_Ticket_Num() %>" name="ticketNum2">
@@ -564,7 +497,6 @@ for(int i =0 ; i<list1.size(); i++){
 								<td class="td1" style="text-align: left;"><span class="flightname"><%= list1.get(i).getFlight_name() %></span><br><span class="airplanename"><%= list1.get(i).getFlight_airplaneName() %></span></td>
 								<td class="td1"><span class="time"><%= list1.get(i).getFlight_departureTime()%></span><br><span class="airport"><%= list1.get(i).getFlight_departure() %></span></td>
 								<td class="td1"><span class="time"><%= list1.get(i).getFlight_arrivalTime() %></span><br><span class="airport"><%= list1.get(i).getFlight_arrival() %></span></td>
-								<td class="td1"><%= list1.get(i).getFlight_Rpassportnum() %></td>
 								<td class="td1"><%= list1.get(i).getFlight_Rfirstname() %> &nbsp; <%= list1.get(i).getFlight_Rlastname() %></td>			
 								<td class="td1"><%= list1.get(i).getSeatNum() %></td>
 							</tr>

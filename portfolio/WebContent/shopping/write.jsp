@@ -15,7 +15,7 @@
 	header img {
 		position: relative;
 		top: 40px;
-		left: 170px;
+		left: 120px;
 	}
 	#review {
 		width: 500px;
@@ -32,19 +32,20 @@
 		text-align: center;
 		position: relative;
 		margin-bottom: 40px;
-		right: 60px;
+		right: 100px;
 	}
 	#text {
 		width: 500px;
-		height: 210px;
+		height: 170px;
 		margin-top: 0px;
+		resize: none;
 	}
 	#photoSel {
 		margin-top: 10px;
 	}
 	#photo {
 		width: 500px;
-		height: 50px;
+		height: 40px;
 		border-style: dashed;
 		border-color: #D5D5D5; 
 		background-color: white;
@@ -118,9 +119,10 @@
 	}
 	/* 평점 */
 	.rate {
-	    float: left;
 	    position: relative;
-		left: 40px;
+	    margin: 0 auto;
+	    width: 220px;
+	    right: 35px;
 	    bottom: 20px;
 	}
 	.rate:not(:checked) > input {
@@ -195,7 +197,18 @@
 	  		$('input[name=reRate]').attr('value',"5");
 	 	});
 	  	
+	  	$('#text').on('keyup', function() {
+			 $('.textLength').html($(this).val().length+" / 250자");
+			 
+			 if ($(this).val().length > 250) {
+				 alert("글자 수가 초과되었습니다.");
+				 $(this).val($(this).val().substring(0, 250));
+				 $('.textLength').html($(this).val().length+" / 250자");
+			 }	
+		});
 	});
+	
+	
 </script>
 <body>
 	<form action="insert.jsp" method="pet">

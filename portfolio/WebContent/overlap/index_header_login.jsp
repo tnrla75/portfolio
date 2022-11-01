@@ -20,11 +20,9 @@
 			</div>
 			<div id="nav">
 				<nav>
-					<ul id="top" style="margin-left: 70px;">
+					<ul id="top" style="margin-left: 155px;">
 						<li class='commonnav'><a href='overlap/login.jsp'>로그인</a></li>
 						<li class="commonnav"><a href="overlap/signuppage.jsp">회원가입</a></li>
-						<li class="commonnav"><a href="overlap/myfavorites.jsp">즐겨찾기</a></li>
-						<li class="commonnav"><a href="overlap/service_center.jsp">고객센터</a></li>
 					</ul>
 					<ul id="main">
 						

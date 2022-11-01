@@ -24,7 +24,7 @@ public class Hotel_NationAction implements Action {
 		
 	 	Hotel_MainService hotel_mainService = new Hotel_MainService();	
 		
-		TreeMap<Integer, Hotel_room_DTO> main_roomList = hotel_mainService.getArticle();	
+		TreeMap<Integer, Hotel_room_DTO> main_roomList =hotel_mainService.main_roomList();	
 		ArrayList<Hotel_main_DTO> ajaxList=new ArrayList<Hotel_main_DTO>();
 		
 //		HttpSession session=request.getSession();

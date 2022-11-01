@@ -388,6 +388,39 @@ if(id == null){
 		<%= i+1 %> <%= lastname[i] %> <%= firstname[i] %>
 		</div>
 		<% }%>
+		<div class="seatinfo" style="margin-top: 20px;">
+				<table>
+					<tr class="infotr">
+						<td><img src="../img/flight/legend-unselectable.svg"></td>
+						<td>선택 불가 좌석</td>
+						<td><img src="../img/flight/legend-economy.svg"></td>
+						<td>일반석</td>
+					</tr>
+					<tr class="infotr" >
+						<td><img src="../img/flight/fl-icon-prefer.png"></td>
+						<td>선택된 좌석</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div class="seatinfo">
+			
+				<table>
+					<tr class="infotr">
+						<td><img src="../img/flight/galley.png"></td>
+						<td>갤리</td>
+						<td><img src="../img/flight/toilet.png"></td>
+						<td>화장실</td>
+					</tr>
+					<tr class="infotr">
+						<td><img src="../img/flight/plane-exit.svg"></td>
+						<td>비상구</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
 		</div>
 		<div id="seatdiv">
 		<div style=" width:fit-content; display: flex; margin:0 auto;">

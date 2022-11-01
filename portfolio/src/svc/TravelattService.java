@@ -17,7 +17,6 @@ public class TravelattService {
 		Connection con = getConnection();
 		TravelDAO travelDAO = TravelDAO.getInstance();
 		int a = 0;
-		System.out.println(att+"=====12");
 		travelDAO.setConnection(con);
 		travelatt = travelDAO.selecttravelatt(att);
 		close(con);

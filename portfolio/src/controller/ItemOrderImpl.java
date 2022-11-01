@@ -13,7 +13,7 @@ import vo.Item;
 import vo.ItemOrder;
 import vo.Member_info;
 import model.ItemModel;
-
+import vo.FlightReserveListBean;
 
 //action
 public class ItemOrderImpl implements ItemCommandInter{
@@ -37,7 +37,11 @@ public class ItemOrderImpl implements ItemCommandInter{
 		String mb_id = (String)session.getAttribute("mb_id");
 		String option = (String)session.getAttribute("option");
 		String item_count = (String)session.getAttribute("count");
-		String order_no = (String)session.getAttribute("order_no");
+		
+		String order_no="";
+		for (int i=0; i<8; i++) {
+			order_no += (int)(Math.random()*10)+1;	
+		}
 		
 		int count = Integer.parseInt(item_count);
 		System.out.println(order_no+"/"+itemCode+"/"+mb_id + "/"+ option+"/"+count);
@@ -50,7 +54,9 @@ public class ItemOrderImpl implements ItemCommandInter{
 		
 		ItemModel model = ItemModel.instance();
 		int insertOrder = model.insertOrder(itemOrder);
+		
 		request.setAttribute("itemOrder", itemOrder);
+		request.setAttribute("order_no", order_no);
 		//controller
 		return "/shopping/itemOrder2.jsp";
 	}

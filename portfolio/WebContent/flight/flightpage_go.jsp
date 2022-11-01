@@ -12,6 +12,7 @@
 		request.setAttribute("ticketBeanList1", ticketBeanList1);
 		String people =request.getParameter("flight_people1");
 		String seat = request.getParameter("seatGrade1");
+		String departureDay =  request.getParameter("departureDay1");
 		String arrivalday = request.getParameter("arrivalDay1");
 				
 		PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo1");
@@ -138,12 +139,12 @@
 		#datechoice1 {
 			width: 120px;
 			position: relative;
-			left: 40px;
+			left: 75px;
 		}
 		#datechoice2 {
 			width: 120px;
 			position: relative;
-			left: 60px;
+			left: 140px;
 		}
 		#datechoice5 {
 			width: 150px;
@@ -164,7 +165,7 @@
 		}
 		.searchicon2 {
 			position: relative;
-			left: 70px;
+			left: 300px;
 			width: 50px;
 			height: 40px;
 			border-style: none;
@@ -321,7 +322,6 @@
 
 		}
 		#flightdiv3{
-		
 			width: 900px;
 			border-radius: 5px;
 			height: fit-content;
@@ -329,9 +329,10 @@
 			background-color:white;
 			border-radius: 10px;
 			box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+			margin-bottom: 90px;
 		}
 		#flightdivmain{
-			width: 1200px; height: 1500px; margin: 0 auto;
+			width: 1200px; height: 1200px; margin: 0 auto;
 			
 		}
 		.flightlistdiv{
@@ -340,8 +341,6 @@
 			background-color:white;
 			width: 880px;
 			height: 120px;
-			
-		
 			margin:4px;
 		}
 		.td1{
@@ -510,7 +509,7 @@
 		}
 		#modal1>#content1{
 			width:500px;
-			height:484px;
+			height: 390px;
 			margin:100px auto;
 			padding:20px;
 			position: relative;
@@ -533,10 +532,10 @@
 		  text-decoration: none;
 		  cursor :pointer;
 		}
-		.modalul {
+		.modalul1 {
 			width:500px;
 		}
-		.modalul li{
+		.modalul1 li{
 			list-style: none;
 			float: left;
 			width: 95px;
@@ -546,7 +545,7 @@
 			left:-60px;
 			top:-36px;
 		}
-		.modalul li:nth-child(1){
+		.modalul1 li:nth-child(1){
 			width: 540px;
 			height: 40px;
 			background-color: #F0F0F0;
@@ -554,12 +553,12 @@
 			font-size:12pt;
 			line-height: 40px;
 		}
-		.modalul li:nth-child(n+2){
+		.modalul1 li:nth-child(n+2){
 			font-size:10pt;
 			padding: 0 10px;
 			margin: 2px 5px;
 		}
-		.modalul li:nth-child(n+2):hover{
+		.modalul1 li:nth-child(n+2):hover{
 			background-color: #5AA0FF ;
 			color:white;
 		}
@@ -575,6 +574,88 @@
 		.flex{
 		  display:flex
 		}
+		#modal2 > *{
+			padding: 0px;
+			margin: 0px;
+		}
+		
+		#modal2{
+			display : none;
+			z-index : 999;
+			position:absolute;
+		    left: 230px;
+			top: 198px;
+			width:70%;
+			height:650px;
+		}
+		#modal2>#content2{
+			width:500px;
+			height: 390px;
+			margin:100px auto;
+			padding:20px;
+			position: relative;
+			background-color:#fff;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		}
+		
+		#modal2 .close{
+			position:absolute;
+			top:4px;
+			right:4px;	
+			font-size:20px;
+			border:0;
+			background-color:#F0F0F0;
+		}
+		
+		#modal2 .close:hover,
+		#modal2 .close:focus {
+		  color : #000;
+		  text-decoration: none;
+		  cursor :pointer;
+		}
+		.modalul2 {
+			width:500px;
+		}
+		.modalul2 li{
+			list-style: none;
+			float: left;
+			width: 95px;
+			height: 50px;
+			line-height: 50px;
+			position: relative;
+			left:-60px;
+			top:-36px;
+		}
+		.modalul2 li:nth-child(1){
+			width: 540px;
+			height: 40px;
+			background-color: #F0F0F0;
+			font-weight: bold;
+			font-size:12pt;
+			line-height: 40px;
+		}
+		.modalul2 li:nth-child(n+2){
+			font-size:10pt;
+			padding: 0 10px;
+			margin: 2px 5px;
+		}
+		.modalul2 li:nth-child(n+2):hover{
+			background-color: #5AA0FF ;
+			color:white;
+		}
+		#btnOpen2:focus{
+			outline: none;
+			border-bottom: solid rgba(211, 10, 20, 0.9) 2px;
+		}
+		#backdiv{
+			background-color: #f5f7fa;
+			position: relative;
+			top:-13px;
+		}
+		.flex{
+		  display:flex
+		}
+		
 		/* 라디오버튼 */
 		.container {
 		  display: flex;
@@ -637,12 +718,12 @@
   position: absolute;
   z-index: 1;
   left: 0;
-  right: 0;
+  right: 5px;
   top: 0;
   bottom: 0;
   border-radius: 5px;
   height: 5px;
-  background-color: #c6aee7;
+  background-color: #FFCDCD;
 }
 .slider1 > .range1, .slider2 > .range2 {
 	/* 가운데 색깔 바 */
@@ -654,18 +735,18 @@
   top: 0;
   bottom: 0;
   border-radius: 5px;
-  background-color: #6200ee;
+  background-color: #CC3D3D;
 }
 .slider1 > .thumb1, .slider2 > .thumb2 {
   position: absolute;
   z-index: 3;
   width: 15px;
   height: 15px;
-  background-color: #6200ee;
+  background-color: #CC3D3D;
   border-radius: 50%;
 }
 .slider1 > .thumb1.left1, .slider2 > .thumb2.left2 {
-  left: 5%;
+/*   left: 5%; */
   transform: translate(-14px, -5px);
 }
 .slider1 > .thumb1.right1, .slider2 > .thumb2.right2 {
@@ -680,7 +761,8 @@ input[type="range"] {
   -webkit-appearance: none;
   z-index: 2;
   height: 10px;
-  width: 100%;
+  width: 270px;
+  right: -7px;
   opacity: 0;
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -751,8 +833,7 @@ $(document).ready(function() {
 	}); 
 
 	
-	$("input:radio[name='choicebtn']").change(function(){
-		
+	$(document).on("change","input:radio[name='choicebtn']", function(){
 		var checkBtn = $(this);
 		var tr = checkBtn.parent().parent().parent();
 		var td = tr.children();
@@ -836,26 +917,6 @@ $(document).ready(function() {
 	
 });	
 
-	
-	
-	
-
-	
-	<%-- <% if( people.equals("1")){ %>
-		$('#flight_people1').val('1').prop("selected",true);
-	<%}else if(people.equals("2")){%>
-		$('#flight_people1').val('2').prop("selected",true);
-	<%}else if(people.equals("3")){%>
-		$('#flight_people1').val('3').prop("selected",true);	
-	<%}else{}%>
-	<% if( seat.equals("이코노미 클래스")){ %>
-		$('#seatGrade1').val('이코노미 클래스').prop("selected",true);
-	<%}else if(seat.equals("비지니스 클래스")){%>
-		$('#seatGrade1').val('비지니스 클래스').prop("selected",true);
-	<%}else if(seat.equals("퍼스트 클래스")){%>
-		$('#seatGrade1').val('퍼스트 클래스').prop("selected",true);	
-	<%}else{}%>  --%>
-
 
 
 </script>
@@ -865,8 +926,9 @@ $(document).ready(function() {
 	document.getElementById('datechoice2').value = new Date().toISOString().substring(0, 10);
 	var today = new Date().toISOString().substring(0, 10);
 	document.getElementById('datechoice1').setAttribute("min", today);
-}
-function changeDate1(){
+	document.getElementById('datechoice2').setAttribute("min", today);
+} */
+/* function changeDate1(){
 	document.getElementById('datechoice2').setAttribute("min", document.getElementById('datechoice1').value);
 	document.getElementById('datechoice2').value = document.getElementById('datechoice1').value;
 }   */
@@ -927,22 +989,14 @@ function getPost(mode)
 	<div id='content1'>
 		<div>
 			<div class="modaltitle">
-				<ul class="modalul">
-					<li>&nbsp;&nbsp;인기지역 <input type='button' value='X' class="close" id='btnClose1'/></li>
-					<li>서울</li>
-					<li>제주도</li>
+				<ul class="modalul1">
+					<li>&nbsp;&nbsp;한국<input type='button' value='X' class="close" id='btnClose1'/></li>
+					<li>서울/인천</li>
+					<li>제주</li>
 				</ul>
 			</div>
 			<div class="modaltitle">
-				<ul class="modalul">
-					<li>&nbsp;&nbsp;한국</li>
-					<li>ICN 서울/인천</li>
-					<li>GMP 서울/김포</li>
-					<li>CJU 제주</li>
-				</ul>
-			</div>
-			<div class="modaltitle">
-				<ul class="modalul">
+				<ul class="modalul1">
 					<li>&nbsp;&nbsp;중국</li>
 					<li>도쿄</li>
 					<li>오사카</li>
@@ -953,7 +1007,7 @@ function getPost(mode)
 				</ul>
 			</div>			
 			<div class="modaltitle">
-				<ul class="modalul">
+				<ul class="modalul1">
 					<li>&nbsp;&nbsp;베트남</li>
 					<li>호치민</li>
 					<li>호이안</li>
@@ -962,7 +1016,7 @@ function getPost(mode)
 				</ul>
 			</div>
 			<div class="modaltitle">
-				<ul class="modalul">
+				<ul class="modalul1">
 					<li>&nbsp;&nbsp;기타 국가</li>
 					<li>싱가포르</li>
 					<li>홍콩</li>					
@@ -973,26 +1027,18 @@ function getPost(mode)
 	</div>
 </div>
 
-<!-- <div id='modal2'>
+<div id='modal2'>
 	<div id='content2'>
 		<div>
 			<div class="modaltitle">
-				<ul class="modalul">
-					<li>&nbsp;&nbsp;인기지역 <input type='button' value='X' class="close" id='btnClose1'/></li>
-					<li>서울</li>
-					<li>제주도</li>
+				<ul class="modalul2">
+					<li>&nbsp;&nbsp;한국<input type='button' value='X' class="close" id='btnClose2'/></li>
+					<li>서울/인천</li>
+					<li>제주</li>
 				</ul>
 			</div>
 			<div class="modaltitle">
-				<ul class="modalul">
-					<li>&nbsp;&nbsp;한국</li>
-					<li>ICN 서울/인천</li>
-					<li>GMP 서울/김포</li>
-					<li>CJU 제주</li>
-				</ul>
-			</div>
-			<div class="modaltitle">
-				<ul class="modalul">
+				<ul class="modalul2">
 					<li>&nbsp;&nbsp;중국</li>
 					<li>도쿄</li>
 					<li>오사카</li>
@@ -1003,7 +1049,7 @@ function getPost(mode)
 				</ul>
 			</div>			
 			<div class="modaltitle">
-				<ul class="modalul">
+				<ul class="modalul2">
 					<li>&nbsp;&nbsp;베트남</li>
 					<li>호치민</li>
 					<li>호이안</li>
@@ -1012,7 +1058,7 @@ function getPost(mode)
 				</ul>
 			</div>
 			<div class="modaltitle">
-				<ul class="modalul">
+				<ul class="modalul2">
 					<li>&nbsp;&nbsp;기타 국가</li>
 					<li>싱가포르</li>
 					<li>홍콩</li>					
@@ -1021,7 +1067,8 @@ function getPost(mode)
 			
 		</div>
 	</div>
-</div>  -->
+</div>
+
 <div id="backdiv">
 		<div id="flightdiv1">
 			<div class="tabset">
@@ -1047,18 +1094,7 @@ function getPost(mode)
 												<img src="../img/icon/landing.png" width="20" height="20" class="flighticon"> 
 												<input type="text" placeholder="도착지" class="arrive"
 													name='arrive1' value="<%= request.getParameter("arrive1") %>" id='btnOpen2'> 
-													<select class="people"
-													name="flight_people1">
-													<option>인원수</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select> <select class="seatGrade" name='seatGrade1'>
-													<option>좌석등급</option>
-													<option>이코노미 클래스</option>
-													<option>비지니스 클래스</option>
-													<option>퍼스트 클래스</option>
-												</select>
+													
 											</section>
 											<section class="airplainchoice">
 												<input type="date" placeholder="출발일" id="datechoice1"
@@ -1085,17 +1121,7 @@ function getPost(mode)
 											<section class="airplainchoice">
 											<img src="../img/icon/landing.png" width="20" height="20" class="flighticon"> 
 												<input type="text" placeholder="도착지" class="arrive" name='arrive2' id='btnOpen4'>
-												<select class="people" name="flight_people2">
-													<option>인원수</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select> <select class="seatGrade" name="seatGrade2">
-													<option>좌석등급</option>
-													<option>이코노미 클래스</option>
-													<option>비지니스 클래스</option>
-													<option>퍼스트 클래스</option>
-												</select>
+												
 											</section>
 											<section class="airplainchoice">
 												<input type="date" placeholder="출발일" id="datechoice5"
@@ -1122,7 +1148,7 @@ function getPost(mode)
 				</div>
 				<div class="flightdiv2_indiv">
 				<h4> &nbsp;&nbsp;항공편 시간</h4>
-				<i class="fa-solid fa-plane-departure"></i><span>출발 시간</span><span id="startleftval1">00</span><span>: 00 - </span><span id="startrightval1">24</span><span>: 00</span>
+				<i class="fa-solid fa-plane-departure"></i>&nbsp;<span>출발 시간</span>&nbsp;<span id="startleftval1">00</span><span>: 00 - </span><span id="startrightval1">24</span><span>: 00</span>
 					<div class="middle1">
 					  <div class="multi-range-slider1" >
 					    <input type="range" id="input1-left1" min="0" max="24" value="0" class="range" />
@@ -1135,7 +1161,7 @@ function getPost(mode)
 					    </div>
 					  </div>
 					</div>	
-					<i class="fa-solid fa-plane-arrival"></i><span>도착 시간</span><span id="startleftval2">00</span><span>: 00 - </span><span id="startrightval2">24</span><span>: 00</span>
+					<i class="fa-solid fa-plane-arrival"></i>&nbsp;<span>도착 시간</span>&nbsp;<span id="startleftval2">00</span><span>: 00 - </span><span id="startrightval2">24</span><span>: 00</span>
 					<div class="middle2">
 					  <div class="multi-range-slider2">
 					    <input type="range" id="input2-left2" min="0" max="24" value="0" class="range" />
@@ -1191,8 +1217,8 @@ function getPost(mode)
 			
 			
 		</div>
+		
 </div>
-
 	</form>
 </body>
 <script>
@@ -1292,7 +1318,8 @@ const range1 = document.querySelector(".slider1 > .range1");
 		
 		inputLeft2.addEventListener("input", setLeftValue2);
 		inputRight2.addEventListener("input", setRightValue2);
-
+</script>
+<script>
 	// modal 창 1번 
 	var btnOpen1  = document.getElementById('btnOpen1');
 	var btnClose1 = document.getElementById('btnClose1');
@@ -1312,16 +1339,17 @@ const range1 = document.querySelector(".slider1 > .range1");
 			modal1.style.display = 'none';
 		}
 	}
-	btnClose1.onclick = closeRtn;
+	btnClose1.onclick = closeRtn1;
+	
 	$(document).ready(function() {
-		$(".modalul li:nth-child(n+2)").on('click', function(e) {
+		$(".modalul1 li:nth-child(n+2)").on('click', function(e) {
 			$('#btnOpen1').val($(this).text());
-			modal1.style.display = 'none';
+			modal1.style.display = 'none'; 
 		}); 
 	});
 	
 	// modal 창 1번 
-	/* var btnOpen2  = document.getElementById('btnOpen2');
+	var btnOpen2  = document.getElementById('btnOpen2');
 	var btnClose2 = document.getElementById('btnClose2');
 	
 	// modal 창을 감춤
@@ -1339,12 +1367,12 @@ const range1 = document.querySelector(".slider1 > .range1");
 			modal2.style.display = 'none';
 		}
 	}
-	btnClose2.onclick = closeRtn;
+	btnClose2.onclick = closeRtn2;
 	$(document).ready(function() {
-		$(".modalul li:nth-child(n+2)").on('click', function(e) {
+		$(".modalul2 li:nth-child(n+2)").on('click', function(e) {
 			$('#btnOpen2').val($(this).text());
 			modal2.style.display = 'none';
 		}); 
-	}); */
+	}); 
 </script>
 </html>

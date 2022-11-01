@@ -8,11 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import javax.sql.DataSource;
-
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 import vo.FlightTicketBean;
 
@@ -39,7 +36,7 @@ public class Flightdao {
 	}
 
 public ArrayList<FlightTicketBean> selectArticleList_go(String departure,String arrive, String people, String seat, String departureday, int page,int limit){
-		
+		System.out.println("aa");
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String FlightTicket_sql="select * from flight_ticket where flight_departure=? and flight_arrival=? and flight_departureDay=? order by flight_Ticket_Price asc limit ?, 10 ";
@@ -84,7 +81,7 @@ public ArrayList<FlightTicketBean> selectArticleList_go(String departure,String 
 				ticketBean.setFlight_arrivalTime(rs.getString("flight_arrivalTime"));
 				ticketBean.setFlight_Ticket_Price(rs.getInt("flight_Ticket_Price"));
 				ticketBeanList.add(ticketBean);
-				
+				System.out.println("bb");
 			}
 		}catch(Exception ex){
 			System.out.println("실패");
@@ -92,6 +89,7 @@ public ArrayList<FlightTicketBean> selectArticleList_go(String departure,String 
 			close(rs);
 			close(pstmt);
 		}
+		
 		return ticketBeanList;
 	}
 	public ArrayList<FlightTicketBean> selectArticleList_back(String departure,String arrive, String people, String seat, String arrivalday , int page,int limit){

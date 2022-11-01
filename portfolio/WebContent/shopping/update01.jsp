@@ -15,7 +15,7 @@
 	header img {
 		position: relative;
 		top: 40px;
-		left: 170px;
+		left: 120px;
 	}
 	#review {
 		width: 500px;
@@ -32,11 +32,11 @@
 		text-align: center;
 		position: relative;
 		margin-bottom: 40px;
-		right: 60px;
+		right: 100px;
 	}
 	#text {
 		width: 500px;
-		height: 210px;
+		height: 170px;
 		margin-top: 0px;
 	}
 	#photoSel {
@@ -121,9 +121,10 @@
 	}
 	/* 평점 */
 	.rate {
-	    float: left;
 	    position: relative;
-		left: 40px;
+	    margin: 0 auto;
+	    width: 220px;
+	    right: 35px;
 	    bottom: 20px;
 	}
 	.rate:not(:checked) > input {

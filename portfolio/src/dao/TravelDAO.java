@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import vo.Hotel_main_DTO;
 import vo.Travelatt;
 import vo.Travelattandimg;
 import vo.Travelattre;
@@ -25,7 +26,7 @@ public class TravelDAO {
 	private TravelDAO() {
 	}
 
-	public static TravelDAO getInstance(){     //½Ì±ÛÅæÆÐÅÏ =°´Ã¼ÇÑ¹ø »ý¼ºÀ¸·Î °è¼Ó »ç¿ë
+	public static TravelDAO getInstance(){     //ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ =ï¿½ï¿½Ã¼ï¿½Ñ¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if(TravelDAO == null){
 			TravelDAO = new TravelDAO();
 		}
@@ -36,7 +37,7 @@ public class TravelDAO {
 		  this.con = con;
 	}
 		
-	// Áö¿ª select¹®
+	// ï¿½ï¿½ï¿½ï¿½ selectï¿½ï¿½
 	public Travellocal Selecttravellocal(String local){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -91,7 +92,7 @@ public class TravelDAO {
 					board.setAtt_latitude(rs.getString("att_latitude"));
 					board.setAtt_longitude(rs.getString("att_longitude"));
 					board.setAtt_num(rs.getInt("local_num"));
-					board.setTravel_img1(rs.getString("att_img1"));
+					board.setAtt_img1(rs.getString("att_img1"));
 					travelimg.add(board);
 				}
 		
@@ -103,7 +104,7 @@ public class TravelDAO {
 			}
 			return travelimg;			
 	}
-	// °ü±¤¸í¼Ò select¹® 
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ selectï¿½ï¿½ 
 	public ArrayList<Travelatt> selecttravelatt(String att){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -171,7 +172,7 @@ public class TravelDAO {
 					board.setAtt_latitude(rs.getString("att_latitude"));
 					board.setAtt_longitude(rs.getString("att_longitude"));
 					board.setAtt_num(rs.getInt("local_num"));
-					board.setTravel_img1(rs.getString("att_img1"));
+					board.setAtt_img1(rs.getString("att_img1"));
 					travelimg.add(board);
 				}
 		
@@ -212,7 +213,7 @@ public class TravelDAO {
 		return travelimg;
 
 	}
-	//°ü±¤Áö ´ñ±Û select
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ select
 	public ArrayList<Travelattre> att_review(int page, int limit){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -245,7 +246,7 @@ public class TravelDAO {
 			}
 			return travelattre;			
 	}
-	//°ü±¤Áö ´ñ±Û insert
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ insert
 	public int insertArticle(Travelattre travelattre){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -268,7 +269,7 @@ public class TravelDAO {
 			}
 			return a;			
 	}
-	//°ü±¤Áö ´ñ±Û delete
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ delete
 	public int deleteArticle(int att_reNum){
 		PreparedStatement pstmt = null;
 		String board_delete_sql="delete from att_review where att_reNum=?";
@@ -288,23 +289,24 @@ public class TravelDAO {
 	}
 	public int updateArticle(Travelattre travelattre){
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int a=0;
+	
 		try{
 			String board_list_sql="update att_review set att_reContent= ?, att_reRate= ? where att_reNum=?";
 				pstmt = con.prepareStatement(board_list_sql);
 				pstmt.setString(1, travelattre.getAtt_reContent());
 				pstmt.setInt(2, travelattre.getAtt_reRate());
 				pstmt.setInt(3, travelattre.getAtt_reNum());
-				a= pstmt.executeUpdate();
+				 pstmt.executeUpdate();
 			}catch(Exception ex){
 				System.out.println(ex);
 			}finally{
 				close(pstmt);
-			}
-			return a;			
+				
+			}return a;
+						
 	}
-	// °ü±¤Áö ´ñ±ÛÆäÀÌÁöÄ«¿îÆ®  
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½Æ®  
 		public int selectListattCount() {
 
 			int listCount= 0;
@@ -327,7 +329,7 @@ public class TravelDAO {
 			return listCount;
 
 		}
-		//Æ®¸³°¡ÀÌµå select
+		//Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ select
 		public ArrayList<Travellocal> tripguide_select(){
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -357,13 +359,40 @@ public class TravelDAO {
 				return travellocal;			
 		}
 		
+		
+		public ArrayList<Hotel_main_DTO> tripguide_hotel_select(){
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<Hotel_main_DTO> hotel = new ArrayList<Hotel_main_DTO>();
+			
+			try{
+				String board_list_sql="select*from hot_info order by rand() limit 4";
+				Hotel_main_DTO board = null;
+					pstmt = con.prepareStatement(board_list_sql);
+					rs = pstmt.executeQuery();
+					while(rs.next()){
+						board = new Hotel_main_DTO();
+						board.setHot_main_img(rs.getString("hot_main_img"));
+						board.setHot_name(rs.getString("hot_name"));
+						hotel.add(board);
+					}
+			
+				}catch(Exception ex){
+					System.out.println(ex);
+				}finally{
+					close(rs);
+					close(pstmt);
+				}
+				return hotel;			
+		}
+		
 		public ArrayList<Travellocal> Index_travel_select(){
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			ArrayList<Travellocal> travellocal = new ArrayList<Travellocal>();
 			
 			try{
-				String board_list_sql="select*from travel_local order by rand() limit 4";
+				String board_list_sql="select*from travel_local where local_nation= 'ëŒ€í•œë¯¼êµ­' order by rand() limit 4";
 				Travellocal board = null;
 					pstmt = con.prepareStatement(board_list_sql);
 					rs = pstmt.executeQuery();

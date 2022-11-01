@@ -28,7 +28,7 @@
 	
 	Hotel_DAO ins = new Hotel_DAO();
 	
-	ins.insert_01(hot_main_num,mb_id,hot_re_content,hot_re_rate);
+	ins.reviewinsert_01(hot_main_num,mb_id,hot_re_content,hot_re_rate);
 	
 	response.sendRedirect("../hotel/hotelRoomForm.ho?hot_main_num="+hot_main_num); 
 	

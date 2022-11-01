@@ -100,7 +100,7 @@
 	  	<header>여행 메이트 신청</header>
 	  	<div class="pnbox">
 	  	<div class="pn">전화번호:&nbsp;</div>
-	  		<input type="text" placeholder="숫자만 입력해주세요." name="pnNum">
+	  		<input type="text" placeholder="숫자만 입력해주세요." name="pnNum" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
 			<div class="people">신청인원: 
 				<select name="travelmateMember">

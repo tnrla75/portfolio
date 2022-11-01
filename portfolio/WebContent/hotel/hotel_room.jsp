@@ -13,6 +13,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>호텔 메인</title>
+	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo&family=Indie+Flower&family=Koulen&display=swap" rel="stylesheet">
 	
 	<link rel="stylesheet" type="text/css" href="../css/header_footer.css">	
@@ -94,7 +95,7 @@
 	.hot_name{
 		width: 360px;
 		height: 120px;
-		font-size:25px;
+		font-size:20px;
 		
 		padding-left:10px;
 		font-weight:bold;
@@ -102,7 +103,7 @@
 	.hot_address{
 		width: 360px;
 		height: 90px;
-		
+		margin-top:20px;
 		font-size:18px;
 		padding-left:10px;
 	}
@@ -174,11 +175,11 @@
 		border-radius: 4px;
 	}
 	.me_img{
-		width: 200px;
+		width: 230px;
 		height: 200px;
 		
 		border-radius: 4px;
-		margin-left:20px;
+		
 		box-shadow: 7px 7px 7px #BDBDBD;
 		float:left;
 	}
@@ -194,26 +195,42 @@
 		text-align: left;
 		float:left;
 	}
-	.me_naiyou1 div:first-of-type{
+	
+	.subbox{
+		clear:left;
+		width: 240px;
+		height: 30px;
+		float:left;
+	}
+	.people{
 		width: 110px;
 		height: 25px;
-		text-align: left;
+		padding-top:2px;
 		float:left;
-		
-		padding-top:5px;
 	}
 	.room_amount{
-		width: 80px;
-		height: 30px;
-		color:red;
-		line-height:20pt;
+		width: 110px;
+		height: 25px;
+		color:red;		
 		font-weight: bold;
-		font-size: 18px;
-		
-		text-align: left;
-		margin-left:10px;
-		
+		font-size: 18px;		
+		text-align: left;		
+		float:right;
+	}
+	.chekdate01{
+		width: 110px;
+		height: 25px;
+		padding-top:2px;
 		float:left;
+	}
+	.chekdate02{
+		width: 110px;
+		height: 25px;
+			
+		
+		font-size: 18px;		
+		text-align: left;		
+		float:right;
 	}
 	.me_yoyaku{
 		width: 230px;
@@ -222,6 +239,40 @@
 		margin-right:10px;
 		font-size:20px;	
 		text-align: center;
+		float:right;
+		
+	}
+	#datebox{
+		width: 1100px;
+		height: 40px;
+		margin: 20px auto;
+		
+	}
+	#check1{
+		width: 300px;
+		height:30px;
+		float:right;
+	}
+	
+	#check2{
+		clear:right;
+		width: 300px;
+		height:30px;
+		float:right;
+	}
+	.check_sub1{
+		width: 120px;
+		height:30px;
+		
+		text-align:center;
+		float:right;
+	}
+	.check_sub2{
+		width: 120px;
+		height:30px;
+		font-size:15px;
+		
+		text-align:center;
 		float:right;
 	}
 	.room_small{		
@@ -244,9 +295,7 @@
 		clear:right;
 		color: red;		
 		font-weight: bold;
-		margin-top:10px;
-		margin-bottom: 10px;
-		
+		margin:30px auto;				
 		border-color:red;
 		width: 120px;
 		height: 30px;
@@ -266,6 +315,7 @@
 		height:50px;
 		font-size:15px;
 		background-color:#000054;
+		text-align: center;
 		color:white;
 		border-radius: 4px;
 		
@@ -276,7 +326,7 @@
 		clear:left;
 		width:1200px;
 		height:80px;		
-		margin: 40px auto;
+		margin: 40px auto 0 auto;
 		text-align: center;
 		border-top: solid 1px rgba(0,0,0,0.4)
 	}
@@ -406,7 +456,7 @@
 		margin: 30px auto;
 		padding-top:15px;
 		text-align: center;
-		border-top: solid 1px rgba(0,0,0,0.4)
+		border-top: solid 1px rgba(0,0,0,0.4);
 	}
 	
 </style>
@@ -417,13 +467,11 @@
 	String mb_id = (String)session.getAttribute("mb_id"); 
 
 	ArrayList<Hotel_room_DTO> roomList = (ArrayList<Hotel_room_DTO>)request.getAttribute("roomList");
-	ArrayList<Hotel_review_DTO> reviewList = (ArrayList<Hotel_review_DTO>)request.getAttribute("reviewList");
-	
-	ArrayList<Hotel_main_DTO> mainList = (ArrayList<Hotel_main_DTO>)request.getAttribute("mainList");
-	
-	String hot_main_num=request.getParameter("hot_main_num");
-	
+	ArrayList<Hotel_review_DTO> reviewList = (ArrayList<Hotel_review_DTO>)request.getAttribute("reviewList");	
+	ArrayList<Hotel_main_DTO> mainList = (ArrayList<Hotel_main_DTO>)request.getAttribute("mainList");	
+	String hot_main_num=request.getParameter("hot_main_num");	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
 	
 	int listCount=pageInfo.getListCount();
 	int nowPage=pageInfo.getPage();
@@ -455,6 +503,7 @@
 	
 //	var qwwe = $('input[name=value]').val(); JSP(히든을)를 JS에  호출하는 방법
 	<%-- <input type="hidden" name=value value="<%=mb_id%>"> --%>
+	
 	var mb_id = '<%=mb_id%>';
 	function logincheck(){
 		
@@ -462,65 +511,62 @@
 			alert("로그인 해주세요.");
 			location.replace("../overlap/login.jsp");
 		}else{
+			
 			location.replace("../hotel/hotel_re_insert_01.jsp?hot_main_num=<%=hot_main_num %>");
 		}
 	} 
-	function yoyakuBt(hot_room_num,hot_main_num,mb_id){
+	function yoyakuCheck(hot_room_num,hot_main_num,mb_id){
 		
-		if(mb_id == "null"){
-			alert("로그인 해주세요.");
-//			location.replace("../overlap/login.jsp");
-			location.replace("../hotel/hotelYoyakuForm.ho?hot_room_num="+hot_room_num+"&hot_main_num="+hot_main_num+"&mb_id="+mb_id);
+		var hot_checkin_date=document.myform.hot_checkin_date.value;
+		var hot_checkout_date=document.myform.hot_checkout_date.value;
+		alert(hot_checkin_date);
+		alert(hot_checkout_date);
+		if(mb_id ==""){
+			alert("로그인 해주세요.");			
+			location.replace("../overlap/login.jsp");
+			return false;
+		}else if(hot_checkin_date==""){
+			alert("체크인 날짜를 입력해 주세요.")
+			return false;
+		}else if(hot_checkout_date==""){
+			alert("체크아웃 날짜를 입력해 주세요.")
+			return false;
+		}else if(hot_checkin_date>=hot_checkout_date){
+			alert("날짜를 다시 입력 해주세요.")
+			return false;
 		}else{
-			location.replace("../hotel/hotelYoyakuForm.ho?hot_room_num="+hot_room_num+"&hot_main_num="+hot_main_num+"&mb_id="+mb_id);
+			alert("로그인 됨.");
+			
+			
 		}
 	}
-	function getPost(mode)
-	{
-		var myform = document.myform;
-		if(mode == '05'){
-			myform.action = "../hotel/hotelMainForm.ho";
-		}
-		
-		myform.submit();
-	};
-	
 	
 	</script>
 <body>
 
-
-
-	
-	<%
-		if(mb_id == null){
-			%>
-			<jsp:include page="../overlap/header_login.jsp"/>
-			<%
-		}else{
-			%>
-			<jsp:include page="../overlap/header_logout.jsp"/>
-			<%
-		}
-	%>
-	<form >
-	<section>		
+		<%if(mb_id == null){%>
+		<jsp:include page="../overlap/header_login.jsp"/>
+		<%}else{%>
+		<jsp:include page="../overlap/header_logout.jsp"/>
+		<%}%>
+		
+		<%-- ../hotel/hotelYoyakuForm.ho?hot_room_num=<%=roomList.get(0).getHot_room_num()%>&hot_main_num=<%=roomList.get(0).getHot_main_num()%>&mb_id=<%=mb_id%> --%>
+	<form name="myform" method="post" onsubmit="return yoyakuCheck()" action="../hotel/hotelYoyakuForm.ho?hot_room_num=<%=roomList.get(0).getHot_room_num()%>&hot_main_num=<%=roomList.get(0).getHot_main_num()%>&mb_id=<%=mb_id%>">
+	<section>
 		<div class="up_bigbox">		
 			<div id="up_leftbox">
 								
-					<img alt="사진 다시 넣어라잉~" src="../img/hotel/hotel_room/<%=roomList.get(0).getHot_room_img()%>" style="width: 500px;	height: 500px;border-radius: 4px;">			
-				
-				
+					<img alt="room jsp mainimg 오류" src="../img/hotel/hotel_main/<%=mainList.get(0).getHot_main_img()%>" style="width: 500px;	height: 500px;border-radius: 4px;">					
 			</div>
 			<div id="imgbox01">
 				<div id="img01">
-					<img alt="사진 다시 넣어라잉~" src="../img/hotel/hotel_room/<%=roomList.get(1).getHot_room_img()%>" style="width: 241px;	height: 150px;border-radius: 4px;">
+					<img alt="room jsp subimg1 오류" src="../img/hotel/hotel_room/<%=roomList.get(0).getHot_room_img()%>" style="width: 241px;	height: 150px;border-radius: 4px;">
 				</div>
 				<div class="img02">
-					<img alt="사진 다시 넣어라잉~" src="../img/hotel/hotel_room/<%=roomList.get(2).getHot_room_img()%>" style="width: 241px;	height: 150px;border-radius: 4px;">
+					<img alt="room jsp subimg2 오류" src="../img/hotel/hotel_room/<%=roomList.get(1).getHot_room_img()%>" style="width: 241px;	height: 150px;border-radius: 4px;">
 				</div>
 				<div class="img02">
-					<img alt="사진 다시 넣어라잉~" src="../img/hotel/hotel_room/<%=roomList.get(3).getHot_room_img()%>" style="width: 241px;	height: 150px;border-radius: 4px;">
+					<img alt="room jsp subimg3 오류" src="../img/hotel/hotel_room/<%=roomList.get(2).getHot_room_img()%>" style="width: 241px;	height: 150px;border-radius: 4px;">
 				</div>
 			</div>
 			
@@ -533,7 +579,6 @@
 						체크아웃 시간: <%=mainList.get(0).getHot_checkout_time()%><br><br>
 					</div>
 					
-					
 					 
 				</div>
 				<div class="up_rightlebox2">
@@ -543,26 +588,21 @@
 						<div class="up_down"><i class='fa-solid fa-wifi'></i> <%=mainList.get(0).getHot_wifi()%></div>
 					<%} %>
 					
-					
 					<%if(mainList.get(0).getHot_meetRoom()!=null){%>						
 						<div class="up_down"><i class="fa-regular fa-handshake"></i> <%=mainList.get(0).getHot_meetRoom()%><br></div>
 					<%} %>
 					
-					
 					<%if(mainList.get(0).getHot_smoking()!=null){%>						
 						<div class="up_down"><i class="fa-solid fa-smoking"></i> <%=mainList.get(0).getHot_smoking()%></div>
 					<%} %>	
-					
 									
 					<%if(mainList.get(0).getHot_restaurant()!=null){%>
 						<div class="up_down"><i class="fa-solid fa-utensils"></i> <%=mainList.get(0).getHot_restaurant()%><br></div>
 					<%} %> 					
-					
-								
+							
 					<%if(mainList.get(0).getHot_cafe()!=null){%>						
 						<div class="up_down"><i class="fa-solid fa-mug-saucer"></i> <%=mainList.get(0).getHot_cafe()%><br></div>
 					<%} %>
-					
 					
 					<%if(mainList.get(0).getHot_bar()!=null){%>						
 						<div class="up_down"><i class="fa-solid fa-martini-glass"></i> <%=mainList.get(0).getHot_bar()%></div>
@@ -574,7 +614,17 @@
 			<div class="room_bigbox">	
 				<header class="re_headbox">
 					<h2>방 상세정보</h2>				
-				</header>		
+				</header>
+				<div id="datebox">	
+					<div class="check2">									
+						<div class="check_sub1"><input type="date" name="hot_checkout_date" ></div>
+						<div class="check_sub2">체크아웃 날짜</div>
+					</div>	
+					<div class="check1">									
+						<div class="check_sub1"><input type="date"  name="hot_checkin_date" ></div>		
+						<div class="check_sub2">체크인 날짜</div>							
+					</div>					
+				</div>
 				<%for(int i=0;i<roomList.size();i++){ %>
 				<div class="medel_roombox">
 					<div class="me_room_name">
@@ -582,7 +632,7 @@
 					</div>
 					<div class="me_box">
 						<div class="me_img">
-							<img alt="사진 다시 넣어라잉~" src="../img/hotel/hotel_room/<%=roomList.get(i).getHot_room_img()%>" style="width: 200px;	height: 200px;border-radius: 4px;">
+							<img alt="사진 다시 넣어라잉~" src="../img/hotel/hotel_room/<%=roomList.get(i).getHot_room_img()%>" style="width: 230px;	height: 200px;border-radius: 4px;">
 						</div>
 						
 						<div class="me_naiyou1">
@@ -610,46 +660,47 @@
 							<%if(roomList.get(i).getHot_room_shower() !=null){%>
 								<i class="fa-solid fa-shower"> </i> <%=roomList.get(i).getHot_room_shower()%><br>
 							<%} %> 				
-											
-							
-							
 						</div>
+						
 						<div class="me_naiyou1">
-								<br>
+							
 								<%if(roomList.get(i).getHot_room_bedsort() !=null){%>
 									<i class="fa-solid fa-bed"> </i> <%=roomList.get(i).getHot_room_bedsort()%><br><br>
 								<%} %> 
 								
-								<%if(roomList.get(i).getHot_room_maxpeople() !=null){ %>
-									<div>사용가능 인원 : </div> <div class="room_amount">  <%=roomList.get(i).getHot_room_maxpeople()%> 명</div>
-								<%} %>
-								
-								<%if(roomList.get(i).getHot_room_parking() !=null){ %>									
-									<div><%=roomList.get(i).getHot_room_parking()%></div>									
-								<%} %>
-								
-								<%if(roomList.get(i).getHot_room_Noparking() !=null){ %>									
-									<div><%=roomList.get(i).getHot_room_Noparking()%></div>									
-								<%} %>
-								
+								<div class="subbox">
+									<div class="people">사용가능 인원 : </div>
+									<div class="room_amount"><%=roomList.get(i).getHot_room_maxpeople()%> 명</div>
+								</div>
+									
+									<%if(roomList.get(i).getHot_room_parking()!=null){ %>		
+										<div class="subbox">							
+											<div><%=roomList.get(i).getHot_room_parking()%></div>		
+										</div>							
+									<%} %>
+									
+									<%if(roomList.get(i).getHot_room_Noparking()!=null){ %>	
+										<div class="subbox">										
+											<div><%=roomList.get(i).getHot_room_Noparking()%></div>	
+										</div>							
+									<%} %>
+								<div class="subbox">
+									<div class="chekdate01">체크인 시간 : </div>
+									<div class="chekdate02" ><%=mainList.get(0).getHot_checkin_time()%></div>
+								</div>
+								<div class="subbox">
+									<div class="chekdate01">체크아웃 시간 : </div>
+									<div class="chekdate02" ><%=mainList.get(0).getHot_checkout_time()%></div>
+								</div>
 							
 						</div>
-						<div class="me_yoyaku">
-								<div>
-										&nbsp;
-										</div>
-									<div class="room_small">
-										<div>남은 객실</div>
-										<div><%=roomList.get(i).getHot_room_amount()+"개" %></div> 
-									</div>
-									<div class="price_small">
-										<fmt:formatNumber value="<%=roomList.get(i).getHot_room_price()%>" groupingUsed="true" />원
-									</div>
-									<div class="yoyaku_small">
-									
-										<input type="button"  name="yoyakuBtn" class="yoyaku_btn" value="예약하기" onclick="yoyakuBt(<%=roomList.get(i).getHot_room_num()%>,<%=roomList.get(i).getHot_main_num()%>,<%=mb_id%>)">
-									</div>
-							
+						<div class="me_yoyaku">								
+								<div class="price_small">
+									<fmt:formatNumber value="<%=roomList.get(i).getHot_room_price()%>" groupingUsed="true" />원
+								</div>
+								<div class="yoyaku_small">									
+									<input type="submit"  name="yoyakuBtn" class="yoyaku_btn" value="예약하기"	>
+								</div>							
 						</div>
 					</div>
 					
@@ -712,8 +763,9 @@
 									
 								<%}%>	
 								<%if(reviewList.get(i).getHot_re_id().equals(mb_id)){%>				
-									<a  href="hotel_re_delete.jsp?hot_re_num=<%=reviewList.get(i).getHot_re_num()%>&hot_main_num=<%=reviewList.get(0).getHot_main_num()%>" 
-									value='삭제' class='button'">삭제</a>
+									<a  href="hotel_re_delete.jsp?hot_re_num=<%=reviewList.get(i).getHot_re_num()%>&hot_main_num=<%=reviewList.get(0).getHot_main_num()%>" value='삭제' class='button'">삭제</a>
+								<%}else{%>								
+									
 								<%}%>
 							</div>
 						</div>

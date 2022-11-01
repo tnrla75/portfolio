@@ -8,35 +8,111 @@
 	<insert id="insert" parameterType="vo.Travelatt_reservation">
 		insert into attraction_reserve (mb_id, att_num, att_adult_num, att_student_num, att_reserve_date) values(#{mb_id}, #{att_num}, #{att_adult_num}, #{att_student_num}, now() );
 	</insert>
+	<select parameterType="String" resultType="vo.Travelmap" id="mapselect">
+		select  att_num, attraction.local_num, att_img, att_name, att_address, att_latitude, att_longitude, local_name, local_nation, local_img, local_latitude, local_longitude from attraction left outer join travel_local on attraction.local_num=travel_local.local_num where local_name=#{local} 
+	</select>
+	<insert id="makeroute" parameterType="vo.Travel_makeroute">
+		insert into travel_makeroute (routetitle, writedate,route1_1,route1_2,route1_3,route1_4,route1_5,route2_1,route2_2,route2_3,route2_4,route2_5,route3_1,route3_2,route3_3,route3_4,route3_5,route4_1,route4_2,route4_3,route4_4,route4_5,route5_1,route5_2,route5_3,route5_4,route5_5, mb_id, local) values(#{routetitle}, now(), #{route1_1}, #{route1_2}, #{route1_3}, #{route1_4}, #{route1_5}, #{route2_1}, #{route2_2}, #{route2_3}, #{route2_4}, #{route2_5},#{route3_1},#{route3_2},#{route3_3},#{route3_4},#{route3_5},#{route4_1},#{route4_2},#{route4_3},#{route4_4},#{route4_5},#{route5_1},#{route5_2},#{route5_3},#{route5_4},#{route5_5},#{mb_id},#{local});
+	</insert>
 	
 <!-- 면세점 -->
-	<select parameterType="String" resultType="vo.Item" id="item">
-		select * from item where itemCode=#{itemCode} 
-	</select>
-	<select parameterType="vo.ItemOrder" id="itemOrder">
-		insert into itemOrder values(#{order_no},#{mb_id},#{itemCode},#{count},#{option}) 
-	</select>
+<select id="itemMain" resultType="vo.Item">select * from item order by rand() limit 4 </select>
+
+<select parameterType="String" id="item" resultType="vo.Item">select * from item where itemCode=#{itemCode} </select>
+
+
+<select id="itemOrderList" resultType="vo.Item">
+select * from item where itemCode in 
+<foreach index="index" separator="," close=")" open="(" item="itemCo" collection="list">'${itemCo}' </foreach>
+
+</select>
+
+<insert parameterType="vo.ItemOrder" id="itemOrder">
+	insert into itemOrder values(#{order_no},#{mb_id},#{itemCode},#{count},#{option}, now()) 
+</insert>
+
+<insert parameterType="vo.ItemCart" id="itemCart">
+	insert into cart (mb_id, itemCode, itemOption, itemCount) values(#{mb_id},#{itemCode},#{itemOption},#{itemCount}) 
+	</insert>
+
+<insert parameterType="vo.Item" id="itemWish">
+	insert into itemWish (mb_id, itemCode) values(#{mb_id},#{itemCode}) 
+</insert>
+
+<delete parameterType="vo.Item" id="itemWish_del">
+	delete from itemWish where mb_id=#{mb_id} and itemCode=#{itemCode} 
+</delete>
+
+<select parameterType="String" id="itemCartList" resultType="vo.ItemCart">
+	select item.itemCode, brandName, itemName, itemImg, itemWon,itemDollar, discount, discountWon, itemOption, itemCount from item left outer join cart on item.itemCode=cart.itemCode where mb_id=#{mb_id}; 
+</select>
+
+<select parameterType="String" id="ticketInfo" resultType="vo.FlightReserveListBean">
+	SELECT * FROM flight_reserve res join flight_ticket tic using(flight_Ticket_Num) where res.flight_Ticket_Num=#{flight_Ticket_Num}; 
+</select>
+
 
 <!-- 마이페이지 -->
-	<select resultType="vo.Member_info" id="member">
+	<select id="member" resultType="vo.Member_info">
 		select * from member_info where mb_id=#{mb_id} 
 	</select>
+	
 	<update parameterType="vo.Member_info" id="update">
 		update member_info set mb_pw=#{mb_pw}, mb_address=#{mb_address}, mb_detailaddress=#{mb_detailaddress} where mb_id=#{mb_id} 
 	</update>
+	
 	<update parameterType="vo.Member_info" id="board_update">
 		update member_info set mb_passnum=#{mb_passnum}, mb_exdate=#{mb_exdate} where mb_id=#{mb_id} 
 	</update>
-	<select resultType="vo.Mypage_qna" id="item_qna">
-		select item.itemCode, brandName, itemName, itemImg, qsubject, question, qupdate, qanswer from item left outer join itemQna on item.itemCode=itemQna.itemCode where mb_id=#{mb_id}; 
+	
+	<select id="item_qna" resultType="vo.Mypage_qna">
+	select item.itemCode, brandName, itemName, itemImg, qsubject, question, qupdate, qanswer from item left outer join itemQna on item.itemCode=itemQna.itemCode where mb_id=#{mb_id} order by qupdate desc 
+		</select>
+	
+	<select id="item_review" resultType="vo.Mypage_review">
+		select item.itemCode, brandName, itemName, itemImg, reRate, reText, rePhoto1, rePhoto2, rePhoto3, reDate from item left outer join itemReview on item.itemCode=itemReview.itemCode where mb_id=#{mb_id} order by reDate desc 
 	</select>
-	<select resultType="vo.Mypage_review" id="item_review">
-		select item.itemCode, brandName, itemName, itemImg, reRate, reText, rePhoto1, rePhoto2, rePhoto3, reDate from item left outer join itemReview on item.itemCode=itemReview.itemCode where mb_id=#{mb_id}; 
+	
+	<select parameterType="String" id="item_wishList" resultType="vo.Item">
+		select*from item left join itemwish on item.itemCode=itemwish.itemCode left join itemoption on itemwish.itemCode=itemOption.itemcode where mb_id=#{mb_id} 
 	</select>
+	
+	<select parameterType="String" id="item_orderList" resultType="vo.ItemOrder">
+		select item.itemCode, brandName, itemName, itemImg, itemWon,itemDollar, discount,discountWon, itemorder.order_no, itemorder.count, itemorder.option, order_date from item left outer join itemorder on item.itemCode=itemorder.itemCode where mb_id=#{mb_id} order by order_date desc 
+	</select>
+	<select parameterType="String" resultType="vo.Mypage_travelattraction_reserve" id="mypage_reservation">
+		select attraction.att_name, attraction.att_img, attraction.att_num, mb_id, att_adult_num, att_student_num, att_reserve_date from attraction left outer join attraction_reserve on attraction.att_num= attraction_reserve.att_num where mb_id=#{mb_id}; 
+	</select>
+	<select parameterType="String" resultType="vo.Travel_selectroute" id="mypage_myroute">
+		select travel_makeroute.*,travel_local.local_latitude,travel_local.local_longitude,local_img from travel_local left outer join travel_makeroute on travel_makeroute.local= travel_local.local_name where mb_id=#{mb_id};
+	</select>
+	
+	
+	
+	
+	<select resultType="vo.Mypage_travelreview" id="travel_review" parameterType="vo.Mypage_ReviewPage">
+		select attraction.att_name, attraction.att_img, attraction.att_num, mb_id, att_reDate, att_reContent, att_reRate from attraction left outer join att_review on attraction.att_num= att_review.att_num where mb_id=#{mb_id} limit #{page},5;
+	</select>
+	<select resultType="vo.Mypage_travelmateapply" id="travelmate_apply1" parameterType="vo.Mypage_ReviewPage">
+		select apply_num, status, apply_pnNum, apply_member, mb_id, mate_num, id, travelmateTitle, travelmateContent from mate_apply left outer join travel_mate on mate_apply.mate_num= travel_mate.travelmateNum where id=#{mb_id} limit #{page},5;
+	</select>
+	<select resultType="vo.Mypage_travelmateapply" id="travelmate_apply2" parameterType="vo.Mypage_ReviewPage">
+		 select apply_num, status,  mb_id, mate_num, id, travelmateTitle, travelmateContent from mate_apply left outer join travel_mate on mate_apply.mate_num= travel_mate.travelmateNum where mb_id=#{mb_id} limit #{page},5;
+	</select>
+	<select resultType="Integer" id="travel_review_page" parameterType="String">
+		select count(*) from attraction left outer join att_review on attraction.att_num= att_review.att_num where mb_id=#{mb_id};
+	</select>
+	<delete id="mateApplyDelete" parameterType="String">
+		 delete from mate_apply where apply_num=#{applynum};
+	</delete>
+	<update id="mateApplyUpdate" parameterType="vo.Mypage_travelmateapply">
+		 update mate_apply set status=#{status} where apply_num=#{apply_num};
+	</update>		
 <!--ID찾기 -->
 	<select id="findid" resultType="vo.Member_info" parameterType="vo.Member_info">
 		select * from member_info where mb_name=#{mb_name} and mb_email= #{mb_email}
 	</select>
+<!--PW찾기 -->	
 	<select id="findpw" resultType="vo.Member_info" parameterType="vo.Member_info">
 		select * from member_info where mb_id=#{mb_id} and mb_name=#{mb_name} and mb_email= #{mb_email}
 	</select>
@@ -45,32 +121,64 @@
 	</update>
 	
 	<!-- 항공  -->
-	<select resultType="vo.Travelatt" id="flightend_att">
-		select * from attraction order by rand() limit 4; 
-	</select>
-	<select resultType="vo.FlightTicketBean" id="ticketNum1" parameterType="String">
-		select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; 
-	</select>
 
-	<select resultType="vo.FlightTicketBean" id="ticketNum2" parameterType="String">
-		select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; 
-	</select>
-	<select resultType="vo.FlightSeatBean" id="seat1" parameterType="String">
-		select res.seatNum, res.flight_Ticket_Num, tic.flight_airplaneName from flight_reserve res, flight_ticket tic where res.flight_Ticket_Num=#{flight_Ticket_Num} and tic.flight_Ticket_Num=#{flight_Ticket_Num}; 
-	</select>
-	<insert id ="reserve" parameterType="vo.FlightReserveBean">
-	    INSERT INTO flight_reserve(flight_Ticket_Num, seatNum, flight_Rlastname, flight_Rfirstname) VALUES
-	    <foreach collection="list" item="item" separator=",">
-	            (#{item.flight_Ticket_Num}, #{item.seatNum}, #{item.flight_Rlastname}, #{item.flight_Rfirstname})
-	    </foreach>
-	</insert>
-	
+<select id="flightend_att" resultType="vo.Travelattandimg">
+	select*from attraction a, att_img b where a.att_num=b.att_num order by rand() limit 4;
+</select>
+<select parameterType="String" id="ticketNum1" resultType="vo.FlightTicketBean">
+	select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; 
+</select>
+
+<select parameterType="String" id="ticketNum2" resultType="vo.FlightTicketBean">
+	select * from flight_ticket where flight_Ticket_Num=#{flight_Ticket_Num}; 
+</select>
+
+<select parameterType="String" id="seat1" resultType="vo.FlightSeatBean">
+	select res.seatNum, res.flight_Ticket_Num, tic.flight_airplaneName from flight_reserve res, flight_ticket tic where res.flight_Ticket_Num=#{flight_Ticket_Num} and tic.flight_Ticket_Num=#{flight_Ticket_Num};
+</select>
+<insert parameterType="vo.FlightReserveBean" id="reserve">
+	INSERT INTO flight_reserve(mb_id, flight_Ticket_Num, seatNum, flight_Rlastname, flight_Rfirstname) VALUES 
+	<foreach separator="," item="item" collection="list">
+		(#{item.mb_id} ,#{item.flight_Ticket_Num}, #{item.seatNum}, #{item.flight_Rlastname}, #{item.flight_Rfirstname})
+	</foreach>
+</insert>
+<select parameterType="String" id="ticketOrderSelect" resultType="vo.FlightReserveListBean">
+	SELECT * FROM flight_reserve res join flight_ticket tic using(flight_Ticket_Num) where res.mb_id=#{mb_id};
+</select>
+
 <!-- 호텔 -->
-	<insert parameterType="vo.Hotel_yoyaku_DTO" id="yoyaku">	
-		insert into hot_yoyaku (mb_id,hot_main_num,hot_room_num) values (#{mb_id},#{hot_main_num},#{hot_room_num})
-	</insert>
 
 
+<!-- 예약 insert -->
+
+
+<insert parameterType="vo.Hotel_yoyaku_DTO" id="yoyakuList">	insert into hot_yoyaku (mb_id,hot_main_num,hot_room_num,hot_name,hot_address,hot_room_name,hot_room_price,hot_room_amount,mb_firstname,mb_lastname,mb_phonenum,mb_email,mb_birth,mb_gender,hot_checkin_date,hot_checkout_date,hot_checkin_time,hot_checkout_time)values(#{mb_id},#{hot_main_num},#{hot_room_num},#{hot_name},#{hot_address},#{hot_room_name},#{hot_room_price},#{hot_room_amount},#{mb_firstname},#{mb_lastname},#{mb_phonenum},#{mb_email},#{mb_birth},#{mb_gender},#{hot_checkin_date},#{hot_checkout_date},#{hot_checkin_time},#{hot_checkout_time}) </insert>
+
+<!-- 예약 완료 -->
+
+
+<select id="kanryoList" resultType="vo.Hotel_yoyaku_DTO">select * from hot_yoyaku order by hot_yoyaku_num desc </select>
+
+<!-- 게시판 -->
+
+
+<select id="qnaList" resultType="vo.Hotel_qna_DTO">select * from hot_qna order by hot_qna_num desc </select>
+
+<!-- 인덱스 검색 후 호텔 메인 -->
+
+
+<select parameterType="vo.Hotel_main_DTO" id="kensakuList" resultType="vo.Hotel_main_DTO">	select DISTINCT * from hot_infoinner join(select hot_main_num, hot_room_maxpeople, hot_checkin_date, hot_checkout_date from hot_roomwhere hot_room_maxpeople>= #{hot_room_maxpeople}and hot_checkin_date=#{hot_checkin_date}and hot_checkout_date=#{hot_checkout_date}) hot_roomon hot_info.hot_main_num = hot_room.hot_main_numwhere hot_nation=#{hot_nation}order by hot_room_maxpeople desc limit #{startrow},4 </select>
+
+<!-- 인덱스 검색 후 메인 트리맵 객실 가격 가져오기 -->
+
+
+
+<select id="kensakuPrice" resultType="vo.Hotel_room_DTO">
+select * , min(hot_room_price) as hot_room_price from hot_room group by hot_main_num; 
+<!-- select * from hot_info where hot_nation=#{hot_nation} and order by hot_main_num desc limit 0,4; -->
+
+
+</select>
 
 
 </mapper>

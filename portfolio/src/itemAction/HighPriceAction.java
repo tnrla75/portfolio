@@ -15,7 +15,7 @@ public class HighPriceAction implements Action {
 		 
 		ArrayList<Item> articleList=new ArrayList<Item>();	
 		int page=1;
-		int limit=10;
+		int limit=16;
 		if(request.getParameter("page")!=null){
 			page=Integer.parseInt(request.getParameter("page"));
 		}
@@ -28,7 +28,7 @@ public class HighPriceAction implements Action {
 		int listCount=highPriceService.getListCount(category);
 		articleList = highPriceService.getArticleList(page, limit, category);
 		int maxPage=(int)((double)listCount/limit+0.95);
-   		int startPage = (((int) ((double)page / 10 + 0.9)) - 1) * 10 + 1;
+		int startPage = (((int) ((double)page / 16 + 1)) - 1) * 16 + 1;
    	    int endPage = startPage+10-1;
 		
    	    if (endPage> maxPage) endPage= maxPage;

@@ -33,7 +33,7 @@
 	
 	Hotel_DAO upddate = new Hotel_DAO();
 	
-	upddate.update_01(hot_re_num,hot_main_num,hot_re_id,hot_re_content,hot_re_rate);
+	upddate.reviewupdate_01(hot_re_num,hot_main_num,hot_re_id,hot_re_content,hot_re_rate);
 	
 	response.sendRedirect("../hotel/hotelRoomForm.ho?hot_re_num="+hot_re_num+"&hot_main_num="+hot_main_num+"&hot_re_rate="+hot_re_rate); 
 	

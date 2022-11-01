@@ -141,5 +141,32 @@ public class ItemDetailService {
 		close(con);
 		return articleList;
 	}
+	
+	public Item wishGetArticle(String itemCode, String mb_id) throws Exception{
+		// TODO Auto-generated method stub
+		Item article = null;
+		Connection con = getConnection();
+		ItemDAO itemDAO = ItemDAO.getInstance();
+		itemDAO.setConnection(con);
+
+		article = itemDAO.wishSelectArticle(itemCode, mb_id);
+		close(con);
+		return article;
+	}
+	
+	
+	
+	
+	//wish
+/*	public ArrayList<Item> wishGetArticleList(String itemCode, String mb_id) throws Exception{
+		ArrayList<Item> articleList = null;
+		Connection con = getConnection();
+		ItemDAO itemDAO = ItemDAO.getInstance();
+		itemDAO.setConnection(con);
+			
+		articleList = itemDAO.wishSelectArticle(itemCode, mb_id);
+		close(con);
+		return articleList;
+	}	*/
 
 }

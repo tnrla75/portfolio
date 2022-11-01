@@ -113,22 +113,21 @@
 </head>
 
 <body>
-	<%
-		String mb_id = (String)session.getAttribute("mb_id");
-		String order_no =(String)session.getAttribute("order_no");	
-	
-		if(mb_id == null){
-			%>
-			<jsp:include page="../overlap/header_login.jsp"/>
-			<%
-		}else{
-			%>
-			<jsp:include page="../overlap/header_logout.jsp"/>
-			<%
-		}
-	%>
-	
-	<form>
+	<form action="../overlap/mypage_itemorder.mypage?command=item_orderList">
+		<%
+			String mb_id = (String)session.getAttribute("mb_id");
+			String order_no =(String)request.getAttribute("order_no");	
+		
+			if(mb_id == null){
+				%>
+				<jsp:include page="../overlap/header_login.jsp"/>
+				<%
+			}else{
+				%>
+				<jsp:include page="../overlap/header_logout.jsp"/>
+				<%
+			}
+		%>
 		<header>
 			<h3>CHECKOUT</h3>
 			<div class="order_wr">
@@ -140,7 +139,7 @@
 		<section>
 			<h2>주문번호 : <%= order_no %></h2>
 			<b>주문이 완료되었습니다.</b></br>
-			<input type="button" value="주문내역 확인하러 가기">
+			<input type="submit" value="주문내역 확인하러 가기" >
 		</section>
 		
 		<jsp:include page="../overlap/footer.jsp"/>

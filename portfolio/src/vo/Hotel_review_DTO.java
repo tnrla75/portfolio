@@ -24,10 +24,6 @@ public class Hotel_review_DTO {
 		this.hot_re_num = hot_re_num;
 	}
 	
-	
-	
-	
-	
 	public String getHot_re_id() {
 		return hot_re_id;
 	}

@@ -21,10 +21,11 @@ public class Mypage_infoImpl implements MypageCommandInter {
 	public String showData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		MypageModel model = MypageModel.instance();
 		String mb_id = request.getParameter("mb_id");
+		System.out.println(mb_id);
 		
 		Member_info member = (Member_info) model.selectMember(mb_id);
 		request.setAttribute("member", member);
 		//controller
-		return "../overlap/mypage_info.jsp";
+		return "mypage_info.jsp";
 	}
 }

@@ -94,14 +94,17 @@
 </style>
 </head>
 <script>
+		<% String mb_id = (String)session.getAttribute("mb_id");%>
 	function gomain(){
-		location.href="../overlap/indexpage.jsp";
+		location.href="../index.jsp";
+	}
+	function gomypage(){
+		location.href="../overlap/mypage_mateapply.mypage?command=travel_mateApply&mb_id=<%= mb_id %>"
 	}
 </script>
 <body>
 	<form>
-		<%
-		String mb_id = (String)session.getAttribute("mb_id"); 
+		<% 
 		if(mb_id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
@@ -127,10 +130,10 @@
 				</svg>
 		<div id="maindiv">
 			<div id="textdiv">
-				<%= mb_id %>님 예약이 완료되었습니다.
+				<%= mb_id %>님 신청이 완료되었습니다.
 			</div>
 			<div id="btndiv">
-				<input type="button" value="예약정보 확인하기">
+				<input type="button" value="신청정보 확인하기" onclick="gomypage()">
 				<input type="button" value="메인 화면 이동" onclick="gomain()">
 			</div>
 		</div>

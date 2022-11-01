@@ -6,6 +6,11 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
+<style>
+	.icon-bag-dark{
+		background-image: url(//static.wconcept.co.kr/web/images/icon/icon-bag-dark.png);
+	}
+</style>
 <body>
 	<div style="width:100%; height: 150px; box-shadow: 0px 5px 1px 1px #030066; ">
 		<div style="width: 1200px; height: 150px; margin: 0 auto; ">
@@ -20,16 +25,15 @@
 			</div>
 			<div id="nav">
 				<nav>
-					<ul id="top">
+					<ul id="top" style="margin-left: 25px;">
 					<% 
 						if(!((String)session.getAttribute("mb_id")==null)){
 							%><li class='commonnav'><%=(String)session.getAttribute("mb_id") %>님</li><% 
 						}
 					%>
 						<li class='commonnav'><a href='../overlap/logout.jsp' >로그아웃</a></li>
-						<li class="commonnav"><a href="info.mypage?command=info&mb_id=<%= (String)session.getAttribute("mb_id")%>">마이페이지</a></li>
-						<li class="commonnav"><a href="#">즐겨찾기</a></li>
-						<li class="commonnav"><a href="#">고객센터</a></li>
+						<li class="commonnav"><a href="../overlap/info.mypage?command=info&mb_id=<%= (String)session.getAttribute("mb_id")%>">마이페이지</a></li>
+						<li class="commonnav"><a href="../shopping/itemCartList.dutyfree?command=cartList">장바구니</a></li>
 					</ul>
 				<ul id="main">
 						
@@ -50,7 +54,7 @@
 							</ul>
 						</li>
 						<li class="commonnav4">
-							<p><a class="commonlink" href="../shopping/itemMain.jsp">면세점</a></p>
+							<p><a class="commonlink" href="../shopping/itemMain.dutyfree?command=itemMain">면세점</a></p>
 							<ul class="list">
 								<li><a href="shoping/">Best샵</a></li>
 								<li><a href="shoping/">세일</a></li>

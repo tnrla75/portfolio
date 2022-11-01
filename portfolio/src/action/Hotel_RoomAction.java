@@ -13,6 +13,7 @@ import vo.ActionForward;
 import vo.Hotel_main_DTO;
 import vo.Hotel_review_DTO;
 import vo.Hotel_room_DTO;
+import vo.Hotel_yoyaku_DTO;
 import vo.PageInfo;
 
 public class Hotel_RoomAction implements Action {
@@ -20,27 +21,24 @@ public class Hotel_RoomAction implements Action {
 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{ 
 	   	
 		request.setCharacterEncoding("UTF-8");
-//		媛앹떎�젙蹂� 諛� 由щ럭�젙蹂�
+
 		
 //		int hot_room_num=Integer.parseInt(request.getParameter("hot_room_num"));
-		int hot_main_num=Integer.parseInt(request.getParameter("hot_main_num"));		
+		int hot_main_num=Integer.parseInt(request.getParameter("hot_main_num"));	
+		
 		
 //		HttpRequest request=request.getParameter();
 		
 		Hotel_RoomService hotel_RoomService = new Hotel_RoomService();	
 		
-		
-		ArrayList<Hotel_room_DTO> roomList = hotel_RoomService.getArticle(hot_main_num);	
-		
 		ArrayList<Hotel_main_DTO> mainList = hotel_RoomService.jjinmainService(hot_main_num);
+		ArrayList<Hotel_room_DTO> roomList = hotel_RoomService.roomList(hot_main_num);	
+		
+		
 		
 		ActionForward forward_hotel = new ActionForward();
 		
-		
-		
-		
-		
-//		 �샇�뀛 �젙蹂� 媛��졇�삩 怨�
+//		 리뷰 리스트
 		ArrayList<Hotel_review_DTO> reviewList=new ArrayList<Hotel_review_DTO>();
 
 		int page=1;

@@ -19,13 +19,13 @@ public class Mypage_ticketImpl implements MypageCommandInter {
 		
 		
 		String mb_id = request.getParameter("mb_id");
-		System.out.println("imp ticketImpl" + mb_id);
+		System.out.println("imp ticketImpl : " + mb_id);
 		Mypage_ticketModel model = Mypage_ticketModel.instance();
 		ArrayList<FlightReserveListBean> list1 = (ArrayList<FlightReserveListBean>) model.mypage_flightreserve(mb_id);
-		
+		System.out.println(list1);
 		request.setAttribute("list1", list1);
 		
-		return "mypage_ticketOrder.jsp";
+		return "../overlap/mypage_ticketOrder.jsp";
 	}
 
 }

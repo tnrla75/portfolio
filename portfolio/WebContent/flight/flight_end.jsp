@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="vo.Travelatt"%>
+    <%@page import="vo.Travelattandimg"%>
     <%@page import="java.util.ArrayList"%>
 <%	request.setCharacterEncoding("utf-8");%>
 <!DOCTYPE html>
@@ -78,7 +78,7 @@
 		text-align: center;
 		font-size: 16pt;
 		font-weight: bold;
-		line-height: 50px;
+		line-height: 70px;
 	}
 	.listdiv{
 		width:1200px;
@@ -90,6 +90,36 @@
 		margin:0 20px;
 		float: left;
 	}
+	/* attimg  */
+	.localbox{
+		width: 1200px;
+		height: 200px;
+		margin-bottom: 40px;
+	}
+	.localimg{
+		overflow: hidden;
+		width: 280px;
+		height:200px;
+		float: left;
+		margin-left: 15px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 200px;
+		text-align: center;
+		color: white;
+		font-weight: bold;
+	}
+	.localimg div{
+		height: 30px;
+		position: relative;
+		font-size: 15pt;
+		bottom: 35px;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.localimg img:hover{
+		transform: scale(1.04);
+		overflow: hidden;
+	}
 	
 </style>
 </head>
@@ -99,8 +129,8 @@
 <body>
 	<form>
 		<%
-		String id = (String)session.getAttribute("mb_id"); 
-		if(id == null){
+		String mb_id = (String)session.getAttribute("mb_id"); 
+		if(mb_id == null){
 			%>
 			<jsp:include page="../overlap/header_login.jsp"/>
 			<%
@@ -125,10 +155,10 @@
 				</svg>
 		<div id="maindiv">
 			<div id="textdiv">
-				<%= id %>님 예약이 완료되었습니다.
+				<%= mb_id %>님 예약이 완료되었습니다.
 			</div>
 			<div id="btndiv">
-				<input type="button" value="예약정보 확인하기">
+				<input type="button" value="예약정보 확인하기" onclick="location.href='mypage_itemqna.mypage?command=ticketOrder&mb_id=<%= mb_id %>'">
 				<input type="button" value="메인 화면 이동">
 			</div>
 		</div>
@@ -139,20 +169,28 @@
 				</div>
 				<div class="listdiv">
 				<%
-					ArrayList<Travelatt> list = (ArrayList<Travelatt>)request.getAttribute("data");
+					ArrayList<Travelattandimg> list = (ArrayList<Travelattandimg>)request.getAttribute("data");
 				%>
-					<div>
-						<%= list.get(0).getAtt_name() %>
-					</div>
-					<div>
-						<%= list.get(1).getAtt_name() %>
-					</div>
-					<div>
-						<%= list.get(2).getAtt_name() %>
-					</div>
-					<div>
-						<%= list.get(3).getAtt_name() %>
-					</div>
+					<a href="../travel/Attraction.travel?att=<%=list.get(0).getAtt_name()%>">
+			<div class="localimg">
+				<img src="../img/travel<%=list.get(0).getAtt_img1()%>" width="280px" height="200px">
+				<div><%=list.get(0).getAtt_name() %></div>
+			</div></a>
+			<a href=../travel/Attraction.travel?att=<%=list.get(1).getAtt_name()%>">
+			<div class="localimg">
+				<img src="../img/travel<%=list.get(1).getAtt_img1()%>" width="280px" height="200px">
+				<div><%=list.get(1).getAtt_name() %></div>
+			</div></a>
+			<a href="../travel/Attraction.travel?att=<%=list.get(2).getAtt_name()%>">
+			<div class="localimg">
+				<img src="../img/travel<%=list.get(2).getAtt_img1()%>" width="280px" height="200px">
+				<div><%=list.get(2).getAtt_name() %></div>
+			</div></a>
+			<a href="../travel/Attraction.travel?att=<%=list.get(3).getAtt_name()%>">
+			<div class="localimg">
+				<img src="../img/travel<%=list.get(3).getAtt_img1()%>" width="280px" height="200px">
+				<div><%=list.get(3).getAtt_name() %></div>
+			</div></a>
 				</div>
 			</div>
 			<div>

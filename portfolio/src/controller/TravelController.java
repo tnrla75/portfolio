@@ -18,6 +18,7 @@ import action.TravelMate_searchAction;
 import action.Travel_tripguideAction;
 import action.TravelattAction;
 import action.TravellocalAction;
+import action.travel_writerouteAction;
 import vo.ActionForward;
 
 @WebServlet("*.travel")    
@@ -117,6 +118,9 @@ public class TravelController extends javax.servlet.http.HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();	
 			}
+		}else if(command.equals("/travel/writeRoute.travel")){
+			forward=new ActionForward();
+			forward.setPath("../travel/travel_route_map.jsp");
 		}
 		if(forward != null){
 			

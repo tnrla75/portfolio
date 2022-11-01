@@ -311,6 +311,7 @@ $(document).ready(function() {
 			$('.tab_container5').show();
 		}
 	});
+	var seatprice = <%= request.getParameter("hiddenprice")%>;
 	$("input:radio[name='select1']").change(function(){
 		var price = 30000;
 		for(var i = 0; i<6; i++){
@@ -352,7 +353,7 @@ $(document).ready(function() {
 	추가 수하물로 마음까지 넉넉한 여행
 </div>
 <div id="mb_name">
-	
+	<input type="hidden" value="<%= (String)session.getAttribute("mb_id") %>" name="mb_id">
 	<% for(int i =0; i<lastname.length; i++){ %>
 		<label class="container">
 		  <input type="radio" class="choicebtn" name="choicebtn" value="<%=i%>">

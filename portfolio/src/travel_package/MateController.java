@@ -11,11 +11,12 @@ import java.util.ArrayList;
 
 import travel_package.MateDTO;
 import vo.PageInfo;
+import vo.TravelMate_apply;
 
 public class MateController {
 	Connection conn = null;
 	Statement stmt = null;
-	
+	// ����Ʈ ���ϴ±� select
 	public ArrayList<MateDTO> select(int page, int limit){
 		ArrayList<MateDTO> dbal = new ArrayList<MateDTO>();
 		int startrow=(page-1)*10; 
@@ -53,7 +54,7 @@ public class MateController {
 		}
 		return dbal;                         
 		}
-	
+	// ����Ʈ ���ϴ±� �˻��� select
 	public ArrayList<MateDTO> searchselect(int page, int limit, String search){
 		ArrayList<MateDTO> dbal = new ArrayList<MateDTO>();
 		int startrow=(page-1)*10; 
@@ -93,7 +94,7 @@ public class MateController {
 		}
 		return dbal;                         
 		}
-	
+	// ����Ʈ ���ϴ±� �ۼ�
 	public void insert(String id,String travelmateTitle,String destination,String travelmateMember,String travelmateContent,String departureDate,String arriveDate,String reservation,String travelmateDate){
 		try{
 			dbc();
@@ -115,7 +116,7 @@ public class MateController {
 			}
 		}
 		}
-	
+	// ����Ʈ ���ϴ±� ���ۼ�
 	public void update(String id,String travelmateTitle,String destination,String travelmateMember,String travelmateContent,String departureDate,String arriveDate,String reservation,String travelmateDate,String travelmateNum){
 		try{
 			dbc();
@@ -231,7 +232,7 @@ public class MateController {
 
 	}
 	
-	
+	// �� �������� ���γ���
 	public ArrayList<MateDTO> detail(String travelNum){
 		ArrayList<MateDTO> dbal = new ArrayList<MateDTO>();
 		try {
@@ -268,7 +269,7 @@ public class MateController {
 		}
 		return dbal;                         
 		}
-	
+	// ����Ʈ���ϴ±� ����
 	public void delete(String travelmateNum){
 		try{
 			dbc();
@@ -290,8 +291,28 @@ public class MateController {
 		}
 		}
 	
-	
-	
+	//����Ʈ ��û 
+	public void mateapply(TravelMate_apply travelmate_apply){
+		try{
+			dbc();
+			String command = String.format("insert into mate_apply (mb_id, mate_num, apply_pnNum, apply_member, status) values ('%s','%s','%s','%s','���')"
+					,travelmate_apply.getMb_id(), travelmate_apply.getMate_num(), travelmate_apply.getApply_pnNum(), travelmate_apply.getApply_member() );
+			int rowNum = stmt.executeUpdate(command);
+		}catch(Exception e){	
+		}
+		finally{
+			try{
+				stmt.close();
+			}
+			catch(Exception e){	
+			}
+			try{
+				conn.close();
+			}
+			catch(Exception e){
+			}
+		}
+		}
 	public void dbc() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
